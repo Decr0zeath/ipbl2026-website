@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>§01 Overview · iPBL 2026 Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">iP</span>
+      <span class="brand-text">
+        <span class="brand-title">Quadruped Pre-Training Manual</span>
+        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidenav">
+    <a href="index.html" class="home-link">Home</a>
+    <div class="sidebar-label">The Manual</div>
+    <ol>
+      <li><a href="overview.html">Overview</a></li>
+      <li><a href="bom.html"> Materials &amp; Tools</a></li>
+      <li><a href="printing.html">3D-Printed Parts</a></li>
+      <li><a href="assembly.html">Mechanical Assembly</a></li>
+      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
+      <li><a href="pcb.html">PCB Assembly</a></li>
+      <li><a href="firmware.html">Arduino Firmware</a></li>
+      <li><a href="testing.html">Testing &amp; Calibration</a></li>
+    </ol>
+    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
+    <ol style="counter-reset: none;">
+      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
+    </ol>
+  </aside>
+
+  <main class="content">
+
+    <div class="page-head">
+      <div class="crumb">Section 01 · Foundations</div>
+      <h1>Overview</h1>
+      <p class="subtitle">A short briefing on what you're building, why it's shaped the way it is, and what we expect you to know before you begin.</p>
+    </div>
+
+    <div class="section-marker">The Machine in One Page</div>
+
+    <p class="lede">Eight servos. Four legs. One Arduino Nano. A custom PCB to keep the wiring honest, a battery to keep it walking, and roughly two weekends of patience to make it all behave.</p>
+
+    <p>The platform is a small quadruped — sometimes called a "spider robot" because of its splayed posture — with two degrees of freedom per leg. One servo lifts the leg; one servo swings it forward and back. With careful timing across the eight joints, the robot can produce a passable crawl, trot, and turn-in-place. That's all this manual aims for: a robot that <strong>stands, walks forward, and responds reliably</strong>. The cleverer behaviour is sealed in a separate envelope and opens on Day 01 in Cebu.</p>
+
+    <figure>
+      <div class="frame"><div class="placeholder"><span>FIG. 01 — Assembled robot, three-quarter view</span></div></div>
+      <figcaption><span class="fig-label">Figure 01</span>Reference photograph of a completed unit. Yours will look very similar; minor variation in 3D-print colour and screw choice is expected and acceptable.</figcaption>
+    </figure>
+
+    <h2>System Block Diagram</h2>
+    <p>Before any soldering, hold the whole system in your head. There are three subsystems and you'll be living inside each of them by turns.</p>
+
+    <figure>
+      <div class="frame">
+        <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; background:#FAF6EC;">
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M 0 0 L 8 3 L 0 6 z" fill="#0D3E20"/>
+            </marker>
+          </defs>
+          <!-- Power -->
+          <g>
+            <rect x="40" y="160" width="120" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
+            <text x="100" y="185" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Battery</text>
+            <text x="100" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion / 7.4V</text>
+          </g>
+          <!-- PCB -->
+          <g>
+            <rect x="220" y="120" width="180" height="140" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
+            <text x="310" y="150" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Custom PCB</text>
+            <text x="310" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#5E6F62">power · distribution · headers</text>
+            <rect x="245" y="190" width="60" height="35" fill="#0D3E20"/>
+            <text x="275" y="212" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#FEB104">Nano</text>
+            <rect x="320" y="190" width="55" height="35" fill="none" stroke="#0D3E20" stroke-dasharray="2 2"/>
+            <text x="347" y="212" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#0D3E20">8× hdr</text>
+          </g>
+          <!-- Servos -->
+          <g>
+            <rect x="460" y="60" width="220" height="260" fill="none" stroke="#0D3E20" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="570" y="50" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" fill="#C98300">EIGHT SG90 SERVOS</text>
+            <!-- 4 legs, each 2 servos -->
+            <g font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">
+              <rect x="480" y="80" width="80" height="22" fill="#FEB104" stroke="#0D3E20"/>
+              <text x="520" y="95" text-anchor="middle">FL · hip</text>
+              <rect x="580" y="80" width="80" height="22" fill="#F3ECD8" stroke="#0D3E20"/>
+              <text x="620" y="95" text-anchor="middle">FL · knee</text>
+              <rect x="480" y="135" width="80" height="22" fill="#FEB104" stroke="#0D3E20"/>
+              <text x="520" y="150" text-anchor="middle">FR · hip</text>
+              <rect x="580" y="135" width="80" height="22" fill="#F3ECD8" stroke="#0D3E20"/>
+              <text x="620" y="150" text-anchor="middle">FR · knee</text>
+              <rect x="480" y="190" width="80" height="22" fill="#FEB104" stroke="#0D3E20"/>
+              <text x="520" y="205" text-anchor="middle">BL · hip</text>
+              <rect x="580" y="190" width="80" height="22" fill="#F3ECD8" stroke="#0D3E20"/>
+              <text x="620" y="205" text-anchor="middle">BL · knee</text>
+              <rect x="480" y="245" width="80" height="22" fill="#FEB104" stroke="#0D3E20"/>
+              <text x="520" y="260" text-anchor="middle">BR · hip</text>
+              <rect x="580" y="245" width="80" height="22" fill="#F3ECD8" stroke="#0D3E20"/>
+              <text x="620" y="260" text-anchor="middle">BR · knee</text>
+            </g>
+          </g>
+          <!-- Arrows -->
+          <line x1="160" y1="190" x2="218" y2="190" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="400" y1="190" x2="458" y2="170" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <text x="180" y="180" font-family="JetBrains Mono, monospace" font-size="8" fill="#5E6F62">5V regulated</text>
+          <text x="410" y="155" font-family="JetBrains Mono, monospace" font-size="8" fill="#5E6F62">PWM × 8</text>
+          <!-- Caption -->
+          <text x="360" y="355" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 02 — High-level block diagram</text>
+        </svg>
+      </div>
+      <figcaption><span class="fig-label">Figure 02</span>Three subsystems: power source, central controller, and the bank of eight servos. The PCB is the connective tissue. Everything else is implementation detail.</figcaption>
+    </figure>
+
+    <h3>Subsystem 01 · Power</h3>
+    <p>A 2S Li-Ion pack (nominally 7.4 V) is the ground truth. From it, a small buck converter on the PCB derives a clean 5 V rail for the Nano and — critically — a separate, beefier 5 V rail for the servos. Eight servos drawing simultaneously is a non-trivial load; do not be the team that powers servos from the Nano's onboard regulator. You'll learn what brown-out looks like very quickly.</p>
+
+    <h3>Subsystem 02 · Control</h3>
+    <p>An Arduino Nano (ATmega328P) sits in the centre of the PCB. It drives the eight servos via the <code>Servo</code> library, reads from the on-board buttons or external command (when applicable), and runs the gait state machine. The Nano is more than fast enough for an 8-channel software-PWM job; you are not pushed against any computational ceiling here.</p>
+
+    <h3>Subsystem 03 · Actuation</h3>
+    <p>Eight SG90 servos — two per leg. The hip servo (closer to the body) controls lift; the knee servo controls swing. This is a deliberately simple 2-DOF leg design. It costs us elegance of motion but gains us a build that can be completed in two weekends with hand tools.</p>
+
+    <div class="callout note">
+      <div class="callout-label">Note · A word on the SG90</div>
+      <p>The SG90 is the cheapest reasonable hobby servo on the market. It is also famously inconsistent — gear quality, deadband, and centre point vary unit-to-unit. We tolerate this on purpose; learning to calibrate around real-world component tolerance is part of the lesson.</p>
+    </div>
+
+    <h2>What "Done" Looks Like</h2>
+    <p>By the end of this manual you should be able to demonstrate, on a bench, the following four behaviours:</p>
+
+    <ol>
+      <li><strong>Power on, stand up.</strong> The robot lifts itself into a neutral standing pose within two seconds of receiving power.</li>
+      <li><strong>Walk forward.</strong> A simple four-step gait moves the robot forward by approximately one body length per cycle, in a straight line, on a flat surface.</li>
+      <li><strong>Stop on command.</strong> Pressing the on-board button halts movement and returns the legs to neutral.</li>
+      <li><strong>Individual servo addressability.</strong> Through the serial monitor, any of the eight servos can be commanded to any valid angle.</li>
+    </ol>
+
+    <p>If you can show us those four things at the meet-and-greet on arrival day, you are ready for what comes next.</p>
+
+    <h2>Prerequisites</h2>
+    <p>This manual assumes you are a second- or third-year undergraduate in Computer Engineering, Electrical Engineering, Electronics, Computer Science, or IT. That is — you should already have, or be willing to quickly pick up:</p>
+
+    <ul>
+      <li>Comfort with a soldering iron and through-hole soldering</li>
+      <li>The Arduino IDE installed and at least one prior "blink" sketch flashed in your life</li>
+      <li>Reading a basic schematic (resistor, capacitor, regulator, pin headers)</li>
+      <li>Basic command of multimeter use — continuity, voltage, resistance</li>
+      <li>Patience for mechanical assembly with small screws and limited tools</li>
+    </ul>
+
+    <p>If any of these are unfamiliar — especially soldering — start there first. The build will be miserable if you're learning to solder on the PCB itself.</p>
+
+    <div class="callout tip">
+      <div class="callout-label">Tip · Pair up early</div>
+      <p>Many delegates find it easier to work in pairs during pre-training, even at different universities. A second pair of eyes catches mirror-image leg assemblies and reversed servo connectors before they become catastrophic.</p>
+    </div>
+
+    <h2>Time Budget</h2>
+    <ul class="spec-list">
+      <li><span class="spec-label">3D Printing</span><span class="spec-value">~14 hrs</span></li>
+      <li><span class="spec-label">Mechanical</span><span class="spec-value">3–4 hrs</span></li>
+      <li><span class="spec-label">PCB Soldering</span><span class="spec-value">2–3 hrs</span></li>
+      <li><span class="spec-label">Wiring</span><span class="spec-value">1–2 hrs</span></li>
+      <li><span class="spec-label">Firmware &amp; Calibration</span><span class="spec-value">2–4 hrs</span></li>
+      <li><span class="spec-label">Total Active Work</span><span class="spec-value">~12 hrs</span></li>
+    </ul>
+
+    <p>Plan for two weekends. Don't try to do it in one night.</p>
+
+    <h2>Safety, in Brief</h2>
+    <ol>
+      <li><strong>Solder fumes.</strong> Work in a ventilated space. Fume extractors are ideal; an open window is the minimum.</li>
+      <li><strong>Lithium batteries.</strong> Do not short, puncture, or charge above their rated voltage. Use a balance charger.</li>
+      <li><strong>Servos under load.</strong> Eight servos can produce enough combined torque to bend a leg or pinch a finger. Power off before adjusting mechanical things.</li>
+      <li><strong>Soldering irons.</strong> Tin the tip, return to the stand, do not check temperature with your other hand.</li>
+    </ol>
+
+    <hr/>
+
+    <p>That's the briefing. Section 02 gets you ordered up. Section 03 has you printing. By Section 04 you'll be holding the thing.</p>
+
+    <nav class="pagination" aria-label="Section navigation">
+      <a href="index.html" class="prev">
+        <span class="page-direction">← Home</span>
+        <span class="page-title">Welcome</span>
+      </a>
+      <a href="bom.html" class="next">
+        <span class="page-direction">Next · §02</span>
+        <span class="page-title">Bill of Materials &amp; Tools</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="foot-inner">
+    <div>
+      <h5>About this manual</h5>
+      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
+    </div>
+    <div>
+      <h5>Manual</h5>
+      <ul>
+        <li><a href="overview.html">§01 Overview</a></li>
+        <li><a href="bom.html">§02 Bill of Materials</a></li>
+        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
+        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
+        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
+        <li><a href="pcb.html">§06 PCB</a></li>
+        <li><a href="firmware.html">§07 Firmware</a></li>
+        <li><a href="testing.html">§08 Testing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Programme</h5>
+      <ul>
+        <li>iPBL · 2026 Edition</li>
+        <li>Host: USJ-R, Cebu</li>
+        <li>Partners: STUST · OIT</li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 · International Project-Based Learning</span>
+    <span>Set in Inter &amp; JetBrains Mono</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+

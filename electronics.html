@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>§05 Electronics &amp; Wiring · iPBL 2026 Manual</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">iP</span>
+      <span class="brand-text">
+        <span class="brand-title">Quadruped Pre-Training Manual</span>
+        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" id="sidenav">
+    <a href="index.html" class="home-link">Home</a>
+    <div class="sidebar-label">The Manual</div>
+    <ol>
+      <li><a href="overview.html">Overview</a></li>
+      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
+      <li><a href="printing.html">3D-Printed Parts</a></li>
+      <li><a href="assembly.html">Mechanical Assembly</a></li>
+      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
+      <li><a href="pcb.html">PCB Assembly</a></li>
+      <li><a href="firmware.html">Arduino Firmware</a></li>
+      <li><a href="testing.html">Testing &amp; Calibration</a></li>
+    </ol>
+    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
+    <ol style="counter-reset: none;">
+      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
+    </ol>
+  </aside>
+
+  <main class="content">
+
+    <div class="page-head">
+      <div class="crumb">Section 05 · The Electrons</div>
+      <h1>Electronics &amp; Wiring</h1>
+      <p class="subtitle">Pinouts, channel assignments, power budgeting, and the conventions that will keep your wiring clean once the PCB is soldered.</p>
+    </div>
+
+    <div class="section-marker">The Pin Map</div>
+
+    <p class="lede">Every servo lives on a digital pin. Every pin has a job. Memorise the channel map below — you will be referring to it through every subsequent section of this manual.</p>
+
+    <h2>Servo Channel Assignment</h2>
+
+    <p>The eight servos are addressed by leg and joint. The mnemonic is <code>{FL|FR|BL|BR}-{H|K}</code>: front/back, left/right, hip or knee. The PCB headers J2 through J9 follow the order below, left to right when looking at the assembled PCB from above.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Header</th>
+            <th>Label</th>
+            <th>Leg</th>
+            <th>Joint</th>
+            <th>Nano Pin</th>
+            <th>Servo Index</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>J2</td><td>FL-H</td><td>Front-Left</td><td>Hip</td><td>D2</td><td class="num">0</td></tr>
+          <tr><td>J3</td><td>FL-K</td><td>Front-Left</td><td>Knee</td><td>D3</td><td class="num">1</td></tr>
+          <tr><td>J4</td><td>FR-H</td><td>Front-Right</td><td>Hip</td><td>D4</td><td class="num">2</td></tr>
+          <tr><td>J5</td><td>FR-K</td><td>Front-Right</td><td>Knee</td><td>D5</td><td class="num">3</td></tr>
+          <tr><td>J6</td><td>BL-H</td><td>Back-Left</td><td>Hip</td><td>D6</td><td class="num">4</td></tr>
+          <tr><td>J7</td><td>BL-K</td><td>Back-Left</td><td>Knee</td><td>D7</td><td class="num">5</td></tr>
+          <tr><td>J8</td><td>BR-H</td><td>Back-Right</td><td>Hip</td><td>D8</td><td class="num">6</td></tr>
+          <tr><td>J9</td><td>BR-K</td><td>Back-Right</td><td>Knee</td><td>D9</td><td class="num">7</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-label">Note · Why these pins</div>
+      <p>The <code>Servo</code> library on the ATmega328P uses Timer1 internally and supports up to twelve software-PWM channels on any digital pin. We chose D2–D9 because they're contiguous (easy to remember), avoid the hardware UART pins on D0/D1 (used by USB serial), and leave the PWM-capable pins D10/D11 free for future expansion.</p>
+    </div>
+
+    <h2>Other Nano Pins in Use</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Pin</th><th>Function</th><th>Connected to</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>D10</td><td>Status LED control</td><td>R1 → D1 (green LED)</td></tr>
+          <tr><td>D11</td><td>User button input</td><td>SW2 via R2 pull-up</td></tr>
+          <tr><td>D12</td><td>Reserved</td><td>Header J10 — left for programme use</td></tr>
+          <tr><td>D13</td><td>Reserved (onboard LED)</td><td>Built-in Nano LED</td></tr>
+          <tr><td>A0–A3</td><td>Reserved</td><td>Headers J11–J14 — left for programme use</td></tr>
+          <tr><td>A4 (SDA)</td><td>Reserved (I²C)</td><td>Header J15 — left for programme use</td></tr>
+          <tr><td>A5 (SCL)</td><td>Reserved (I²C)</td><td>Header J15 — left for programme use</td></tr>
+          <tr><td>A6, A7</td><td>Unused</td><td>—</td></tr>
+          <tr><td>VIN</td><td>—</td><td>Do not use. Power comes from the 5 V regulated rail.</td></tr>
+          <tr><td>5V</td><td>Logic rail</td><td>From buck converter output, separate from servo rail</td></tr>
+          <tr><td>GND</td><td>Common ground</td><td>Tied to servo GND and battery negative</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">Tip · The "reserved" pins are a hint</div>
+      <p>If you find yourself wondering why we left A4/A5 (I²C) and several extra digital pins broken out to headers — that's part of what gets revealed in Cebu. Resist the urge to populate them with anything yet.</p>
+    </div>
+
+    <h2>Power Architecture</h2>
+
+    <p>This is the most failure-prone area of the entire build. Read the section twice.</p>
+
+    <figure>
+      <div class="frame">
+        <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; background:#FAF6EC;">
+          <defs>
+            <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M 0 0 L 8 3 L 0 6 z" fill="#0D3E20"/>
+            </marker>
+          </defs>
+
+          <!-- Battery -->
+          <rect x="20" y="140" width="110" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="75" y="165" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">BT1</text>
+          <text x="75" y="183" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion · 7.4V</text>
+
+          <!-- Switch -->
+          <rect x="155" y="155" width="50" height="30" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="180" y="173" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">SW1</text>
+
+          <!-- Buck -->
+          <rect x="230" y="60" width="120" height="60" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="290" y="83" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">Buck → 5V</text>
+          <text x="290" y="103" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#5E6F62">MP1584 / LM2596</text>
+
+          <!-- Servo rail -->
+          <rect x="230" y="220" width="120" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="290" y="243" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">5V Servo Rail</text>
+          <text x="290" y="263" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">C1 · C2 bulk</text>
+
+          <!-- Nano -->
+          <rect x="420" y="60" width="120" height="60" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="480" y="83" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#FEB104">Arduino Nano</text>
+          <text x="480" y="103" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#FFCD55">5V logic only</text>
+
+          <!-- Servos -->
+          <rect x="420" y="220" width="270" height="60" fill="none" stroke="#0D3E20" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="555" y="245" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">8 × SG90 Servos</text>
+          <text x="555" y="263" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#5E6F62">peak ≈ 4 A combined</text>
+
+          <!-- Wires -->
+          <line x1="130" y1="170" x2="153" y2="170" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
+          <line x1="205" y1="170" x2="220" y2="170" stroke="#0D3E20" stroke-width="2"/>
+          <line x1="220" y1="170" x2="220" y2="90" stroke="#0D3E20" stroke-width="2"/>
+          <line x1="220" y1="90" x2="228" y2="90" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
+          <line x1="220" y1="170" x2="220" y2="250" stroke="#0D3E20" stroke-width="2"/>
+          <line x1="220" y1="250" x2="228" y2="250" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
+          <line x1="350" y1="90" x2="418" y2="90" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
+          <line x1="350" y1="250" x2="418" y2="250" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
+
+          <!-- Signal -->
+          <line x1="540" y1="120" x2="540" y2="220" stroke="#C98300" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arr2)"/>
+          <text x="552" y="170" font-family="JetBrains Mono, monospace" font-size="8" fill="#C98300">PWM × 8</text>
+
+          <!-- Ground rail -->
+          <line x1="290" y1="280" x2="290" y2="310" stroke="#0D3E20" stroke-width="2"/>
+          <line x1="480" y1="280" x2="480" y2="310" stroke="#0D3E20" stroke-width="2"/>
+          <line x1="555" y1="280" x2="555" y2="310" stroke="#0D3E20" stroke-width="2"/>
+          <line x1="75" y1="200" x2="75" y2="310" stroke="#0D3E20" stroke-width="2"/>
+          <line x1="75" y1="310" x2="640" y2="310" stroke="#0D3E20" stroke-width="2"/>
+          <text x="640" y="307" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">GND</text>
+
+          <!-- Caption -->
+          <text x="360" y="340" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 09 — Power architecture</text>
+        </svg>
+      </div>
+      <figcaption><span class="fig-label">Figure 09</span>The two-rail power design. The buck converter feeds 5 V to the Nano via a clean, low-current rail. Servos take their power directly from the regulated 5 V at the bulk capacitors. The two rails share ground but not noise.</figcaption>
+    </figure>
+
+    <h3>Why two rails?</h3>
+
+    <p>An SG90 idle draws ~10 mA. An SG90 stalled draws ~700 mA. Eight servos stalling at once — say, on a hard landing where every leg tries to brace — can pull just under 4 A in a transient. The Arduino Nano's onboard 5 V regulator can supply at most ~800 mA continuously and will fold under sudden loads.</p>
+
+    <p>If you tie the Nano's 5 V pin directly to the servos, you will see the classic failure: the moment servos start moving, the Nano's voltage sags, the ATmega328P browns out, and the firmware locks up. The robot then continues to hold the last commanded servo positions until you cycle power. It's a frustrating bug to diagnose.</p>
+
+    <p>The buck converter solves this by stepping 7.4 V down to 5 V at up to 3 A. <strong>But that's not actually the fix.</strong> The fix is keeping the servo current loop physically separate from the Nano's 5 V pin. The buck output feeds both — the Nano takes its 5 V from one branch, and the servo headers take 5 V from the other — but the servo current never travels along the Nano's traces.</p>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning · Do not power servos from the Nano's 5V pin</div>
+      <p>This is the single most common failure mode in beginner servo projects. The Nano's 5 V pin is connected to its onboard regulator, which is rated for hundreds of milliamps, not amps. Brown-out, lockup, eventual destruction of the Nano are the predictable results.</p>
+    </div>
+
+    <h3>Decoupling</h3>
+
+    <p>The two 470 µF electrolytics (C1, C2) sit on the servo rail right at the input to the eight servo headers. They absorb the inrush current when a servo suddenly starts moving and prevent the rail voltage from dropping. The three 100 nF ceramics (C3, C4, C5) handle high-frequency noise — one across the buck output, one across the Nano's 5 V/GND, one across the servo rail. Don't skip any of them.</p>
+
+    <h2>Servo Cable Conventions</h2>
+
+    <p>Every SG90 ships with the same three-wire cable. The colours are standardised but read them yourself to confirm:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Wire</th><th>Function</th><th>PCB Header Pin (looking at PCB top, J2–J9)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Brown (or black)</td><td>Ground</td><td>Pin 1 — closest to the PCB edge</td></tr>
+          <tr><td>Red</td><td>+5 V (servo rail)</td><td>Pin 2 — middle</td></tr>
+          <tr><td>Orange (or yellow / white)</td><td>PWM signal</td><td>Pin 3 — closest to the Nano</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning · Connector polarity</div>
+      <p>It is mechanically possible to install an SG90 connector on the header backwards. Doing so reverses the polarity into the servo — which kills the SG90 within seconds and may damage the Nano via the signal pin. <strong>Confirm the brown wire faces the PCB edge before powering on, every time</strong>, especially after re-wiring.</p>
+    </div>
+
+    <h2>Buck Converter Setup</h2>
+
+    <p>The MP1584 / LM2596 modules ship configured for whatever the last person left them at — typically 5 V, but not always. You must set them <em>before</em> installing the module on the PCB.</p>
+
+    <ol class="steps">
+      <li>
+        <h4>Connect the module to a 9 V battery or bench supply</h4>
+        <p>Apply 7–9 V to the input terminals. Do not load the output yet — you're configuring it open-circuit, which is fine for setting voltage.</p>
+      </li>
+      <li>
+        <h4>Measure the output voltage</h4>
+        <p>Probe the OUT+ and OUT– pads with a multimeter. Note the reading.</p>
+      </li>
+      <li>
+        <h4>Adjust the trimpot until OUT = 5.00 V ± 0.05 V</h4>
+        <p>The blue trimpot rotates many turns. Turn slowly, watching the meter. Lock in 5.00 V; never above 5.20 V (some SG90 batches don't tolerate it well).</p>
+      </li>
+      <li>
+        <h4>Disconnect, mark, install</h4>
+        <p>Once set, mark the trimpot with a dot of nail polish or paint so you know it's been configured. Then proceed to PCB soldering.</p>
+      </li>
+    </ol>
+
+    <h2>Power Budget Estimate</h2>
+
+    <ul class="spec-list">
+      <li><span class="spec-label">Idle Current</span><span class="spec-value">~80 mA</span></li>
+      <li><span class="spec-label">Walking Avg</span><span class="spec-value">~600 mA</span></li>
+      <li><span class="spec-label">Peak Transient</span><span class="spec-value">~4 A</span></li>
+      <li><span class="spec-label">Pack 1500 mAh</span><span class="spec-value">~2 hr walk</span></li>
+      <li><span class="spec-label">Pack 2200 mAh</span><span class="spec-value">~3 hr walk</span></li>
+    </ul>
+
+    <p>A 1500 mAh 2S pack is the practical minimum. A 2200 mAh pack is what we recommend — the extra capacity costs little and the marginal weight is well within the servo torque budget.</p>
+
+    <h2>Ready for PCB?</h2>
+
+    <p>You should now understand: which pin drives which servo, why the servo rail and Nano rail are separated, how to set the buck converter, and what the connector polarity is. If any of that is fuzzy, re-read this page. The next section assumes all of it.</p>
+
+    <nav class="pagination" aria-label="Section navigation">
+      <a href="assembly.html" class="prev">
+        <span class="page-direction">← Previous · §04</span>
+        <span class="page-title">Mechanical Assembly</span>
+      </a>
+      <a href="pcb.html" class="next">
+        <span class="page-direction">Next · §06</span>
+        <span class="page-title">PCB Assembly</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="foot-inner">
+    <div>
+      <h5>About this manual</h5>
+      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
+    </div>
+    <div>
+      <h5>Manual</h5>
+      <ul>
+        <li><a href="overview.html">§01 Overview</a></li>
+        <li><a href="bom.html">§02 Bill of Materials</a></li>
+        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
+        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
+        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
+        <li><a href="pcb.html">§06 PCB</a></li>
+        <li><a href="firmware.html">§07 Firmware</a></li>
+        <li><a href="testing.html">§08 Testing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Programme</h5>
+      <ul>
+        <li>iPBL · 2026 Edition</li>
+        <li>Host: USJ-R, Cebu</li>
+        <li>Partners: STUST · OIT</li>
+        <li><a href="credits.html">Credits</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon">
+    <span>© 2026 · International Project-Based Learning</span>
+    <span>Set in Inter &amp; JetBrains Mono</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+

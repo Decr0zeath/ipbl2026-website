@@ -19,7 +19,7 @@
       </li>
       <li>
         <h4>Plug in the Nano, identify the serial port</h4>
-        <p>Connect the USB-C cable. Tools → Port should now show a new entry: <code>/dev/cu.usbserial-*</code> on macOS, <code>COM#</code> on Windows, <code>/dev/ttyUSB#</code> on Linux. Select it. If nothing appears, see the USB cable warning in <a href="#bom">§02</a>.</p>
+        <p>Connect the USB-C cable. Tools → Port should now show a new entry: <code>/dev/cu.usbserial-*</code> on macOS, <code>COM#</code> on Windows, <code>/dev/ttyUSB#</code> on Linux. Select it. If nothing appears, see the USB cable warning in <a href="#bom">Section 02</a>.</p>
       </li>
       <li>
         <h4>Verify with Blink</h4>
@@ -47,7 +47,7 @@
     <pre data-lang="C++"><code>#include &lt;Servo.h&gt;
 
 // Eight servos, one Servo object each, addressed by index 0..7.
-// Index matches the channel map from §05:
+// Index matches the channel map from Section 05:
 // 0=FL-H, 1=FL-K, 2=FR-H, 3=FR-K,
 // 4=BL-H, 5=BL-K, 6=BR-H, 7=BR-K
 Servo legs[8];
@@ -83,7 +83,7 @@ const uint8_t BTN_PIN = 11;</code></pre>
   Serial.println(F("Quadruped ready. Send 'h' for help."));
 }</code></pre>
 
-    <p>The servos are attached one by one and written to their trimmed neutral immediately. This is what produces the "stand up within two seconds" behaviour described in <a href="#overview">§01</a>. The status LED comes on once setup completes, a useful signal that boot succeeded.</p>
+    <p>The servos are attached one by one and written to their trimmed neutral immediately. This is what produces the "stand up within two seconds" behaviour described in <a href="#overview">Section 01</a>. The status LED comes on once setup completes, a useful signal that boot succeeded.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Why 600 / 2400 µs?</div>

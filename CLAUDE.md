@@ -15,7 +15,7 @@ A static SPA-lite HTML manual for the iPBL 2026 quadruped robotics pre-training 
 
 **Shell + fragments (course-viewer pattern; original reference in `reference/course-viewer.js`).** `manual.html` is the single shell holding the chrome (topbar, sidebar skeleton, footer) and three empty mounts: `#pageHead`, `#sectionView`, `#pagination`. The viewer in `assets/js/main.js` fetches `sections/<slug>.html`, caches it, injects it, and routes via location hash (`manual.html#assembly`). Sidebar clicks are plain `#slug` anchors — a `hashchange` listener does the loading, so nothing ever full-page-reloads. `index.html` is a standalone landing page (no sidebar; links into `manual.html#<slug>`).
 
-**`assets/js/manual-map.js` is the single source of truth for structure.** `MANUAL_MAP` (ordered §01–§08) + `MANUAL_REFERENCE` (credits) hold `slug`, `num`, `crumb`, `title`, `subtitle` per section. Sidebar, `.page-head`, `document.title`, and prev/next pagination all generate from it. Adding a section = one fragment file in `sections/` + one map entry (+ the static footer link lists in `index.html` and `manual.html`, the only remaining duplication).
+**`assets/js/manual-map.js` is the single source of truth for structure.** `MANUAL_MAP` (ordered Sections 01–08) + `MANUAL_REFERENCE` (credits) hold `slug`, `num`, `crumb`, `title`, `subtitle` per section. Sidebar, `.page-head`, `document.title`, and prev/next pagination all generate from it. Adding a section = one fragment file in `sections/` + one map entry (+ the static footer link lists in `index.html` and `manual.html`, the only remaining duplication).
 
 **Fragments in `sections/` are content-only** — no `<html>`, no chrome, no page-head (the viewer builds that from the map; don't repeat the h1/subtitle inside a fragment). They keep the 4-space indent of their original `main.content` context.
 
@@ -28,7 +28,7 @@ A static SPA-lite HTML manual for the iPBL 2026 quadruped robotics pre-training 
 - **Figures:** `<figure><div class="frame">…</div><figcaption><span class="fig-label">Figure NN</span>…</figcaption></figure>`. The `.frame` supplies the gold corner brackets; replacing a placeholder means swapping only the inner `<div class="placeholder">` for an `<img>` (see README).
 - **Diagrams are inline SVG** with `class="diagram"` (sizing/background come from CSS — no inline `style` attributes), drawn by hand against the palette hex values, with `JetBrains Mono` labels and a `FIG. NN — …` caption drawn inside the SVG. There are no image files in `assets/images/` yet.
 - **No inline styles.** One-off styling uses the helper classes near the bottom of the buttons section in `style.css` (`.section-intro`, `.em-accent`, `.aside-note`, `.fine-note`, `.signoff`, `.stack-top`, `.stack-bottom`, `.btn-sm`). Add a class rather than a `style` attribute.
-- **Mono labels are rationed.** JetBrains Mono uppercase is reserved for `.section-marker`, `.fig-label`, sidebar `§NN` counters, and index-page kickers; wayfinding text (table headers, callout labels, crumbs, pagination, sidebar, footer headings) is Inter with gentle tracking. Don't reintroduce tiny tracked mono for UI text.
+- **Mono labels are rationed.** JetBrains Mono uppercase is reserved for `.section-marker`, `.fig-label`, sidebar `NN` counters, and index-page kickers; wayfinding text (table headers, callout labels, crumbs, pagination, sidebar, footer headings) is Inter with gentle tracking. Don't reintroduce tiny tracked mono for UI text.
 - **Callouts:** `<div class="callout note|tip|warning"><div class="callout-label">…</div>…</div>`.
 - **Procedures:** `<ol class="steps">` — auto-numbers `01`, `02`, … via CSS counters; each `<li>` starts with an `<h4>`.
 - **Tables** must be wrapped in `.table-wrap` for horizontal scroll; numeric cells get `class="num"`.
@@ -36,7 +36,7 @@ A static SPA-lite HTML manual for the iPBL 2026 quadruped robotics pre-training 
 
 ## Editorial voice
 
-Deliberately scoped: pre-arrival mechanical build, PCB, wiring, firmware upload, and calibration only. Vision, autonomy, sensor fusion, and the collaborative brief are intentionally withheld until Day 01 in Cebu — don't add content covering them. Tone is a vintage academic field guide; sections are referenced as `§01`–`§08`.
+Deliberately scoped: pre-arrival mechanical build, PCB, wiring, firmware upload, and calibration only. Vision, autonomy, sensor fusion, and the collaborative brief are intentionally withheld until Day 01 in Cebu — don't add content covering them. Tone is a vintage academic field guide; sections are referenced as "Section 01"–"Section 08" (never with the § sign — the user does not want it in content).
 
 ## Conventions
 

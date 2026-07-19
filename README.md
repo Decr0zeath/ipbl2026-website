@@ -10,14 +10,14 @@ A 10-page web manual covering everything a student needs to assemble and program
 
 The site covers:
 
-- §01 Overview — what the robot is, system block diagrams
-- §02 Bill of Materials & Tools
-- §03 3D-Printed Parts — STL inventory, print settings, orientation
-- §04 Mechanical Assembly — step-by-step build
-- §05 Electronics & Wiring — pinout, channel map, power architecture
-- §06 PCB Assembly — schematic walkthrough and soldering sequence
-- §07 Arduino Firmware — toolchain, sketch walkthrough, calibration
-- §08 Testing & Calibration — bench tests, troubleshooting, pre-flight checklist
+- Section 01 Overview — what the robot is, system block diagrams
+- Section 02 Bill of Materials & Tools
+- Section 03 3D-Printed Parts — STL inventory, print settings, orientation
+- Section 04 Mechanical Assembly — step-by-step build
+- Section 05 Electronics & Wiring — pinout, channel map, power architecture
+- Section 06 PCB Assembly — schematic walkthrough and soldering sequence
+- Section 07 Arduino Firmware — toolchain, sketch walkthrough, calibration
+- Section 08 Testing & Calibration — bench tests, troubleshooting, pre-flight checklist
 - Credits & Acknowledgments
 
 ## Participating universities
@@ -46,7 +46,7 @@ Serve the folder over HTTP and open `index.html` — e.g. VS Code's Live Server 
 ├── index.html              Home / welcome page (standalone)
 ├── manual.html             Manual shell — chrome + empty viewer; JS fills in everything
 ├── sections/
-│   ├── overview.html       §01 … testing.html §08, credits.html
+│   ├── overview.html       Section 01 … testing.html Section 08, credits.html
 │   └── …                   Content fragments only (no <html>, no chrome) — fetched by the viewer
 ├── assets/
 │   ├── css/

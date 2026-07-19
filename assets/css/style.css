@@ -214,7 +214,7 @@ aside.sidebar {
   transition: color .15s ease;
 }
 .sidebar ol li a::before {
-  content: "§" counter(navcount, decimal-leading-zero);
+  content: counter(navcount, decimal-leading-zero);
   font-family: 'JetBrains Mono', monospace;
   font-size: .7rem;
   color: var(--ink-mute);
@@ -408,11 +408,15 @@ svg.diagram { width: 100%; height: auto; background: var(--paper); }
   counter-increment: stepcount;
   display: grid;
   grid-template-columns: 3rem 1fr;
-  gap: 1.4rem;
+  gap: 0 1.4rem;
   padding: 1.4rem 0;
   border-bottom: 1px solid var(--rule);
   align-items: start;
 }
+/* The number pseudo-element owns column 1; all real children stack in
+   column 2 (without this, anything after the h4 auto-flows into the
+   3rem number column and wraps one word per line). */
+.steps > li > * { grid-column: 2; min-width: 0; }
 .steps > li:first-child { padding-top: 0; }
 .steps > li::before {
   content: counter(stepcount, decimal-leading-zero);
@@ -903,7 +907,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 
 /* ---------- Print ----------
-   Each §-page should print as a clean, self-contained handout. */
+   Each section should print as a clean, self-contained handout. */
 @media print {
   .topbar, aside.sidebar, .nav-toggle, .pagination,
   footer.site-footer, .cta-band { display: none; }

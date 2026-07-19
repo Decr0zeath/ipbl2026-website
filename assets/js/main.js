@@ -72,7 +72,7 @@
       '<div class="crumb">' + esc(entry.crumb) + '</div>' +
       '<h1>' + esc(entry.title) + '</h1>' +
       '<p class="subtitle">' + esc(entry.subtitle) + '</p>';
-    document.title = (entry.num ? '§' + entry.num + ' ' : '') + entry.title + ' · iPBL 2026 Manual';
+    document.title = entry.title + ' · iPBL 2026 Manual';
   }
 
   function pagLink(href, direction, title, cls) {
@@ -89,21 +89,21 @@
     if (idx === -1) {
       // Reference pages (credits): previous = last manual section
       var lastSec = MANUAL_MAP[last];
-      html += pagLink('#' + lastSec.slug, '← Previous · §' + lastSec.num, lastSec.title, 'prev');
+      html += pagLink('#' + lastSec.slug, '← Previous · Section ' + lastSec.num, lastSec.title, 'prev');
       html += pagLink('index.html', '↑ Top', 'Back to Home', 'next');
     } else {
       if (idx === 0) {
         html += pagLink('index.html', '← Home', 'Welcome', 'prev');
       } else {
         var p = MANUAL_MAP[idx - 1];
-        html += pagLink('#' + p.slug, '← Previous · §' + p.num, p.title, 'prev');
+        html += pagLink('#' + p.slug, '← Previous · Section ' + p.num, p.title, 'prev');
       }
       if (idx === last) {
         var ref = MANUAL_REFERENCE[0];
         html += pagLink('#' + ref.slug, 'Reference', ref.title, 'next');
       } else {
         var n = MANUAL_MAP[idx + 1];
-        html += pagLink('#' + n.slug, 'Next · §' + n.num, n.title, 'next');
+        html += pagLink('#' + n.slug, 'Next · Section ' + n.num, n.title, 'next');
       }
     }
     pagination.innerHTML = html;

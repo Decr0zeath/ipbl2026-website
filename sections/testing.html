@@ -1,58 +1,6 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>§08 Testing &amp; Calibration · iPBL 2026 Manual</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
-      <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
-  </div>
-</header>
-
-<div class="layout">
-
-  <aside class="sidebar" id="sidenav">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="sidebar-label">The Manual</div>
-    <ol>
-      <li><a href="overview.html">Overview</a></li>
-      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
-      <li><a href="printing.html">3D-Printed Parts</a></li>
-      <li><a href="assembly.html">Mechanical Assembly</a></li>
-      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
-      <li><a href="pcb.html">PCB Assembly</a></li>
-      <li><a href="firmware.html">Arduino Firmware</a></li>
-      <li><a href="testing.html">Testing &amp; Calibration</a></li>
-    </ol>
-    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
-    <ol style="counter-reset: none;">
-      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
-    </ol>
-  </aside>
-
-  <main class="content">
-
-    <div class="page-head">
-      <div class="crumb">Section 08 · The Last Mile</div>
-      <h1>Testing &amp; Calibration</h1>
-      <p class="subtitle">Bench tests, gait verification, common failure modes, and the pre-flight checklist that confirms you're ready to fly.</p>
-    </div>
-
     <div class="section-marker">The Standing Test</div>
 
-    <p class="lede">Before any walking is attempted, the robot must stand cleanly and hold its pose. If neutral isn't right, walking won't be either — and trying to debug a walk-cycle with mis-trimmed servos is one of the most demoralising experiences in this hobby.</p>
+    <p class="lede">Before any walking is attempted, the robot must stand cleanly and hold its pose. If neutral isn't right, walking won't be either, and trying to debug a walk-cycle with mis-trimmed servos is one of the most demoralising experiences in this hobby.</p>
 
     <h2>Bench Test 01 · Power-On Stand</h2>
 
@@ -71,13 +19,13 @@
       </li>
       <li>
         <h4>Visual symmetry check</h4>
-        <p>Stand at the front of the robot and look down the long axis. All four femurs should be horizontal and at the same height. Sight along the body left-to-right — the chassis should be parallel to the bench, not tilted. If anything is visibly off, return to <a href="firmware.html">§07</a>'s calibration procedure.</p>
+        <p>Stand at the front of the robot and look down the long axis. All four femurs should be horizontal and at the same height. Sight along the body left-to-right; the chassis should be parallel to the bench, not tilted. If anything is visibly off, return to <a href="#firmware">§07</a>'s calibration procedure.</p>
       </li>
     </ol>
 
     <div class="callout note">
       <div class="callout-label">Note · Servo buzz is a signal</div>
-      <p>A constant low buzz from a servo means it's being commanded just past its mechanical limit — the internal motor is fighting the end-stop. This will eventually burn out the servo. Adjust the firmware's range limits (the <code>constrain(a, 10, 170)</code> in <code>setServo</code>) or re-check the mechanical centring of that specific servo.</p>
+      <p>A constant low buzz from a servo means it's being commanded just past its mechanical limit; the internal motor is fighting the end-stop. This will eventually burn out the servo. Adjust the firmware's range limits (the <code>constrain(a, 10, 170)</code> in <code>setServo</code>) or re-check the mechanical centring of that specific servo.</p>
     </div>
 
     <h2>Bench Test 02 · Individual Servo Sweep</h2>
@@ -99,7 +47,7 @@
       </li>
       <li>
         <h4>Repeat for indices 1 through 7</h4>
-        <p>One servo at a time. Note any that hesitate, buzz, or have visibly less range than the others. A weak SG90 often shows up here — swap it in for a spare before the issue compounds.</p>
+        <p>One servo at a time. Note any that hesitate, buzz, or have visibly less range than the others. A weak SG90 often shows up here; swap it in for a spare before the issue compounds.</p>
       </li>
     </ol>
 
@@ -125,8 +73,8 @@
     </ol>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 13 — Robot mid-step, side view</span></div></div>
-      <figcaption><span class="fig-label">Figure 13</span>A successful step in the creep gait — one leg lifted, the other three supporting. The chassis remains roughly level throughout.</figcaption>
+      <div class="frame"><div class="placeholder"><span>FIG. 13 · Robot mid-step, side view</span></div></div>
+      <figcaption><span class="fig-label">Figure 13</span>A successful step in the creep gait: one leg lifted, the other three supporting. The chassis remains roughly level throughout.</figcaption>
     </figure>
 
     <h2>Common Failure Modes</h2>
@@ -142,7 +90,7 @@
           <tr>
             <td>Robot powers on, Nano LED lights, but servos don't move</td>
             <td>No power to the servo rail. Buck converter not delivering 5 V to J2–J9.</td>
-            <td>Measure pin 2 of any servo header against pin 1. Should read 5 V. If it reads 0, the buck output isn't reaching the headers — check FB1 / jumper and the C1/C2 area.</td>
+            <td>Measure pin 2 of any servo header against pin 1. Should read 5 V. If it reads 0, the buck output isn't reaching the headers; check FB1 / jumper and the C1/C2 area.</td>
           </tr>
           <tr>
             <td>One servo doesn't move; others fine</td>
@@ -151,7 +99,7 @@
           </tr>
           <tr>
             <td>All servos behave erratically when more than two move at once</td>
-            <td>Brown-out — servo current is pulling the rail down below the Nano's brown-out threshold.</td>
+            <td>Brown-out: servo current is pulling the rail down below the Nano's brown-out threshold.</td>
             <td>Re-verify that the Nano is on the <code>+5V_LOGIC</code> branch (after the ferrite bead) and that the servo rail is on <code>+5V_SERVO</code> (before the bead, with C1/C2). They share the buck output but should not share the same trace through the ferrite.</td>
           </tr>
           <tr>
@@ -208,11 +156,11 @@
       </li>
       <li>
         <h4>Secure with eight M2 × 6 mm screws</h4>
-        <p>Four into the standoffs, four into the corner posts. Snug, not over-torqued — PLA threads strip easily.</p>
+        <p>Four into the standoffs, four into the corner posts. Snug, not over-torqued; PLA threads strip easily.</p>
       </li>
       <li>
         <h4>Re-test standing and walking through the closed chassis</h4>
-        <p>The closed robot should behave identically to the open one. If anything changed — buzzing, drift, a leg behaving differently — something is being pinched or shorted inside. Open it up and investigate.</p>
+        <p>The closed robot should behave identically to the open one. If anything changed (buzzing, drift, a leg behaving differently), something is being pinched or shorted inside. Open it up and investigate.</p>
       </li>
     </ol>
 
@@ -233,72 +181,18 @@
         <li>Multimeter</li>
         <li>Small Phillips and slotted screwdrivers, M2 hex driver if applicable</li>
         <li>Bag of spare M2 hardware (at least 10 screws of each size used)</li>
-        <li>Your build journal — paper notebook or digital, but bring it</li>
+        <li>Your build journal, paper notebook or digital; bring it</li>
         <li>This manual, printed or on a device that works offline</li>
       </ul>
     </div>
 
     <div class="callout warning">
       <div class="callout-label">Warning · Battery air travel</div>
-      <p>Most airlines treat 2S Li-Ion packs (≈ 7.4 V, &lt; 100 Wh) as carry-on only. <strong>Do not</strong> pack the battery in checked luggage. Store each pack in a fire-resistant LiPo bag during transit. Familiarise yourself with your airline's specific rules at least two weeks before you fly — Cebu's customs has occasionally held shipments lacking documentation.</p>
+      <p>Most airlines treat 2S Li-Ion packs (≈ 7.4 V, &lt; 100 Wh) as carry-on only. <strong>Do not</strong> pack the battery in checked luggage. Store each pack in a fire-resistant LiPo bag during transit. Familiarise yourself with your airline's specific rules at least two weeks before you fly; Cebu's customs has occasionally held shipments lacking documentation.</p>
     </div>
 
     <h2>Final Word</h2>
 
-    <p>You've built a robot. The work that lies ahead in Cebu is going to be different in character — more collaborative, more open-ended, with surprises you can't prepare for from this manual alone. That's the design. Trust that you have what you need; what's missing, you'll learn together with your fellow delegates and the on-ground programme team.</p>
+    <p>You've built a robot. The work that lies ahead in Cebu is going to be different in character: more collaborative, more open-ended, with surprises you can't prepare for from this manual alone. That's the design. Trust that you have what you need; what's missing, you'll learn together with your fellow delegates and the on-ground programme team.</p>
 
-    <p>Travel safely. <em>Madayaw nga pag-abot</em> — welcome, in advance.</p>
-
-    <nav class="pagination" aria-label="Section navigation">
-      <a href="firmware.html" class="prev">
-        <span class="page-direction">← Previous · §07</span>
-        <span class="page-title">Arduino Firmware</span>
-      </a>
-      <a href="credits.html" class="next">
-        <span class="page-direction">Reference</span>
-        <span class="page-title">Credits &amp; Acknowledgments</span>
-      </a>
-    </nav>
-
-  </main>
-</div>
-
-<footer class="site-footer">
-  <div class="foot-inner">
-    <div>
-      <h5>About this manual</h5>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
-    </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="overview.html">§01 Overview</a></li>
-        <li><a href="bom.html">§02 Bill of Materials</a></li>
-        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
-        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
-        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
-        <li><a href="pcb.html">§06 PCB</a></li>
-        <li><a href="firmware.html">§07 Firmware</a></li>
-        <li><a href="testing.html">§08 Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT</li>
-        <li><a href="credits.html">Credits</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon">
-    <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Inter &amp; JetBrains Mono</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-
+    <p>Travel safely. <em>Madayaw nga pag-abot</em>: welcome, in advance.</p>

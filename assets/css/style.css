@@ -22,9 +22,9 @@
 
   --paper:    #FAF6EC;
   --paper-2:  #F3ECD8;
-  --ink:      #0D3E20;
-  --ink-soft: #2A4434;
-  --ink-mute: #5E6F62;
+  --ink:      #21291F;      /* near-black warm ink — body text */
+  --ink-soft: #3D4A3C;
+  --ink-mute: #55624F;
   --rule:     #C8C0A4;
 
   --maxw: 1280px;
@@ -144,7 +144,7 @@ hr {
 }
 .brand-sub {
   font-size: .72rem;
-  letter-spacing: .14em;
+  letter-spacing: .07em;
   text-transform: uppercase;
   color: var(--gold-300);
   font-family: 'JetBrains Mono', monospace;
@@ -155,9 +155,10 @@ hr {
   border: 1px solid rgba(254,177,4,.45);
   color: var(--paper);
   padding: .45rem .7rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .75rem;
-  letter-spacing: .15em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .05em;
   text-transform: uppercase;
   cursor: pointer;
   display: none;
@@ -182,13 +183,14 @@ aside.sidebar {
   overflow-y: auto;
   padding-right: 1rem;
   border-right: 1px solid var(--rule);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .82rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .9rem;
 }
 .sidebar-label {
   text-transform: uppercase;
-  letter-spacing: .18em;
-  font-size: .68rem;
+  letter-spacing: .08em;
+  font-size: .72rem;
+  font-weight: 600;
   color: var(--ink-mute);
   margin-bottom: .9rem;
   padding-bottom: .6rem;
@@ -213,6 +215,7 @@ aside.sidebar {
 }
 .sidebar ol li a::before {
   content: "§" counter(navcount, decimal-leading-zero);
+  font-family: 'JetBrains Mono', monospace;
   font-size: .7rem;
   color: var(--ink-mute);
   letter-spacing: .05em;
@@ -239,11 +242,34 @@ aside.sidebar {
 .sidebar .home-link::before { content: "← "; color: var(--gold-600); }
 .sidebar .home-link:hover { color: var(--green-800); }
 
+/* Reference block below the numbered sections */
+.sidebar-label.ref { margin-top: 1.5rem; }
+.sidebar .ref-list li a { grid-template-columns: 1fr; }
+.sidebar .ref-list li a::before { content: none; }
+
 /* ---------- Content ---------- */
 main.content {
   max-width: var(--contentw);
   min-width: 0;
 }
+
+/* Viewer states (manual.html shell) */
+.view-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
+  color: var(--ink-mute);
+  padding: 3rem 0;
+}
+.page-head:empty, .pagination:empty { display: none; }
+
+/* A new h2 marks a new subsystem — give it a visible break. */
+main.content h2 {
+  margin-top: 3.2em;
+  padding-top: 1.1em;
+  border-top: 1px solid var(--rule);
+}
+main.content .page-head + h2,
+main.content .section-marker + h2 { margin-top: 0; padding-top: 0; border-top: 0; }
 
 .section-marker {
   font-family: 'JetBrains Mono', monospace;
@@ -300,24 +326,19 @@ figure .frame::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0;
 figure .placeholder {
   width: 100%;
   aspect-ratio: 16 / 10;
-  background:
-    linear-gradient(45deg, transparent 49%, rgba(13,62,32,.08) 49%, rgba(13,62,32,.08) 51%, transparent 51%),
-    linear-gradient(-45deg, transparent 49%, rgba(13,62,32,.08) 49%, rgba(13,62,32,.08) 51%, transparent 51%),
-    var(--paper);
-  background-size: 18px 18px;
+  background: var(--paper);
   display: grid;
   place-items: center;
   color: var(--ink-mute);
   font-family: 'JetBrains Mono', monospace;
   font-size: .8rem;
-  letter-spacing: .15em;
+  letter-spacing: .1em;
   text-transform: uppercase;
-  border: 1px dashed var(--rule);
+  border: 1px solid var(--rule);
 }
 figure .placeholder span {
-  background: var(--paper);
   padding: .4rem .9rem;
-  border: 1px solid var(--rule);
+  text-align: center;
 }
 figure figcaption {
   font-family: 'Inter', system-ui, sans-serif;
@@ -338,6 +359,9 @@ figure figcaption .fig-label {
   margin-right: .6rem;
 }
 
+/* Inline SVG diagrams inside frames */
+svg.diagram { width: 100%; height: auto; background: var(--paper); }
+
 /* Two-up figures */
 .figure-grid {
   display: grid;
@@ -356,20 +380,22 @@ figure figcaption .fig-label {
   position: relative;
 }
 .callout .callout-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .72rem;
-  letter-spacing: .2em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .78rem;
+  letter-spacing: .08em;
   text-transform: uppercase;
   margin-bottom: .5rem;
   font-weight: 700;
 }
 .callout p:last-child { margin-bottom: 0; }
+/* Hierarchy: note/tip are quiet asides; warning must outrank both. */
 .callout.note     { border-color: var(--green-700); }
 .callout.note .callout-label    { color: var(--green-700); }
-.callout.tip      { border-color: var(--gold-500); background: var(--gold-100); }
+.callout.tip      { border-color: var(--gold-500); }
 .callout.tip .callout-label     { color: var(--gold-600); }
-.callout.warning  { border-color: #B7410E; background: #FBE6D7; }
-.callout.warning .callout-label { color: #B7410E; }
+.callout.warning  { border-color: #B7410E; border-left-width: 5px; background: #FBE6D7; }
+.callout.warning .callout-label { color: #B7410E; font-size: .84rem; }
+.callout.warning .callout-label::before { content: "⚠ "; }
 
 /* ---------- Step Blocks ---------- */
 .steps {
@@ -397,7 +423,7 @@ figure figcaption .fig-label {
   line-height: 1;
   padding-top: .15rem;
 }
-.steps > li h4 { margin-top: 0; }
+.steps > li h4 { margin-top: 0; font-size: 1.25rem; color: var(--green-800); }
 .steps > li p:last-child { margin-bottom: 0; }
 
 /* ---------- Tables ---------- */
@@ -415,14 +441,13 @@ table {
 }
 table thead th {
   text-align: left;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  font-size: .72rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: .84rem;
+  letter-spacing: .02em;
   color: var(--paper);
   background: var(--green-800);
-  padding: .9rem 1rem;
+  padding: .75rem 1rem;
   border-bottom: 2px solid var(--gold-500);
 }
 table tbody td {
@@ -493,9 +518,10 @@ pre::before {
 .pagination a:hover .page-direction { color: var(--gold-300); }
 .pagination a:hover .page-title { color: var(--paper); }
 .pagination .page-direction {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .68rem;
-  letter-spacing: .2em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .07em;
   text-transform: uppercase;
   color: var(--gold-600);
   display: block;
@@ -525,13 +551,13 @@ footer.site-footer .foot-inner {
   gap: 3rem;
 }
 footer.site-footer h5 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .72rem;
-  letter-spacing: .2em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .78rem;
+  letter-spacing: .07em;
   text-transform: uppercase;
   color: var(--gold-300);
   margin: 0 0 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 footer.site-footer p, footer.site-footer li {
   font-size: .9rem;
@@ -548,10 +574,10 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(254,177,4,.18);
   font-family: 'JetBrains Mono', monospace;
-  font-size: .7rem;
-  letter-spacing: .15em;
+  font-size: .72rem;
+  letter-spacing: .06em;
   text-transform: uppercase;
-  color: rgba(220, 231, 222, 0.6);
+  color: rgba(220, 231, 222, 0.75);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -594,7 +620,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .hero-meta {
   font-family: 'JetBrains Mono', monospace;
   font-size: .8rem;
-  letter-spacing: .15em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--ink-mute);
   margin-bottom: 2rem;
@@ -654,8 +680,8 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .uni-card.host .uni-role { color: var(--gold-300); }
 .uni-card .uni-role {
   font-family: 'JetBrains Mono', monospace;
-  font-size: .68rem;
-  letter-spacing: .2em;
+  font-size: .72rem;
+  letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--gold-600);
   margin-bottom: .6rem;
@@ -717,10 +743,10 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .scope-grid .excluded { border-color: var(--gold-500); background: transparent; }
 .scope-grid h3 {
   margin: 0 0 .8rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  font-family: 'JetBrains Mono', monospace;
-  letter-spacing: .14em;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: .05em;
   text-transform: uppercase;
 }
 .scope-grid .included h3 { color: var(--green-700); }
@@ -765,15 +791,25 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   background: var(--gold-500);
   color: var(--green-900);
   text-decoration: none;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .78rem;
-  letter-spacing: .2em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .82rem;
+  letter-spacing: .06em;
   text-transform: uppercase;
   font-weight: 700;
   border: 2px solid var(--gold-500);
   transition: background .15s ease, color .15s ease;
 }
 .btn:hover { background: transparent; color: var(--gold-500); }
+.btn.btn-sm { padding: .55rem 1.1rem; font-size: .74rem; }
+
+/* Shared content helpers (replace one-off inline styles) */
+.section-intro { max-width: 62ch; color: var(--ink-soft); font-size: 1.05rem; }
+.em-accent { font-style: italic; color: var(--gold-600); }
+.aside-note { font-size: .85rem; margin-top: .8rem; color: var(--ink-mute); font-style: italic; }
+.fine-note { color: var(--ink-mute); font-size: .9rem; font-style: italic; }
+.signoff { font-style: italic; color: var(--ink-soft); text-align: center; font-size: 1.1rem; }
+.stack-top { margin-top: 1.5rem; }
+.stack-bottom { margin-bottom: 1.5rem; }
 
 /* ---------- Page header (interior pages) ---------- */
 .page-head {
@@ -782,9 +818,10 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   border-bottom: 1px solid var(--rule);
 }
 .page-head .crumb {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .72rem;
-  letter-spacing: .18em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--ink-mute);
   margin-bottom: .8rem;
@@ -818,9 +855,10 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .spec-list .spec-label {
   display: block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .66rem;
-  letter-spacing: .18em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--ink-mute);
   margin-bottom: .3rem;
@@ -864,9 +902,43 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   .brand-sub { font-size: .65rem; }
 }
 
-/* ---------- Print ---------- */
+/* ---------- Print ----------
+   Each §-page should print as a clean, self-contained handout. */
 @media print {
-  .topbar, aside.sidebar, .pagination, footer.site-footer { display: none; }
-  .layout { grid-template-columns: 1fr; padding: 0; }
-  body { background: white; }
+  .topbar, aside.sidebar, .nav-toggle, .pagination,
+  footer.site-footer, .cta-band { display: none; }
+  .layout { display: block; padding: 0; }
+  main.content { max-width: 100%; }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4 { color: #000; }
+  .page-head h1 { font-size: 22pt; }
+
+  /* New subsystem = new sheet. */
+  main.content h2 { break-before: page; border-top: 0; padding-top: 0; margin-top: 0; }
+  h2, h3, h4 { break-after: avoid; }
+  figure, .callout, .table-wrap, pre, .steps > li, .spec-list li { break-inside: avoid; }
+
+  /* Ink-friendly surfaces. */
+  figure .frame, figure .placeholder, .callout, .spec-list li,
+  .table-wrap, table tbody tr:nth-child(even) { background: #fff; }
+  figure .frame::before, figure .frame::after { display: none; }
+  table thead th { background: #fff; color: #000; border-bottom: 2px solid #000; }
+  pre { background: #fff; color: #000; border: 1px solid #888; white-space: pre-wrap; word-break: break-word; }
+  .code-comment { color: #555; }
+  .code-key, .code-str { color: #000; }
+
+  /* Links: flatten, but show external destinations. */
+  a { color: #000; text-decoration: none; }
+  main.content a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: .78em;
+    color: #444;
+    word-break: break-all;
+  }
 }

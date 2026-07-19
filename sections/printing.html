@@ -1,58 +1,6 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>§03 3D-Printed Parts · iPBL 2026 Manual</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
-      <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
-  </div>
-</header>
-
-<div class="layout">
-
-  <aside class="sidebar" id="sidenav">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="sidebar-label">The Manual</div>
-    <ol>
-      <li><a href="overview.html">Overview</a></li>
-      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
-      <li><a href="printing.html">3D-Printed Parts</a></li>
-      <li><a href="assembly.html">Mechanical Assembly</a></li>
-      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
-      <li><a href="pcb.html">PCB Assembly</a></li>
-      <li><a href="firmware.html">Arduino Firmware</a></li>
-      <li><a href="testing.html">Testing &amp; Calibration</a></li>
-    </ol>
-    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
-    <ol style="counter-reset: none;">
-      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
-    </ol>
-  </aside>
-
-  <main class="content">
-
-    <div class="page-head">
-      <div class="crumb">Section 03 · The Structure</div>
-      <h1>3D-Printed Parts</h1>
-      <p class="subtitle">Eleven STL files, one printer, roughly fourteen hours of bed time. The structure of the entire robot is plastic, and the quality of that plastic determines everything that follows.</p>
-    </div>
-
     <div class="section-marker">The Print List</div>
 
-    <p class="lede">Every structural element of the robot is printed — the chassis plates, the leg hip mounts, the femurs, the tibia tips, and a small clip for the battery. Get these right and assembly is satisfying. Get them wrong and you'll spend the next section forcing things to fit.</p>
+    <p class="lede">Every structural element of the robot is printed: the chassis plates, the leg hip mounts, the femurs, the tibia tips, and a small clip for the battery. Get these right and assembly is satisfying. Get them wrong and you'll spend the next section forcing things to fit.</p>
 
     <h2>STL Inventory</h2>
 
@@ -81,8 +29,8 @@
     </div>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 03 — All printed parts laid out on print bed</span></div></div>
-      <figcaption><span class="fig-label">Figure 03</span>The complete set, post-print. Note the symmetric arrangement of hip mounts — there are four identical brackets, mirrored in software, not in the print.</figcaption>
+      <div class="frame"><div class="placeholder"><span>FIG. 03 · All printed parts laid out on print bed</span></div></div>
+      <figcaption><span class="fig-label">Figure 03</span>The complete set, post-print. Note the symmetric arrangement of hip mounts; there are four identical brackets, mirrored in software, not in the print.</figcaption>
     </figure>
 
     <h2>Recommended Print Settings</h2>
@@ -104,7 +52,7 @@
 
     <div class="callout note">
       <div class="callout-label">Note · Why these settings</div>
-      <p>Four wall lines and 25 % infill is deliberate over-engineering for the loads involved. The reason isn't strength under static load — it's screw-pocket survival. Self-tapping M2 screws torqued into thin PLA walls will strip. The thicker walls give the screws something to bite into across many layers.</p>
+      <p>Four wall lines and 25 % infill is deliberate over-engineering for the loads involved. The reason isn't strength under static load; it's screw-pocket survival. Self-tapping M2 screws torqued into thin PLA walls will strip. The thicker walls give the screws something to bite into across many layers.</p>
     </div>
 
     <h2>Orientation</h2>
@@ -112,7 +60,7 @@
     <p>How a part sits on the build plate determines almost everything about how it will perform. Layer adhesion is weakest perpendicular to layers; cosmetic surfaces face up; supports go where they can be removed cleanly. The orientation guide below is non-negotiable for the leg parts.</p>
 
     <h3>Chassis plates</h3>
-    <p>Lay flat on the bed, large face down. No supports needed. The mounting holes will have a slight first-layer elephant's foot — this is fine, even helpful, as it creates a self-centring lead-in for the screws.</p>
+    <p>Lay flat on the bed, large face down. No supports needed. The mounting holes will have a slight first-layer elephant's foot; this is fine, even helpful, as it creates a self-centring lead-in for the screws.</p>
 
     <h3>Hip mounts</h3>
     <p>Stand on the long edge with the L-bend facing up. This puts the layers <em>across</em> the screw axis, so screw-pocket walls are reinforced with multiple layers. Print with tree supports under the overhanging arm.</p>
@@ -121,16 +69,16 @@
     <p>Flat on the bed, servo-horn pocket facing up. The pocket needs no support if your bridging is well-tuned; otherwise enable supports inside the pocket only.</p>
 
     <h3>Tibia</h3>
-    <p>Stand vertically with the foot at the bottom. Layer lines should run horizontally across the leg — this gives the best resistance to bending under landing impact.</p>
+    <p>Stand vertically with the foot at the bottom. Layer lines should run horizontally across the leg; this gives the best resistance to bending under landing impact.</p>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 04 — Slicer orientations, all six parts</span></div></div>
+      <div class="frame"><div class="placeholder"><span>FIG. 04 · Slicer orientations, all six parts</span></div></div>
       <figcaption><span class="fig-label">Figure 04</span>Recommended slicer orientations. The arrows indicate layer direction relative to expected load.</figcaption>
     </figure>
 
     <div class="callout warning">
       <div class="callout-label">Warning · Tibia orientation matters</div>
-      <p>A tibia printed flat on the bed will print twice as fast and look identical to one printed upright — and it will snap the first time the robot lands a step. Do not be tempted. We have lost more legs to lazy orientation than to any other single cause.</p>
+      <p>A tibia printed flat on the bed will print twice as fast and look identical to one printed upright, and it will snap the first time the robot lands a step. Do not be tempted. We have lost more legs to lazy orientation than to any other single cause.</p>
     </div>
 
     <h2>Material Choice</h2>
@@ -158,7 +106,7 @@
     <ol class="steps">
       <li>
         <h4>Remove supports carefully</h4>
-        <p>Use flush cutters, not your fingers. Tree supports under the hip mounts can leave small stubs in the servo pocket — these will prevent the servo from seating fully if not cleaned out.</p>
+        <p>Use flush cutters, not your fingers. Tree supports under the hip mounts can leave small stubs in the servo pocket; these will prevent the servo from seating fully if not cleaned out.</p>
       </li>
       <li>
         <h4>Test-fit a servo into each hip mount</h4>
@@ -185,58 +133,4 @@
 
     <h2>What to Bring to Cebu</h2>
 
-    <p>All printed parts. <strong>All of them.</strong> Even the spares. Even the failed test prints — bring them too, as a conversation piece. The on-ground programme assumes you arrive with the structural set complete and assembled into a working robot; we will not be printing replacements for you.</p>
-
-    <nav class="pagination" aria-label="Section navigation">
-      <a href="bom.html" class="prev">
-        <span class="page-direction">← Previous · §02</span>
-        <span class="page-title">Bill of Materials &amp; Tools</span>
-      </a>
-      <a href="assembly.html" class="next">
-        <span class="page-direction">Next · §04</span>
-        <span class="page-title">Mechanical Assembly</span>
-      </a>
-    </nav>
-
-  </main>
-</div>
-
-<footer class="site-footer">
-  <div class="foot-inner">
-    <div>
-      <h5>About this manual</h5>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
-    </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="overview.html">§01 Overview</a></li>
-        <li><a href="bom.html">§02 Bill of Materials</a></li>
-        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
-        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
-        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
-        <li><a href="pcb.html">§06 PCB</a></li>
-        <li><a href="firmware.html">§07 Firmware</a></li>
-        <li><a href="testing.html">§08 Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT</li>
-        <li><a href="credits.html">Credits</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon">
-    <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Inter &amp; JetBrains Mono</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-
+    <p>All printed parts. <strong>All of them.</strong> Even the spares. Even the failed test prints; bring them too, as a conversation piece. The on-ground programme assumes you arrive with the structural set complete and assembled into a working robot; we will not be printing replacements for you.</p>

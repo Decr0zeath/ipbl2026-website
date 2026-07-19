@@ -2,7 +2,7 @@
 
 Pre-training field manual for delegates of **International Project-Based Learning 2026**, hosted by the **University of San Jose – Recoletos** in Cebu, Philippines.
 
-Built as a static multi-page site for GitHub Pages.
+Built as a static SPA-lite site for GitHub Pages: one shell page loads the chrome once, section content is fetched and injected without page reloads (hash routing keeps sections linkable). No build step, no dependencies.
 
 ## What this is
 
@@ -33,30 +33,34 @@ The site covers:
 3. Source: **Deploy from a branch**. Branch: `main` (or `gh-pages`), folder `/ (root)`.
 4. Save. After a minute or two, the site will be live at `https://<your-username>.github.io/<repo-name>/`.
 
-No build step. All assets are static HTML, CSS, and a tiny JS file.
+No build step — plain HTML, CSS, and JS.
+
+## Local preview
+
+Serve the folder over HTTP and open `index.html` — e.g. VS Code's Live Server extension, or `python -m http.server`. (Opening files directly from disk won't work: the manual shell fetches section content, and browsers block `fetch()` on `file://`.)
 
 ## File structure
 
 ```
 /
-├── index.html              Home / welcome page
-├── overview.html           §01
-├── bom.html                §02
-├── printing.html           §03
-├── assembly.html           §04
-├── electronics.html        §05
-├── pcb.html                §06
-├── firmware.html           §07
-├── testing.html            §08
-├── credits.html            Credits page
+├── index.html              Home / welcome page (standalone)
+├── manual.html             Manual shell — chrome + empty viewer; JS fills in everything
+├── sections/
+│   ├── overview.html       §01 … testing.html §08, credits.html
+│   └── …                   Content fragments only (no <html>, no chrome) — fetched by the viewer
 ├── assets/
 │   ├── css/
 │   │   └── style.css       Shared stylesheet
 │   ├── js/
-│   │   └── main.js         Mobile nav + current-page highlight
+│   │   ├── manual-map.js   Manual structure — sidebar, page headers, pagination all generate from this
+│   │   └── main.js         SPA-lite viewer (fetch + inject + hash routing) and mobile nav toggle
 │   └── images/             (Empty — drop your photos here)
 └── README.md
 ```
+
+Sections are addressed as `manual.html#<slug>` (e.g. `manual.html#assembly`) — deep links work and are shareable.
+
+To add a manual section: drop its content fragment in `sections/<slug>.html` and add one entry to `MANUAL_MAP` in `assets/js/manual-map.js` — sidebar, page header, and prev/next links update automatically. (The footer link lists in `index.html` and `manual.html` are the only manual edits.)
 
 ## Replacing placeholder images
 
@@ -77,7 +81,7 @@ The frame's corner brackets and styling stay; only the inner content changes.
 
 ## Design
 
-- **Type:** Fraunces (display), Newsreader (body), JetBrains Mono (code/labels)
+- **Type:** Inter (headings and body), JetBrains Mono (code/labels)
 - **Palette:** USJ-R green `#0D3E20` + gold `#FEB104` on warm cream `#FAF6EC`
 - **Aesthetic:** Academic field-guide / vintage technical manual
 

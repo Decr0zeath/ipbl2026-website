@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>§01 Overview · iPBL 2026 Manual</title>
+  <meta name="description" content="§01 Overview — what the iPBL 2026 quadruped is, its system block diagram, and what delegates should know before starting the build." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -75,25 +80,25 @@
           <!-- Power -->
           <g>
             <rect x="40" y="160" width="120" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="100" y="185" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Battery</text>
-            <text x="100" y="205" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion / 7.4V</text>
+            <text x="100" y="185" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Battery</text>
+            <text x="100" y="205" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion / 7.4V</text>
           </g>
           <!-- PCB -->
           <g>
             <rect x="220" y="120" width="180" height="140" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="310" y="150" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Custom PCB</text>
-            <text x="310" y="170" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#5E6F62">power · distribution · headers</text>
+            <text x="310" y="150" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Custom PCB</text>
+            <text x="310" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">power · distribution · headers</text>
             <rect x="245" y="190" width="60" height="35" fill="#0D3E20"/>
-            <text x="275" y="212" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#FEB104">Nano</text>
+            <text x="275" y="212" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#FEB104">Nano</text>
             <rect x="320" y="190" width="55" height="35" fill="none" stroke="#0D3E20" stroke-dasharray="2 2"/>
-            <text x="347" y="212" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#0D3E20">8× hdr</text>
+            <text x="347" y="212" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#0D3E20">8× hdr</text>
           </g>
           <!-- Servos -->
           <g>
             <rect x="460" y="60" width="220" height="260" fill="none" stroke="#0D3E20" stroke-width="1" stroke-dasharray="3 3"/>
-            <text x="570" y="50" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="2" fill="#C98300">EIGHT SG90 SERVOS</text>
+            <text x="570" y="50" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2" fill="#C98300">EIGHT SG90 SERVOS</text>
             <!-- 4 legs, each 2 servos -->
-            <g font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">
+            <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">
               <rect x="480" y="80" width="80" height="22" fill="#FEB104" stroke="#0D3E20"/>
               <text x="520" y="95" text-anchor="middle">FL · hip</text>
               <rect x="580" y="80" width="80" height="22" fill="#F3ECD8" stroke="#0D3E20"/>
@@ -115,10 +120,10 @@
           <!-- Arrows -->
           <line x1="160" y1="190" x2="218" y2="190" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
           <line x1="400" y1="190" x2="458" y2="170" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
-          <text x="180" y="180" font-family="JetBrains Mono, monospace" font-size="8" fill="#5E6F62">5V regulated</text>
-          <text x="410" y="155" font-family="JetBrains Mono, monospace" font-size="8" fill="#5E6F62">PWM × 8</text>
+          <text x="180" y="180" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">5V regulated</text>
+          <text x="410" y="155" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">PWM × 8</text>
           <!-- Caption -->
-          <text x="360" y="355" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 02 — High-level block diagram</text>
+          <text x="360" y="355" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 02 — High-level block diagram</text>
         </svg>
       </div>
       <figcaption><span class="fig-label">Figure 02</span>Three subsystems: power source, central controller, and the bank of eight servos. The PCB is the connective tissue. Everything else is implementation detail.</figcaption>
@@ -237,7 +242,7 @@
   </div>
   <div class="colophon">
     <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Inter &amp; JetBrains Mono</span>
+    <span>Set in Plus Jakarta Sans, Lexend &amp; IBM Plex Mono</span>
   </div>
 </footer>
 

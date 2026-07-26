@@ -3,11 +3,13 @@
    University of San Jose – Recoletos
    ========================================================= */
 
-/* ---------- Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-
 /* ---------- Tokens ---------- */
 :root {
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Lexend', system-ui, sans-serif;
+  --font-serif-italic: 'Crimson Pro', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
   --green-900: #06200F;
   --green-800: #0D3E20;
   --green-700: #195A33;
@@ -38,11 +40,14 @@
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 18px;
   line-height: 1.65;
   font-weight: 400;
@@ -54,7 +59,7 @@ img, svg { max-width: 100%; display: block; }
 
 /* ---------- Typography ---------- */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-display);
   color: var(--green-800);
   font-weight: 600;
   line-height: 1.15;
@@ -77,13 +82,13 @@ a {
 a:hover { color: var(--gold-600); }
 
 strong { font-weight: 600; color: var(--ink); }
-em { color: var(--ink-soft); }
+em { color: var(--ink-soft); font-family: var(--font-serif-italic); }
 
 ul, ol { padding-left: 1.4em; margin: 0 0 1.2em; }
 ul li, ol li { margin-bottom: .35em; }
 
 code, kbd, samp {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: .92em;
   background: var(--paper-2);
   padding: .12em .42em;
@@ -129,7 +134,7 @@ hr {
   border: 1.5px solid var(--gold-500);
   display: grid;
   place-items: center;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-weight: 600;
   color: var(--gold-500);
   font-size: 1rem;
@@ -137,7 +142,7 @@ hr {
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
 .brand-title {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -147,7 +152,7 @@ hr {
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--gold-300);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
 }
 
 .nav-toggle {
@@ -155,7 +160,7 @@ hr {
   border: 1px solid rgba(254,177,4,.45);
   color: var(--paper);
   padding: .45rem .7rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .75rem;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -182,7 +187,7 @@ aside.sidebar {
   overflow-y: auto;
   padding-right: 1rem;
   border-right: 1px solid var(--rule);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .82rem;
 }
 .sidebar-label {
@@ -246,7 +251,7 @@ main.content {
 }
 
 .section-marker {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .78rem;
   letter-spacing: .22em;
   text-transform: uppercase;
@@ -265,7 +270,7 @@ main.content {
 .section-marker::after { flex: 1; }
 
 .lede {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.35rem;
   font-weight: 400;
   line-height: 1.45;
@@ -308,7 +313,7 @@ figure .placeholder {
   display: grid;
   place-items: center;
   color: var(--ink-mute);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .8rem;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -320,7 +325,7 @@ figure .placeholder span {
   border: 1px solid var(--rule);
 }
 figure figcaption {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-serif-italic);
   font-style: italic;
   font-size: .92rem;
   color: var(--ink-soft);
@@ -330,7 +335,7 @@ figure figcaption {
 }
 figure figcaption .fig-label {
   font-style: normal;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -356,7 +361,7 @@ figure figcaption .fig-label {
   position: relative;
 }
 .callout .callout-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -390,7 +395,7 @@ figure figcaption .fig-label {
 .steps > li:first-child { padding-top: 0; }
 .steps > li::before {
   content: counter(stepcount, decimal-leading-zero);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
   font-weight: 400;
   color: var(--gold-600);
@@ -411,11 +416,11 @@ table {
   width: 100%;
   border-collapse: collapse;
   font-size: .94rem;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 table thead th {
   text-align: left;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-weight: 700;
   font-size: .72rem;
   letter-spacing: .14em;
@@ -432,7 +437,7 @@ table tbody td {
 }
 table tbody tr:last-child td { border-bottom: 0; }
 table tbody tr:nth-child(even) { background: rgba(255,255,255,.4); }
-table .num { font-family: 'JetBrains Mono', monospace; color: var(--ink-soft); text-align: right; }
+table .num { font-family: var(--font-mono); color: var(--ink-soft); text-align: right; }
 
 /* ---------- Code Blocks ---------- */
 pre {
@@ -441,7 +446,7 @@ pre {
   padding: 1.5rem;
   margin: 2em 0;
   overflow-x: auto;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .85rem;
   line-height: 1.6;
   border-left: 3px solid var(--gold-500);
@@ -493,7 +498,7 @@ pre::before {
 .pagination a:hover .page-direction { color: var(--gold-300); }
 .pagination a:hover .page-title { color: var(--paper); }
 .pagination .page-direction {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .68rem;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -502,7 +507,7 @@ pre::before {
   margin-bottom: .25rem;
 }
 .pagination .page-title {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.15rem;
   color: var(--green-800);
   font-weight: 500;
@@ -525,7 +530,7 @@ footer.site-footer .foot-inner {
   gap: 3rem;
 }
 footer.site-footer h5 {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -547,7 +552,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   margin: 2.5rem auto 0;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(254,177,4,.18);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .7rem;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -574,7 +579,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   position: absolute;
   top: 2rem;
   right: var(--gutter);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .25em;
   color: var(--gold-600);
@@ -587,12 +592,13 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   letter-spacing: -0.03em;
 }
 .hero-title .accent {
+  font-family: var(--font-serif-italic);
   font-style: italic;
   font-weight: 400;
   color: var(--gold-600);
 }
 .hero-meta {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .8rem;
   letter-spacing: .15em;
   text-transform: uppercase;
@@ -609,7 +615,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   display: inline-block;
 }
 .hero-blurb {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   font-size: 1.15rem;
   line-height: 1.5;
@@ -653,7 +659,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .uni-card.host h3 { color: var(--paper); }
 .uni-card.host .uni-role { color: var(--gold-300); }
 .uni-card .uni-role {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .68rem;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -689,7 +695,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   position: absolute;
   top: .8rem;
   right: 1rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .7rem;
   letter-spacing: .12em;
   color: var(--gold-600);
@@ -719,7 +725,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   margin: 0 0 .8rem;
   font-size: 1.1rem;
   font-weight: 600;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -765,7 +771,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   background: var(--gold-500);
   color: var(--green-900);
   text-decoration: none;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .78rem;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -782,7 +788,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   border-bottom: 1px solid var(--rule);
 }
 .page-head .crumb {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .72rem;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -795,7 +801,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   font-weight: 400;
 }
 .page-head .subtitle {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 1.05rem;
   color: var(--ink-soft);
   margin: 0;
@@ -818,7 +824,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .spec-list .spec-label {
   display: block;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .66rem;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -826,7 +832,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   margin-bottom: .3rem;
 }
 .spec-list .spec-value {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   color: var(--green-800);
   font-weight: 500;

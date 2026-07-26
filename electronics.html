@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>§05 Electronics &amp; Wiring · iPBL 2026 Manual</title>
+  <meta name="description" content="§05 Electronics &amp; Wiring — pinout reference, servo wiring, and power distribution for the iPBL 2026 quadruped." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -131,32 +136,32 @@
 
           <!-- Battery -->
           <rect x="20" y="140" width="110" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="75" y="165" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">BT1</text>
-          <text x="75" y="183" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion · 7.4V</text>
+          <text x="75" y="165" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">BT1</text>
+          <text x="75" y="183" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion · 7.4V</text>
 
           <!-- Switch -->
           <rect x="155" y="155" width="50" height="30" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="180" y="173" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">SW1</text>
+          <text x="180" y="173" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">SW1</text>
 
           <!-- Buck -->
           <rect x="230" y="60" width="120" height="60" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="290" y="83" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">Buck → 5V</text>
-          <text x="290" y="103" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#5E6F62">MP1584 / LM2596</text>
+          <text x="290" y="83" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">Buck → 5V</text>
+          <text x="290" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">MP1584 / LM2596</text>
 
           <!-- Servo rail -->
           <rect x="230" y="220" width="120" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="290" y="243" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">5V Servo Rail</text>
-          <text x="290" y="263" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">C1 · C2 bulk</text>
+          <text x="290" y="243" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">5V Servo Rail</text>
+          <text x="290" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">C1 · C2 bulk</text>
 
           <!-- Nano -->
           <rect x="420" y="60" width="120" height="60" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="480" y="83" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#FEB104">Arduino Nano</text>
-          <text x="480" y="103" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#FFCD55">5V logic only</text>
+          <text x="480" y="83" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#FEB104">Arduino Nano</text>
+          <text x="480" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#FFCD55">5V logic only</text>
 
           <!-- Servos -->
           <rect x="420" y="220" width="270" height="60" fill="none" stroke="#0D3E20" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <text x="555" y="245" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">8 × SG90 Servos</text>
-          <text x="555" y="263" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#5E6F62">peak ≈ 4 A combined</text>
+          <text x="555" y="245" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">8 × SG90 Servos</text>
+          <text x="555" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">peak ≈ 4 A combined</text>
 
           <!-- Wires -->
           <line x1="130" y1="170" x2="153" y2="170" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
@@ -170,7 +175,7 @@
 
           <!-- Signal -->
           <line x1="540" y1="120" x2="540" y2="220" stroke="#C98300" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arr2)"/>
-          <text x="552" y="170" font-family="JetBrains Mono, monospace" font-size="8" fill="#C98300">PWM × 8</text>
+          <text x="552" y="170" font-family="IBM Plex Mono, monospace" font-size="8" fill="#C98300">PWM × 8</text>
 
           <!-- Ground rail -->
           <line x1="290" y1="280" x2="290" y2="310" stroke="#0D3E20" stroke-width="2"/>
@@ -178,10 +183,10 @@
           <line x1="555" y1="280" x2="555" y2="310" stroke="#0D3E20" stroke-width="2"/>
           <line x1="75" y1="200" x2="75" y2="310" stroke="#0D3E20" stroke-width="2"/>
           <line x1="75" y1="310" x2="640" y2="310" stroke="#0D3E20" stroke-width="2"/>
-          <text x="640" y="307" font-family="JetBrains Mono, monospace" font-size="9" fill="#0D3E20">GND</text>
+          <text x="640" y="307" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">GND</text>
 
           <!-- Caption -->
-          <text x="360" y="340" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 09 — Power architecture</text>
+          <text x="360" y="340" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 09 — Power architecture</text>
         </svg>
       </div>
       <figcaption><span class="fig-label">Figure 09</span>The two-rail power design. The buck converter feeds 5 V to the Nano via a clean, low-current rail. Servos take their power directly from the regulated 5 V at the bulk capacitors. The two rails share ground but not noise.</figcaption>
@@ -310,7 +315,7 @@
   </div>
   <div class="colophon">
     <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Inter &amp; JetBrains Mono</span>
+    <span>Set in Plus Jakarta Sans, Lexend &amp; IBM Plex Mono</span>
   </div>
 </footer>
 

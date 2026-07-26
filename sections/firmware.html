@@ -1,3 +1,4 @@
+<<<<<<< HEAD:firmware.html
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,9 +56,11 @@
       <p class="subtitle">Toolchain setup, a walk through the base sketch, and the calibration ritual that turns eight imperfectly-centred servos into a usable robot.</p>
     </div>
 
+=======
+>>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/firmware.html
     <div class="section-marker">Toolchain Setup</div>
 
-    <p class="lede">The base firmware uses the Arduino IDE and the built-in <code>Servo</code> library — nothing exotic. If you've blinked an LED on an Arduino before, you already have everything you need.</p>
+    <p class="lede">The base firmware uses the Arduino IDE and the built-in <code>Servo</code> library; nothing exotic. If you've blinked an LED on an Arduino before, you already have everything you need.</p>
 
     <h2>Installing the IDE</h2>
 
@@ -72,21 +75,21 @@
       </li>
       <li>
         <h4>Select the board and processor</h4>
-        <p>Tools → Board → Arduino AVR Boards → <strong>Arduino Nano</strong>. Then Tools → Processor → <strong>ATmega328P (Old Bootloader)</strong> if your kit Nano was supplied as a clone (most of ours are); otherwise <strong>ATmega328P</strong>. If uploads fail with an avrdude timeout, swap between the two — that's almost always the fix.</p>
+        <p>Tools → Board → Arduino AVR Boards → <strong>Arduino Nano</strong>. Then Tools → Processor → <strong>ATmega328P (Old Bootloader)</strong> if your kit Nano was supplied as a clone (most of ours are); otherwise <strong>ATmega328P</strong>. If uploads fail with an avrdude timeout, swap between the two; that's almost always the fix.</p>
       </li>
       <li>
         <h4>Plug in the Nano, identify the serial port</h4>
-        <p>Connect the USB-C cable. Tools → Port should now show a new entry — <code>/dev/cu.usbserial-*</code> on macOS, <code>COM#</code> on Windows, <code>/dev/ttyUSB#</code> on Linux. Select it. If nothing appears, see the USB cable warning in <a href="bom.html">§02</a>.</p>
+        <p>Connect the USB-C cable. Tools → Port should now show a new entry: <code>/dev/cu.usbserial-*</code> on macOS, <code>COM#</code> on Windows, <code>/dev/ttyUSB#</code> on Linux. Select it. If nothing appears, see the USB cable warning in <a href="#bom">Section 02</a>.</p>
       </li>
       <li>
         <h4>Verify with Blink</h4>
-        <p>File → Examples → 01.Basics → Blink. Upload it. The Nano's onboard LED (next to D13) should start blinking at 1 Hz. If this works, your toolchain is good. If it doesn't, fix toolchain issues now — not during the more complex sketch.</p>
+        <p>File → Examples → 01.Basics → Blink. Upload it. The Nano's onboard LED (next to D13) should start blinking at 1 Hz. If this works, your toolchain is good. If it doesn't, fix toolchain issues now, not during the more complex sketch.</p>
       </li>
     </ol>
 
     <h2>Libraries</h2>
 
-    <p>The base firmware uses only one external library, and it ships with the IDE — no additional install needed:</p>
+    <p>The base firmware uses only one external library, and it ships with the IDE, no additional install needed:</p>
 
     <ul class="spec-list">
       <li><span class="spec-label">Servo</span><span class="spec-value">Built-in</span></li>
@@ -97,14 +100,14 @@
 
     <h2>Sketch Structure</h2>
 
-    <p>The base sketch is intentionally minimal — it does exactly what the manual promises (stand, walk, button-stop, individual servo command via serial) and nothing more. Open <code>quadruped_base.ino</code> and follow along.</p>
+    <p>The base sketch is intentionally minimal: it does exactly what the manual promises (stand, walk, button-stop, individual servo command via serial) and nothing more. Open <code>quadruped_base.ino</code> and follow along.</p>
 
     <h3>Servo Array Declaration</h3>
 
     <pre data-lang="C++"><code>#include &lt;Servo.h&gt;
 
 // Eight servos, one Servo object each, addressed by index 0..7.
-// Index matches the channel map from §05:
+// Index matches the channel map from Section 05:
 // 0=FL-H, 1=FL-K, 2=FR-H, 3=FR-K,
 // 4=BL-H, 5=BL-K, 6=BR-H, 7=BR-K
 Servo legs[8];
@@ -119,7 +122,7 @@ int8_t TRIM[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 const uint8_t LED_PIN = 10;
 const uint8_t BTN_PIN = 11;</code></pre>
 
-    <p>Three things to notice: (1) we hold the eight servos in a flat array indexed by the channel map; (2) the pin numbers are pulled into a const array so the index-to-pin mapping is in one place; (3) the <code>TRIM</code> array is the only thing you'll edit per-unit — every robot will have slightly different values, derived from calibration.</p>
+    <p>Three things to notice: (1) we hold the eight servos in a flat array indexed by the channel map; (2) the pin numbers are pulled into a const array so the index-to-pin mapping is in one place; (3) the <code>TRIM</code> array is the only thing you'll edit per-unit; every robot will have slightly different values, derived from calibration.</p>
 
     <h3>Setup</h3>
 
@@ -140,11 +143,11 @@ const uint8_t BTN_PIN = 11;</code></pre>
   Serial.println(F("Quadruped ready. Send 'h' for help."));
 }</code></pre>
 
-    <p>The servos are attached one by one and written to their trimmed neutral immediately. This is what produces the "stand up within two seconds" behaviour described in <a href="overview.html">§01</a>. The status LED comes on once setup completes — a useful signal that boot succeeded.</p>
+    <p>The servos are attached one by one and written to their trimmed neutral immediately. This is what produces the "stand up within two seconds" behaviour described in <a href="#overview">Section 01</a>. The status LED comes on once setup completes, a useful signal that boot succeeded.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Why 600 / 2400 µs?</div>
-      <p>The <code>Servo</code> library defaults to 544–2400 µs which works for most servos but pushes the SG90 past its mechanical end-stops on the low end — you'll hear it buzz unhappily. Restricting to 600–2400 keeps it inside the safe range. If your particular servo batch behaves differently, adjust by 50 µs at a time and observe.</p>
+      <p>The <code>Servo</code> library defaults to 544–2400 µs which works for most servos but pushes the SG90 past its mechanical end-stops on the low end; you'll hear it buzz unhappily. Restricting to 600–2400 keeps it inside the safe range. If your particular servo batch behaves differently, adjust by 50 µs at a time and observe.</p>
     </div>
 
     <h3>Neutral Pose</h3>
@@ -164,13 +167,13 @@ void setServo(uint8_t idx, int angle) {
   legs[idx].write(a);
 }</code></pre>
 
-    <p>Every angle you write goes through <code>setServo()</code>, which adds the trim and clamps to the safe range. Never call <code>legs[i].write()</code> directly outside of <code>setup()</code> — you'll bypass the trim and the clamp, and you'll learn an expensive lesson about servo mechanical limits.</p>
+    <p>Every angle you write goes through <code>setServo()</code>, which adds the trim and clamps to the safe range. Never call <code>legs[i].write()</code> directly outside of <code>setup()</code>; you'll bypass the trim and the clamp, and you'll learn an expensive lesson about servo mechanical limits.</p>
 
     <h3>A Minimal Gait</h3>
 
     <pre data-lang="C++"><code>// A simple "creep" gait. Lifts one leg at a time, swings it
 // forward, lowers it, then shifts weight onto the new contact.
-// This is not graceful — it is honest about its mechanical limits.
+// This is not graceful, but it is honest about its mechanical limits.
 //
 // Each "frame" defines the eight angles, with delays between frames.
 // Indices: 0=FL-H 1=FL-K 2=FR-H 3=FR-K 4=BL-H 5=BL-K 6=BR-H 7=BR-K
@@ -204,7 +207,7 @@ void stepCreepForward() {
   delay(FRAME_MS);
 }</code></pre>
 
-    <p>The gait above is deliberately the simplest thing that works — one leg moves at a time, every leg returns to neutral between phases, no two legs are ever in the air simultaneously. It looks slow and ungainly because it is. The interesting gait work is reserved for the on-ground programme.</p>
+    <p>The gait above is deliberately the simplest thing that works: one leg moves at a time, every leg returns to neutral between phases, no two legs are ever in the air simultaneously. It looks slow and ungainly because it is. The interesting gait work is reserved for the on-ground programme.</p>
 
     <h3>Main Loop</h3>
 
@@ -226,7 +229,7 @@ void loop() {
   lastBtn = b;
 
   // Serial commands for individual servo testing.
-  // Format: "s &lt;idx&gt; &lt;angle&gt;\n" — e.g. "s 0 45"
+  // Format: "s &lt;idx&gt; &lt;angle&gt;\n", e.g. "s 0 45"
   if (Serial.available()) {
     handleSerialCommand();
   }
@@ -237,7 +240,7 @@ void loop() {
   }
 }</code></pre>
 
-    <p>The button on D11 toggles between idle and walking. The serial monitor lets you address any servo individually for calibration. The status LED on D10 is on when idle, off when walking — a passive heartbeat.</p>
+    <p>The button on D11 toggles between idle and walking. The serial monitor lets you address any servo individually for calibration. The status LED on D10 is on when idle, off when walking, a passive heartbeat.</p>
 
     <div class="callout tip">
       <div class="callout-label">Tip · Read the serial output during early tests</div>
@@ -249,7 +252,7 @@ void loop() {
     <ol class="steps">
       <li>
         <h4>Open <code>quadruped_base.ino</code> in the IDE</h4>
-        <p>From the project repository — clone or download the zip. Open the <code>.ino</code> file; the IDE will offer to create a folder for it. Accept.</p>
+        <p>From the project repository: clone or download the zip. Open the <code>.ino</code> file; the IDE will offer to create a folder for it. Accept.</p>
       </li>
       <li>
         <h4>Verify (Ctrl/⌘ + R)</h4>
@@ -261,7 +264,7 @@ void loop() {
       </li>
       <li>
         <h4>Confirm boot</h4>
-        <p>The status LED (D1 on the PCB, not the Nano onboard) should illuminate within a second. Open the serial monitor — you should see the "Quadruped ready" line.</p>
+        <p>The status LED (D1 on the PCB, not the Nano onboard) should illuminate within a second. Open the serial monitor; you should see the "Quadruped ready" line.</p>
       </li>
     </ol>
 
@@ -280,11 +283,11 @@ void loop() {
       </li>
       <li>
         <h4>Try different angles to converge on the right trim</h4>
-        <p>Send <code>s 0 85</code>, <code>s 0 95</code>, etc., until the visual angle is correct. Note that adjustment value — that's the new <code>TRIM[0]</code>.</p>
+        <p>Send <code>s 0 85</code>, <code>s 0 95</code>, etc., until the visual angle is correct. Note that adjustment value; that's the new <code>TRIM[0]</code>.</p>
       </li>
       <li>
         <h4>Repeat for all eight servos</h4>
-        <p>Servos 0, 2, 4, 6 are hips — should leave femurs horizontal. Servos 1, 3, 5, 7 are knees — should leave tibias vertical (hanging straight down).</p>
+        <p>Servos 0, 2, 4, 6 are hips; they should leave femurs horizontal. Servos 1, 3, 5, 7 are knees; they should leave tibias vertical (hanging straight down).</p>
       </li>
       <li>
         <h4>Update the TRIM array and re-upload</h4>
@@ -298,12 +301,13 @@ void loop() {
 
     <div class="callout warning">
       <div class="callout-label">Warning · Trim limits</div>
-      <p>Trim values larger than ±20° usually mean something is mechanically misaligned — typically a servo horn installed off-centre during assembly. Don't paper over a mechanical error in firmware. Power down, remove the horn, re-centre it physically, and start the calibration over.</p>
+      <p>Trim values larger than ±20° usually mean something is mechanically misaligned, typically a servo horn installed off-centre during assembly. Don't paper over a mechanical error in firmware. Power down, remove the horn, re-centre it physically, and start the calibration over.</p>
     </div>
 
-    <h2>What's in the Sketch — and What Isn't</h2>
+    <h2>What's in the Sketch, and What Isn't</h2>
 
     <p>The base sketch deliberately includes: servo init, neutral pose, one creep-forward gait, button toggle, serial single-servo command. It deliberately excludes: any sensor reading, any I²C, any communication beyond the USB serial, any autonomous behaviour beyond toggling the gait. The exclusions are there for a reason. We will populate them together when you arrive.</p>
+<<<<<<< HEAD:firmware.html
 
     <nav class="pagination" aria-label="Section navigation">
       <a href="pcb.html" class="prev">
@@ -358,3 +362,5 @@ void loop() {
 </body>
 </html>
 
+=======
+>>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/firmware.html

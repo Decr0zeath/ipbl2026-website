@@ -1,3 +1,4 @@
+<<<<<<< HEAD:pcb.html
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,13 +56,15 @@
       <p class="subtitle">A schematic walkthrough — so you understand what you're soldering — followed by the assembly sequence for the board itself.</p>
     </div>
 
+=======
+>>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/pcb.html
     <div class="section-marker">Read the Schematic First</div>
 
     <p class="lede">A blank PCB has been shipped to each delegate in the kit. The board itself is laid out for you; the schematic that drove it is published below. You should be able to trace every component on the bare board to a symbol on the schematic before you reach for the soldering iron.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Two paths through this section</div>
-      <p>Some of you will want to redesign the PCB yourselves from the schematic — that's encouraged for your own portfolio, but <strong>do not bring a self-fabricated board to Cebu</strong>. We will be working from the standardised PCB across all teams. Soldering practice happens on the supplied board.</p>
+      <p>Some of you will want to redesign the PCB yourselves from the schematic; that's encouraged for your own portfolio, but <strong>do not bring a self-fabricated board to Cebu</strong>. We will be working from the standardised PCB across all teams. Soldering practice happens on the supplied board.</p>
     </div>
 
     <h2>The Schematic</h2>
@@ -69,13 +72,13 @@
     <p>The schematic is divided into four functional sections. Read each one and confirm you can locate its components on the bare PCB. The schematic PDF is in the project repository: <code>quadruped-schematic-v1.pdf</code>.</p>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 10 — Full schematic, four-sheet PDF, page 1 reproduced</span></div></div>
+      <div class="frame"><div class="placeholder"><span>FIG. 10 · Full schematic, four-sheet PDF, page 1 reproduced</span></div></div>
       <figcaption><span class="fig-label">Figure 10</span>Reproduction of the canonical schematic. Refer to the PDF in the repository for full-resolution.</figcaption>
     </figure>
 
     <h3>Section A · Power input and switch</h3>
 
-    <p>Battery enters the board at J1 (JST-XH or XT30, depending on your pack). Positive feeds through SW1 (the master power switch) and then into the buck converter's V_IN pin. The negative is tied to the board's common ground plane. Note the reverse-polarity protection: a Schottky diode (D2) sits between J1 and SW1 — it will pass forward current at the cost of ~0.3 V but block damage if the battery is plugged in backwards.</p>
+    <p>Battery enters the board at J1 (JST-XH or XT30, depending on your pack). Positive feeds through SW1 (the master power switch) and then into the buck converter's V_IN pin. The negative is tied to the board's common ground plane. Note the reverse-polarity protection: a Schottky diode (D2) sits between J1 and SW1; it will pass forward current at the cost of ~0.3 V but block damage if the battery is plugged in backwards.</p>
 
     <h3>Section B · Buck converter and rails</h3>
 
@@ -90,14 +93,14 @@
 
     <h3>Section C · Microcontroller</h3>
 
-    <p>The Arduino Nano sits in a socketed female-header arrangement (no direct-soldered Nano — you want the option to swap it out). Its pin mapping is exactly as documented in <a href="electronics.html">§05</a>. The reset pin is broken out to a small tact button (RST) for convenience. The status LED (D1) sits on D10 via R1 (330 Ω). The user push-button (SW2) is on D11 with R2 (10 kΩ) as a pull-up to 5 V — pressing the button pulls the pin to ground.</p>
+    <p>The Arduino Nano sits in a socketed female-header arrangement (no direct-soldered Nano; you want the option to swap it out). Its pin mapping is exactly as documented in <a href="#electronics">Section 05</a>. The reset pin is broken out to a small tact button (RST) for convenience. The status LED (D1) sits on D10 via R1 (330 Ω). The user push-button (SW2) is on D11 with R2 (10 kΩ) as a pull-up to 5 V; pressing the button pulls the pin to ground.</p>
 
     <h3>Section D · Servo headers</h3>
 
-    <p>Eight identical 3-pin 0.1" headers in a row. Pin 1 of each connects to GND; pin 2 to <code>+5V_SERVO</code>; pin 3 to the corresponding Nano digital pin (D2 through D9). The signal traces run with a ground return alongside them on the inner layer where possible — though this is a 2-layer board, so the routing is opportunistic.</p>
+    <p>Eight identical 3-pin 0.1" headers in a row. Pin 1 of each connects to GND; pin 2 to <code>+5V_SERVO</code>; pin 3 to the corresponding Nano digital pin (D2 through D9). The signal traces run with a ground return alongside them on the inner layer where possible, though this is a 2-layer board, so the routing is opportunistic.</p>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 11 — Bare PCB, top side, annotated</span></div></div>
+      <div class="frame"><div class="placeholder"><span>FIG. 11 · Bare PCB, top side, annotated</span></div></div>
       <figcaption><span class="fig-label">Figure 11</span>The bare board you received in the kit, top side. Component designators are silk-screened next to each footprint.</figcaption>
     </figure>
 
@@ -112,7 +115,7 @@
       </li>
       <li>
         <h4>Continuity-test the power rails</h4>
-        <p>With a multimeter in continuity mode, probe between the battery + terminal and the buck input pad. You should hear a buzz. Now probe between the battery + terminal and the battery – terminal. You should hear <em>nothing</em>. If you hear a buzz across the battery terminals on a bare board, the board is faulty — do not proceed.</p>
+        <p>With a multimeter in continuity mode, probe between the battery + terminal and the buck input pad. You should hear a buzz. Now probe between the battery + terminal and the battery – terminal. You should hear <em>nothing</em>. If you hear a buzz across the battery terminals on a bare board, the board is faulty; do not proceed.</p>
       </li>
       <li>
         <h4>Sort components into a tray</h4>
@@ -141,7 +144,7 @@
           <tr><td class="num">5</td><td>LED</td><td>D1</td><td><strong>Polarity matters.</strong> Long lead = anode (positive). Match flat side on body to silkscreen flat.</td></tr>
           <tr><td class="num">6</td><td>Tactile button</td><td>SW2</td><td>Will only seat one way. Don't force it.</td></tr>
           <tr><td class="num">7</td><td>Nano headers (female)</td><td>U1 sockets</td><td>Two rows of 15-pin sockets. Tack one corner each, check alignment, then complete.</td></tr>
-          <tr><td class="num">8</td><td>Servo headers</td><td>J2–J9</td><td>Eight 3-pin right-angle headers. <strong>Orientation matters</strong> — pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
+          <tr><td class="num">8</td><td>Servo headers</td><td>J2–J9</td><td>Eight 3-pin right-angle headers. <strong>Orientation matters</strong>: pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
           <tr><td class="num">9</td><td>Slide switch</td><td>SW1</td><td>Tack one pin, confirm flat against board, complete.</td></tr>
           <tr><td class="num">10</td><td>Electrolytic capacitors</td><td>C1, C2</td><td><strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can).</td></tr>
           <tr><td class="num">11</td><td>Battery connector</td><td>J1</td><td>JST-XH or XT30 depending on your supplied pack.</td></tr>
@@ -152,7 +155,7 @@
 
     <div class="callout tip">
       <div class="callout-label">Tip · Solder technique on this board</div>
-      <p>Heat the pad and the lead together for one second. Touch solder to the joint (not the iron). It should flow in, form a small concave fillet, and reflow within another second. A whole joint should take three seconds end to end. If it's taking longer, your iron is too cold or your flux is exhausted — clean the tip and re-tin.</p>
+      <p>Heat the pad and the lead together for one second. Touch solder to the joint (not the iron). It should flow in, form a small concave fillet, and reflow within another second. A whole joint should take three seconds end to end. If it's taking longer, your iron is too cold or your flux is exhausted; clean the tip and re-tin.</p>
     </div>
 
     <h2>Polarity-Sensitive Components</h2>
@@ -163,7 +166,7 @@
       <li><strong>D2 (Schottky diode).</strong> Stripe on body = cathode. Cathode goes toward the buck converter side.</li>
       <li><strong>D1 (LED).</strong> Long lead = anode (+). Flat side on plastic body = cathode (–).</li>
       <li><strong>C1, C2 (electrolytic capacitors).</strong> Long lead = +. White stripe on the can = – side.</li>
-      <li><strong>The Nano itself.</strong> The USB port faces the edge of the PCB labelled "USB" — don't insert it 180° flipped.</li>
+      <li><strong>The Nano itself.</strong> The USB port faces the edge of the PCB labelled "USB"; don't insert it 180° flipped.</li>
     </ol>
 
     <h2>Post-Solder Inspection</h2>
@@ -173,19 +176,19 @@
     <ol class="steps">
       <li>
         <h4>Visual inspection under good light</h4>
-        <p>Every joint should look like a shiny, concave fillet — not a dull grey blob. Dull joints are usually "cold" — reflow them. Blob joints often hide a short to a neighbouring pad — flux and re-touch.</p>
+        <p>Every joint should look like a shiny, concave fillet, not a dull grey blob. Dull joints are usually "cold"; reflow them. Blob joints often hide a short to a neighbouring pad; flux and re-touch.</p>
       </li>
       <li>
         <h4>Continuity check: battery + to battery –</h4>
-        <p>With SW1 in the OFF position, probe across the battery terminals. There must be no continuity. If there is, you have a short somewhere on the input side — most often a solder bridge near J1 or D2.</p>
+        <p>With SW1 in the OFF position, probe across the battery terminals. There must be no continuity. If there is, you have a short somewhere on the input side, most often a solder bridge near J1 or D2.</p>
       </li>
       <li>
         <h4>Continuity check: +5V_LOGIC to GND</h4>
-        <p>Probe the Nano's 5 V pin (in its socket) against GND. There should be no continuity. If there is, you have a short on the 5 V rail — check around the Nano socket pins and the ceramic capacitors.</p>
+        <p>Probe the Nano's 5 V pin (in its socket) against GND. There should be no continuity. If there is, you have a short on the 5 V rail; check around the Nano socket pins and the ceramic capacitors.</p>
       </li>
       <li>
         <h4>Continuity check: +5V_SERVO to GND</h4>
-        <p>Probe pin 2 of any servo header against pin 1 of the same header. There should be no continuity. If there is — most commonly because an electrolytic was installed backwards and shorted — disconnect everything and find it before applying power.</p>
+        <p>Probe pin 2 of any servo header against pin 1 of the same header. There should be no continuity. If there is (most commonly because an electrolytic was installed backwards and shorted), disconnect everything and find it before applying power.</p>
       </li>
       <li>
         <h4>Smoke test: bench supply at 7.4 V, current limit to 200 mA</h4>
@@ -193,23 +196,24 @@
       </li>
       <li>
         <h4>Install the Nano, repeat smoke test</h4>
-        <p>Power down. Insert the Nano into its socket with the USB port facing the labelled edge. Power up again — current should rise to about 80 mA (Nano idle plus buck idle). The Nano's onboard power LED should illuminate.</p>
+        <p>Power down. Insert the Nano into its socket with the USB port facing the labelled edge. Power up again; current should rise to about 80 mA (Nano idle plus buck idle). The Nano's onboard power LED should illuminate.</p>
       </li>
     </ol>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 12 — Completed PCB, top side</span></div></div>
+      <div class="frame"><div class="placeholder"><span>FIG. 12 · Completed PCB, top side</span></div></div>
       <figcaption><span class="fig-label">Figure 12</span>What a clean, completed PCB looks like. Note the consistent orientation of the eight servo headers along one edge.</figcaption>
     </figure>
 
     <h2>Mounting the PCB to the Chassis</h2>
 
-    <p>Once smoke-tested and verified, the PCB drops into the chassis on the four standoffs you installed in <a href="assembly.html">§04</a>. Secure with four M2 × 4 mm screws from above. Route the eight servo cables into the chassis from the corner cutouts and onto their labelled headers (J2 through J9). The battery exits the chassis through the rear cutout to its external pack.</p>
+    <p>Once smoke-tested and verified, the PCB drops into the chassis on the four standoffs you installed in <a href="#assembly">Section 04</a>. Secure with four M2 × 4 mm screws from above. Route the eight servo cables into the chassis from the corner cutouts and onto their labelled headers (J2 through J9). The battery exits the chassis through the rear cutout to its external pack.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · Do not power on with servos connected yet</div>
-      <p>Confirm the firmware is loaded and the servos are centred (in software) <em>before</em> you connect the servo cables to the PCB. An uncentred firmware can swing servos to mechanical extremes the instant power is applied — and you'll be putting bend forces on your legs that they weren't designed for. This is covered in <a href="firmware.html">§07</a>.</p>
+      <p>Confirm the firmware is loaded and the servos are centred (in software) <em>before</em> you connect the servo cables to the PCB. An uncentred firmware can swing servos to mechanical extremes the instant power is applied, and you'll be putting bend forces on your legs that they weren't designed for. This is covered in <a href="#firmware">Section 07</a>.</p>
     </div>
+<<<<<<< HEAD:pcb.html
 
     <nav class="pagination" aria-label="Section navigation">
       <a href="electronics.html" class="prev">
@@ -264,3 +268,5 @@
 </body>
 </html>
 
+=======
+>>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/pcb.html

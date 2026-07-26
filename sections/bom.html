@@ -1,3 +1,4 @@
+<<<<<<< HEAD:bom.html
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,13 +56,15 @@
       <p class="subtitle">Every component, every fastener, every tool you'll need at the bench. Read this before you order anything.</p>
     </div>
 
+=======
+>>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/bom.html
     <div class="section-marker">What's in the Kit</div>
 
-    <p class="lede">A package will reach each visiting team by post before the programme begins. It contains the parts that are difficult to source consistently across three countries — most notably the PCB and the matched servo set. Everything else, you supply locally.</p>
+    <p class="lede">A package will reach each visiting team by post before the programme begins. It contains the parts that are difficult to source consistently across three countries, most notably the PCB and the matched servo set. Everything else, you supply locally.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Kit contents</div>
-      <p>Each delegate receives <strong>one (1) blank PCB</strong>, <strong>eight (8) matched SG90 servos</strong> (factory-fresh, same production batch), <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of M2 hardware and JST connectors. The rest of the BOM below — including filament for printing, batteries, and consumables — is your team's responsibility.</p>
+      <p>Each delegate receives <strong>one (1) blank PCB</strong>, <strong>eight (8) matched SG90 servos</strong> (factory-fresh, same production batch), <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of M2 hardware and JST connectors. The rest of the BOM below (including filament for printing, batteries, and consumables) is your team's responsibility.</p>
     </div>
 
     <h2>Electronic Components</h2>
@@ -90,8 +93,8 @@
           <tr><td>C3–C5</td><td>Ceramic capacitor 100 nF</td><td class="num">3</td><td>HF decoupling near Nano and buck output.</td></tr>
           <tr><td>J1</td><td>JST-XH 2-pin header (battery)</td><td class="num">1</td><td>Or XT30, depending on your pack.</td></tr>
           <tr><td>J2–J9</td><td>3-pin header, 0.1" pitch (servo)</td><td class="num">8</td><td>Right-angle preferred. Match the cable orientation.</td></tr>
-          <tr><td>—</td><td>Heat-shrink tubing, assorted</td><td class="num">~30 cm</td><td>For battery lead splices.</td></tr>
-          <tr><td>—</td><td>Hookup wire, 22 AWG, stranded</td><td class="num">~1 m</td><td>For any off-board jumpers.</td></tr>
+          <tr><td>·</td><td>Heat-shrink tubing, assorted</td><td class="num">~30 cm</td><td>For battery lead splices.</td></tr>
+          <tr><td>·</td><td>Hookup wire, 22 AWG, stranded</td><td class="num">~1 m</td><td>For any off-board jumpers.</td></tr>
         </tbody>
       </table>
     </div>
@@ -113,7 +116,7 @@
           <tr><td>Chassis screws</td><td>M2 × 6 mm, pan head, machine</td><td class="num">12</td><td>Hold the top and bottom plates together.</td></tr>
           <tr><td>Standoffs</td><td>M2 × 10 mm, brass, F-F</td><td class="num">4</td><td>Between PCB and top chassis plate.</td></tr>
           <tr><td>Standoff screws</td><td>M2 × 4 mm, pan head</td><td class="num">8</td><td>For PCB mounting.</td></tr>
-          <tr><td>Servo horn screws</td><td>M2 × 4 mm, supplied with SG90</td><td class="num">8</td><td>One per servo. Use only the original screws — others can strip the horn.</td></tr>
+          <tr><td>Servo horn screws</td><td>M2 × 4 mm, supplied with SG90</td><td class="num">8</td><td>One per servo. Use only the original screws; others can strip the horn.</td></tr>
           <tr><td>Battery strap</td><td>Velcro, 10 mm × 200 mm</td><td class="num">1</td><td>Or a 3D-printed clip; either is fine.</td></tr>
         </tbody>
       </table>
@@ -121,7 +124,7 @@
 
     <h2>3D-Printing Stock</h2>
 
-    <p>You will print the structural parts yourself. STL files are distributed via the project repository (link in <a href="credits.html">Credits</a>). Recommended material:</p>
+    <p>You will print the structural parts yourself. STL files are distributed via the project repository (link in <a href="#credits">Credits</a>). Recommended material:</p>
 
     <ul class="spec-list">
       <li><span class="spec-label">Material</span><span class="spec-value">PLA or PETG</span></li>
@@ -130,13 +133,13 @@
       <li><span class="spec-label">Layer Height</span><span class="spec-value">0.20 mm</span></li>
     </ul>
 
-    <p>Print settings are covered in detail in <a href="printing.html">§03</a>. ABS is permitted but unnecessary; the parts are not load-bearing under heat.</p>
+    <p>Print settings are covered in detail in <a href="#printing">Section 03</a>. ABS is permitted but unnecessary; the parts are not load-bearing under heat.</p>
 
     <hr/>
 
     <h2>Tools Required</h2>
 
-    <p>Most of these you should be able to borrow from your university's electronics or maker lab. If not, the personal-kit subset (marked ★) is worth investing in regardless — you will use it for the rest of your degree.</p>
+    <p>Most of these you should be able to borrow from your university's electronics or maker lab. If not, the personal-kit subset (marked ★) is worth investing in regardless; you will use it for the rest of your degree.</p>
 
     <div class="table-wrap">
       <table>
@@ -171,16 +174,16 @@
 
     <div class="callout warning">
       <div class="callout-label">Warning · USB cable trap</div>
-      <p>A surprising number of USB-C cables shipped with phones in 2025–2026 are power-only and carry no data lines. If your Nano is recognised as a power sink but not as a serial device, the cable is the first thing to suspect — before drivers, before the board.</p>
+      <p>A surprising number of USB-C cables shipped with phones in 2025–2026 are power-only and carry no data lines. If your Nano is recognised as a power sink but not as a serial device, the cable is the first thing to suspect, before drivers, before the board.</p>
     </div>
 
     <h2>Optional but Recommended</h2>
 
     <ul>
-      <li><strong>Bench power supply</strong> — for first-power-on tests at 7.4 V before committing the battery. Saves you from the worst class of mistakes.</li>
-      <li><strong>Helping hands / PCB holder</strong> — your soldering quality will improve immediately.</li>
-      <li><strong>Logic analyser</strong> — overkill, but useful for debugging servo PWM if things go sideways.</li>
-      <li><strong>Magnifying lamp</strong> — once you've used one, you can't go back.</li>
+      <li><strong>Bench power supply</strong>: for first-power-on tests at 7.4 V before committing the battery. Saves you from the worst class of mistakes.</li>
+      <li><strong>Helping hands / PCB holder</strong>: your soldering quality will improve immediately.</li>
+      <li><strong>Logic analyser</strong>: overkill, but useful for debugging servo PWM if things go sideways.</li>
+      <li><strong>Magnifying lamp</strong>: once you've used one, you can't go back.</li>
     </ul>
 
     <h2>Sourcing Notes</h2>
@@ -205,6 +208,7 @@
       <div class="callout-label">Tip · Buy your spares early</div>
       <p>One SG90 will fail. One M2 screw will strip. Order an extra of each before you begin, not after. Shipping a single replacement screw is more expensive than ordering ten with the original kit.</p>
     </div>
+<<<<<<< HEAD:bom.html
 
     <nav class="pagination" aria-label="Section navigation">
       <a href="overview.html" class="prev">
@@ -259,3 +263,5 @@
 </body>
 </html>
 
+=======
+>>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/bom.html

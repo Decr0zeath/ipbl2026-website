@@ -1,63 +1,3 @@
-<<<<<<< HEAD:testing.html
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>§08 Testing &amp; Calibration · iPBL 2026 Manual</title>
-  <meta name="description" content="§08 Testing &amp; Calibration — bench tests, troubleshooting, and the pre-flight checklist before arriving in Cebu." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
-      <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
-  </div>
-</header>
-
-<div class="layout">
-
-  <aside class="sidebar" id="sidenav">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="sidebar-label">The Manual</div>
-    <ol>
-      <li><a href="overview.html">Overview</a></li>
-      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
-      <li><a href="printing.html">3D-Printed Parts</a></li>
-      <li><a href="assembly.html">Mechanical Assembly</a></li>
-      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
-      <li><a href="pcb.html">PCB Assembly</a></li>
-      <li><a href="firmware.html">Arduino Firmware</a></li>
-      <li><a href="testing.html">Testing &amp; Calibration</a></li>
-    </ol>
-    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
-    <ol style="counter-reset: none;">
-      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
-    </ol>
-  </aside>
-
-  <main class="content">
-
-    <div class="page-head">
-      <div class="crumb">Section 08 · The Last Mile</div>
-      <h1>Testing &amp; Calibration</h1>
-      <p class="subtitle">Bench tests, gait verification, common failure modes, and the pre-flight checklist that confirms you're ready to fly.</p>
-    </div>
-
-=======
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/testing.html
     <div class="section-marker">The Standing Test</div>
 
     <p class="lede">Before any walking is attempted, the robot must stand cleanly and hold its pose. If neutral isn't right, walking won't be either, and trying to debug a walk-cycle with mis-trimmed servos is one of the most demoralising experiences in this hobby.</p>
@@ -75,7 +15,7 @@
       </li>
       <li>
         <h4>Observe the first two seconds</h4>
-        <p>Status LED illuminates within ~0.5 s. All eight servos drive to their trimmed neutral within ~1 s. Body should lift to its standing posture and hold steady. No buzzing, no shaking, no slow drift.</p>
+        <p>Status LED is already lit; it's wired straight to 3V3, so it's on the moment power reaches the board. All twelve servos drive to their trimmed neutral within ~1 s. Body should lift to its standing posture and hold steady. No buzzing, no shaking, no slow drift.</p>
       </li>
       <li>
         <h4>Visual symmetry check</h4>
@@ -95,18 +35,18 @@
     <ol class="steps">
       <li>
         <h4>Send <code>s 0 45</code> and observe</h4>
-        <p>The front-left hip should rotate the femur backward. If a <em>different</em> leg moves, your servo cables are mis-mapped. Power down, label-check, swap on the PCB headers.</p>
+        <p>The front-left coxa should swing the whole leg sideways, toward the body. If a <em>different</em> leg moves, your servo cables are mis-mapped. Power down, label-check, swap on the PCB headers.</p>
       </li>
       <li>
         <h4>Send <code>s 0 135</code> and observe</h4>
-        <p>Same leg, opposite direction.</p>
+        <p>Same leg, opposite direction (away from the body).</p>
       </li>
       <li>
         <h4>Send <code>s 0 90</code> to return to neutral</h4>
-        <p>Femur returns to horizontal.</p>
+        <p>Coxa returns to centre.</p>
       </li>
       <li>
-        <h4>Repeat for indices 1 through 7</h4>
+        <h4>Repeat for indices 1 through 11</h4>
         <p>One servo at a time. Note any that hesitate, buzz, or have visibly less range than the others. A weak SG90 often shows up here; swap it in for a spare before the issue compounds.</p>
       </li>
     </ol>
@@ -149,7 +89,7 @@
         <tbody>
           <tr>
             <td>Robot powers on, Nano LED lights, but servos don't move</td>
-            <td>No power to the servo rail. Buck converter not delivering 5 V to J2–J9.</td>
+            <td>No power to the servo rail. Buck converter not delivering 5 V to J2–J13.</td>
             <td>Measure pin 2 of any servo header against pin 1. Should read 5 V. If it reads 0, the buck output isn't reaching the headers; check FB1 / jumper and the C1/C2 area.</td>
           </tr>
           <tr>
@@ -184,8 +124,8 @@
           </tr>
           <tr>
             <td>Button press does nothing</td>
-            <td>SW2 unsoldered, R2 pull-up missing, or D11 not configured as input.</td>
-            <td>Measure D11 with a meter: should read ~5 V at rest, ~0 V while button pressed. If neither, the button or pull-up is wrong. If the readings are correct but the firmware doesn't react, re-flash.</td>
+            <td>SW2 unsoldered, R2 pull-up missing, or A0 not configured as input.</td>
+            <td>Measure A0 with a meter: should read ~5 V at rest, ~0 V while button pressed. If neither, the button or pull-up is wrong. If the readings are correct but the firmware doesn't react, re-flash.</td>
           </tr>
           <tr>
             <td>Servos jitter even when not commanded to move</td>
@@ -231,7 +171,7 @@
     <div class="callout note">
       <div class="callout-label">Bring with you, in working order</div>
       <ul>
-        <li>Assembled and tested quadruped (closed chassis, all eight servos installed)</li>
+        <li>Assembled and tested quadruped (closed chassis, all twelve servos installed)</li>
         <li>2× spare SG90 servos</li>
         <li>One fully charged 2S Li-Ion battery pack <strong>plus a second pack if you have one</strong></li>
         <li>Balance charger compatible with your pack</li>
@@ -253,65 +193,6 @@
 
     <h2>Final Word</h2>
 
-<<<<<<< HEAD:testing.html
-    <p>You've built a robot. The work that lies ahead in Cebu is going to be different in character — more collaborative, more open-ended, with surprises you can't prepare for from this manual alone. That's the design. Trust that you have what you need; what's missing, you'll learn together with your fellow delegates and the on-ground programme team.</p>
-
-    <p>Travel safely. <em>Madayaw nga pag-abot</em> — welcome, in advance.</p>
-
-    <nav class="pagination" aria-label="Section navigation">
-      <a href="firmware.html" class="prev">
-        <span class="page-direction">← Previous · §07</span>
-        <span class="page-title">Arduino Firmware</span>
-      </a>
-      <a href="credits.html" class="next">
-        <span class="page-direction">Reference</span>
-        <span class="page-title">Credits &amp; Acknowledgments</span>
-      </a>
-    </nav>
-
-  </main>
-</div>
-
-<footer class="site-footer">
-  <div class="foot-inner">
-    <div>
-      <h5>About this manual</h5>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
-    </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="overview.html">§01 Overview</a></li>
-        <li><a href="bom.html">§02 Bill of Materials</a></li>
-        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
-        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
-        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
-        <li><a href="pcb.html">§06 PCB</a></li>
-        <li><a href="firmware.html">§07 Firmware</a></li>
-        <li><a href="testing.html">§08 Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT</li>
-        <li><a href="credits.html">Credits</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon">
-    <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Plus Jakarta Sans, Lexend &amp; IBM Plex Mono</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-=======
     <p>You've built a robot. The work that lies ahead in Cebu is going to be different in character: more collaborative, more open-ended, with surprises you can't prepare for from this manual alone. That's the design. Trust that you have what you need; what's missing, you'll learn together with your fellow delegates and the on-ground programme team.</p>
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/testing.html
 
     <p>Travel safely. <em>Madayaw nga pag-abot</em>: welcome, in advance.</p>

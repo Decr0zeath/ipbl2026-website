@@ -1,66 +1,6 @@
-<<<<<<< HEAD:printing.html
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>§03 3D-Printed Parts · iPBL 2026 Manual</title>
-  <meta name="description" content="§03 3D-Printed Parts — STL inventory, recommended print settings, and orientation guidance for the quadruped chassis and legs." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
-      <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
-  </div>
-</header>
-
-<div class="layout">
-
-  <aside class="sidebar" id="sidenav">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="sidebar-label">The Manual</div>
-    <ol>
-      <li><a href="overview.html">Overview</a></li>
-      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
-      <li><a href="printing.html">3D-Printed Parts</a></li>
-      <li><a href="assembly.html">Mechanical Assembly</a></li>
-      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
-      <li><a href="pcb.html">PCB Assembly</a></li>
-      <li><a href="firmware.html">Arduino Firmware</a></li>
-      <li><a href="testing.html">Testing &amp; Calibration</a></li>
-    </ol>
-    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
-    <ol style="counter-reset: none;">
-      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
-    </ol>
-  </aside>
-
-  <main class="content">
-
-    <div class="page-head">
-      <div class="crumb">Section 03 · The Structure</div>
-      <h1>3D-Printed Parts</h1>
-      <p class="subtitle">Eleven STL files, one printer, roughly fourteen hours of bed time. The structure of the entire robot is plastic, and the quality of that plastic determines everything that follows.</p>
-    </div>
-
-=======
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/printing.html
     <div class="section-marker">The Print List</div>
 
-    <p class="lede">Every structural element of the robot is printed: the chassis plates, the leg hip mounts, the femurs, the tibia tips, and a small clip for the battery. Get these right and assembly is satisfying. Get them wrong and you'll spend the next section forcing things to fit.</p>
+    <p class="lede">Every structural element of the robot is printed: the chassis plates, the coxa brackets, the leg hip mounts, the femurs, the leg tips, and a small clip for the battery. Get these right and assembly is satisfying. Get them wrong and you'll spend the next section forcing things to fit.</p>
 
     <h2>STL Inventory</h2>
 
@@ -77,11 +17,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>chassis_top.stl</code></td><td>Upper chassis plate</td><td class="num">1</td><td>1 hr 40 min</td></tr>
-          <tr><td><code>chassis_bottom.stl</code></td><td>Lower chassis plate</td><td class="num">1</td><td>1 hr 50 min</td></tr>
-          <tr><td><code>hip_mount.stl</code></td><td>Hip-servo bracket (L-shape)</td><td class="num">4</td><td>~45 min each</td></tr>
+          <tr><td><code>chassis_top.stl</code></td><td>Upper chassis plate (body upper)</td><td class="num">1</td><td>1 hr 40 min</td></tr>
+          <tr><td><code>chassis_bottom.stl</code></td><td>Lower chassis plate (body lower)</td><td class="num">1</td><td>1 hr 50 min</td></tr>
+          <tr><td><code>hold.stl</code></td><td>Hip-servo bracket (L-shape)</td><td class="num">4</td><td>~45 min each</td></tr>
+          <tr><td><code>coxa_l.stl</code></td><td>Coxa bracket, left</td><td class="num">2</td><td>~30 min each</td></tr>
+          <tr><td><code>coxa_r.stl</code></td><td>Coxa bracket, right</td><td class="num">2</td><td>~30 min each</td></tr>
           <tr><td><code>femur.stl</code></td><td>Upper leg segment</td><td class="num">4</td><td>~35 min each</td></tr>
-          <tr><td><code>tibia.stl</code></td><td>Lower leg / foot</td><td class="num">4</td><td>~30 min each</td></tr>
+          <tr><td><code>leg_l.stl</code></td><td>Lower leg / foot, left</td><td class="num">2</td><td>~30 min each</td></tr>
+          <tr><td><code>leg_r.stl</code></td><td>Lower leg / foot, right</td><td class="num">2</td><td>~30 min each</td></tr>
           <tr><td><code>battery_clip.stl</code></td><td>Optional battery retainer</td><td class="num">1</td><td>~20 min</td></tr>
           <tr><td><code>pcb_spacer.stl</code></td><td>PCB-to-chassis spacer (use if you didn't buy brass standoffs)</td><td class="num">4</td><td>~5 min each</td></tr>
         </tbody>
@@ -90,7 +33,7 @@
 
     <figure>
       <div class="frame"><div class="placeholder"><span>FIG. 03 · All printed parts laid out on print bed</span></div></div>
-      <figcaption><span class="fig-label">Figure 03</span>The complete set, post-print. Note the symmetric arrangement of hip mounts; there are four identical brackets, mirrored in software, not in the print.</figcaption>
+      <figcaption><span class="fig-label">Figure 03</span>The complete set, post-print. The hold brackets and femurs are four identical, non-handed prints each; the coxa brackets and legs are true left/right mirrors, printed as separate <code>_l</code> / <code>_r</code> files, not mirrored in software.</figcaption>
     </figure>
 
     <h2>Recommended Print Settings</h2>
@@ -122,17 +65,20 @@
     <h3>Chassis plates</h3>
     <p>Lay flat on the bed, large face down. No supports needed. The mounting holes will have a slight first-layer elephant's foot; this is fine, even helpful, as it creates a self-centring lead-in for the screws.</p>
 
-    <h3>Hip mounts</h3>
+    <h3>Coxa brackets</h3>
+    <p>Stand on the long edge, mirrored left and right per the <code>_l</code> / <code>_r</code> file. This puts the layers <em>across</em> the screw axis, same reasoning as the hold brackets below. Print with tree supports under the overhang.</p>
+
+    <h3>Hold brackets (hip mounts)</h3>
     <p>Stand on the long edge with the L-bend facing up. This puts the layers <em>across</em> the screw axis, so screw-pocket walls are reinforced with multiple layers. Print with tree supports under the overhanging arm.</p>
 
     <h3>Femur</h3>
     <p>Flat on the bed, servo-horn pocket facing up. The pocket needs no support if your bridging is well-tuned; otherwise enable supports inside the pocket only.</p>
 
-    <h3>Tibia</h3>
-    <p>Stand vertically with the foot at the bottom. Layer lines should run horizontally across the leg; this gives the best resistance to bending under landing impact.</p>
+    <h3>Leg (tibia)</h3>
+    <p>Stand vertically with the foot at the bottom. Layer lines should run horizontally across the leg; this gives the best resistance to bending under landing impact. Like the coxa brackets, legs are mirrored left/right; keep the <code>_l</code> / <code>_r</code> files straight.</p>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 04 · Slicer orientations, all six parts</span></div></div>
+      <div class="frame"><div class="placeholder"><span>FIG. 04 · Slicer orientations, all eight structural parts</span></div></div>
       <figcaption><span class="fig-label">Figure 04</span>Recommended slicer orientations. The arrows indicate layer direction relative to expected load.</figcaption>
     </figure>
 
@@ -166,10 +112,10 @@
     <ol class="steps">
       <li>
         <h4>Remove supports carefully</h4>
-        <p>Use flush cutters, not your fingers. Tree supports under the hip mounts can leave small stubs in the servo pocket; these will prevent the servo from seating fully if not cleaned out.</p>
+        <p>Use flush cutters, not your fingers. Tree supports under the hold and coxa brackets can leave small stubs in the servo pocket; these will prevent the servo from seating fully if not cleaned out.</p>
       </li>
       <li>
-        <h4>Test-fit a servo into each hip mount</h4>
+        <h4>Test-fit a servo into each hold and coxa bracket</h4>
         <p>The servo body should slide in with light hand pressure. If it doesn't, file or sand the inside of the pocket until it does. Forcing a servo into a tight pocket and then screwing it down is how you crack a print at its weakest layer.</p>
       </li>
       <li>
@@ -182,73 +128,15 @@
       </li>
       <li>
         <h4>Mark left vs. right</h4>
-        <p>Femurs and tibias are not technically handed, but you'll find it useful to mark four "front" and four "back" parts with a permanent marker. This becomes important during assembly.</p>
+        <p>Femurs and hold brackets are not handed, but the coxa brackets and legs are printed as true mirrors: keep <code>coxa_l</code> paired with <code>leg_l</code> on the left side of the robot, and the <code>_r</code> parts on the right. Mark each print as you pull it off the bed; this becomes important during assembly.</p>
       </li>
     </ol>
 
     <div class="callout tip">
       <div class="callout-label">Tip · Print one full set first</div>
-      <p>Don't queue up the entire build at once. Print one hip mount, one femur, one tibia first, and test-fit them with a single servo. If the dimensions are off, you'll have wasted one part instead of four. Once you confirm the fit, batch the remaining prints in groups of four.</p>
+      <p>Don't queue up the entire build at once. Print one hold bracket, one coxa bracket (either hand), one femur, one leg first, and test-fit them with a single servo. If the dimensions are off, you'll have wasted one part instead of four. Once you confirm the fit, batch the remaining prints in groups of four.</p>
     </div>
 
     <h2>What to Bring to Cebu</h2>
 
-<<<<<<< HEAD:printing.html
-    <p>All printed parts. <strong>All of them.</strong> Even the spares. Even the failed test prints — bring them too, as a conversation piece. The on-ground programme assumes you arrive with the structural set complete and assembled into a working robot; we will not be printing replacements for you.</p>
-
-    <nav class="pagination" aria-label="Section navigation">
-      <a href="bom.html" class="prev">
-        <span class="page-direction">← Previous · §02</span>
-        <span class="page-title">Bill of Materials &amp; Tools</span>
-      </a>
-      <a href="assembly.html" class="next">
-        <span class="page-direction">Next · §04</span>
-        <span class="page-title">Mechanical Assembly</span>
-      </a>
-    </nav>
-
-  </main>
-</div>
-
-<footer class="site-footer">
-  <div class="foot-inner">
-    <div>
-      <h5>About this manual</h5>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
-    </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="overview.html">§01 Overview</a></li>
-        <li><a href="bom.html">§02 Bill of Materials</a></li>
-        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
-        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
-        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
-        <li><a href="pcb.html">§06 PCB</a></li>
-        <li><a href="firmware.html">§07 Firmware</a></li>
-        <li><a href="testing.html">§08 Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT</li>
-        <li><a href="credits.html">Credits</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon">
-    <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Plus Jakarta Sans, Lexend &amp; IBM Plex Mono</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-
-=======
     <p>All printed parts. <strong>All of them.</strong> Even the spares. Even the failed test prints; bring them too, as a conversation piece. The on-ground programme assumes you arrive with the structural set complete and assembled into a working robot; we will not be printing replacements for you.</p>
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/printing.html

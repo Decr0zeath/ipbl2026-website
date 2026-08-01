@@ -123,6 +123,7 @@
     var file = 'sections/' + entry.slug + '.html';
 
     if (history.replaceState) history.replaceState(null, '', '#' + entry.slug);
+    document.documentElement.scrollTop = document.body.scrollTop = 0;
 
     if (cache[file]) {
       inject(entry, cache[file]);

@@ -1,70 +1,10 @@
-<<<<<<< HEAD:bom.html
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>§02 Bill of Materials · iPBL 2026 Manual</title>
-  <meta name="description" content="§02 Bill of Materials &amp; Tools — the full parts list, tools, and sourcing notes for building the iPBL 2026 quadruped." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
-      <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
-  </div>
-</header>
-
-<div class="layout">
-
-  <aside class="sidebar" id="sidenav">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="sidebar-label">The Manual</div>
-    <ol>
-      <li><a href="overview.html">Overview</a></li>
-      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
-      <li><a href="printing.html">3D-Printed Parts</a></li>
-      <li><a href="assembly.html">Mechanical Assembly</a></li>
-      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
-      <li><a href="pcb.html">PCB Assembly</a></li>
-      <li><a href="firmware.html">Arduino Firmware</a></li>
-      <li><a href="testing.html">Testing &amp; Calibration</a></li>
-    </ol>
-    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
-    <ol style="counter-reset: none;">
-      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
-    </ol>
-  </aside>
-
-  <main class="content">
-
-    <div class="page-head">
-      <div class="crumb">Section 02 · Foundations</div>
-      <h1>Bill of Materials &amp; Tools</h1>
-      <p class="subtitle">Every component, every fastener, every tool you'll need at the bench. Read this before you order anything.</p>
-    </div>
-
-=======
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/bom.html
     <div class="section-marker">What's in the Kit</div>
 
     <p class="lede">A package will reach each visiting team by post before the programme begins. It contains the parts that are difficult to source consistently across three countries, most notably the PCB and the matched servo set. Everything else, you supply locally.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Kit contents</div>
-      <p>Each delegate receives <strong>one (1) blank PCB</strong>, <strong>eight (8) matched SG90 servos</strong> (factory-fresh, same production batch), <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of M2 hardware and JST connectors. The rest of the BOM below (including filament for printing, batteries, and consumables) is your team's responsibility.</p>
+      <p>Each delegate receives <strong>one (1) blank PCB</strong>, <strong>twelve (12) matched SG90 servos</strong> (factory-fresh, same production batch), <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of M2 hardware and JST connectors. The rest of the BOM below (including filament for printing, batteries, and consumables) is your team's responsibility.</p>
     </div>
 
     <h2>Electronic Components</h2>
@@ -81,8 +21,8 @@
         </thead>
         <tbody>
           <tr><td>U1</td><td>Arduino Nano (ATmega328P)</td><td class="num">1</td><td>Provided. USB-C variant. Old Mini-USB clones also work but not recommended.</td></tr>
-          <tr><td>U2</td><td>MP1584 / LM2596 buck converter module</td><td class="num">1</td><td>Adjustable, set to 5.0 V before installation.</td></tr>
-          <tr><td>M1–M8</td><td>SG90 micro servo, 9 g</td><td class="num">8</td><td>Provided. Plus 2 recommended spares.</td></tr>
+          <tr><td>U2</td><td>XL4015E1 buck converter module</td><td class="num">1</td><td>Adjustable, set to 5.0 V before installation.</td></tr>
+          <tr><td>M1–M12</td><td>SG90 micro servo, 9 g</td><td class="num">12</td><td>Provided. Plus 2 recommended spares.</td></tr>
           <tr><td>BT1</td><td>2S Li-Ion battery pack, 7.4 V, ≥1500 mAh</td><td class="num">1</td><td>With XT30 or JST-XH connector. Balance leads required for charging.</td></tr>
           <tr><td>SW1</td><td>SPDT slide switch, 3-pin, PCB-mount</td><td class="num">1</td><td>Master power switch.</td></tr>
           <tr><td>SW2</td><td>Tactile push button, 6 × 6 mm</td><td class="num">1</td><td>User input / start-stop button.</td></tr>
@@ -92,11 +32,16 @@
           <tr><td>C1, C2</td><td>Electrolytic capacitor 470 µF / 16 V</td><td class="num">2</td><td>Bulk decoupling on the servo rail.</td></tr>
           <tr><td>C3–C5</td><td>Ceramic capacitor 100 nF</td><td class="num">3</td><td>HF decoupling near Nano and buck output.</td></tr>
           <tr><td>J1</td><td>JST-XH 2-pin header (battery)</td><td class="num">1</td><td>Or XT30, depending on your pack.</td></tr>
-          <tr><td>J2–J9</td><td>3-pin header, 0.1" pitch (servo)</td><td class="num">8</td><td>Right-angle preferred. Match the cable orientation.</td></tr>
+          <tr><td>J2–J13</td><td>3-pin header, 0.1" pitch (servo)</td><td class="num">12</td><td>Right-angle preferred. Match the cable orientation.</td></tr>
           <tr><td>·</td><td>Heat-shrink tubing, assorted</td><td class="num">~30 cm</td><td>For battery lead splices.</td></tr>
           <tr><td>·</td><td>Hookup wire, 22 AWG, stranded</td><td class="num">~1 m</td><td>For any off-board jumpers.</td></tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-label">Important · The buck converter is not optional</div>
+      <p>The 2S pack delivers 7.4 V nominal. The SG90 servos are rated 4.8–6 V and the Nano's logic rail expects a clean 5 V, so neither can take the battery directly. The XL4015E1 (U2) steps 7.4 V down to a regulated 5 V before either load sees it: skip it and wire the battery straight to the servo headers or the Nano's 5 V pin, and you will overdrive the servos past their rated voltage and put more current through the Nano's onboard regulator than it was ever sized for. Set and verify its output before it goes anywhere near the board; see <a href="#electronics">Section 04</a> for the full two-rail rationale and <a href="#pcb">Section 05</a> for the calibration procedure.</p>
     </div>
 
     <h2>Mechanical Hardware</h2>
@@ -112,11 +57,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Servo mounting screws</td><td>M2 × 8 mm, pan head, self-tapping</td><td class="num">32</td><td>Four per servo. Use spares from the SG90 packaging where possible.</td></tr>
+          <tr><td>Servo mounting screws</td><td>M2 × 8 mm, pan head, self-tapping</td><td class="num">48</td><td>Four per servo. Use spares from the SG90 packaging where possible.</td></tr>
           <tr><td>Chassis screws</td><td>M2 × 6 mm, pan head, machine</td><td class="num">12</td><td>Hold the top and bottom plates together.</td></tr>
           <tr><td>Standoffs</td><td>M2 × 10 mm, brass, F-F</td><td class="num">4</td><td>Between PCB and top chassis plate.</td></tr>
           <tr><td>Standoff screws</td><td>M2 × 4 mm, pan head</td><td class="num">8</td><td>For PCB mounting.</td></tr>
-          <tr><td>Servo horn screws</td><td>M2 × 4 mm, supplied with SG90</td><td class="num">8</td><td>One per servo. Use only the original screws; others can strip the horn.</td></tr>
+          <tr><td>Servo horn screws</td><td>M2 × 4 mm, supplied with SG90</td><td class="num">12</td><td>One per servo. Use only the original screws; others can strip the horn.</td></tr>
           <tr><td>Battery strap</td><td>Velcro, 10 mm × 200 mm</td><td class="num">1</td><td>Or a 3D-printed clip; either is fine.</td></tr>
         </tbody>
       </table>
@@ -180,88 +125,13 @@
     <h2>Optional but Recommended</h2>
 
     <ul>
-      <li><strong>Bench power supply</strong>: for first-power-on tests at 7.4 V before committing the battery. Saves you from the worst class of mistakes.</li>
+      <li><strong>Bench power supply</strong>: current-limited, for first-power-on tests before committing the battery. See the buck converter verification step in <a href="#pcb">Section 05</a>.</li>
       <li><strong>Helping hands / PCB holder</strong>: your soldering quality will improve immediately.</li>
       <li><strong>Logic analyser</strong>: overkill, but useful for debugging servo PWM if things go sideways.</li>
       <li><strong>Magnifying lamp</strong>: once you've used one, you can't go back.</li>
     </ul>
 
-    <h2>Sourcing Notes</h2>
-
-    <p>Component availability varies by country. The following are reasonable starting points for each delegate's region:</p>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Region</th><th>Suggested Suppliers</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Philippines</td><td>e-Gizmo, CircuitRocks, Makerlab Electronics, Lazada / Shopee for filament and consumables.</td></tr>
-          <tr><td>Taiwan</td><td>Ruten, ICshop, 3Cwawa, PChome 24h for next-day local stock.</td></tr>
-          <tr><td>Japan</td><td>Akizuki Denshi, Sengoku Denshi (秋葉原), Switch Science, Marutsu Online.</td></tr>
-          <tr><td>International</td><td>DigiKey and Mouser for fasteners and capacitors; AliExpress with patience for everything else.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
     <div class="callout tip">
       <div class="callout-label">Tip · Buy your spares early</div>
       <p>One SG90 will fail. One M2 screw will strip. Order an extra of each before you begin, not after. Shipping a single replacement screw is more expensive than ordering ten with the original kit.</p>
     </div>
-<<<<<<< HEAD:bom.html
-
-    <nav class="pagination" aria-label="Section navigation">
-      <a href="overview.html" class="prev">
-        <span class="page-direction">← Previous · §01</span>
-        <span class="page-title">Overview</span>
-      </a>
-      <a href="printing.html" class="next">
-        <span class="page-direction">Next · §03</span>
-        <span class="page-title">3D-Printed Parts</span>
-      </a>
-    </nav>
-
-  </main>
-</div>
-
-<footer class="site-footer">
-  <div class="foot-inner">
-    <div>
-      <h5>About this manual</h5>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
-    </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="overview.html">§01 Overview</a></li>
-        <li><a href="bom.html">§02 Bill of Materials</a></li>
-        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
-        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
-        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
-        <li><a href="pcb.html">§06 PCB</a></li>
-        <li><a href="firmware.html">§07 Firmware</a></li>
-        <li><a href="testing.html">§08 Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT</li>
-        <li><a href="credits.html">Credits</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon">
-    <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Plus Jakarta Sans, Lexend &amp; IBM Plex Mono</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-
-=======
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/bom.html

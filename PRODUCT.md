@@ -12,7 +12,7 @@ Delegates (STEM undergraduates from Engineering, Computer Science, Robotics, Inf
 
 ## Product Purpose
 
-A pre-training field manual that walks each delegate through building and calibrating an identical quadruped robot (four legs, eight SG90 servos, Arduino Nano, custom PCB) on their own, before arriving in Cebu — so the on-ground programme can start from a working, standing robot rather than from assembly.
+A pre-training field manual that walks each delegate through building and calibrating an identical quadruped robot (four legs, twelve SG90 servos, Arduino Nano, custom PCB) on their own, before arriving in Cebu — so the on-ground programme can start from a working, standing robot rather than from assembly.
 
 ## Positioning
 
@@ -24,26 +24,29 @@ Not a general robotics tutorial: a narrow, sequenced manual scoped to exactly wh
 - Delegates work independently, likely at home or in a dorm/lab, over roughly two to three weekends, following the section order (Overview → BOM → Printing → Assembly → Electronics → PCB → Firmware → Testing).
 - Physical, hands-on workflow alongside the screen: soldering, 3D printing, servo wiring — the manual is consulted step-by-step while hands are on hardware.
 - Delegates are expected to arrive with a build journal, spare parts, and a laptop with Arduino IDE pre-configured.
-- Static site with no build step, deployed via GitHub Pages.
+- Static site deployed via GitHub Pages, no server-side logic.
 
 ## Capabilities and Constraints
 
-- 10-page static multi-page site: index + 8 numbered manual sections + credits. No JS framework; one small JS file handles mobile nav toggle and active-link highlighting.
-- All figures currently use styled placeholder frames (`<div class="placeholder">`) instead of real photos/diagrams — real photography is expected to replace these later (see Evidence on Hand).
+- **Shell + fragments architecture (SPA-lite):** `index.html` is a standalone landing page. `manual.html` is a single shell (chrome + empty mounts) that fetches `sections/<slug>.html` fragments via `assets/js/main.js`, injects them, and routes via location hash (`manual.html#assembly`). `assets/js/manual-map.js` is the single source of truth for section order/titles; `sections/*.html` are content-only fragments (no `<html>`/chrome). `reference/course-viewer.js` is an inert reference pattern, not loaded by any page.
+- Must be served over HTTP (Live Server, `python -m http.server`, etc.) — opening `manual.html` from `file://` fails because the viewer uses `fetch()`.
+- All figures currently use styled placeholder frames (`<div class="placeholder">`) instead of real photos/diagrams — real photography is expected to replace these later.
 - No backend, no forms, no build tooling — plain HTML/CSS/JS only.
 - Mechanical platform adapted from Regis Hsu's open-source quadruped (PCBWay); PCB is a custom redesign by the USJ-R host team.
+- No em dashes in site content (house style — see CLAUDE.md); figure labels and empty table cells use `·` instead.
 
 ## Brand Commitments
 
 - Name: "Quadruped Pre-Training Manual," iPBL 2026, USJ-R host mark ("iP" brand mark).
 - Aesthetic: academic field-guide / vintage technical manual — figure frames with corner brackets, section markers, mono-spaced labels.
-- Palette: USJ-R green `#0D3E20` (deep) with gold `#FEB104` accent, on warm cream `#FAF6EC` paper.
+- Palette: USJ-R green `#0D3E20` (deep) with gold `#FEB104` accent, on warm cream `#FAF6EC` paper. Gold text on paper/paper-2 backgrounds uses the darker `--gold-700` token for AA contrast; `--gold-500/600` stay for borders, backgrounds, and gold-on-dark contexts.
+- Type: Plus Jakarta Sans (display/headings), Lexend (body/UI text), Crimson Pro italic (accents), IBM Plex Mono (code/technical labels — rationed, not used for general wayfinding text).
 - Voice: warm but precise field-manual tone; opens with a Cebuano greeting ("maayong adlaw"); treats the withheld Day-01 content as a deliberate, motivating mystery rather than a limitation.
 
 ## Evidence on Hand
 
-- No real photography or assembly diagrams yet — every figure is a placeholder (`FIG. NN — description`) per the README's stated replacement workflow. Do not fabricate photos or claim specific visuals exist.
-- Real BOM, pinout tables, wiring/schematic content, and firmware walkthrough exist as structured text/diagrams (SVG) already in the pages.
+- No real photography or assembly diagrams yet — every figure is a placeholder (`FIG. NN · description`) per the README's stated replacement workflow. Do not fabricate photos or claim specific visuals exist.
+- Real BOM, pinout tables, wiring/schematic content, and firmware walkthrough exist as structured text/diagrams (SVG) already in the section fragments.
 
 ## Product Principles
 
@@ -55,4 +58,4 @@ Not a general robotics tutorial: a narrow, sequenced manual scoped to exactly wh
 
 ## Accessibility & Inclusion
 
-Delegates travel internationally (Philippines, Taiwan, Japan) — English is a shared but non-native language for most readers; avoid idiom-heavy phrasing outside the intentional, isolated Cebuano greeting. No other accessibility requirement has been established yet.
+Delegates travel internationally (Philippines, Taiwan, Japan) — English is a shared but non-native language for most readers; avoid idiom-heavy phrasing outside the intentional, isolated Cebuano greetings. Gold-on-paper text must clear WCAG AA (use `--gold-700`, not `--gold-600`, for text). No other accessibility requirement has been established yet.

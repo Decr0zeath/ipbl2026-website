@@ -26,14 +26,14 @@ var MANUAL_MAP = [
     num: '03',
     crumb: 'Section 03 · The Structure',
     title: '3D-Printed Parts',
-    subtitle: 'Eleven STL files, one printer, roughly fourteen hours of bed time. The structure of the entire robot is plastic, and the quality of that plastic determines everything that follows.'
+    subtitle: 'Ten STL files, one printer, roughly fourteen hours of bed time. The structure of the entire robot is plastic, and the quality of that plastic determines everything that follows.'
   },
   {
     slug: 'assembly',
     num: '04',
     crumb: 'Section 04 · The Build',
     title: 'Mechanical Assembly',
-    subtitle: 'Eight servos, four legs, two chassis plates. With patience and a screwdriver this takes three or four hours. With impatience, it takes considerably longer.'
+    subtitle: 'Twelve servos, four legs, two chassis plates. With patience and a screwdriver this takes three or four hours. With impatience, it takes considerably longer.'
   },
   {
     slug: 'electronics',
@@ -54,7 +54,7 @@ var MANUAL_MAP = [
     num: '07',
     crumb: 'Section 07 · The Software',
     title: 'Arduino Firmware',
-    subtitle: 'Toolchain setup, a walk through the base sketch, and the calibration ritual that turns eight imperfectly-centred servos into a usable robot.'
+    subtitle: 'Toolchain setup, a walk through the base sketch, and the calibration ritual that turns twelve imperfectly-centred servos into a usable robot.'
   },
   {
     slug: 'testing',

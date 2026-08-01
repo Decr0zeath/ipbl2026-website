@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="color-scheme" content="light" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>iPBL 2026 · Quadruped Pre-Training Manual</title>
   <meta name="description" content="Pre-training field manual for the iPBL 2026 quadruped robotics project, hosted by the University of San Jose – Recoletos." />
@@ -29,17 +30,13 @@
 <!-- ============== HERO ============== -->
 <section class="hero">
   <div>
-    <div class="hero-meta">
-      <span class="dot"></span>
-      <span>Pre-Training Edition · v1.0</span>
-    </div>
     <h1 class="hero-title">
       A field manual for<br />
       assembling a <span class="accent">quadruped</span><br />
       from the ground up.
     </h1>
     <div class="hero-blurb">
-      <p>Welcome, and <em>maayong adlaw</em>. Before you arrive in Cebu for iPBL 2026, you'll build the machine that the rest of the program is built upon: a four-legged, eight-servo robot driven by an Arduino Nano and a custom PCB.</p>
+      <p>Welcome, and <em>maayong adlaw</em>. Before you arrive in Cebu for iPBL 2026, you'll build the machine that the rest of the program is built upon: a four-legged, twelve-servo robot driven by an Arduino Nano and a custom PCB.</p>
       <p>This manual walks you through every screw, every solder joint, every line of firmware. What happens <em>after</em> the robot stands up is a story for when you get here.</p>
     </div>
   </div>
@@ -65,7 +62,7 @@
         <circle cx="160" cy="160" r="22" fill="#FEB104" stroke="#0D3E20" />
         <text x="160" y="165" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">N</text>
       </g>
-      <!-- Legs - 4 corners, each with hip + femur + tibia segments -->
+      <!-- Legs - 4 corners, each with coxa + hip + knee segments (schematic, not 1:1) -->
       <!-- Front-left -->
       <g stroke="#0D3E20" stroke-width="2" fill="#F3ECD8" stroke-linejoin="round" stroke-linecap="round">
         <circle cx="115" cy="115" r="6" fill="#FEB104"/>
@@ -99,39 +96,9 @@
         <circle cx="278" cy="258" r="4" fill="#0D3E20"/>
       </g>
       <!-- Labels -->
-<<<<<<< HEAD
-      <text x="160" y="22" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="2" fill="#C98300">FIG. 0 — TOP-DOWN PROJECTION</text>
+      <text x="160" y="22" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="2" fill="#8A5A00">FIG. 0 · TOP-DOWN PROJECTION</text>
       <text x="160" y="305" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" letter-spacing="1.5" fill="#5E6F62">SCALE 1:n · ANNOTATED FOR REFERENCE</text>
-=======
-      <text x="160" y="22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2" fill="#C98300">FIG. 0 · TOP-DOWN PROJECTION</text>
-      <text x="160" y="305" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" letter-spacing="1.5" fill="#5E6F62">SCALE 1:n · ANNOTATED FOR REFERENCE</text>
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae
     </svg>
-  </div>
-</section>
-
-<!-- ============== UNIVERSITIES ============== -->
-<section class="home-section" id="universities">
-  <div class="section-marker">Participating Institutions</div>
-  <h2>Three universities. One robot. Eight legs of code.</h2>
-  <p class="section-intro">The International Project-Based Learning programme rotates between member universities each year. For 2026, the University of San Jose – Recoletos in Cebu, Philippines plays host. Students from Taiwan and Japan will travel to join their Filipino counterparts for an intensive collaborative build.</p>
-
-  <div class="cols-3">
-    <div class="uni-card host">
-      <div class="uni-role">Host · 2026</div>
-      <h3>University of San Jose – Recoletos</h3>
-      <p>Cebu City, Philippines. Hosting iPBL 2026 and coordinating the on-ground programme, materials shipment, and the post-arrival project.</p>
-    </div>
-    <div class="uni-card">
-      <div class="uni-role">Visiting Partner</div>
-      <h3>Southern Taiwan University of Science and Technology</h3>
-      <p>Tainan, Taiwan. Joining the 2026 cohort with delegates from the Engineering and Computer Science programmes.</p>
-    </div>
-    <div class="uni-card">
-      <div class="uni-role">Visiting Partner</div>
-      <h3>Osaka Institute of Technology</h3>
-      <p>Osaka, Japan. Contributing delegates from Robotics, Information Science, and Electrical Engineering.</p>
-    </div>
   </div>
 </section>
 
@@ -139,13 +106,13 @@
 <section class="home-section" id="scope">
   <div class="section-marker">What This Manual Covers</div>
   <h2>Read this <em class="em-accent">before</em> you fly to Cebu.</h2>
-  <p class="section-intro">This pre-training is deliberately narrow. By the time you land at MCIA, your quadruped should already be standing, blinking, and waiting for instructions. The interesting parts, the parts you didn't expect, begin on Day 01 of the on-ground programme. We've kept them sealed for a reason.</p>
+  <p class="section-intro">This pre-training is deliberately narrow. It exists to give you a working sense of what you're about to build, nothing more. Assemble the body, solder the PCB, mount and calibrate the servos, set the rocker arms, and get the thing crawling: that's the whole brief. By the time you land at MCIA, you should already know how to bring one from parts to standing, blinking, and waiting for instructions. The interesting parts, the parts you didn't expect, begin on Day 01 of the on-ground programme. We've kept them sealed for a reason.</p>
 
   <div class="scope-grid">
     <div class="included">
       <h3>Included in Pre-Training</h3>
       <ul>
-        <li>Mechanical assembly of the chassis and eight-servo leg system</li>
+        <li>Mechanical assembly of the chassis and twelve-servo leg system</li>
         <li>Recommended 3D-print settings for every structural part</li>
         <li>PCB schematic walkthrough and hand-soldered assembly</li>
         <li>Servo wiring, power distribution, and pinout reference</li>
@@ -170,33 +137,33 @@
 <!-- ============== OUTCOMES ============== -->
 <section class="home-section" id="outcomes">
   <div class="section-marker">Expected Outcomes</div>
-  <h2>What you should arrive with.</h2>
-  <p class="section-intro">By the close of pre-training, every delegate is expected to bring the following to Cebu: physically, intellectually, and in a working state.</p>
+  <h2>What you should arrive knowing.</h2>
+  <p class="section-intro">Nothing you build here needs to leave with you. The quadruped is yours to keep; a fresh kit is waiting in Cebu, and you'll build again from scratch. The only things that make the trip are what you've learned, and your laptop.</p>
 
   <ol class="outcomes">
     <li>
-      <h4>A built robot</h4>
-      <p>Mechanically assembled, with all eight servos installed, calibrated to neutral, and verified.</p>
+      <h4>Assembly fluency</h4>
+      <p>Mechanical assembly of the chassis and twelve-servo leg system, done once already and understood, not just followed.</p>
     </li>
     <li>
-      <h4>An assembled PCB</h4>
-      <p>Either soldered from the kit we shipped, or hand-wired against the published schematic.</p>
+      <h4>Soldering and wiring confidence</h4>
+      <p>A PCB built from the published schematic, kit-soldered or hand-wired, with the pinout committed to memory.</p>
     </li>
     <li>
-      <h4>Working firmware</h4>
-      <p>The base sketch uploaded, servos addressable individually, basic gait demonstrated.</p>
+      <h4>Firmware command</h4>
+      <p>Comfortable uploading the base sketch, calibrating servos individually, and getting a basic gait running.</p>
+    </li>
+    <li>
+      <h4>Troubleshooting instinct</h4>
+      <p>A working sense of where things go wrong: stripped gears, cold joints, misaligned rocker arms, so the next build goes faster than the first.</p>
     </li>
     <li>
       <h4>A build journal</h4>
-      <p>A short log of issues encountered and resolved. Bring it. We will read it together.</p>
-    </li>
-    <li>
-      <h4>Spare parts</h4>
-      <p>At minimum: two spare SG90 servos, extra M2 hardware, and your soldering kit.</p>
+      <p>A short personal log of issues encountered and resolved. Yours to keep and refer back to, not something anyone will collect.</p>
     </li>
     <li>
       <h4>A working laptop</h4>
-      <p>With the Arduino IDE installed, board package configured, and the project sketch flashed at least once.</p>
+      <p>With the Arduino IDE installed, board package configured, and the project sketch flashed at least once. The one item that actually comes with you to Cebu.</p>
     </li>
   </ol>
 </section>

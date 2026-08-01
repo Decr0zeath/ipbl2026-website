@@ -1,63 +1,3 @@
-<<<<<<< HEAD:firmware.html
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>§07 Arduino Firmware · iPBL 2026 Manual</title>
-  <meta name="description" content="§07 Arduino Firmware — toolchain setup, sketch walkthrough, and per-servo calibration for the iPBL 2026 quadruped." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
-      <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
-  </div>
-</header>
-
-<div class="layout">
-
-  <aside class="sidebar" id="sidenav">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="sidebar-label">The Manual</div>
-    <ol>
-      <li><a href="overview.html">Overview</a></li>
-      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
-      <li><a href="printing.html">3D-Printed Parts</a></li>
-      <li><a href="assembly.html">Mechanical Assembly</a></li>
-      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
-      <li><a href="pcb.html">PCB Assembly</a></li>
-      <li><a href="firmware.html">Arduino Firmware</a></li>
-      <li><a href="testing.html">Testing &amp; Calibration</a></li>
-    </ol>
-    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
-    <ol style="counter-reset: none;">
-      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
-    </ol>
-  </aside>
-
-  <main class="content">
-
-    <div class="page-head">
-      <div class="crumb">Section 07 · The Software</div>
-      <h1>Arduino Firmware</h1>
-      <p class="subtitle">Toolchain setup, a walk through the base sketch, and the calibration ritual that turns eight imperfectly-centred servos into a usable robot.</p>
-    </div>
-
-=======
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/firmware.html
     <div class="section-marker">Toolchain Setup</div>
 
     <p class="lede">The base firmware uses the Arduino IDE and the built-in <code>Servo</code> library; nothing exotic. If you've blinked an LED on an Arduino before, you already have everything you need.</p>
@@ -106,44 +46,46 @@
 
     <pre data-lang="C++"><code>#include &lt;Servo.h&gt;
 
-// Eight servos, one Servo object each, addressed by index 0..7.
+// Twelve servos, one Servo object each, addressed by index 0..11.
 // Index matches the channel map from Section 05:
-// 0=FL-H, 1=FL-K, 2=FR-H, 3=FR-K,
-// 4=BL-H, 5=BL-K, 6=BR-H, 7=BR-K
-Servo legs[8];
+// 0=FL-C, 1=FL-H, 2=FL-K, 3=FR-C, 4=FR-H, 5=FR-K,
+// 6=BL-C, 7=BL-H, 8=BL-K, 9=BR-C, 10=BR-H, 11=BR-K
+Servo legs[12];
 
-// Pin assignments: D2..D9
-const uint8_t SERVO_PIN[8] = { 2, 3, 4, 5, 6, 7, 8, 9 };
+// Pin assignments: D2..D13
+const uint8_t SERVO_PIN[12] = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 
 // Per-servo trim offsets, in degrees. Set during calibration.
 // Positive trim shifts the neutral angle clockwise from 90°.
-int8_t TRIM[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+int8_t TRIM[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-const uint8_t LED_PIN = 10;
-const uint8_t BTN_PIN = 11;</code></pre>
+const uint8_t BTN_PIN = A0;</code></pre>
 
-    <p>Three things to notice: (1) we hold the eight servos in a flat array indexed by the channel map; (2) the pin numbers are pulled into a const array so the index-to-pin mapping is in one place; (3) the <code>TRIM</code> array is the only thing you'll edit per-unit; every robot will have slightly different values, derived from calibration.</p>
+    <p>Three things to notice: (1) we hold the twelve servos in a flat array indexed by the channel map; (2) the pin numbers are pulled into a const array so the index-to-pin mapping is in one place; (3) the <code>TRIM</code> array is the only thing you'll edit per-unit; every robot will have slightly different values, derived from calibration.</p>
+
+    <div class="callout note">
+      <div class="callout-label">Note · No LED_PIN</div>
+      <p>Earlier revisions drove the status LED from a Nano digital pin. With all twelve of D2–D13 committed to servos, the status LED (D1 on the PCB) is instead wired straight to the board's 3V3 rail through R1; it lights whenever the board has power, and the sketch never touches it.</p>
+    </div>
 
     <h3>Setup</h3>
 
     <pre data-lang="C++"><code>void setup() {
   Serial.begin(115200);
-  pinMode(LED_PIN, OUTPUT);
   pinMode(BTN_PIN, INPUT_PULLUP);
 
-  // Attach all eight servos and drive them to neutral immediately.
+  // Attach all twelve servos and drive them to neutral immediately.
   // The 600/2400 µs range covers the SG90's full mechanical sweep
   // more reliably than the library default (544/2400).
-  for (uint8_t i = 0; i &lt; 8; i++) {
+  for (uint8_t i = 0; i &lt; 12; i++) {
     legs[i].attach(SERVO_PIN[i], 600, 2400);
     legs[i].write(90 + TRIM[i]);
   }
 
-  digitalWrite(LED_PIN, HIGH);   // ready
   Serial.println(F("Quadruped ready. Send 'h' for help."));
 }</code></pre>
 
-    <p>The servos are attached one by one and written to their trimmed neutral immediately. This is what produces the "stand up within two seconds" behaviour described in <a href="#overview">Section 01</a>. The status LED comes on once setup completes, a useful signal that boot succeeded.</p>
+    <p>The servos are attached one by one and written to their trimmed neutral immediately. This is what produces the "stand up within two seconds" behaviour described in <a href="#overview">Section 01</a>. The status LED is already lit before <code>setup()</code> even runs, since it's tied directly to 3V3; treat the serial monitor's "Quadruped ready" line as your actual boot-succeeded signal.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Why 600 / 2400 µs?</div>
@@ -155,14 +97,14 @@ const uint8_t BTN_PIN = 11;</code></pre>
     <pre data-lang="C++"><code>// Drive all servos to their trimmed centre.
 // Use this between gait cycles, on stop, and at boot.
 void poseNeutral() {
-  for (uint8_t i = 0; i &lt; 8; i++) {
+  for (uint8_t i = 0; i &lt; 12; i++) {
     legs[i].write(90 + TRIM[i]);
   }
 }
 
 // Write a specific angle to one servo, clamped to safe range.
 void setServo(uint8_t idx, int angle) {
-  if (idx &gt;= 8) return;
+  if (idx &gt;= 12) return;
   int a = constrain(angle + TRIM[idx], 10, 170);
   legs[idx].write(a);
 }</code></pre>
@@ -175,39 +117,41 @@ void setServo(uint8_t idx, int angle) {
 // forward, lowers it, then shifts weight onto the new contact.
 // This is not graceful, but it is honest about its mechanical limits.
 //
-// Each "frame" defines the eight angles, with delays between frames.
-// Indices: 0=FL-H 1=FL-K 2=FR-H 3=FR-K 4=BL-H 5=BL-K 6=BR-H 7=BR-K
+// Each "frame" commands the hip and knee for one leg; the coxa
+// channels (0, 3, 6, 9) are left at neutral throughout this gait.
+// Indices: 0=FL-C 1=FL-H 2=FL-K 3=FR-C 4=FR-H 5=FR-K
+//          6=BL-C 7=BL-H 8=BL-K 9=BR-C 10=BR-H 11=BR-K
 
 const uint16_t FRAME_MS = 180;
 
 void stepCreepForward() {
   // Phase 1: lift FL knee, swing FL hip forward
-  setServo(1, 60);  delay(80);
-  setServo(0, 60);  delay(FRAME_MS);
-  setServo(1, 90);  delay(80);
+  setServo(2, 60);   delay(80);
+  setServo(1, 60);   delay(FRAME_MS);
+  setServo(2, 90);   delay(80);
 
   // Phase 2: lift BR knee, swing BR hip forward
-  setServo(7, 60);  delay(80);
-  setServo(6, 120); delay(FRAME_MS);
-  setServo(7, 90);  delay(80);
+  setServo(11, 60);  delay(80);
+  setServo(10, 120); delay(FRAME_MS);
+  setServo(11, 90);  delay(80);
 
   // Phase 3: lift FR knee, swing FR hip forward
-  setServo(3, 60);  delay(80);
-  setServo(2, 120); delay(FRAME_MS);
-  setServo(3, 90);  delay(80);
+  setServo(5, 60);   delay(80);
+  setServo(4, 120);  delay(FRAME_MS);
+  setServo(5, 90);   delay(80);
 
   // Phase 4: lift BL knee, swing BL hip forward
-  setServo(5, 60);  delay(80);
-  setServo(4, 60);  delay(FRAME_MS);
-  setServo(5, 90);  delay(80);
+  setServo(8, 60);   delay(80);
+  setServo(7, 60);   delay(FRAME_MS);
+  setServo(8, 90);   delay(80);
 
   // Re-centre hips: body has now shifted forward
-  setServo(0, 90); setServo(2, 90);
-  setServo(4, 90); setServo(6, 90);
+  setServo(1, 90); setServo(4, 90);
+  setServo(7, 90); setServo(10, 90);
   delay(FRAME_MS);
 }</code></pre>
 
-    <p>The gait above is deliberately the simplest thing that works: one leg moves at a time, every leg returns to neutral between phases, no two legs are ever in the air simultaneously. It looks slow and ungainly because it is. The interesting gait work is reserved for the on-ground programme.</p>
+    <p>The gait above is deliberately the simplest thing that works: one leg moves at a time, every leg returns to neutral between phases, no two legs are ever in the air simultaneously, and the coxa joints sit still throughout. It looks slow and ungainly because it is. Putting the coxa channels to work for turning and lateral motion is reserved for the on-ground programme.</p>
 
     <h3>Main Loop</h3>
 
@@ -221,7 +165,6 @@ void loop() {
   if (lastBtn == HIGH &amp;&amp; b == LOW) {
     state = (state == S_IDLE) ? S_WALKING : S_IDLE;
     poseNeutral();
-    digitalWrite(LED_PIN, state == S_WALKING ? LOW : HIGH);
     Serial.print(F("State: "));
     Serial.println(state == S_WALKING ? F("WALKING") : F("IDLE"));
     delay(60);  // debounce
@@ -240,7 +183,7 @@ void loop() {
   }
 }</code></pre>
 
-    <p>The button on D11 toggles between idle and walking. The serial monitor lets you address any servo individually for calibration. The status LED on D10 is on when idle, off when walking, a passive heartbeat.</p>
+    <p>The button on A0 toggles between idle and walking. The serial monitor lets you address any servo individually for calibration. The status LED stays lit throughout, since it's hardwired to 3V3; watch the serial monitor's <code>State:</code> line for idle/walking feedback instead.</p>
 
     <div class="callout tip">
       <div class="callout-label">Tip · Read the serial output during early tests</div>
@@ -264,7 +207,7 @@ void loop() {
       </li>
       <li>
         <h4>Confirm boot</h4>
-        <p>The status LED (D1 on the PCB, not the Nano onboard) should illuminate within a second. Open the serial monitor; you should see the "Quadruped ready" line.</p>
+        <p>The status LED (D1 on the PCB, not the Nano onboard) is already lit as soon as power is applied; it's wired to 3V3, not a sign of successful boot. Open the serial monitor instead; you should see the "Quadruped ready" line.</p>
       </li>
     </ol>
 
@@ -274,24 +217,24 @@ void loop() {
 
     <ol class="steps">
       <li>
-        <h4>Place the robot on a flat surface with all eight servos connected</h4>
+        <h4>Place the robot on a flat surface with all twelve servos connected</h4>
         <p>Apply battery power. The robot should be in its neutral pose. Observe which legs are off.</p>
       </li>
       <li>
         <h4>Open the serial monitor</h4>
-        <p>Type <code>s 0 90</code> and press send. Servo 0 (FL-H) should drive to its "neutral" angle. Visually compare to where you want the hip to be (femur horizontal, perpendicular to the body). If it's off by, say, +10° to one side, your trim for that servo should be –10.</p>
+        <p>Type <code>s 1 90</code> and press send. Servo 1 (FL-H) should drive to its "neutral" angle. Visually compare to where you want the hip to be (femur horizontal, perpendicular to the body). If it's off by, say, +10° to one side, your trim for that servo should be –10.</p>
       </li>
       <li>
         <h4>Try different angles to converge on the right trim</h4>
-        <p>Send <code>s 0 85</code>, <code>s 0 95</code>, etc., until the visual angle is correct. Note that adjustment value; that's the new <code>TRIM[0]</code>.</p>
+        <p>Send <code>s 1 85</code>, <code>s 1 95</code>, etc., until the visual angle is correct. Note that adjustment value; that's the new <code>TRIM[1]</code>.</p>
       </li>
       <li>
-        <h4>Repeat for all eight servos</h4>
-        <p>Servos 0, 2, 4, 6 are hips; they should leave femurs horizontal. Servos 1, 3, 5, 7 are knees; they should leave tibias vertical (hanging straight down).</p>
+        <h4>Repeat for all twelve servos</h4>
+        <p>Servos 0, 3, 6, 9 are coxas; they should leave the leg centred with no sideways lean. Servos 1, 4, 7, 10 are hips; they should leave femurs horizontal. Servos 2, 5, 8, 11 are knees; they should leave tibias vertical (hanging straight down).</p>
       </li>
       <li>
         <h4>Update the TRIM array and re-upload</h4>
-        <p>Edit the <code>int8_t TRIM[8] = { ... };</code> line in the sketch. Save. Re-upload. Disconnect battery first (as before).</p>
+        <p>Edit the <code>int8_t TRIM[12] = { ... };</code> line in the sketch. Save. Re-upload. Disconnect battery first (as before).</p>
       </li>
       <li>
         <h4>Verify the neutral pose</h4>
@@ -307,60 +250,3 @@ void loop() {
     <h2>What's in the Sketch, and What Isn't</h2>
 
     <p>The base sketch deliberately includes: servo init, neutral pose, one creep-forward gait, button toggle, serial single-servo command. It deliberately excludes: any sensor reading, any I²C, any communication beyond the USB serial, any autonomous behaviour beyond toggling the gait. The exclusions are there for a reason. We will populate them together when you arrive.</p>
-<<<<<<< HEAD:firmware.html
-
-    <nav class="pagination" aria-label="Section navigation">
-      <a href="pcb.html" class="prev">
-        <span class="page-direction">← Previous · §06</span>
-        <span class="page-title">PCB Assembly</span>
-      </a>
-      <a href="testing.html" class="next">
-        <span class="page-direction">Next · §08</span>
-        <span class="page-title">Testing &amp; Calibration</span>
-      </a>
-    </nav>
-
-  </main>
-</div>
-
-<footer class="site-footer">
-  <div class="foot-inner">
-    <div>
-      <h5>About this manual</h5>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
-    </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="overview.html">§01 Overview</a></li>
-        <li><a href="bom.html">§02 Bill of Materials</a></li>
-        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
-        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
-        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
-        <li><a href="pcb.html">§06 PCB</a></li>
-        <li><a href="firmware.html">§07 Firmware</a></li>
-        <li><a href="testing.html">§08 Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT</li>
-        <li><a href="credits.html">Credits</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon">
-    <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Plus Jakarta Sans, Lexend &amp; IBM Plex Mono</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-
-=======
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/firmware.html

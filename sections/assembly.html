@@ -1,63 +1,3 @@
-<<<<<<< HEAD:assembly.html
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>§04 Mechanical Assembly · iPBL 2026 Manual</title>
-  <meta name="description" content="§04 Mechanical Assembly — step-by-step instructions for building the quadruped's chassis and eight-servo leg system." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-</head>
-<body>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
-      <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
-      </span>
-    </a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="sidenav">Contents</button>
-  </div>
-</header>
-
-<div class="layout">
-
-  <aside class="sidebar" id="sidenav">
-    <a href="index.html" class="home-link">Home</a>
-    <div class="sidebar-label">The Manual</div>
-    <ol>
-      <li><a href="overview.html">Overview</a></li>
-      <li><a href="bom.html">Bill of Materials &amp; Tools</a></li>
-      <li><a href="printing.html">3D-Printed Parts</a></li>
-      <li><a href="assembly.html">Mechanical Assembly</a></li>
-      <li><a href="electronics.html">Electronics &amp; Wiring</a></li>
-      <li><a href="pcb.html">PCB Assembly</a></li>
-      <li><a href="firmware.html">Arduino Firmware</a></li>
-      <li><a href="testing.html">Testing &amp; Calibration</a></li>
-    </ol>
-    <div class="sidebar-label" style="margin-top:1.5rem;">Reference</div>
-    <ol style="counter-reset: none;">
-      <li><a href="credits.html" style="grid-template-columns: 1fr;"><span>Credits &amp; Acknowledgments</span></a></li>
-    </ol>
-  </aside>
-
-  <main class="content">
-
-    <div class="page-head">
-      <div class="crumb">Section 04 · The Build</div>
-      <h1>Mechanical Assembly</h1>
-      <p class="subtitle">Eight servos, four legs, two chassis plates. With patience and a screwdriver this takes three or four hours. With impatience, it takes considerably longer.</p>
-    </div>
-
-=======
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/assembly.html
     <div class="section-marker">Before You Begin</div>
 
     <p class="lede">Every leg you build is going to be identical. Build the first one carefully and slowly. Build the next three by repetition. By the fourth leg you'll be quicker than this guide can keep up with; that's the goal.</p>
@@ -69,7 +9,7 @@
 
     <h2>Pre-Centring Every Servo</h2>
 
-    <p>This is a one-time step. It takes about ten minutes for all eight servos and saves several hours of grief later.</p>
+    <p>This is a one-time step. It takes about fifteen minutes for all twelve servos and saves several hours of grief later.</p>
 
     <ol class="steps">
       <li>
@@ -86,13 +26,13 @@
       </li>
       <li>
         <h4>Power down, unplug, set aside</h4>
-        <p>The servo is now mechanically centred. Move on to the next one. Repeat for all eight.</p>
+        <p>The servo is now mechanically centred. Move on to the next one. Repeat for all twelve.</p>
       </li>
     </ol>
 
     <figure>
       <div class="frame"><div class="placeholder"><span>FIG. 05 · Servo centring jig on breadboard</span></div></div>
-      <figcaption><span class="fig-label">Figure 05</span>Single-servo centring setup. Repeat eight times. This is the most boring step of the build and the most important.</figcaption>
+      <figcaption><span class="fig-label">Figure 05</span>Single-servo centring setup. Repeat twelve times. This is the most boring step of the build and the most important.</figcaption>
     </figure>
 
     <h2>Assembly Sequence</h2>
@@ -100,7 +40,7 @@
     <p>The mechanical build proceeds in this order:</p>
 
     <ul>
-      <li><strong>A.</strong> Build one leg (hip-mount + hip servo + femur + knee servo + tibia)</li>
+      <li><strong>A.</strong> Build one leg (coxa bracket + coxa servo + hip-mount + hip servo + femur + knee servo + tibia)</li>
       <li><strong>B.</strong> Repeat three more times to produce four identical legs</li>
       <li><strong>C.</strong> Mount the lower chassis plate</li>
       <li><strong>D.</strong> Attach all four legs to the chassis</li>
@@ -115,13 +55,25 @@
 
     <figure>
       <div class="frame"><div class="placeholder"><span>FIG. 06 · Exploded view, single leg assembly</span></div></div>
-      <figcaption><span class="fig-label">Figure 06</span>Exploded view of a single leg. The hip servo and knee servo are identical SG90 units; only their position in the kinematic chain differs.</figcaption>
+      <figcaption><span class="fig-label">Figure 06</span>Exploded view of a single leg. The coxa, hip, and knee servos are identical SG90 units; only their position in the kinematic chain differs.</figcaption>
     </figure>
 
     <ol class="steps">
       <li>
+        <h4>Seat the coxa servo in the coxa bracket</h4>
+        <p>Coxa brackets are handed: left legs (FL, BL) take a mirror-image bracket from right legs (FR, BR). Take one pre-centred SG90 and slide it into the rectangular pocket in the coxa bracket for the side you're building. Press until the servo flange sits flush against the print. If it doesn't seat easily, do not force it; file the pocket walls until it does.</p>
+      </li>
+      <li>
+        <h4>Secure the coxa servo with two M2 × 8 mm screws</h4>
+        <p>The screws thread through the servo's mounting tabs and into the printed walls of the coxa bracket. Tighten until snug, not gorilla-tight.</p>
+      </li>
+      <li>
+        <h4>Install the hip mount onto the coxa-servo output shaft</h4>
+        <p>Press a servo horn into the hip mount's shaft pocket, then place the hip mount (with horn) onto the coxa servo's output shaft. With the coxa servo still at 90°, the hip mount's L-bend should point straight outward, perpendicular to the coxa bracket. Secure with the small black M2 × 4 mm screw supplied with the SG90, down the centre of the horn.</p>
+      </li>
+      <li>
         <h4>Seat the hip servo in the hip mount</h4>
-        <p>Take one pre-centred SG90 and slide it into the rectangular pocket in the hip mount. The output shaft should face <em>upward</em> when the L-bend points outward. Press until the servo flange sits flush against the print. If it doesn't seat easily, do not force it; file the pocket walls until it does.</p>
+        <p>Take a second pre-centred SG90 and slide it into the rectangular pocket in the hip mount. The output shaft should face <em>upward</em> when the L-bend points outward. Press until the servo flange sits flush against the print. If it doesn't seat easily, do not force it; file the pocket walls until it does.</p>
       </li>
       <li>
         <h4>Secure the hip servo with two M2 × 8 mm screws</h4>
@@ -145,18 +97,18 @@
       </li>
       <li>
         <h4>Manually verify range of motion</h4>
-        <p>With the servos unpowered, gently swing the leg through its expected motion: hip rotates the femur up and forward; knee rotates the tibia up and back. You're checking that nothing binds, no print rubs against itself, and there's no interference at extremes. <strong>If something binds, fix it now</strong>: once a servo is powered, it can't tell the difference between binding and a hard mechanical stop, and it will burn out trying.</p>
+        <p>With the servos unpowered, gently swing the leg through its expected motion: coxa swings the whole hip-mount-and-below assembly side to side; hip rotates the femur up and forward; knee rotates the tibia up and back. You're checking that nothing binds, no print rubs against itself, and there's no interference at extremes. <strong>If something binds, fix it now</strong>: once a servo is powered, it can't tell the difference between binding and a hard mechanical stop, and it will burn out trying.</p>
       </li>
     </ol>
 
     <figure>
       <div class="frame"><div class="placeholder"><span>FIG. 07 · Completed leg, side view</span></div></div>
-      <figcaption><span class="fig-label">Figure 07</span>A completed leg in its neutral pose. All four of your legs should look like this, indistinguishably.</figcaption>
+      <figcaption><span class="fig-label">Figure 07</span>A completed leg in its neutral pose. All four of your legs should look like this, indistinguishably (mirrored left-right at the coxa bracket).</figcaption>
     </figure>
 
     <div class="callout note">
       <div class="callout-label">Note · Cable management at this stage</div>
-      <p>Each leg now has two servo cables: three wires each, six wires total. Don't tie them down yet. You'll route them up through the hip mount and into the chassis during electronics assembly. Just let them hang for now.</p>
+      <p>Each leg now has three servo cables: three wires each, nine wires total. Don't tie them down yet. You'll route them up through the coxa bracket and into the chassis during electronics assembly. Just let them hang for now.</p>
     </div>
 
     <hr/>
@@ -167,7 +119,7 @@
 
     <div class="callout tip">
       <div class="callout-label">Tip · Label the cables now</div>
-      <p>While each leg is still in isolation, label its two servo cables with masking tape: <code>FL-H</code> / <code>FL-K</code>, <code>FR-H</code> / <code>FR-K</code>, <code>BL-H</code> / <code>BL-K</code>, <code>BR-H</code> / <code>BR-K</code> (front-left hip, front-left knee, and so on). This label saves you in Section 05 and again in Section 07.</p>
+      <p>While each leg is still in isolation, label its three servo cables with masking tape: <code>FL-C</code> / <code>FL-H</code> / <code>FL-K</code>, <code>FR-C</code> / <code>FR-H</code> / <code>FR-K</code>, <code>BL-C</code> / <code>BL-H</code> / <code>BL-K</code>, <code>BR-C</code> / <code>BR-H</code> / <code>BR-K</code> (front-left coxa, front-left hip, front-left knee, and so on). This label saves you in Section 05 and again in Section 07.</p>
     </div>
 
     <hr/>
@@ -192,11 +144,11 @@
     <ol class="steps">
       <li>
         <h4>Position the first leg at the front-left corner</h4>
-        <p>Orient the hip mount so its L-bend points outward (away from the chassis centre). The hip-servo output shaft, with femur, should now be at the corner. Cable bundle routes up into the chassis through the corner cutout.</p>
+        <p>Orient the coxa bracket so the hip mount it carries points outward (away from the chassis centre). The whole hip-mount-and-below assembly should now be at the corner. Cable bundle routes up into the chassis through the corner cutout.</p>
       </li>
       <li>
-        <h4>Secure the hip mount to the lower plate with three M2 × 6 mm screws</h4>
-        <p>The hip mount sits on top of the lower chassis plate. Three screws form a triangle that resists twisting under servo load. Drive from above, threading into the printed walls of the hip mount below.</p>
+        <h4>Secure the coxa bracket to the lower plate with three M2 × 6 mm screws</h4>
+        <p>The coxa bracket sits on top of the lower chassis plate. Three screws form a triangle that resists twisting under servo load. Drive from above, threading into the printed walls of the coxa bracket below.</p>
       </li>
       <li>
         <h4>Repeat for the remaining three corners</h4>
@@ -215,7 +167,7 @@
 
     <p>Do <em>not</em> install the upper chassis plate yet. You need to wire and test the PCB first; see Sections 05 and 06. The upper plate goes on at the very end, in Section 08.</p>
 
-    <p>For now, leave the robot with its lower chassis open. Set it carefully on the bench, legs splayed out at whatever angles the servos chose. Eight servo cables should be poking up out of the chassis cavity.</p>
+    <p>For now, leave the robot with its lower chassis open. Set it carefully on the bench, legs splayed out at whatever angles the servos chose. Twelve servo cables should be poking up out of the chassis cavity.</p>
 
     <h2>Mechanical Sign-Off</h2>
 
@@ -224,67 +176,9 @@
     <ol>
       <li>All four legs are visually identical, leg length matches within 1–2 mm</li>
       <li>No mechanical binding when each joint is moved by hand through its full range</li>
-      <li>All sixteen leg screws are seated firmly (none stripped, none cross-threaded)</li>
-      <li>All eight servo cables are labelled with their position</li>
+      <li>All twenty-four leg screws are seated firmly (none stripped, none cross-threaded)</li>
+      <li>All twelve servo cables are labelled with their position</li>
       <li>The chassis sits flat on a flat surface (no rocking)</li>
     </ol>
 
-<<<<<<< HEAD:assembly.html
-    <p>If yes to all five, continue. If no — fix it now. The next sections assume mechanical completion.</p>
-
-    <nav class="pagination" aria-label="Section navigation">
-      <a href="printing.html" class="prev">
-        <span class="page-direction">← Previous · §03</span>
-        <span class="page-title">3D-Printed Parts</span>
-      </a>
-      <a href="electronics.html" class="next">
-        <span class="page-direction">Next · §05</span>
-        <span class="page-title">Electronics &amp; Wiring</span>
-      </a>
-    </nav>
-
-  </main>
-</div>
-
-<footer class="site-footer">
-  <div class="foot-inner">
-    <div>
-      <h5>About this manual</h5>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos.</p>
-    </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="overview.html">§01 Overview</a></li>
-        <li><a href="bom.html">§02 Bill of Materials</a></li>
-        <li><a href="printing.html">§03 3D-Printed Parts</a></li>
-        <li><a href="assembly.html">§04 Mechanical Assembly</a></li>
-        <li><a href="electronics.html">§05 Electronics &amp; Wiring</a></li>
-        <li><a href="pcb.html">§06 PCB</a></li>
-        <li><a href="firmware.html">§07 Firmware</a></li>
-        <li><a href="testing.html">§08 Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT</li>
-        <li><a href="credits.html">Credits</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="colophon">
-    <span>© 2026 · International Project-Based Learning</span>
-    <span>Set in Plus Jakarta Sans, Lexend &amp; IBM Plex Mono</span>
-  </div>
-</footer>
-
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-
-=======
     <p>If yes to all five, continue. If no, fix it now. The next sections assume mechanical completion.</p>
->>>>>>> 5ff8bc9b725e7ecb41a94280cf1f64eeef3fa4ae:sections/assembly.html

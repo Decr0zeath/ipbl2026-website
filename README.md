@@ -6,7 +6,7 @@ Built as a static SPA-lite site for GitHub Pages: one shell page loads the chrom
 
 ## What this is
 
-A 10-page web manual covering everything a student needs to assemble and program a four-legged, eight-servo quadruped robot before arriving on-site for the on-ground iPBL programme. The mechanical platform is adapted from [Regis Hsu's open quadruped on PCBWay](https://www.pcbway.com/project/shareproject/Quadruped_Spider_Robot_3D_Printed_Parts_SG90_Servo_Motor_Arduino_Nano_10107fe3.html).
+A 10-page web manual covering everything a student needs to assemble and program a four-legged, twelve-servo quadruped robot before arriving on-site for the on-ground iPBL programme. The mechanical platform is adapted from [Regis Hsu's open quadruped on PCBWay](https://www.pcbway.com/project/shareproject/Quadruped_Spider_Robot_3D_Printed_Parts_SG90_Servo_Motor_Arduino_Nano_10107fe3.html).
 
 The site covers:
 
@@ -81,7 +81,7 @@ The frame's corner brackets and styling stay; only the inner content changes.
 
 ## Design
 
-- **Type:** Inter (headings and body), JetBrains Mono (code/labels)
+- **Type:** Plus Jakarta Sans (headings/display), Lexend (body/UI), Crimson Pro italic (accents), IBM Plex Mono (code/labels)
 - **Palette:** USJ-R green `#0D3E20` + gold `#FEB104` on warm cream `#FAF6EC`
 - **Aesthetic:** Academic field-guide / vintage technical manual
 

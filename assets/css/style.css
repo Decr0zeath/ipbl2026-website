@@ -715,7 +715,8 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 
 .outcomes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 1.5rem;
   margin: 2rem 0 0;
   padding: 0;
@@ -909,6 +910,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   .hero-mark { max-width: 200px; justify-self: start; }
   footer.site-footer .foot-inner { grid-template-columns: 1fr; gap: 2rem; }
   .scope-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .outcomes { grid-template-columns: repeat(2, 1fr); }
   body { font-size: 17px; }
 }
 @media (max-width: 560px) {
@@ -921,6 +923,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   .brand-sub { font-size: .65rem; }
   .hero { gap: 1.25rem; }
   .hero-mark { max-width: 160px; }
+  .outcomes { grid-template-columns: 1fr; }
 }
 
 /* ---------- Print ----------

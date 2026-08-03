@@ -4,7 +4,7 @@
 
     <h2>Servo Channel Assignment</h2>
 
-    <p>The twelve servos are addressed by leg and joint. The mnemonic is <code>{FL|FR|BL|BR}-{C|H|K}</code>: front/back, left/right, coxa, hip, or knee. The PCB headers J2 through J13 follow the order below, left to right when looking at the assembled PCB from above.</p>
+    <p>The twelve servos are addressed by leg and joint. The mnemonic is <code>{FL|FR|BL|BR}-{C|H|K}</code>: front/back, left/right, coxa, hip, or knee. The PCB headers J1 through J12 follow the order below, left to right when looking at the assembled PCB from above.</p>
 
     <div class="table-wrap">
       <table>
@@ -19,18 +19,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>J2</td><td>FL-C</td><td>Front-Left</td><td>Coxa</td><td>D2</td><td class="num">0</td></tr>
-          <tr><td>J3</td><td>FL-H</td><td>Front-Left</td><td>Hip</td><td>D3</td><td class="num">1</td></tr>
-          <tr><td>J4</td><td>FL-K</td><td>Front-Left</td><td>Knee</td><td>D4</td><td class="num">2</td></tr>
-          <tr><td>J5</td><td>FR-C</td><td>Front-Right</td><td>Coxa</td><td>D5</td><td class="num">3</td></tr>
-          <tr><td>J6</td><td>FR-H</td><td>Front-Right</td><td>Hip</td><td>D6</td><td class="num">4</td></tr>
-          <tr><td>J7</td><td>FR-K</td><td>Front-Right</td><td>Knee</td><td>D7</td><td class="num">5</td></tr>
-          <tr><td>J8</td><td>BL-C</td><td>Back-Left</td><td>Coxa</td><td>D8</td><td class="num">6</td></tr>
-          <tr><td>J9</td><td>BL-H</td><td>Back-Left</td><td>Hip</td><td>D9</td><td class="num">7</td></tr>
-          <tr><td>J10</td><td>BL-K</td><td>Back-Left</td><td>Knee</td><td>D10</td><td class="num">8</td></tr>
-          <tr><td>J11</td><td>BR-C</td><td>Back-Right</td><td>Coxa</td><td>D11</td><td class="num">9</td></tr>
-          <tr><td>J12</td><td>BR-H</td><td>Back-Right</td><td>Hip</td><td>D12</td><td class="num">10</td></tr>
-          <tr><td>J13</td><td>BR-K</td><td>Back-Right</td><td>Knee</td><td>D13</td><td class="num">11</td></tr>
+          <tr><td>J1</td><td>FL-C</td><td>Front-Left</td><td>Coxa</td><td>D2</td><td class="num">0</td></tr>
+          <tr><td>J2</td><td>FL-H</td><td>Front-Left</td><td>Hip</td><td>D3</td><td class="num">1</td></tr>
+          <tr><td>J3</td><td>FL-K</td><td>Front-Left</td><td>Knee</td><td>D4</td><td class="num">2</td></tr>
+          <tr><td>J4</td><td>FR-C</td><td>Front-Right</td><td>Coxa</td><td>D5</td><td class="num">3</td></tr>
+          <tr><td>J5</td><td>FR-H</td><td>Front-Right</td><td>Hip</td><td>D6</td><td class="num">4</td></tr>
+          <tr><td>J6</td><td>FR-K</td><td>Front-Right</td><td>Knee</td><td>D7</td><td class="num">5</td></tr>
+          <tr><td>J7</td><td>BL-C</td><td>Back-Left</td><td>Coxa</td><td>D8</td><td class="num">6</td></tr>
+          <tr><td>J8</td><td>BL-H</td><td>Back-Left</td><td>Hip</td><td>D9</td><td class="num">7</td></tr>
+          <tr><td>J9</td><td>BL-K</td><td>Back-Left</td><td>Knee</td><td>D10</td><td class="num">8</td></tr>
+          <tr><td>J10</td><td>BR-C</td><td>Back-Right</td><td>Coxa</td><td>D11</td><td class="num">9</td></tr>
+          <tr><td>J11</td><td>BR-H</td><td>Back-Right</td><td>Hip</td><td>D12</td><td class="num">10</td></tr>
+          <tr><td>J12</td><td>BR-K</td><td>Back-Right</td><td>Knee</td><td>D13</td><td class="num">11</td></tr>
         </tbody>
       </table>
     </div>
@@ -54,9 +54,9 @@
         </thead>
         <tbody>
           <tr><td>3V3</td><td>Status LED</td><td>R1 → D1 (red LED), always on while the board has power. Not firmware-controlled.</td></tr>
-          <tr><td>A0–A3</td><td>Reserved</td><td>Headers J14–J17, left for programme use</td></tr>
-          <tr><td>A4 (SDA)</td><td>Reserved (I²C)</td><td>Header J18, left for programme use</td></tr>
-          <tr><td>A5 (SCL)</td><td>Reserved (I²C)</td><td>Header J18, left for programme use</td></tr>
+          <tr><td>A0–A3</td><td>Reserved</td><td>Headers J13–J16, left for programme use</td></tr>
+          <tr><td>A4 (SDA)</td><td>Reserved (I²C)</td><td>Header J17, left for programme use</td></tr>
+          <tr><td>A5 (SCL)</td><td>Reserved (I²C)</td><td>Header J17, left for programme use</td></tr>
           <tr><td>A6, A7</td><td>Unused</td><td>·</td></tr>
           <tr><td>VIN</td><td>·</td><td>Do not use. Power comes from the 5 V regulated rail.</td></tr>
           <tr><td>5V</td><td>Logic rail</td><td>From buck converter output, separate from servo rail</td></tr>
@@ -165,7 +165,7 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Wire</th><th>Function</th><th>PCB Header Pin (looking at PCB top, J2–J13)</th></tr>
+          <tr><th>Wire</th><th>Function</th><th>PCB Header Pin (looking at PCB top, J1–J12)</th></tr>
         </thead>
         <tbody>
           <tr><td>Brown (or black)</td><td>Ground</td><td>Pin 1, closest to the PCB edge</td></tr>

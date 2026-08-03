@@ -14,8 +14,8 @@ The site covers:
 - Section 02 Bill of Materials & Tools
 - Section 03 3D-Printed Parts — STL inventory, print settings, orientation
 - Section 04 Mechanical Assembly — step-by-step build
-- Section 05 Electronics & Wiring — pinout, channel map, power architecture
-- Section 06 PCB Assembly — schematic walkthrough and soldering sequence
+- Section 05 PCB Assembly — schematic walkthrough and soldering sequence
+- Section 06 Electronics & Wiring — pinout, channel map, power architecture
 - Section 07 Arduino Firmware — toolchain, sketch walkthrough, calibration
 - Section 08 Testing & Calibration — bench tests, troubleshooting, pre-flight checklist
 - Credits & Acknowledgments

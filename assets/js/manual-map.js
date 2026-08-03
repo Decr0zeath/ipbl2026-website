@@ -36,18 +36,18 @@ var MANUAL_MAP = [
     subtitle: 'Twelve servos, four legs, two chassis plates. With patience and a screwdriver, the process takes three to four hours; with impatience, considerably longer.'
   },
   {
-    slug: 'electronics',
-    num: '05',
-    crumb: 'Section 05 · The Electrons',
-    title: 'Electronics & Wiring',
-    subtitle: 'Pinouts, channel assignments, power budgeting, and the conventions that will keep your wiring clean once the PCB is soldered.'
-  },
-  {
     slug: 'pcb',
-    num: '06',
-    crumb: 'Section 06 · The PCB',
+    num: '05',
+    crumb: 'Section 05 · The PCB',
     title: 'PCB Assembly',
     subtitle: 'A schematic walkthrough, so that you understand what you are soldering, followed by the assembly sequence for the board itself.'
+  },
+  {
+    slug: 'electronics',
+    num: '06',
+    crumb: 'Section 06 · The Electrons',
+    title: 'Electronics & Wiring',
+    subtitle: 'Pinouts, channel assignments, power budgeting, and the conventions that will keep your wiring clean once the PCB is soldered.'
   },
   {
     slug: 'firmware',

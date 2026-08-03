@@ -1,38 +1,38 @@
     <div class="section-marker">Before You Begin</div>
 
-    <p class="lede">Every leg you build is going to be identical. Build the first one carefully and slowly. Build the next three by repetition. By the fourth leg you'll be quicker than this guide can keep up with; that's the goal.</p>
+    <p class="lede">Every leg built in this section is identical in construction. Build the first carefully and deliberately; the remaining three follow by repetition. By the fourth leg, the process should feel routine; that is the intended outcome.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · Centre your servos first</div>
-      <p>Before installing any servo into a printed part, you must move it to its mechanical centre (90°). Otherwise you'll mount the horn at an arbitrary angle and discover, three hours later, that one of your legs only travels from 30° to 130° instead of 0° to 180°. <strong>Read the "Pre-centring" step below before touching any screws.</strong></p>
+      <p>Before installing any servo into a printed part, it must be moved to its mechanical centre (90°). Failing to do so results in the horn being mounted at an arbitrary angle, which is typically discovered only after assembly, when a leg is found to travel from 30° to 130° rather than the intended 0° to 180°. <strong>Read the "Pre-centring" step below before proceeding with any screws.</strong></p>
     </div>
 
     <h2>Pre-Centring Every Servo</h2>
 
-    <p>This is a one-time step. It takes about fifteen minutes for all twelve servos and saves several hours of grief later.</p>
+    <p>This is a one-time step. It takes approximately fifteen minutes for all twelve servos and prevents considerable difficulty later in the build.</p>
 
     <ol class="steps">
       <li>
         <h4>Wire one servo to an Arduino at a time</h4>
-        <p>Use any Arduino, any breadboard, any USB cable. The servo's three wires connect: <em>orange</em> → pin 9, <em>red</em> → 5 V, <em>brown</em> → GND. Power the Arduino from USB; the SG90 will pull just under 200 mA on idle which the USB rail can handle for short bursts.</p>
+        <p>Use any Arduino, any breadboard, any USB cable. The servo's three wires connect: <em>orange</em> → pin 9, <em>red</em> → 5 V, <em>brown</em> → GND. Power the Arduino from USB; the SG90 will pull just under 200 mA on idle, which the USB rail can handle for short bursts.</p>
       </li>
       <li>
         <h4>Upload the centring sketch</h4>
-        <p>Flash the small sketch <code>servo_center.ino</code> from the project repository. It does exactly one thing: writes <code>90°</code> to pin 9 and stays there. The servo will swing to its mechanical centre and hold.</p>
+        <p>Flash the small sketch <code>servo_center.ino</code> from the project repository. It performs exactly one function: writing <code>90°</code> to pin 9 and holding there. The servo will swing to its mechanical centre and remain in place.</p>
       </li>
       <li>
         <h4>Mark the centred shaft</h4>
-        <p>While the servo is powered and holding at 90°, install one of the supplied servo horns onto the shaft in the orientation you want, typically perpendicular to the body. Mark the shaft and horn with a permanent marker so you can re-align if the horn ever comes off. <strong>Do not screw the horn down yet</strong>; you'll do that during leg assembly.</p>
+        <p>While the servo is powered and holding at 90°, install one of the supplied servo horns onto the shaft in the desired orientation, typically perpendicular to the body. Mark the shaft and horn with a permanent marker to allow realignment if the horn is later removed. <strong>Do not secure the horn with a screw at this stage</strong>; this is completed during leg assembly.</p>
       </li>
       <li>
         <h4>Power down, unplug, set aside</h4>
-        <p>The servo is now mechanically centred. Move on to the next one. Repeat for all twelve.</p>
+        <p>The servo is now mechanically centred. Proceed to the next one. Repeat for all twelve.</p>
       </li>
     </ol>
 
     <figure>
       <div class="frame"><div class="placeholder"><span>FIG. 05 · Servo centring jig on breadboard</span></div></div>
-      <figcaption><span class="fig-label">Figure 05</span>Single-servo centring setup. Repeat twelve times. This is the most boring step of the build and the most important.</figcaption>
+      <figcaption><span class="fig-label">Figure 05</span>Single-servo centring setup, repeated twelve times. This is among the least eventful steps of the build, and among the most important.</figcaption>
     </figure>
 
     <h2>Assembly Sequence</h2>
@@ -61,11 +61,11 @@
     <ol class="steps">
       <li>
         <h4>Seat the coxa servo in the coxa bracket</h4>
-        <p>Coxa brackets are handed: left legs (FL, BL) take a mirror-image bracket from right legs (FR, BR). Take one pre-centred SG90 and slide it into the rectangular pocket in the coxa bracket for the side you're building. Press until the servo flange sits flush against the print. If it doesn't seat easily, do not force it; file the pocket walls until it does.</p>
+        <p>Coxa brackets are handed: left legs (FL, BL) take a mirror-image bracket from right legs (FR, BR). Take one pre-centred SG90 and slide it into the rectangular pocket in the coxa bracket for the side being built. Press until the servo flange sits flush against the print. If it does not seat easily, do not force it; file the pocket walls until it does.</p>
       </li>
       <li>
         <h4>Secure the coxa servo with two M2 × 8 mm screws</h4>
-        <p>The screws thread through the servo's mounting tabs and into the printed walls of the coxa bracket. Tighten until snug, not gorilla-tight.</p>
+        <p>The screws thread through the servo's mounting tabs and into the printed walls of the coxa bracket. Tighten until snug; avoid over-tightening.</p>
       </li>
       <li>
         <h4>Install the hip mount onto the coxa-servo output shaft</h4>
@@ -73,23 +73,23 @@
       </li>
       <li>
         <h4>Seat the hip servo in the hip mount</h4>
-        <p>Take a second pre-centred SG90 and slide it into the rectangular pocket in the hip mount. The output shaft should face <em>upward</em> when the L-bend points outward. Press until the servo flange sits flush against the print. If it doesn't seat easily, do not force it; file the pocket walls until it does.</p>
+        <p>Take a second pre-centred SG90 and slide it into the rectangular pocket in the hip mount. The output shaft should face <em>upward</em> when the L-bend points outward. Press until the servo flange sits flush against the print. If it does not seat easily, do not force it; file the pocket walls until it does.</p>
       </li>
       <li>
         <h4>Secure the hip servo with two M2 × 8 mm screws</h4>
-        <p>The screws thread through the servo's mounting tabs and into the printed walls of the hip mount. Tighten until snug, not gorilla-tight. Two screws (one front, one back) is sufficient; the other two holes can be filled later if you have OCD about symmetry.</p>
+        <p>The screws thread through the servo's mounting tabs and into the printed walls of the hip mount. Tighten until snug; avoid over-tightening. Two screws (one front, one back) are sufficient; the remaining two holes may be filled later for those who prefer complete symmetry.</p>
       </li>
       <li>
         <h4>Install the femur onto the hip-servo output shaft</h4>
-        <p>The femur has a circular pocket sized for the included single-arm or cross-arm servo horn. Press the horn into the femur pocket and check that it sits flat. Then place the femur (with horn) onto the hip servo's output shaft. With the servo still at 90° (which you set during pre-centring), the femur should point outward, parallel to the ground, perpendicular to the hip-mount L-bend.</p>
+        <p>The femur has a circular pocket sized for the included single-arm or cross-arm servo horn. Press the horn into the femur pocket and check that it sits flat. Then place the femur (with horn) onto the hip servo's output shaft. With the servo still at 90° (as set during pre-centring), the femur should point outward, parallel to the ground, perpendicular to the hip-mount L-bend.</p>
       </li>
       <li>
         <h4>Secure the femur to the horn with the supplied M2 × 4 mm</h4>
-        <p>Use the small black screw that came with the SG90, <em>not</em> a generic M2. The SG90's included screw is a slightly different thread pitch designed to bite into the horn without splitting it. Drive it down the centre of the horn and into the servo's output shaft. Snug, not crushed.</p>
+        <p>Use the small black screw supplied with the SG90, <em>not</em> a generic M2. The SG90's included screw has a slightly different thread pitch, designed to engage the horn without splitting it. Drive it down the centre of the horn and into the servo's output shaft. Snug, not crushed.</p>
       </li>
       <li>
         <h4>Seat the knee servo in the femur</h4>
-        <p>The far end of the femur has a second servo pocket. Slide a second pre-centred SG90 into it with the output shaft facing <em>down</em> and slightly forward (you'll see why in the next step). Secure with two M2 × 8 mm screws.</p>
+        <p>The far end of the femur has a second servo pocket. Slide a second pre-centred SG90 into it with the output shaft facing <em>down</em> and slightly forward (the reason becomes clear in the next step). Secure with two M2 × 8 mm screws.</p>
       </li>
       <li>
         <h4>Attach the tibia to the knee servo</h4>
@@ -97,29 +97,29 @@
       </li>
       <li>
         <h4>Manually verify range of motion</h4>
-        <p>With the servos unpowered, gently swing the leg through its expected motion: coxa swings the whole hip-mount-and-below assembly side to side; hip rotates the femur up and forward; knee rotates the tibia up and back. You're checking that nothing binds, no print rubs against itself, and there's no interference at extremes. <strong>If something binds, fix it now</strong>: once a servo is powered, it can't tell the difference between binding and a hard mechanical stop, and it will burn out trying.</p>
+        <p>With the servos unpowered, gently swing the leg through its expected motion: coxa swings the whole hip-mount-and-below assembly side to side; hip rotates the femur up and forward; knee rotates the tibia up and back. This confirms that nothing binds, no print surface rubs against itself, and there is no interference at the extremes of travel. <strong>Resolve any binding before proceeding</strong>: a powered servo cannot distinguish between mechanical binding and a hard stop, and will continue driving against it until it fails.</p>
       </li>
     </ol>
 
     <figure>
       <div class="frame"><div class="placeholder"><span>FIG. 07 · Completed leg, side view</span></div></div>
-      <figcaption><span class="fig-label">Figure 07</span>A completed leg in its neutral pose. All four of your legs should look like this, indistinguishably (mirrored left-right at the coxa bracket).</figcaption>
+      <figcaption><span class="fig-label">Figure 07</span>A completed leg in its neutral pose. All four legs should appear identical (mirrored left-right at the coxa bracket).</figcaption>
     </figure>
 
     <div class="callout note">
       <div class="callout-label">Note · Cable management at this stage</div>
-      <p>Each leg now has three servo cables: three wires each, nine wires total. Don't tie them down yet. You'll route them up through the coxa bracket and into the chassis during electronics assembly. Just let them hang for now.</p>
+      <p>Each leg now carries three servo cables, nine wires in total. These should not be secured yet; they will be routed through the coxa bracket and into the chassis during electronics assembly. Leave them unbound for the time being.</p>
     </div>
 
     <hr/>
 
     <h2>B · Repeat for Three More Legs</h2>
 
-    <p>Build legs two, three, and four following exactly the same steps. After all four are built, line them up on your bench in a row. They should be visually indistinguishable. If one looks noticeably different (femur angle, tibia hang), go back and find out why. Doing this comparison now is much easier than chasing an asymmetric gait later.</p>
+    <p>Build legs two, three, and four following the same steps. Once all four are complete, arrange them in a row on the bench. They should be visually indistinguishable. If one appears noticeably different (femur angle, tibia hang), investigate the cause before proceeding. Identifying discrepancies now is considerably easier than diagnosing an asymmetric gait later.</p>
 
     <div class="callout tip">
       <div class="callout-label">Tip · Label the cables now</div>
-      <p>While each leg is still in isolation, label its three servo cables with masking tape: <code>FL-C</code> / <code>FL-H</code> / <code>FL-K</code>, <code>FR-C</code> / <code>FR-H</code> / <code>FR-K</code>, <code>BL-C</code> / <code>BL-H</code> / <code>BL-K</code>, <code>BR-C</code> / <code>BR-H</code> / <code>BR-K</code> (front-left coxa, front-left hip, front-left knee, and so on). This label saves you in Section 05 and again in Section 07.</p>
+      <p>While each leg is still in isolation, label its three servo cables with masking tape: <code>FL-C</code> / <code>FL-H</code> / <code>FL-K</code>, <code>FR-C</code> / <code>FR-H</code> / <code>FR-K</code>, <code>BL-C</code> / <code>BL-H</code> / <code>BL-K</code>, <code>BR-C</code> / <code>BR-H</code> / <code>BR-K</code> (front-left coxa, front-left hip, front-left knee, and so on). This labelling proves useful again in Section 05 and Section 07.</p>
     </div>
 
     <hr/>
@@ -129,11 +129,11 @@
     <ol class="steps">
       <li>
         <h4>Place the lower chassis plate flat, holes facing up</h4>
-        <p>Identify the four corner cutouts where the hip mounts attach. Confirm orientation: the rectangular cut-out at one end is for battery access; that's the "rear" of the robot.</p>
+        <p>Identify the four corner cutouts where the hip mounts attach. Confirm orientation: the rectangular cut-out at one end is for battery access; this marks the "rear" of the robot.</p>
       </li>
       <li>
         <h4>Install the four PCB standoffs</h4>
-        <p>Drive four M2 × 4 mm screws up through the underside of the plate into the M2 brass standoffs above it. These are where the PCB will sit. Finger-tight is fine for now; you'll re-snug after the PCB is installed.</p>
+        <p>Drive four M2 × 4 mm screws up through the underside of the plate into the M2 brass standoffs above it. These are where the PCB will sit. Finger-tight is sufficient for now; re-tighten after the PCB is installed.</p>
       </li>
     </ol>
 
@@ -144,7 +144,7 @@
     <ol class="steps">
       <li>
         <h4>Position the first leg at the front-left corner</h4>
-        <p>Orient the coxa bracket so the hip mount it carries points outward (away from the chassis centre). The whole hip-mount-and-below assembly should now be at the corner. Cable bundle routes up into the chassis through the corner cutout.</p>
+        <p>Orient the coxa bracket so the hip mount it carries points outward (away from the chassis centre). The whole hip-mount-and-below assembly should now be at the corner. Route the cable bundle up into the chassis through the corner cutout.</p>
       </li>
       <li>
         <h4>Secure the coxa bracket to the lower plate with three M2 × 6 mm screws</h4>
@@ -152,7 +152,7 @@
       </li>
       <li>
         <h4>Repeat for the remaining three corners</h4>
-        <p>Front-right, back-left, back-right. After all four legs are attached, the assembly should be able to stand on its own, though the legs will be at whatever angle the unpowered servos happen to settle at. They'll look correct only after the firmware drives them.</p>
+        <p>Front-right, back-left, back-right. After all four legs are attached, the assembly should be able to stand on its own, though the legs will rest at whatever angle the unpowered servos happen to settle at. They will appear correctly aligned only once the firmware drives them into position.</p>
       </li>
     </ol>
 
@@ -165,9 +165,9 @@
 
     <h2>E · Closing Up</h2>
 
-    <p>Do <em>not</em> install the upper chassis plate yet. You need to wire and test the PCB first; see Sections 05 and 06. The upper plate goes on at the very end, in Section 08.</p>
+    <p>Do <em>not</em> install the upper chassis plate yet. The PCB must be wired and tested first; see Sections 05 and 06. The upper plate is installed at the very end, in Section 08.</p>
 
-    <p>For now, leave the robot with its lower chassis open. Set it carefully on the bench, legs splayed out at whatever angles the servos chose. Twelve servo cables should be poking up out of the chassis cavity.</p>
+    <p>At this stage, leave the robot with its lower chassis open. Set it carefully on the bench, with the legs splayed at whatever angles the servos have settled into. Twelve servo cables should be visible, extending up out of the chassis cavity.</p>
 
     <h2>Mechanical Sign-Off</h2>
 
@@ -181,4 +181,4 @@
       <li>The chassis sits flat on a flat surface (no rocking)</li>
     </ol>
 
-    <p>If yes to all five, continue. If no, fix it now. The next sections assume mechanical completion.</p>
+    <p>If all five conditions are met, continue to the next section. If not, address the issue now; subsequent sections assume mechanical completion.</p>

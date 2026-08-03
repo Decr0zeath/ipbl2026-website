@@ -1,10 +1,10 @@
     <div class="section-marker">Read the Schematic First</div>
 
-    <p class="lede">A blank PCB has been shipped to each delegate in the kit. The board itself is laid out for you; the schematic that drove it is published below. You should be able to trace every component on the bare board to a symbol on the schematic before you reach for the soldering iron.</p>
+    <p class="lede">A blank PCB has been shipped to each delegate as part of the kit. The board layout is provided; the schematic that produced it is published below. Every component on the bare board should be traceable to a symbol on the schematic before the soldering iron is used.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Two paths through this section</div>
-      <p>Some of you will want to redesign the PCB yourselves from the schematic; that's encouraged for your own portfolio, but <strong>do not bring a self-fabricated board to Cebu</strong>. We will be working from the standardised PCB across all teams. Soldering practice happens on the supplied board.</p>
+      <p>Some delegates may wish to redesign the PCB from the schematic; this is encouraged as a portfolio exercise, but <strong>a self-fabricated board should not be brought to Cebu</strong>. All teams will work from the standardised PCB during the programme. Soldering practice takes place on the supplied board.</p>
     </div>
 
     <h2>The Schematic</h2>
@@ -18,22 +18,27 @@
 
     <h3>Section A · Power input and switch</h3>
 
-    <p>Battery enters the board at J1 (JST-XH or XT30, depending on your pack). Positive feeds through SW1 (the master power switch) and then into the buck converter's V_IN pin. The negative is tied to the board's common ground plane. Note the reverse-polarity protection: a Schottky diode (D2) sits between J1 and SW1; it will pass forward current at the cost of ~0.3 V but block damage if the battery is plugged in backwards.</p>
+    <p>Battery enters the board at J1, a 2-pin screw terminal (5 mm pitch). Positive feeds through SW1, the master power switch, and then into the buck converter's V_IN pin. The negative is tied to the board's common ground plane. SW1 is not a manufactured switch part: it is a break in the trace bridged by two single-pin headers, closed by joining a male-to-male and a male-to-female jumper wire, and opened by separating them.</p>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning · No reverse-polarity protection</div>
+      <p>This board revision has no protection diode on the battery input. Connecting BT1/BT2 backwards at J1 will feed reverse voltage straight into the buck converter with nothing to block it. Confirm polarity with a meter before every connection, and wire the screw terminal the same way every time.</p>
+    </div>
 
     <h3>Section B · Buck converter and rails</h3>
 
-    <p>The buck converter module is not a single chip on the PCB but a daughter-board (XL4015E1 module) that you solder in by its four header pins. Its output net is labelled <code>+5V</code> and feeds two physical rails:</p>
+    <p>The buck converter module is not a single chip on the PCB but a daughter-board (XL4015E1 module) that you solder in by its four header pins. A 100 µF capacitor (C1) sits at its input for bulk filtering on the battery side. Its output net is labelled <code>+5V</code> and feeds two physical rails:</p>
 
     <ul>
       <li>A low-current <code>+5V_LOGIC</code> branch with a ferrite bead (FB1) in series, feeding the Nano's 5V pin</li>
-      <li>A high-current <code>+5V_SERVO</code> branch going to the twelve servo headers, decoupled by C1 and C2 (470 µF each)</li>
+      <li>A high-current <code>+5V_SERVO</code> branch going to the twelve servo headers, decoupled by C2 and C3 (470 µF each)</li>
     </ul>
 
     <p>Both branches share ground but the ferrite bead keeps servo switching noise off the Nano's supply.</p>
 
     <h3>Section C · Microcontroller</h3>
 
-    <p>The Arduino Nano sits in a socketed female-header arrangement (no direct-soldered Nano; you want the option to swap it out). Its pin mapping is exactly as documented in <a href="#electronics">Section 05</a>. The reset pin is broken out to a small tact button (RST) for convenience. All twelve digital pins D2–D13 go to servo headers, so the status LED (D1) is instead wired straight to the Nano's 3V3 pin via R1 (330 Ω): it lights whenever the board has power and is not firmware-controlled. The user push-button (SW2) is on A0 with R2 (10 kΩ) as a pull-up to 5 V; pressing the button pulls the pin to ground.</p>
+    <p>The Arduino Nano sits in a socketed arrangement of two 15-pin female headers, one per row, so the module is not directly soldered, preserving the option to replace it. Its pin mapping is exactly as documented in <a href="#electronics">Section 05</a>. All twelve digital pins D2–D13 go to servo headers, so the status LED (D1) is instead wired straight to the Nano's 3V3 pin via R1 (330 Ω): it lights whenever the board has power and is not firmware-controlled.</p>
 
     <h3>Section D · Servo headers</h3>
 
@@ -46,7 +51,7 @@
 
     <h2>Pre-Solder Checks</h2>
 
-    <p>Before any solder touches the board, do these four things:</p>
+    <p>Before any solder touches the board, complete the following four checks:</p>
 
     <ol class="steps">
       <li>
@@ -59,11 +64,11 @@
       </li>
       <li>
         <h4>Sort components into a tray</h4>
-        <p>Resistors with resistors, capacitors with capacitors, headers with headers. Read every resistor's colour code or use the meter; the 330 Ω and the 10 kΩ are easy to confuse at a glance.</p>
+        <p>Resistors with resistors, capacitors with capacitors, headers with headers. Read the resistor's colour code or use the meter to confirm it is the 330 Ω before soldering.</p>
       </li>
       <li>
         <h4>Bend leads and pre-form parts</h4>
-        <p>For axial through-hole parts (resistors, the Schottky diode), bend the leads at 90° to match the footprint spacing. This is fussy but saves you fighting with springy leads under the iron.</p>
+        <p>For the axial through-hole resistor (R1), bend the leads at 90° to match the footprint spacing. This step requires some care but avoids difficulty with springy leads under the iron.</p>
       </li>
     </ol>
 
@@ -77,36 +82,32 @@
           <tr><th class="num">#</th><th>Component</th><th>Designator</th><th>Notes</th></tr>
         </thead>
         <tbody>
-          <tr><td class="num">1</td><td>Resistors</td><td>R1, R2</td><td>Either orientation. Trim leads after soldering, flush.</td></tr>
-          <tr><td class="num">2</td><td>Schottky diode</td><td>D2</td><td><strong>Polarity matters.</strong> Stripe matches silkscreen mark (cathode).</td></tr>
-          <tr><td class="num">3</td><td>Ceramic capacitors</td><td>C3, C4, C5</td><td>100 nF, either orientation.</td></tr>
-          <tr><td class="num">4</td><td>Ferrite bead</td><td>FB1</td><td>If present in the kit; otherwise jumper the FB1 pads with a wire link.</td></tr>
-          <tr><td class="num">5</td><td>LED</td><td>D1</td><td><strong>Polarity matters.</strong> Long lead = anode (positive). Match flat side on body to silkscreen flat.</td></tr>
-          <tr><td class="num">6</td><td>Tactile button</td><td>SW2</td><td>Will only seat one way. Don't force it.</td></tr>
-          <tr><td class="num">7</td><td>Nano headers (female)</td><td>U1 sockets</td><td>Two rows of 15-pin sockets. Tack one corner each, check alignment, then complete.</td></tr>
-          <tr><td class="num">8</td><td>Servo headers</td><td>J2–J13</td><td>Twelve 3-pin right-angle headers. <strong>Orientation matters</strong>: pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
-          <tr><td class="num">9</td><td>Slide switch</td><td>SW1</td><td>Tack one pin, confirm flat against board, complete.</td></tr>
-          <tr><td class="num">10</td><td>Electrolytic capacitors</td><td>C1, C2</td><td><strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can).</td></tr>
-          <tr><td class="num">11</td><td>Battery connector</td><td>J1</td><td>JST-XH or XT30 depending on your supplied pack.</td></tr>
-          <tr><td class="num">12</td><td>Buck converter module</td><td>U2</td><td>Solder via four header pins. Sit it flush against the board or use a standoff if the silkscreen indicates.</td></tr>
+          <tr><td class="num">1</td><td>Resistor</td><td>R1</td><td>Either orientation. Trim leads after soldering, flush.</td></tr>
+          <tr><td class="num">2</td><td>LED</td><td>D1</td><td><strong>Polarity matters.</strong> Long lead = anode (positive). Match flat side on body to silkscreen flat.</td></tr>
+          <tr><td class="num">3</td><td>Ferrite bead</td><td>FB1</td><td>Not included in this kit; jumper the FB1 pads with a short wire link instead.</td></tr>
+          <tr><td class="num">4</td><td>Nano headers (female)</td><td>U1 sockets</td><td>Two 15-pin female headers, one per row. Tack one corner each, check alignment, then complete.</td></tr>
+          <tr><td class="num">5</td><td>Servo headers</td><td>J2–J13</td><td>Twelve 3-pin right-angle headers. <strong>Orientation matters</strong>: pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
+          <tr><td class="num">6</td><td>Improvised switch headers</td><td>SW1</td><td>Two single-pin male headers. The connecting wires are not soldered; they plug in after assembly.</td></tr>
+          <tr><td class="num">7</td><td>Electrolytic capacitors</td><td>C1, C2, C3</td><td><strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can). C1 is 100 µF/16 V at the buck input; C2, C3 are 470 µF/10 V on the servo rail.</td></tr>
+          <tr><td class="num">8</td><td>Battery connector</td><td>J1</td><td>2-pin screw terminal, 5 mm pitch. Not keyed: confirm polarity against the silkscreen before wiring in the battery.</td></tr>
+          <tr><td class="num">9</td><td>Buck converter module</td><td>U2</td><td>Solder via four header pins. Sit it flush against the board or use a standoff if the silkscreen indicates.</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="callout tip">
       <div class="callout-label">Tip · Solder technique on this board</div>
-      <p>Heat the pad and the lead together for one second. Touch solder to the joint (not the iron). It should flow in, form a small concave fillet, and reflow within another second. A whole joint should take three seconds end to end. If it's taking longer, your iron is too cold or your flux is exhausted; clean the tip and re-tin.</p>
+      <p>Heat the pad and the lead together for one second. Touch solder to the joint, not the iron. It should flow in, form a small concave fillet, and set within another second. A complete joint should take roughly three seconds end to end. If it is taking longer, the iron is too cold or the flux is exhausted; clean the tip and re-tin.</p>
     </div>
 
     <h2>Polarity-Sensitive Components</h2>
 
-    <p>Four components on this board will be damaged or will damage other things if installed backwards. Verify each one with a meter <em>before</em> applying power.</p>
+    <p>The following components will be damaged, or will damage adjacent components, if installed backwards. Verify each one with a meter <em>before</em> applying power.</p>
 
     <ol>
-      <li><strong>D2 (Schottky diode).</strong> Stripe on body = cathode. Cathode goes toward the buck converter side.</li>
       <li><strong>D1 (LED).</strong> Long lead = anode (+). Flat side on plastic body = cathode (–).</li>
-      <li><strong>C1, C2 (electrolytic capacitors).</strong> Long lead = +. White stripe on the can = – side.</li>
-      <li><strong>The Nano itself.</strong> The USB port faces the edge of the PCB labelled "USB"; don't insert it 180° flipped.</li>
+      <li><strong>C1, C2, C3 (electrolytic capacitors).</strong> Long lead = +. White stripe on the can = – side.</li>
+      <li><strong>The Nano itself.</strong> The USB port faces the edge of the PCB labelled "USB"; do not insert it rotated 180°.</li>
     </ol>
 
     <h2>Post-Solder Inspection</h2>
@@ -120,11 +121,11 @@
       </li>
       <li>
         <h4>Continuity check: battery + to battery –</h4>
-        <p>With SW1 in the OFF position, probe across the battery terminals. There must be no continuity. If there is, you have a short somewhere on the input side, most often a solder bridge near J1 or D2.</p>
+        <p>With the SW1 jumper wires disconnected, probe across the battery terminals. There must be no continuity. If there is, you have a short somewhere on the input side, most often a solder bridge near J1.</p>
       </li>
       <li>
         <h4>Continuity check: +5V_LOGIC to GND</h4>
-        <p>Probe the Nano's 5 V pin (in its socket) against GND. There should be no continuity. If there is, you have a short on the 5 V rail; check around the Nano socket pins and the ceramic capacitors.</p>
+        <p>Probe the Nano's 5 V pin (in its socket) against GND. There should be no continuity. If there is, you have a short on the 5 V rail; check around the Nano socket pins and C1.</p>
       </li>
       <li>
         <h4>Continuity check: +5V_SERVO to GND</h4>
@@ -132,7 +133,7 @@
       </li>
       <li>
         <h4>Smoke test: bench supply at 7.4 V, current limit to 200 mA</h4>
-        <p>If you have access to a current-limited bench supply, this is the moment to use it. Set 7.4 V, 200 mA limit, and switch on SW1 with no Nano installed and no servos connected. The supply should show roughly 30–50 mA of current draw (the buck converter idle). The buck converter output should read 5.00 V at its output pads. If current goes to limit, switch off immediately and find the short.</p>
+        <p>If you have access to a current-limited bench supply, this is the moment to use it. Set 7.4 V, 200 mA limit, and connect the SW1 jumper wires with no Nano installed and no servos connected. The supply should show roughly 30–50 mA of current draw (the buck converter idle). The buck converter output should read 5.00 V at its output pads. If current goes to limit, disconnect the SW1 wires immediately and find the short.</p>
       </li>
       <li>
         <h4>Install the Nano, repeat smoke test</h4>
@@ -151,5 +152,5 @@
 
     <div class="callout warning">
       <div class="callout-label">Warning · Do not power on with servos connected yet</div>
-      <p>Confirm the firmware is loaded and the servos are centred (in software) <em>before</em> you connect the servo cables to the PCB. An uncentred firmware can swing servos to mechanical extremes the instant power is applied, and you'll be putting bend forces on your legs that they weren't designed for. This is covered in <a href="#firmware">Section 07</a>.</p>
+      <p>Confirm the firmware is loaded and the servos are centred (in software) <em>before</em> connecting the servo cables to the PCB. Uncentred firmware can swing servos to mechanical extremes the instant power is applied, placing bending forces on the legs that they were not designed to withstand. This is covered in <a href="#firmware">Section 07</a>.</p>
     </div>

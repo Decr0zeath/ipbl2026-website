@@ -12,28 +12,28 @@ var MANUAL_MAP = [
     num: '01',
     crumb: 'Section 01 · Foundations',
     title: 'Overview',
-    subtitle: "A short briefing on what you're building, why it's shaped the way it is, and what we expect you to know before you begin."
+    subtitle: "A concise briefing on what you are building, why it takes the form it does, and what you are expected to know before you begin."
   },
   {
     slug: 'bom',
     num: '02',
     crumb: 'Section 02 · Foundations',
     title: 'Bill of Materials & Tools',
-    subtitle: "Every component, every fastener, every tool you'll need at the bench. Read this before you order anything."
+    subtitle: 'Every component, every fastener, and every tool required at the bench.'
   },
   {
     slug: 'printing',
     num: '03',
     crumb: 'Section 03 · The Structure',
     title: '3D-Printed Parts',
-    subtitle: 'Ten STL files, one printer, roughly fourteen hours of bed time. The structure of the entire robot is plastic, and the quality of that plastic determines everything that follows.'
+    subtitle: 'Ten STL files, one printer, and roughly fourteen hours of print time.'
   },
   {
     slug: 'assembly',
     num: '04',
     crumb: 'Section 04 · The Build',
     title: 'Mechanical Assembly',
-    subtitle: 'Twelve servos, four legs, two chassis plates. With patience and a screwdriver this takes three or four hours. With impatience, it takes considerably longer.'
+    subtitle: 'Twelve servos, four legs, two chassis plates. With patience and a screwdriver, the process takes three to four hours; with impatience, considerably longer.'
   },
   {
     slug: 'electronics',
@@ -47,21 +47,21 @@ var MANUAL_MAP = [
     num: '06',
     crumb: 'Section 06 · The PCB',
     title: 'PCB Assembly',
-    subtitle: "A schematic walkthrough (so you understand what you're soldering) followed by the assembly sequence for the board itself."
+    subtitle: 'A schematic walkthrough, so that you understand what you are soldering, followed by the assembly sequence for the board itself.'
   },
   {
     slug: 'firmware',
     num: '07',
     crumb: 'Section 07 · The Software',
     title: 'Arduino Firmware',
-    subtitle: 'Toolchain setup, a walk through the base sketch, and the calibration ritual that turns twelve imperfectly-centred servos into a usable robot.'
+    subtitle: 'Toolchain setup, a walkthrough of the base sketch, and the calibration procedure that turns twelve imperfectly centred servos into a usable robot.'
   },
   {
     slug: 'testing',
     num: '08',
     crumb: 'Section 08 · The Last Mile',
     title: 'Testing & Calibration',
-    subtitle: "Bench tests, gait verification, common failure modes, and the pre-flight checklist that confirms you're ready to fly."
+    subtitle: 'Bench tests, gait verification, common failure modes, and the pre-flight checklist confirming readiness for departure.'
   }
 ];
 
@@ -71,6 +71,6 @@ var MANUAL_REFERENCE = [
     num: null,
     crumb: 'Reference',
     title: 'Credits & Acknowledgments',
-    subtitle: 'No project of this size is built alone. The work below was made possible by the open-hardware community, our partner institutions, and the host team in Cebu.'
+    subtitle: 'No project of this scale is completed alone. The work that follows was made possible by the open-hardware community, our partner institutions, and the host team in Cebu.'
   }
 ];

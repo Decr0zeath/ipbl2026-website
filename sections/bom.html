@@ -1,10 +1,10 @@
-    <div class="section-marker">What's in the Kit</div>
+    <div class="section-marker">Kit Contents</div>
 
-    <p class="lede">A package will reach each visiting team by post before the programme begins. It contains the parts that are difficult to source consistently across three countries, most notably the PCB and the matched servo set. Everything else, you supply locally.</p>
+    <p class="lede">A package will reach each visiting team by post before the programme begins. All remaining items are to be sourced locally.</p>
 
     <div class="callout note">
       <div class="callout-label">Note · Kit contents</div>
-      <p>Each delegate receives <strong>one (1) blank PCB</strong>, <strong>twelve (12) matched SG90 servos</strong> (factory-fresh, same production batch), <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of M2 hardware and JST connectors. The rest of the BOM below (including filament for printing, batteries, and consumables) is your team's responsibility.</p>
+      <p>Each delegate receives <strong>one (1) printed PCB</strong>, <strong>twelve (12) SG90 servos</strong>, <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of the complete quadruped parts and components that needs to be soldered. The remaining items in the bill of materials below, including  batteries, capacitors, buck converter, and consumables, are the responsibility of each team.</p>
     </div>
 
     <h2>Electronic Components</h2>
@@ -20,19 +20,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>U1</td><td>Arduino Nano (ATmega328P)</td><td class="num">1</td><td>Provided. USB-C variant. Old Mini-USB clones also work but not recommended.</td></tr>
-          <tr><td>U2</td><td>XL4015E1 buck converter module</td><td class="num">1</td><td>Adjustable, set to 5.0 V before installation.</td></tr>
-          <tr><td>M1–M12</td><td>SG90 micro servo, 9 g</td><td class="num">12</td><td>Provided. Plus 2 recommended spares.</td></tr>
-          <tr><td>BT1</td><td>2S Li-Ion battery pack, 7.4 V, ≥1500 mAh</td><td class="num">1</td><td>With XT30 or JST-XH connector. Balance leads required for charging.</td></tr>
-          <tr><td>SW1</td><td>SPDT slide switch, 3-pin, PCB-mount</td><td class="num">1</td><td>Master power switch.</td></tr>
-          <tr><td>SW2</td><td>Tactile push button, 6 × 6 mm</td><td class="num">1</td><td>User input / start-stop button.</td></tr>
-          <tr><td>D1</td><td>LED, 3 mm, green</td><td class="num">1</td><td>Power indicator. Forward voltage ~2 V.</td></tr>
-          <tr><td>R1</td><td>Resistor 330 Ω, 1/4 W</td><td class="num">1</td><td>LED current limiting.</td></tr>
-          <tr><td>R2</td><td>Resistor 10 kΩ, 1/4 W</td><td class="num">1</td><td>Pull-up for SW2.</td></tr>
-          <tr><td>C1, C2</td><td>Electrolytic capacitor 470 µF / 16 V</td><td class="num">2</td><td>Bulk decoupling on the servo rail.</td></tr>
-          <tr><td>C3–C5</td><td>Ceramic capacitor 100 nF</td><td class="num">3</td><td>HF decoupling near Nano and buck output.</td></tr>
-          <tr><td>J1</td><td>JST-XH 2-pin header (battery)</td><td class="num">1</td><td>Or XT30, depending on your pack.</td></tr>
-          <tr><td>J2–J13</td><td>3-pin header, 0.1" pitch (servo)</td><td class="num">12</td><td>Right-angle preferred. Match the cable orientation.</td></tr>
+          <tr><td>U1</td><td>Arduino Nano (ATmega328P)</td><td class="num">1</td><td>Provided. USB-C variant. Older Mini-USB clones also function but are not recommended.</td></tr>
+          <tr><td>U2</td><td>XL4015E1 buck converter module</td><td class="num">1</td><td>Adjustable, set to 5.0 V using a Multitester before installation.</td></tr>
+          <tr><td>U3</td><td>2S Li-ion/LiPo charger module, 4 A, USB-C input</td><td class="num">1</td><td>Off-board accessory used to charge BT1/BT2. Not part of the robot's onboard circuit.</td></tr>
+          <tr><td>M1–M12</td><td>SG90 micro servo, 9 g</td><td class="num">12</td><td>Provided.</td></tr>
+          <tr><td>BT1, BT2</td><td>18650 Li-ion cell</td><td class="num">2</td><td>Team-sourced. Held in series by BH1 for a 2S, 7.4–8.4 V pack.</td></tr>
+          <tr><td>BH1</td><td>18650 battery holder, 2-cell</td><td class="num">1</td><td>Wires BT1 and BT2 in series.</td></tr>
+          <tr><td>SW1</td><td>Improvised switch: 2× 1-pin male header + jumper wires (1× M-M, 1× M-F)</td><td class="num">1 set</td><td>Master power. In-line between buck converter and 12 servos, and the Nano; join the wires to close the circuit, separate them to open it.</td></tr>
+          <tr><td>D1</td><td>LED, 3 mm, red</td><td class="num">1</td><td>Power indicator. Forward voltage ~2 V.</td></tr>
+          <tr><td>R1</td><td>Carbon film resistor 330 Ω, 1/4 W</td><td class="num">1</td><td>LED current limiting.</td></tr>
+          <tr><td>C1</td><td>Electrolytic capacitor 100 µF / 16 V</td><td class="num">1</td><td>Bulk filtering at the buck converter's input, battery side.</td></tr>
+          <tr><td>C2, C3</td><td>Electrolytic capacitor 470 µF / 10 V</td><td class="num">2</td><td>Bulk decoupling on the 5 V servo rail.</td></tr>
+          <tr><td>J1</td><td>Screw terminal, 2-pin, 5 mm pitch</td><td class="num">1</td><td>Battery input. Not keyed: confirm polarity against the silkscreen before wiring in the battery.</td></tr>
+          <tr><td>J2–J13</td><td>Male header, 3-pin, 2.54 mm pitch</td><td class="num">12</td><td>Match the cable orientation.</td></tr>
+          <tr><td>·</td><td>Female header, 15-pin, 2.54 mm pitch</td><td class="num">2</td><td>Nano socket, one row per side.</td></tr>
           <tr><td>·</td><td>Heat-shrink tubing, assorted</td><td class="num">~30 cm</td><td>For battery lead splices.</td></tr>
           <tr><td>·</td><td>Hookup wire, 22 AWG, stranded</td><td class="num">~1 m</td><td>For any off-board jumpers.</td></tr>
         </tbody>
@@ -41,50 +42,12 @@
 
     <div class="callout warning">
       <div class="callout-label">Important · The buck converter is not optional</div>
-      <p>The 2S pack delivers 7.4 V nominal. The SG90 servos are rated 4.8–6 V and the Nano's logic rail expects a clean 5 V, so neither can take the battery directly. The XL4015E1 (U2) steps 7.4 V down to a regulated 5 V before either load sees it: skip it and wire the battery straight to the servo headers or the Nano's 5 V pin, and you will overdrive the servos past their rated voltage and put more current through the Nano's onboard regulator than it was ever sized for. Set and verify its output before it goes anywhere near the board; see <a href="#electronics">Section 04</a> for the full two-rail rationale and <a href="#pcb">Section 05</a> for the calibration procedure.</p>
+      <p>The 2S pack delivers 7.4 V nominal. The SG90 servos are rated for 4.8–6 V, and the Nano's logic rail requires a clean 5 V; neither can be supplied directly from the battery. The XL4015E1 (U2) steps 7.4 V down to a regulated 5 V before either load receives it. Omitting this step and wiring the battery directly to the servo headers or the Nano's 5 V pin will overdrive the servos past their rated voltage and pass more current through the Nano's onboard regulator than it is designed to handle. Set and verify the converter's output before it is installed on the board; see <a href="#electronics">Section 04</a> for the full two-rail rationale and <a href="#pcb">Section 05</a> for the calibration procedure.</p>
     </div>
-
-    <h2>Mechanical Hardware</h2>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Specification</th>
-            <th class="num">Qty</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Servo mounting screws</td><td>M2 × 8 mm, pan head, self-tapping</td><td class="num">48</td><td>Four per servo. Use spares from the SG90 packaging where possible.</td></tr>
-          <tr><td>Chassis screws</td><td>M2 × 6 mm, pan head, machine</td><td class="num">12</td><td>Hold the top and bottom plates together.</td></tr>
-          <tr><td>Standoffs</td><td>M2 × 10 mm, brass, F-F</td><td class="num">4</td><td>Between PCB and top chassis plate.</td></tr>
-          <tr><td>Standoff screws</td><td>M2 × 4 mm, pan head</td><td class="num">8</td><td>For PCB mounting.</td></tr>
-          <tr><td>Servo horn screws</td><td>M2 × 4 mm, supplied with SG90</td><td class="num">12</td><td>One per servo. Use only the original screws; others can strip the horn.</td></tr>
-          <tr><td>Battery strap</td><td>Velcro, 10 mm × 200 mm</td><td class="num">1</td><td>Or a 3D-printed clip; either is fine.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h2>3D-Printing Stock</h2>
-
-    <p>You will print the structural parts yourself. STL files are distributed via the project repository (link in <a href="#credits">Credits</a>). Recommended material:</p>
-
-    <ul class="spec-list">
-      <li><span class="spec-label">Material</span><span class="spec-value">PLA or PETG</span></li>
-      <li><span class="spec-label">Filament Required</span><span class="spec-value">~120 g</span></li>
-      <li><span class="spec-label">Nozzle</span><span class="spec-value">0.4 mm</span></li>
-      <li><span class="spec-label">Layer Height</span><span class="spec-value">0.20 mm</span></li>
-    </ul>
-
-    <p>Print settings are covered in detail in <a href="#printing">Section 03</a>. ABS is permitted but unnecessary; the parts are not load-bearing under heat.</p>
-
-    <hr/>
 
     <h2>Tools Required</h2>
 
-    <p>Most of these you should be able to borrow from your university's electronics or maker lab. If not, the personal-kit subset (marked ★) is worth investing in regardless; you will use it for the rest of your degree.</p>
+    <p>Most of these can be borrowed from your university's electronics or maker lab. Where that is not possible, the personal-kit subset (marked ★) is a worthwhile investment regardless.</p>
 
     <div class="table-wrap">
       <table>
@@ -99,7 +62,7 @@
           <tr><td>Soldering iron ★</td><td>Temperature-controlled, 25–60 W, fine conical or chisel tip</td><td>PCB assembly, wire splicing</td></tr>
           <tr><td>Solder ★</td><td>0.6 mm leaded (60/40) or lead-free with flux core</td><td>PCB assembly</td></tr>
           <tr><td>Flux pen</td><td>No-clean, RMA grade</td><td>Cleaner joints, particularly on the buck module pads</td></tr>
-          <tr><td>Desoldering braid / pump</td><td>2 mm braid recommended</td><td>You will make a mistake. Plan for it.</td></tr>
+          <tr><td>Desoldering braid / pump</td><td>2 mm braid recommended</td><td>Recommended for correcting soldering errors</td></tr>
           <tr><td>Wire cutters ★</td><td>Flush-cut, small</td><td>Trimming leads, cutting wire</td></tr>
           <tr><td>Wire strippers</td><td>22–26 AWG range</td><td>Battery and jumper prep</td></tr>
           <tr><td>Needle-nose pliers</td><td>Small, smooth jaw</td><td>Component placement</td></tr>
@@ -107,7 +70,7 @@
           <tr><td>Multimeter ★</td><td>Continuity buzzer, DC voltage, resistance</td><td>Verification throughout</td></tr>
           <tr><td>Screwdrivers</td><td>PH00, PH0, slotted 2 mm</td><td>Mechanical assembly</td></tr>
           <tr><td>Hex driver</td><td>1.5 mm, 2 mm</td><td>If your hardware bag includes hex screws</td></tr>
-          <tr><td>3D printer</td><td>FDM, 0.4 mm nozzle, 200 mm bed minimum</td><td>Structural parts. Lab or makerspace access is fine.</td></tr>
+          <tr><td>3D printer</td><td>FDM, 0.4 mm nozzle, 200 mm bed minimum</td><td>Structural parts. Lab or makerspace access is acceptable.</td></tr>
           <tr><td>Hobby knife</td><td>#11 blade</td><td>Cleaning up print layer scars</td></tr>
           <tr><td>Fine file or sandpaper</td><td>240–400 grit</td><td>Test-fitting servo pockets</td></tr>
           <tr><td>Heat-shrink heat source</td><td>Hot air station or lighter</td><td>Battery splices</td></tr>
@@ -117,21 +80,11 @@
       </table>
     </div>
 
-    <div class="callout warning">
-      <div class="callout-label">Warning · USB cable trap</div>
-      <p>A surprising number of USB-C cables shipped with phones in 2025–2026 are power-only and carry no data lines. If your Nano is recognised as a power sink but not as a serial device, the cable is the first thing to suspect, before drivers, before the board.</p>
-    </div>
-
     <h2>Optional but Recommended</h2>
 
     <ul>
       <li><strong>Bench power supply</strong>: current-limited, for first-power-on tests before committing the battery. See the buck converter verification step in <a href="#pcb">Section 05</a>.</li>
-      <li><strong>Helping hands / PCB holder</strong>: your soldering quality will improve immediately.</li>
-      <li><strong>Logic analyser</strong>: overkill, but useful for debugging servo PWM if things go sideways.</li>
-      <li><strong>Magnifying lamp</strong>: once you've used one, you can't go back.</li>
+      <li><strong>Helping hands / PCB holder</strong>: markedly improves soldering quality and consistency.</li>
+      <li><strong>Logic analyser</strong>: not essential, but useful for debugging servo PWM signals if problems arise.</li>
+      <li><strong>Magnifying lamp</strong>: substantially eases work with small components and fine solder joints.</li>
     </ul>
-
-    <div class="callout tip">
-      <div class="callout-label">Tip · Buy your spares early</div>
-      <p>One SG90 will fail. One M2 screw will strip. Order an extra of each before you begin, not after. Shipping a single replacement screw is more expensive than ordering ten with the original kit.</p>
-    </div>

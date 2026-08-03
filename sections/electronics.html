@@ -1,6 +1,6 @@
     <div class="section-marker">The Pin Map</div>
 
-    <p class="lede">Every servo lives on a digital pin. Every pin has a job. Memorise the channel map below; you will be referring to it through every subsequent section of this manual.</p>
+    <p class="lede">Every servo is assigned to a digital pin, and every pin has a defined function. Commit the channel map below to memory; it is referenced throughout every subsequent section of this manual.</p>
 
     <h2>Servo Channel Assignment</h2>
 
@@ -37,12 +37,12 @@
 
     <div class="callout note">
       <div class="callout-label">Note · Why these pins</div>
-      <p>The <code>Servo</code> library on the ATmega328P uses Timer1 internally and supports up to twelve software-PWM channels on any digital pin. Twelve servos means we use all of them: D2–D13, contiguous and avoiding the hardware UART pins on D0/D1 (used by USB serial). That leaves no digital pins spare, which is why the status LED and user button live on the analog pins below.</p>
+      <p>The <code>Servo</code> library on the ATmega328P uses Timer1 internally and supports up to twelve software-PWM channels on any digital pin. Twelve servos require the use of all of them: D2–D13, contiguous and avoiding the hardware UART pins on D0/D1 (used by USB serial). This leaves no digital pins available, which is why the status LED runs directly off 3V3 rather than a GPIO pin; the analog pins are left free for the on-ground programme, as listed below.</p>
     </div>
 
     <div class="callout warning">
       <div class="callout-label">Warning · D13 doubles up</div>
-      <p>D13 also drives the Nano's own built-in LED. Once BR-K is attached, that onboard LED will flicker with the knee servo's PWM signal. This is harmless but can be confusing during early bring-up if you're expecting the classic Blink behaviour on that pin.</p>
+      <p>D13 also drives the Nano's own built-in LED. Once BR-K is attached, that onboard LED will flicker in response to the knee servo's PWM signal. This is harmless, though it may cause confusion during early bring-up if the classic Blink behaviour is expected on that pin.</p>
     </div>
 
     <h2>Other Nano Pins in Use</h2>
@@ -53,9 +53,8 @@
           <tr><th>Pin</th><th>Function</th><th>Connected to</th></tr>
         </thead>
         <tbody>
-          <tr><td>3V3</td><td>Status LED</td><td>R1 → D1 (green LED), always on while the board has power. Not firmware-controlled.</td></tr>
-          <tr><td>A0</td><td>User button input</td><td>SW2 via R2 pull-up, header J14</td></tr>
-          <tr><td>A1–A3</td><td>Reserved</td><td>Headers J15–J17, left for programme use</td></tr>
+          <tr><td>3V3</td><td>Status LED</td><td>R1 → D1 (red LED), always on while the board has power. Not firmware-controlled.</td></tr>
+          <tr><td>A0–A3</td><td>Reserved</td><td>Headers J14–J17, left for programme use</td></tr>
           <tr><td>A4 (SDA)</td><td>Reserved (I²C)</td><td>Header J18, left for programme use</td></tr>
           <tr><td>A5 (SCL)</td><td>Reserved (I²C)</td><td>Header J18, left for programme use</td></tr>
           <tr><td>A6, A7</td><td>Unused</td><td>·</td></tr>
@@ -68,12 +67,12 @@
 
     <div class="callout tip">
       <div class="callout-label">Tip · The "reserved" pins are a hint</div>
-      <p>If you find yourself wondering why we left A1–A3 and A4/A5 (I²C) broken out to headers, that's part of what gets revealed in Cebu. Resist the urge to populate them with anything yet.</p>
+      <p>The reason A0–A3 and A4/A5 (I²C) are broken out to headers will become clear during the on-ground programme in Cebu. Refrain from populating them with anything at this stage.</p>
     </div>
 
     <h2>Power Architecture</h2>
 
-    <p>This is the most failure-prone area of the entire build. Read the section twice.</p>
+    <p>This is the most failure-prone area of the entire build; read this section carefully.</p>
 
     <figure>
       <div class="frame">
@@ -101,7 +100,7 @@
           <!-- Servo rail -->
           <rect x="230" y="220" width="120" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
           <text x="290" y="243" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">5V Servo Rail</text>
-          <text x="290" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">C1 · C2 bulk</text>
+          <text x="290" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">C2 · C3 bulk</text>
 
           <!-- Nano -->
           <rect x="420" y="60" width="120" height="60" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
@@ -144,24 +143,24 @@
 
     <h3>Why two rails?</h3>
 
-    <p>An SG90 idle draws ~10 mA. An SG90 stalled draws ~700 mA. Twelve servos stalling at once (say, on a hard landing where every leg tries to brace) can pull up to roughly 8 A in a transient. The Arduino Nano's onboard 5 V regulator can supply at most ~800 mA continuously and will fold under sudden loads.</p>
+    <p>An idle SG90 draws approximately 10 mA; a stalled SG90 draws approximately 700 mA. Twelve servos stalling simultaneously, for instance during a hard landing where every leg attempts to brace, can draw up to roughly 8 A in a transient. The Arduino Nano's onboard 5 V regulator can supply at most ~800 mA continuously and will fail under sudden loads of this magnitude.</p>
 
-    <p>If you tie the Nano's 5 V pin directly to the servos, you will see the classic failure: the moment servos start moving, the Nano's voltage sags, the ATmega328P browns out, and the firmware locks up. The robot then continues to hold the last commanded servo positions until you cycle power. It's a frustrating bug to diagnose.</p>
+    <p>Connecting the Nano's 5 V pin directly to the servos produces a characteristic failure: the moment the servos begin moving, the Nano's voltage sags, the ATmega328P browns out, and the firmware locks up. The robot then holds its last commanded servo positions until power is cycled. This failure mode can be difficult to diagnose without prior knowledge of its cause.</p>
 
-    <p>The XL4015E1 buck converter solves this by stepping 7.4 V down to 5 V at up to 5 A continuous, with the bulk capacitors on the servo rail absorbing transients above that. <strong>But that's not actually the fix.</strong> The fix is keeping the servo current loop physically separate from the Nano's 5 V pin. The buck output feeds both (the Nano takes its 5 V from one branch, and the servo headers take 5 V from the other), but the servo current never travels along the Nano's traces.</p>
+    <p>The XL4015E1 buck converter addresses part of this by stepping 7.4 V down to 5 V at up to 5 A continuous, with bulk capacitors on the servo rail absorbing transients above that. <strong>This alone, however, is not the complete solution.</strong> The essential design principle is keeping the servo current loop physically separate from the Nano's 5 V pin. The buck output feeds both branches (the Nano draws its 5 V from one branch, the servo headers from the other), but servo current never travels along the Nano's traces.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · Do not power servos from the Nano's 5V pin</div>
-      <p>This is the single most common failure mode in beginner servo projects. The Nano's 5 V pin is connected to its onboard regulator, which is rated for hundreds of milliamps, not amps. Brown-out, lockup, eventual destruction of the Nano are the predictable results.</p>
+      <p>This is the single most common failure mode in beginner servo projects. The Nano's 5 V pin is connected to its onboard regulator, which is rated for hundreds of milliamps, not amps. Brown-out, lockup, and eventual damage to the Nano are the predictable results.</p>
     </div>
 
     <h3>Decoupling</h3>
 
-    <p>The two 470 µF electrolytics (C1, C2) sit on the servo rail right at the input to the twelve servo headers. They absorb the inrush current when a servo suddenly starts moving and prevent the rail voltage from dropping. The three 100 nF ceramics (C3, C4, C5) handle high-frequency noise: one across the buck output, one across the Nano's 5 V/GND, one across the servo rail. Don't skip any of them.</p>
+    <p>The two 470 µF electrolytics (C2, C3) sit on the servo rail at the input to the twelve servo headers. They absorb the inrush current when a servo begins moving and prevent the rail voltage from dropping. A single 100 µF electrolytic (C1) sits at the buck converter's input, on the battery side, providing bulk filtering ahead of the regulator.</p>
 
     <h2>Servo Cable Conventions</h2>
 
-    <p>Every SG90 ships with the same three-wire cable. The colours are standardised but read them yourself to confirm:</p>
+    <p>Every SG90 ships with the same three-wire cable. The colours are standardised, but should be confirmed by inspection:</p>
 
     <div class="table-wrap">
       <table>
@@ -178,17 +177,17 @@
 
     <div class="callout warning">
       <div class="callout-label">Warning · Connector polarity</div>
-      <p>It is mechanically possible to install an SG90 connector on the header backwards. Doing so reverses the polarity into the servo, which kills the SG90 within seconds and may damage the Nano via the signal pin. <strong>Confirm the brown wire faces the PCB edge before powering on, every time</strong>, especially after re-wiring.</p>
+      <p>It is mechanically possible to install an SG90 connector on the header backwards. Doing so reverses the polarity into the servo, which destroys the SG90 within seconds and may damage the Nano via the signal pin. <strong>Confirm the brown wire faces the PCB edge before every power-on</strong>, particularly after re-wiring.</p>
     </div>
 
     <h2>Buck Converter Setup</h2>
 
-    <p>The XL4015E1 modules ship configured for whatever the last person left them at: typically 5 V, but not always. You must set them <em>before</em> installing the module on the PCB.</p>
+    <p>The XL4015E1 modules ship configured to whatever setting was last used during manufacturing or testing, typically 5 V, though not always. The output voltage must be set <em>before</em> installing the module on the PCB.</p>
 
     <ol class="steps">
       <li>
         <h4>Connect the module to a 9 V battery or bench supply</h4>
-        <p>Apply 7–9 V to the input terminals. Do not load the output yet; you're configuring it open-circuit, which is fine for setting voltage.</p>
+        <p>Apply 7–9 V to the input terminals. Do not load the output yet; the module is configured open-circuit, which is appropriate for setting voltage.</p>
       </li>
       <li>
         <h4>Measure the output voltage</h4>
@@ -196,11 +195,11 @@
       </li>
       <li>
         <h4>Adjust the trimpot until OUT = 5.00 V ± 0.05 V</h4>
-        <p>The blue trimpot rotates many turns. Turn slowly, watching the meter. Lock in 5.00 V; never above 5.20 V (some SG90 batches don't tolerate it well).</p>
+        <p>The blue trimpot rotates through many turns. Turn slowly while watching the meter. Set precisely to 5.00 V; never exceed 5.20 V, as some SG90 batches do not tolerate higher voltages well.</p>
       </li>
       <li>
         <h4>Disconnect, mark, install</h4>
-        <p>Once set, mark the trimpot with a dot of nail polish or paint so you know it's been configured. Then proceed to PCB soldering.</p>
+        <p>Once set, mark the trimpot with a dot of nail polish or paint to indicate it has been configured. Then proceed to PCB soldering.</p>
       </li>
     </ol>
 
@@ -218,4 +217,4 @@
 
     <h2>Ready for PCB?</h2>
 
-    <p>You should now understand: which pin drives which servo, why the servo rail and Nano rail are separated, how to set the buck converter, and what the connector polarity is. If any of that is fuzzy, re-read this page. The next section assumes all of it.</p>
+    <p>By this point, you should understand which pin drives which servo, why the servo rail and Nano rail are separated, how to set the buck converter, and what the connector polarity requirements are. If any of this remains unclear, re-read this section; the next section assumes complete familiarity with it.</p>

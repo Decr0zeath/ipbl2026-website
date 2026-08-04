@@ -2,6 +2,39 @@
 
     <p class="lede">Every servo is assigned to a digital pin, and every pin has a defined function. Commit the channel map below to memory; it is referenced throughout every subsequent section of this manual.</p>
 
+    <h2>Buck Converter Setup</h2>
+
+    <p>The XL4015E1 modules ship configured to whatever setting was last used during manufacturing or testing, typically 5 V, though not always. The output voltage must be set <em>before</em> installing the module on the PCB.</p>
+
+    <ol class="steps">
+      <li>
+        <h4>Connect the module to a 9 V battery or bench supply</h4>
+        <p>Apply 7–9 V to the input terminals. Do not load the output yet; the module is configured open-circuit, which is appropriate for setting voltage.</p>
+      </li>
+      <li>
+        <h4>Measure the output voltage</h4>
+        <p>Probe the OUT+ and OUT– pads with a multimeter. Note the reading.</p>
+      </li>
+      <li>
+        <h4>Adjust the trimpot until OUT = 5.00 V ± 0.05 V</h4>
+        <p>The blue trimpot rotates through many turns. Turn slowly while watching the meter. Set precisely to 5.00 V; never exceed 5.20 V, as some SG90 batches do not tolerate higher voltages well.</p>
+      </li>
+      <li>
+        <h4>Disconnect, mark, install</h4>
+        <p>Once set, mark the trimpot with a dot of nail polish or paint to indicate it has been configured. Then proceed to PCB soldering.</p>
+      </li>
+    </ol>
+
+    <div class="callout note">
+      <div class="callout-label">Note · The trimpot takes patience</div>
+      <p>This is a multi-turn trimpot, not a single-sweep dial. It can take on the order of a hundred turns in one direction before the meter reading moves at all. Do not mistake this for a broken module and stop early; keep turning slowly, in the same direction, and watch the meter rather than the trimpot.</p>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">Tip · Substituting a different buck converter</div>
+      <p>The XL4015E1 is the module specified for this build, but any buck converter may be substituted, provided it outputs a regulated 5 V and is rated for at least 5 A. Confirm both figures before installing a substitute; a module rated below 5 A will brown out under servo load even if it measures correctly on the bench with no load attached.</p>
+    </div>
+
     <h2>Servo Channel Assignment</h2>
 
     <p>The twelve servos are addressed by leg and joint. The mnemonic is <code>{FL|FR|BL|BR}-{C|H|K}</code>: front/back, left/right, coxa, hip, or knee. The PCB headers J1 through J12 follow the order below, left to right when looking at the assembled PCB from above.</p>
@@ -19,30 +52,46 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>J1</td><td>FL-C</td><td>Front-Left</td><td>Coxa</td><td>D2</td><td class="num">0</td></tr>
-          <tr><td>J2</td><td>FL-H</td><td>Front-Left</td><td>Hip</td><td>D3</td><td class="num">1</td></tr>
-          <tr><td>J3</td><td>FL-K</td><td>Front-Left</td><td>Knee</td><td>D4</td><td class="num">2</td></tr>
-          <tr><td>J4</td><td>FR-C</td><td>Front-Right</td><td>Coxa</td><td>D5</td><td class="num">3</td></tr>
-          <tr><td>J5</td><td>FR-H</td><td>Front-Right</td><td>Hip</td><td>D6</td><td class="num">4</td></tr>
-          <tr><td>J6</td><td>FR-K</td><td>Front-Right</td><td>Knee</td><td>D7</td><td class="num">5</td></tr>
-          <tr><td>J7</td><td>BL-C</td><td>Back-Left</td><td>Coxa</td><td>D8</td><td class="num">6</td></tr>
-          <tr><td>J8</td><td>BL-H</td><td>Back-Left</td><td>Hip</td><td>D9</td><td class="num">7</td></tr>
-          <tr><td>J9</td><td>BL-K</td><td>Back-Left</td><td>Knee</td><td>D10</td><td class="num">8</td></tr>
-          <tr><td>J10</td><td>BR-C</td><td>Back-Right</td><td>Coxa</td><td>D11</td><td class="num">9</td></tr>
-          <tr><td>J11</td><td>BR-H</td><td>Back-Right</td><td>Hip</td><td>D12</td><td class="num">10</td></tr>
-          <tr><td>J12</td><td>BR-K</td><td>Back-Right</td><td>Knee</td><td>D13</td><td class="num">11</td></tr>
+          <tr><td>J1</td><td>FL-C</td><td>Front-Left</td><td>Coxa</td><td>D2</td><td class="num center">0</td></tr>
+          <tr><td>J2</td><td>FL-H</td><td>Front-Left</td><td>Hip</td><td>D3</td><td class="num center">1</td></tr>
+          <tr><td>J3</td><td>FL-K</td><td>Front-Left</td><td>Knee</td><td>D4</td><td class="num center">2</td></tr>
+          <tr><td>J4</td><td>FR-C</td><td>Front-Right</td><td>Coxa</td><td>D5</td><td class="num center">3</td></tr>
+          <tr><td>J5</td><td>FR-H</td><td>Front-Right</td><td>Hip</td><td>D6</td><td class="num center">4</td></tr>
+          <tr><td>J6</td><td>FR-K</td><td>Front-Right</td><td>Knee</td><td>D7</td><td class="num center">5</td></tr>
+          <tr><td>J7</td><td>BL-C</td><td>Back-Left</td><td>Coxa</td><td>D8</td><td class="num center">6</td></tr>
+          <tr><td>J8</td><td>BL-H</td><td>Back-Left</td><td>Hip</td><td>D9</td><td class="num center">7</td></tr>
+          <tr><td>J9</td><td>BL-K</td><td>Back-Left</td><td>Knee</td><td>D10</td><td class="num center">8</td></tr>
+          <tr><td>J10</td><td>BR-C</td><td>Back-Right</td><td>Coxa</td><td>D11</td><td class="num center">9</td></tr>
+          <tr><td>J11</td><td>BR-H</td><td>Back-Right</td><td>Hip</td><td>D12</td><td class="num center">10</td></tr>
+          <tr><td>J12</td><td>BR-K</td><td>Back-Right</td><td>Knee</td><td>D13</td><td class="num center">11</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="callout note">
-      <div class="callout-label">Note · Why these pins</div>
-      <p>The <code>Servo</code> library on the ATmega328P uses Timer1 internally and supports up to twelve software-PWM channels on any digital pin. Twelve servos require the use of all of them: D2–D13, contiguous and avoiding the hardware UART pins on D0/D1 (used by USB serial). This leaves no digital pins available, which is why the status LED runs directly off 3V3 rather than a GPIO pin; the analog pins are left free for the on-ground programme, as listed below.</p>
-    </div>
+    <figure>
+      <div class="frame"><img src="assets/images/joint.png" alt="Servo connector at a joint, orange signal wire aligned to the header's printed label" /></div>
+      <figcaption><span class="fig-label">Figure 09</span>The orange signal wire always lines up with the header's printed label, regardless of the header's physical position.</figcaption>
+    </figure>
+    <figure>
+      <div class="frame"><img src="assets/images/pcb-main.png" alt="Bare PCB, top side, showing the M1-M12 servo header labels" /></div>
+      <figcaption><span class="fig-label">Figure 10</span>The M1–M12 header labels on the assembled PCB. Note that M12 is not placed in line with the rest of the row.</figcaption>
+    </figure>
+
+    <p>Connect each servo to its header by Nano pin: D2 to M1, D3 to M2, D4 to M3, and so on through D13 to M12. On every header, the orange wire, the signal wire on the servo's female connector, must line up with the header's printed label; wherever that label sits on the board, that is where the orange wire goes.</p>
 
     <div class="callout warning">
-      <div class="callout-label">Warning · D13 doubles up</div>
-      <p>D13 also drives the Nano's own built-in LED. Once BR-K is attached, that onboard LED will flicker in response to the knee servo's PWM signal. This is harmless, though it may cause confusion during early bring-up if the classic Blink behaviour is expected on that pin.</p>
+      <div class="callout-label">Warning · M12 sits out of line</div>
+      <p>M12 is not placed in sequence with the rest of the row; see Figure 10. Locate it by its printed label before connecting, rather than assuming it follows M11 in physical order.</p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-label">Note · Why these pins</div>
+      <p>The <code>Servo</code> library on the ATmega328P uses Timer1 internally and supports up to twelve software-PWM channels on any digital pin. Twelve servos require the use of all of them: D2–D13, contiguous and avoiding the hardware UART pins on D0/D1 (used by USB serial). This leaves no digital pins free for a status indicator, so the status LED is wired directly to the Nano's 3V3 pin instead, simply lighting whenever the Nano is powered rather than reflecting any digital pin state; the analog pins, A0 through A7, carry no function in this design and stay unpopulated.</p>
+    </div>
+
+    <div class="callout note">
+      <div class="callout-label">Note · D13 is solely for M12</div>
+      <p>D13 drives only M12 (BR-K); it carries no other function. The status LED is never connected to this pin, it draws from the 3V3 pin instead, so it stays lit whenever the Nano is powered and is unaffected by the knee servo's PWM signal.</p>
     </div>
 
     <h2>Other Nano Pins in Use</h2>
@@ -54,25 +103,16 @@
         </thead>
         <tbody>
           <tr><td>3V3</td><td>Status LED</td><td>R1 → D1 (red LED), always on while the board has power. Not firmware-controlled.</td></tr>
-          <tr><td>A0–A3</td><td>Reserved</td><td>Headers J13–J16, left for programme use</td></tr>
-          <tr><td>A4 (SDA)</td><td>Reserved (I²C)</td><td>Header J17, left for programme use</td></tr>
-          <tr><td>A5 (SCL)</td><td>Reserved (I²C)</td><td>Header J17, left for programme use</td></tr>
-          <tr><td>A6, A7</td><td>Unused</td><td>·</td></tr>
+          <tr><td>A0–A7</td><td>Unused</td><td>·</td></tr>
           <tr><td>VIN</td><td>·</td><td>Do not use. Power comes from the 5 V regulated rail.</td></tr>
-          <tr><td>5V</td><td>Logic rail</td><td>From buck converter output, separate from servo rail</td></tr>
           <tr><td>GND</td><td>Common ground</td><td>Tied to servo GND and battery negative</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="callout tip">
-      <div class="callout-label">Tip · The "reserved" pins are a hint</div>
-      <p>The reason A0–A3 and A4/A5 (I²C) are broken out to headers will become clear during the on-ground programme in Cebu. Refrain from populating them with anything at this stage.</p>
-    </div>
-
     <h2>Power Architecture</h2>
 
-    <p>This is the most failure-prone area of the entire build; read this section carefully.</p>
+    <p>Section 01 introduced the shape of this at a glance (Figure 02): the battery feeds the buck converter, and the buck converter's regulated 5 V feeds the PCB, which in turn distributes it onward. This section makes that distribution explicit, down to the rail, the capacitor, and the failure mode each one exists to prevent; it is the most failure-prone area of the entire build, so read it carefully.</p>
 
     <figure>
       <div class="frame">
@@ -138,16 +178,16 @@
           <text x="360" y="340" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 09 · Power architecture</text>
         </svg>
       </div>
-      <figcaption><span class="fig-label">Figure 09</span>The two-rail power design. The buck converter feeds 5 V to the Nano via a clean, low-current rail. Servos take their power directly from the regulated 5 V at the bulk capacitors. The two rails share ground but not noise.</figcaption>
+      <figcaption><span class="fig-label">Figure 11</span>The two-rail power design. The buck converter feeds 5 V to the Nano via a clean, low-current rail. Servos take their power directly from the regulated 5 V at the bulk capacitors. The two rails share ground but not noise.</figcaption>
     </figure>
 
     <h3>Why two rails?</h3>
 
-    <p>An idle SG90 draws approximately 10 mA; a stalled SG90 draws approximately 700 mA. Twelve servos stalling simultaneously, for instance during a hard landing where every leg attempts to brace, can draw up to roughly 8 A in a transient. The Arduino Nano's onboard 5 V regulator can supply at most ~800 mA continuously and will fail under sudden loads of this magnitude.</p>
+    <p>Section 01 already named the rule: servos must never draw from the Nano's onboard regulator. Here is why that rule is absolute, in numbers. An idle SG90 draws approximately 10 mA; a stalled SG90 draws approximately 700 mA. Twelve servos stalling simultaneously, for instance during a hard landing where every leg attempts to brace, can draw up to roughly 8 A in a transient (12 × 700 mA). The Arduino Nano's onboard 5 V regulator can supply at most ~800 mA continuously and will fail under sudden loads of this magnitude.</p>
 
     <p>Connecting the Nano's 5 V pin directly to the servos produces a characteristic failure: the moment the servos begin moving, the Nano's voltage sags, the ATmega328P browns out, and the firmware locks up. The robot then holds its last commanded servo positions until power is cycled. This failure mode can be difficult to diagnose without prior knowledge of its cause.</p>
 
-    <p>The XL4015E1 buck converter addresses part of this by stepping 7.4 V down to 5 V at up to 5 A continuous, with bulk capacitors on the servo rail absorbing transients above that. <strong>This alone, however, is not the complete solution.</strong> The essential design principle is keeping the servo current loop physically separate from the Nano's 5 V pin. The buck output feeds both branches (the Nano draws its 5 V from one branch, the servo headers from the other), but servo current never travels along the Nano's traces.</p>
+    <p>The XL4015E1 buck converter steps 7.4 V down to 5 V at up to 5 A continuous, with bulk capacitors on the servo rail absorbing transients above that. <strong>This alone, however, is not the complete solution.</strong> The essential design principle is keeping the servo current loop physically separate from the Nano's 5 V pin. The buck output feeds both branches (the Nano draws its 5 V from one branch, the servo headers from the other), but servo current never travels along the Nano's traces.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · Do not power servos from the Nano's 5V pin</div>
@@ -179,41 +219,6 @@
       <div class="callout-label">Warning · Connector polarity</div>
       <p>It is mechanically possible to install an SG90 connector on the header backwards. Doing so reverses the polarity into the servo, which destroys the SG90 within seconds and may damage the Nano via the signal pin. <strong>Confirm the brown wire faces the PCB edge before every power-on</strong>, particularly after re-wiring.</p>
     </div>
-
-    <h2>Buck Converter Setup</h2>
-
-    <p>The XL4015E1 modules ship configured to whatever setting was last used during manufacturing or testing, typically 5 V, though not always. The output voltage must be set <em>before</em> installing the module on the PCB.</p>
-
-    <ol class="steps">
-      <li>
-        <h4>Connect the module to a 9 V battery or bench supply</h4>
-        <p>Apply 7–9 V to the input terminals. Do not load the output yet; the module is configured open-circuit, which is appropriate for setting voltage.</p>
-      </li>
-      <li>
-        <h4>Measure the output voltage</h4>
-        <p>Probe the OUT+ and OUT– pads with a multimeter. Note the reading.</p>
-      </li>
-      <li>
-        <h4>Adjust the trimpot until OUT = 5.00 V ± 0.05 V</h4>
-        <p>The blue trimpot rotates through many turns. Turn slowly while watching the meter. Set precisely to 5.00 V; never exceed 5.20 V, as some SG90 batches do not tolerate higher voltages well.</p>
-      </li>
-      <li>
-        <h4>Disconnect, mark, install</h4>
-        <p>Once set, mark the trimpot with a dot of nail polish or paint to indicate it has been configured. Then proceed to PCB soldering.</p>
-      </li>
-    </ol>
-
-    <h2>Power Budget Estimate</h2>
-
-    <ul class="spec-list">
-      <li><span class="spec-label">Idle Current</span><span class="spec-value">~140 mA</span></li>
-      <li><span class="spec-label">Walking Avg</span><span class="spec-value">~900 mA</span></li>
-      <li><span class="spec-label">Peak Transient</span><span class="spec-value">~8 A</span></li>
-      <li><span class="spec-label">Pack 1500 mAh</span><span class="spec-value">~1.5 hr walk</span></li>
-      <li><span class="spec-label">Pack 2200 mAh</span><span class="spec-value">~2.5 hr walk</span></li>
-    </ul>
-
-    <p>A 1500 mAh 2S pack is the practical minimum. A 2200 mAh pack is what we recommend; the extra capacity costs little and the marginal weight is well within the servo torque budget.</p>
 
     <h2>Ready for PCB?</h2>
 

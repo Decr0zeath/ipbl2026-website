@@ -90,7 +90,7 @@
           <tr>
             <td>Robot powers on, Nano LED lights, but servos do not move</td>
             <td>No power to the servo rail. Buck converter not delivering 5 V to J2–J13.</td>
-            <td>Measure pin 2 of any servo header against pin 1. Should read 5 V. If it reads 0, the buck output is not reaching the headers; check FB1 / jumper and the C2/C3 area.</td>
+            <td>Measure pin 2 of any servo header against pin 1. Should read 5 V. If it reads 0, the buck output is not reaching the headers; check the C2/C3 area.</td>
           </tr>
           <tr>
             <td>One servo does not move; others fine</td>
@@ -100,7 +100,7 @@
           <tr>
             <td>All servos behave erratically when more than two move at once</td>
             <td>Brown-out: servo current is pulling the rail down below the Nano's brown-out threshold.</td>
-            <td>Re-verify that the Nano is on the <code>+5V_LOGIC</code> branch (after the ferrite bead) and that the servo rail is on <code>+5V_SERVO</code> (before the bead, with C2/C3). They share the buck output but should not share the same trace through the ferrite.</td>
+            <td>Re-verify that the Nano is on the <code>+5V_LOGIC</code> branch and that the servo rail is on <code>+5V_SERVO</code> (with C2/C3). They share the buck output but run as separate copper traces, and should not be bridged.</td>
           </tr>
           <tr>
             <td>Robot walks but curves consistently to one side</td>

@@ -2,6 +2,11 @@
 
     <p class="lede">A blank PCB has been shipped to each delegate as part of the kit. The board layout is provided; the schematic that produced it is published below. Every component on the bare board should be traceable to a symbol on the schematic before the soldering iron is used.</p>
 
+    <div class="callout warning">
+      <div class="callout-label">Warning · Not everything arrives in the box</div>
+      <p>The courier used for this shipment classifies electrolytic capacitors, lithium battery cells, and the buck converter module as restricted goods, so C1–C3, BT1/BT2, and U2 were withheld from every kit rather than risk the parcel being held at customs. These components must be sourced locally before soldering begins; see the bill of materials in <a href="#bom">Section 02</a> for exact part numbers and ratings.</p>
+    </div>
+
     <div class="callout note">
       <div class="callout-label">Note · Two paths through this section</div>
       <p>Some delegates may wish to redesign the PCB from the schematic; this is encouraged as a portfolio exercise, but <strong>a self-fabricated board should not be brought to Cebu</strong>. All teams will work from the standardised PCB during the programme. Soldering practice takes place on the supplied board.</p>
@@ -9,10 +14,10 @@
 
     <h2>The Schematic</h2>
 
-    <p>The schematic is divided into four functional sections. Read each one and confirm you can locate its components on the bare PCB. The schematic PDF is in the project repository: <code>quadruped-schematic-v1.pdf</code>.</p>
+    <p>The schematic is divided into four functional sections. Read each one and confirm you can locate its components on the bare PCB. The schematic PDF is in the project repository: <a href="assets/pdf/quadruped-schematic-v1.pdf" download><code>quadruped-schematic-v1.pdf</code></a><span class="dl-tag">↓</span>.</p>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 10 · Full schematic, four-sheet PDF, page 1 reproduced</span></div></div>
+      <div class="frame"><img src="assets/images/sch.jpg" alt="Schematic, servo and power sections" /></div>
       <figcaption><span class="fig-label">Figure 10</span>Reproduction of the canonical schematic. Refer to the PDF in the repository for full-resolution.</figcaption>
     </figure>
 
@@ -30,11 +35,11 @@
     <p>The buck converter module is not a single chip on the PCB but a daughter-board (XL4015E1 module) that you solder in by its four header pins. A 100 µF capacitor (C1) sits at its input for bulk filtering on the battery side. Its output net is labelled <code>+5V</code> and feeds two physical rails:</p>
 
     <ul>
-      <li>A low-current <code>+5V_LOGIC</code> branch with a ferrite bead (FB1) in series, feeding the Nano's 5V pin</li>
+      <li>A low-current <code>+5V_LOGIC</code> branch feeding the Nano's 5V pin directly</li>
       <li>A high-current <code>+5V_SERVO</code> branch going to the twelve servo headers, decoupled by C2 and C3 (470 µF each)</li>
     </ul>
 
-    <p>Both branches share ground but the ferrite bead keeps servo switching noise off the Nano's supply.</p>
+    <p>Both branches share ground and run as separate copper traces from the buck converter's output pad.</p>
 
     <h3>Section C · Microcontroller</h3>
 
@@ -45,8 +50,20 @@
     <p>Twelve identical 3-pin 0.1" headers in a row. Pin 1 of each connects to GND; pin 2 to <code>+5V_SERVO</code>; pin 3 to the corresponding Nano digital pin (D2 through D13). The signal traces run with a ground return alongside them on the inner layer where possible, though this is a 2-layer board, so the routing is opportunistic.</p>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 11 · Bare PCB, top side, annotated</span></div></div>
-      <figcaption><span class="fig-label">Figure 11</span>The bare board you received in the kit, top side. Component designators are silk-screened next to each footprint.</figcaption>
+      <div class="frame"><img src="assets/images/pcb-main.png" alt="Bare PCB, top side, rendered straight-on" /></div>
+      <figcaption><span class="fig-label">Figure 11</span>Top side, straight-on.</figcaption>
+    </figure>
+    <figure>
+      <div class="frame"><img src="assets/images/pcb-1.png" alt="Bare PCB, top side, angled render" /></div>
+      <figcaption><span class="fig-label">Figure 12</span>Top side, angled.</figcaption>
+    </figure>
+    <figure>
+      <div class="frame"><img src="assets/images/pcb-2.png" alt="Bare PCB, top side, angled render from the opposite corner" /></div>
+      <figcaption><span class="fig-label">Figure 13</span>Top side, opposite angle.</figcaption>
+    </figure>
+    <figure>
+      <div class="frame"><img src="assets/images/pcb-back.png" alt="PCB routing layout for the servo-to-Nano connections" /></div>
+      <figcaption><span class="fig-label">Figure 14</span>Routing layer, servo-Nano connections.</figcaption>
     </figure>
 
     <h2>Pre-Solder Checks</h2>
@@ -84,13 +101,12 @@
         <tbody>
           <tr><td class="num">1</td><td>Resistor</td><td>R1</td><td>Either orientation. Trim leads after soldering, flush.</td></tr>
           <tr><td class="num">2</td><td>LED</td><td>D1</td><td><strong>Polarity matters.</strong> Long lead = anode (positive). Match flat side on body to silkscreen flat.</td></tr>
-          <tr><td class="num">3</td><td>Ferrite bead</td><td>FB1</td><td>Not included in this kit; jumper the FB1 pads with a short wire link instead.</td></tr>
-          <tr><td class="num">4</td><td>Nano headers (female)</td><td>U1 sockets</td><td>Two 15-pin female headers, one per row. Tack one corner each, check alignment, then complete.</td></tr>
-          <tr><td class="num">5</td><td>Servo headers</td><td>J2–J13</td><td>Twelve 3-pin right-angle headers. <strong>Orientation matters</strong>: pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
-          <tr><td class="num">6</td><td>Improvised switch headers</td><td>SW1</td><td>Two single-pin male headers. The connecting wires are not soldered; they plug in after assembly.</td></tr>
-          <tr><td class="num">7</td><td>Electrolytic capacitors</td><td>C1, C2, C3</td><td><strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can). C1 is 100 µF/16 V at the buck input; C2, C3 are 470 µF/10 V on the servo rail.</td></tr>
-          <tr><td class="num">8</td><td>Battery connector</td><td>J1</td><td>2-pin screw terminal, 5 mm pitch. Not keyed: confirm polarity against the silkscreen before wiring in the battery.</td></tr>
-          <tr><td class="num">9</td><td>Buck converter module</td><td>U2</td><td>Solder via four header pins. Sit it flush against the board or use a standoff if the silkscreen indicates.</td></tr>
+          <tr><td class="num">3</td><td>Nano headers (female)</td><td>U1 sockets</td><td>Two 15-pin female headers, one per row. Tack one corner each, check alignment, then complete.</td></tr>
+          <tr><td class="num">4</td><td>Servo headers</td><td>J2–J13</td><td>Twelve 3-pin right-angle headers. <strong>Orientation matters</strong>: pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
+          <tr><td class="num">5</td><td>Improvised switch headers</td><td>SW1</td><td>Two single-pin male headers. The connecting wires are not soldered; they plug in after assembly.</td></tr>
+          <tr><td class="num">6</td><td>Electrolytic capacitors</td><td>C1, C2, C3</td><td>Not included in this kit; team-sourced (see <a href="#bom">Section 02</a>). <strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can). C1 is 100 µF/16 V at the buck input; C2, C3 are 470 µF/10 V on the servo rail.</td></tr>
+          <tr><td class="num">7</td><td>Battery connector</td><td>J1</td><td>2-pin screw terminal, 5 mm pitch. Not keyed: confirm polarity against the silkscreen before wiring in the battery.</td></tr>
+          <tr><td class="num">8</td><td>Buck converter module</td><td>U2</td><td>Not included in this kit; team-sourced (see <a href="#bom">Section 02</a>). Solder via four header pins. Sit it flush against the board or use a standoff if the silkscreen indicates.</td></tr>
         </tbody>
       </table>
     </div>
@@ -131,26 +147,9 @@
         <h4>Continuity check: +5V_SERVO to GND</h4>
         <p>Probe pin 2 of any servo header against pin 1 of the same header. There should be no continuity. If there is (most commonly because an electrolytic was installed backwards and shorted), disconnect everything and find it before applying power.</p>
       </li>
-      <li>
-        <h4>Smoke test: bench supply at 7.4 V, current limit to 200 mA</h4>
-        <p>If you have access to a current-limited bench supply, this is the moment to use it. Set 7.4 V, 200 mA limit, and connect the SW1 jumper wires with no Nano installed and no servos connected. The supply should show roughly 30–50 mA of current draw (the buck converter idle). The buck converter output should read 5.00 V at its output pads. If current goes to limit, disconnect the SW1 wires immediately and find the short.</p>
-      </li>
-      <li>
-        <h4>Install the Nano, repeat smoke test</h4>
-        <p>Power down. Insert the Nano into its socket with the USB port facing the labelled edge. Power up again; current should rise to about 80 mA (Nano idle plus buck idle). The Nano's onboard power LED should illuminate.</p>
-      </li>
     </ol>
 
     <figure>
-      <div class="frame"><div class="placeholder"><span>FIG. 12 · Completed PCB, top side</span></div></div>
-      <figcaption><span class="fig-label">Figure 12</span>What a clean, completed PCB looks like. Note the consistent orientation of the twelve servo headers along one edge.</figcaption>
+      <div class="frame"><div class="placeholder"><span>FIG. 15 · Completed PCB, top side</span></div></div>
+      <figcaption><span class="fig-label">Figure 15</span>What a clean, completed PCB looks like. Note the consistent orientation of the twelve servo headers along one edge.</figcaption>
     </figure>
-
-    <h2>Mounting the PCB to the Chassis</h2>
-
-    <p>Once smoke-tested and verified, the PCB drops into the chassis on the four standoffs you installed in <a href="#assembly">Section 04</a>. Secure with four M2 × 4 mm screws from above. Route the twelve servo cables into the chassis from the corner cutouts and onto their labelled headers (J1 through J12). The battery exits the chassis through the rear cutout to its external pack.</p>
-
-    <div class="callout warning">
-      <div class="callout-label">Warning · Do not power on with servos connected yet</div>
-      <p>Confirm the firmware is loaded and the servos are centred (in software) <em>before</em> connecting the servo cables to the PCB. Uncentred firmware can swing servos to mechanical extremes the instant power is applied, placing bending forces on the legs that they were not designed to withstand. This is covered in <a href="#firmware">Section 07</a>.</p>
-    </div>

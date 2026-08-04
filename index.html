@@ -17,7 +17,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a href="index.html" class="brand">
-      <span class="brand-mark">iP</span>
+      <img src="assets/logo/IPBL_logo.svg" alt="iPBL logo" class="brand-mark" />
       <span class="brand-text">
         <span class="brand-title">Quadruped Pre-Training Manual</span>
         <span class="brand-sub">iPBL · 2026 · USJ-R</span>
@@ -37,7 +37,7 @@
     </h1>
     <div class="hero-blurb">
       <p>Welcome, and <em>maayong adlaw</em>! Before you arrive in Cebu for iPBL 2026, the International Project-Based Learning programme, you'll build the machine that the rest of the program is built upon: a four-legged, twelve-servo robot driven by an Arduino Nano and a custom PCB.</p>
-      <p>This manual walks you through every screw, every solder joint, every line of firmware. What happens <em>after</em> the robot stands up is a story for when you get here.</p>
+      <p>This manual walks you through every screw, every solder joint, every line of firmware. What happens after the robot stands up is a story for when you get here.</p>
     </div>
   </div>
   <div class="hero-mark">
@@ -57,41 +57,41 @@
         <path d="M 22 314 L 6 314 L 6 298"/>
       </g>
       <!-- Body chassis - 2in x 3.4in true proportion -->
-      <g stroke="#0D3E20" fill="#F3ECD8" stroke-width="1.5">
+      <g stroke="#0D3E20" fill="#EDE9DD" stroke-width="1.5">
         <rect x="130" y="109" width="60" height="102" />
         <circle cx="160" cy="160" r="22" fill="#FEB104" stroke="#0D3E20" />
         <text x="160" y="165" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">N</text>
       </g>
       <!-- Legs - 4 corners, each with coxa + hip + knee segments (schematic, not 1:1) -->
       <!-- Front-left -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#F3ECD8" stroke-linejoin="round" stroke-linecap="round">
+      <g stroke="#0D3E20" stroke-width="2" fill="#EDE9DD" stroke-linejoin="round" stroke-linecap="round">
         <circle cx="130" cy="109" r="6" fill="#FEB104"/>
         <line x1="130" y1="109" x2="93" y2="72"/>
-        <circle cx="93" cy="72" r="5" fill="#F3ECD8"/>
+        <circle cx="93" cy="72" r="5" fill="#EDE9DD"/>
         <line x1="93" y1="72" x2="57" y2="56"/>
         <circle cx="57" cy="56" r="4" fill="#0D3E20"/>
       </g>
       <!-- Front-right -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#F3ECD8" stroke-linejoin="round" stroke-linecap="round">
+      <g stroke="#0D3E20" stroke-width="2" fill="#EDE9DD" stroke-linejoin="round" stroke-linecap="round">
         <circle cx="190" cy="109" r="6" fill="#FEB104"/>
         <line x1="190" y1="109" x2="227" y2="72"/>
-        <circle cx="227" cy="72" r="5" fill="#F3ECD8"/>
+        <circle cx="227" cy="72" r="5" fill="#EDE9DD"/>
         <line x1="227" y1="72" x2="263" y2="56"/>
         <circle cx="263" cy="56" r="4" fill="#0D3E20"/>
       </g>
       <!-- Back-left -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#F3ECD8" stroke-linejoin="round" stroke-linecap="round">
+      <g stroke="#0D3E20" stroke-width="2" fill="#EDE9DD" stroke-linejoin="round" stroke-linecap="round">
         <circle cx="130" cy="211" r="6" fill="#FEB104"/>
         <line x1="130" y1="211" x2="93" y2="248"/>
-        <circle cx="93" cy="248" r="5" fill="#F3ECD8"/>
+        <circle cx="93" cy="248" r="5" fill="#EDE9DD"/>
         <line x1="93" y1="248" x2="57" y2="264"/>
         <circle cx="57" cy="264" r="4" fill="#0D3E20"/>
       </g>
       <!-- Back-right -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#F3ECD8" stroke-linejoin="round" stroke-linecap="round">
+      <g stroke="#0D3E20" stroke-width="2" fill="#EDE9DD" stroke-linejoin="round" stroke-linecap="round">
         <circle cx="190" cy="211" r="6" fill="#FEB104"/>
         <line x1="190" y1="211" x2="227" y2="248"/>
-        <circle cx="227" cy="248" r="5" fill="#F3ECD8"/>
+        <circle cx="227" cy="248" r="5" fill="#EDE9DD"/>
         <line x1="227" y1="248" x2="263" y2="264"/>
         <circle cx="263" cy="264" r="4" fill="#0D3E20"/>
       </g>
@@ -146,27 +146,27 @@
 
   <ol class="outcomes">
     <li>
-      <h4>Assembly fluency</h4>
+      <h3>Assembly fluency</h3>
       <p>Mechanical assembly of the chassis and twelve-servo leg system, done once already and understood, not just followed.</p>
     </li>
     <li>
-      <h4>Soldering and wiring confidence</h4>
+      <h3>Soldering and wiring confidence</h3>
       <p>A PCB built from the published schematic, kit-soldered or hand-wired, with the pinout committed to memory.</p>
     </li>
     <li>
-      <h4>Firmware command</h4>
+      <h3>Firmware command</h3>
       <p>Comfortable uploading the base sketch, calibrating servos individually, and getting a basic gait running.</p>
     </li>
     <li>
-      <h4>Troubleshooting instinct</h4>
+      <h3>Troubleshooting instinct</h3>
       <p>A working sense of common failure points: stripped gears, cold solder joints, misaligned rocker arms, so that subsequent builds proceed more efficiently than the first.</p>
     </li>
     <li>
-      <h4>A build journal</h4>
+      <h3>A build journal</h3>
       <p>A concise personal log of issues encountered and resolved, retained for your own reference; it will not be collected or graded.</p>
     </li>
     <li>
-      <h4>A working laptop</h4>
+      <h3>A working laptop</h3>
       <p>With the Arduino IDE installed, the board package configured, and the project sketch flashed at least once. This is the one item that travels with you to Cebu.</p>
     </li>
   </ol>
@@ -182,12 +182,12 @@
 <footer class="site-footer">
   <div class="foot-inner">
     <div class="foot-about">
-      <h5>About this manual</h5>
+      <h3>About this manual</h3>
       <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos. The mechanical platform is based on the open quadruped published by Regis Hsu on PCBWay, adapted and extended for our programme.</p>
     </div>
     <div class="foot-links">
       <div>
-        <h5>Manual</h5>
+        <h3>Manual</h3>
         <ul>
           <li><a href="manual.html#overview">01 · Overview</a></li>
           <li><a href="manual.html#bom">02 · Materials</a></li>
@@ -200,7 +200,7 @@
         </ul>
       </div>
       <div>
-        <h5>Programme</h5>
+        <h3>Programme</h3>
         <ul>
           <li>iPBL · 2026 Edition</li>
           <li>Host: USJ-R, Cebu</li>

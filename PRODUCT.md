@@ -39,7 +39,7 @@ Not a general robotics tutorial: a narrow, sequenced manual scoped to exactly wh
 
 - Name: "Quadruped Pre-Training Manual," iPBL 2026, USJ-R host mark ("iP" brand mark).
 - Aesthetic: academic field-guide / vintage technical manual — figure frames with corner brackets, section markers, mono-spaced labels.
-- Palette: USJ-R green `#0D3E20` (deep) with gold `#FEB104` accent, on warm cream `#FAF6EC` paper. Gold text on paper/paper-2 backgrounds uses the darker `--gold-700` token for AA contrast; `--gold-500/600` stay for borders, backgrounds, and gold-on-dark contexts.
+- Palette: USJ-R green `#0D3E20` (deep) with gold `#FEB104` accent, on warm ivory `#F6F4EE` paper. Gold text on paper/paper-2 backgrounds uses the darker `--gold-700` token for AA contrast; `--gold-500/600` stay for borders, backgrounds, and gold-on-dark contexts.
 - Type: Plus Jakarta Sans (display/headings), Lexend (body/UI text), Crimson Pro italic (accents), IBM Plex Mono (code/technical labels — rationed, not used for general wayfinding text).
 - Voice: warm but precise field-manual tone; opens with a Cebuano greeting ("maayong adlaw"); treats the withheld Day-01 content as a deliberate, motivating mystery rather than a limitation.
 

@@ -47,6 +47,7 @@ html { scroll-behavior: smooth; color-scheme: light; background: var(--paper); }
 }
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -646,7 +647,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   margin: 0 auto;
   padding: clamp(2rem, 6vh, 4rem) var(--gutter) clamp(1.5rem, 4vh, 2.5rem);
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 2fr 1fr;
   align-items: center;
   align-content: center;
   gap: clamp(2rem, 4vw, 4rem);
@@ -662,6 +663,11 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   font-size: .72rem;
   letter-spacing: .25em;
   color: var(--gold-700);
+  z-index: 1;
+}
+.hero-copy {
+  position: relative;
+  z-index: 1;
 }
 .hero-title {
   font-size: clamp(2.4rem, 1.8vw + 1.9rem, 4.2rem);
@@ -703,14 +709,22 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .hero-blurb p { margin: 0 0 1em; }
 
-/* Spider mark SVG holder */
+/* Interactive 3D model holder - anchored in the right column, oversized so it
+   spills behind the hero copy; z-index keeps the text readable on top. */
 .hero-mark {
-  align-self: stretch;
-  display: grid;
-  place-items: center;
   position: relative;
+  z-index: 0;
+  aspect-ratio: 1 / 1;
 }
-.hero-mark svg { width: 100%; max-width: 480px; height: auto; }
+.hero-mark model-viewer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 187.5%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+}
 
 /* Home sections (non-content pages share these) */
 .home-section {
@@ -955,7 +969,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   aside.sidebar.open { display: block; }
   .nav-toggle { display: inline-block; }
   .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: clamp(1.5rem, 8vh, 3rem) var(--gutter) 2rem; }
-  .hero-mark { max-width: 300px; justify-self: start; }
+  .hero-mark { max-width: 375px; justify-self: start; }
   footer.site-footer .foot-inner { grid-template-columns: 1fr; gap: 2rem; }
   footer.site-footer .foot-links { flex-direction: column; gap: 2rem; }
   .scope-layout { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -972,8 +986,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   .brand-mark { width: 32px; height: 32px; }
   .brand-title { font-size: .95rem; }
   .brand-sub { font-size: .65rem; }
-  .hero { gap: 1.25rem; }
-  .hero-mark { max-width: 240px; }
+  .hero-mark { max-width: 300px; }
   .outcomes { grid-template-columns: 1fr; }
 }
 

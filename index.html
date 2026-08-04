@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230D3E20'/%3E%3Crect x='4' y='4' width='92' height='92' fill='none' stroke='%23FEB104' stroke-width='6'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='46' font-weight='700' fill='%23FEB104' text-anchor='middle'%3EiP%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/css/style.css" />
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
 
 <!-- ============== HERO ============== -->
 <section class="hero">
-  <div>
+  <div class="hero-copy">
     <h1 class="hero-title">
       A field manual for<br />
       assembling a <span class="accent">quadruped</span><br />
@@ -41,64 +42,7 @@
     </div>
   </div>
   <div class="hero-mark">
-    <!-- Stylized top-down quadruped diagram -->
-    <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#0D3E20" stroke-width=".3" opacity=".18"/>
-        </pattern>
-      </defs>
-      <rect width="320" height="320" fill="url(#grid)"/>
-      <!-- corner brackets -->
-      <g stroke="#C98300" stroke-width="1.5" fill="none">
-        <path d="M 6 22 L 6 6 L 22 6"/>
-        <path d="M 298 6 L 314 6 L 314 22"/>
-        <path d="M 314 298 L 314 314 L 298 314"/>
-        <path d="M 22 314 L 6 314 L 6 298"/>
-      </g>
-      <!-- Body chassis - 2in x 3.4in true proportion -->
-      <g stroke="#0D3E20" fill="#EBDFC0" stroke-width="1.5">
-        <rect x="130" y="109" width="60" height="102" />
-        <circle cx="160" cy="160" r="22" fill="#FEB104" stroke="#0D3E20" />
-        <text x="160" y="165" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">N</text>
-      </g>
-      <!-- Legs - 4 corners, each with coxa + hip + knee segments (schematic, not 1:1) -->
-      <!-- Front-left -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#EBDFC0" stroke-linejoin="round" stroke-linecap="round">
-        <circle cx="130" cy="109" r="6" fill="#FEB104"/>
-        <line x1="130" y1="109" x2="93" y2="72"/>
-        <circle cx="93" cy="72" r="5" fill="#EBDFC0"/>
-        <line x1="93" y1="72" x2="57" y2="56"/>
-        <circle cx="57" cy="56" r="4" fill="#0D3E20"/>
-      </g>
-      <!-- Front-right -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#EBDFC0" stroke-linejoin="round" stroke-linecap="round">
-        <circle cx="190" cy="109" r="6" fill="#FEB104"/>
-        <line x1="190" y1="109" x2="227" y2="72"/>
-        <circle cx="227" cy="72" r="5" fill="#EBDFC0"/>
-        <line x1="227" y1="72" x2="263" y2="56"/>
-        <circle cx="263" cy="56" r="4" fill="#0D3E20"/>
-      </g>
-      <!-- Back-left -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#EBDFC0" stroke-linejoin="round" stroke-linecap="round">
-        <circle cx="130" cy="211" r="6" fill="#FEB104"/>
-        <line x1="130" y1="211" x2="93" y2="248"/>
-        <circle cx="93" cy="248" r="5" fill="#EBDFC0"/>
-        <line x1="93" y1="248" x2="57" y2="264"/>
-        <circle cx="57" cy="264" r="4" fill="#0D3E20"/>
-      </g>
-      <!-- Back-right -->
-      <g stroke="#0D3E20" stroke-width="2" fill="#EBDFC0" stroke-linejoin="round" stroke-linecap="round">
-        <circle cx="190" cy="211" r="6" fill="#FEB104"/>
-        <line x1="190" y1="211" x2="227" y2="248"/>
-        <circle cx="227" cy="248" r="5" fill="#EBDFC0"/>
-        <line x1="227" y1="248" x2="263" y2="264"/>
-        <circle cx="263" cy="264" r="4" fill="#0D3E20"/>
-      </g>
-      <!-- Labels -->
-      <text x="160" y="22" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="2" fill="#8A5A00">FIG. 0 · TOP-DOWN PROJECTION</text>
-      <text x="160" y="305" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" letter-spacing="1.5" fill="#5E6F62">SCALE 1:n · ANNOTATED FOR REFERENCE</text>
-    </svg>
+    <model-viewer src="assets/3d/quad.glb" camera-controls disable-pan interaction-prompt="none" auto-rotate camera-orbit="100deg 75deg auto" alt="Interactive 3D model of the quadruped robot"></model-viewer>
   </div>
 </section>
 

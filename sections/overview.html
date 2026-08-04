@@ -10,123 +10,117 @@
     <h2>Nine Steps to a Working Robot</h2>
     <p>Here is the shape of the whole build, start to finish, from raw filament to a robot that walks off the bench. Each box below links to the section that covers it.</p>
 
-    <figure>
-      <div class="frame">
-        <svg viewBox="0 0 720 1250" xmlns="http://www.w3.org/2000/svg" class="diagram">
-          <defs>
-            <marker id="arrowFlow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-              <path d="M 0 0 L 8 3 L 0 6 z" fill="#0D3E20"/>
-            </marker>
-          </defs>
+    <svg viewBox="0 0 720 1235" xmlns="http://www.w3.org/2000/svg" class="diagram">
+      <defs>
+        <marker id="arrowFlow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M 0 0 L 8 3 L 0 6 z" fill="#195A33"/>
+        </marker>
+      </defs>
 
-          <!-- Start -->
-          <text x="360" y="20" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2" fill="#C98300">START · SECTIONS 01&#8211;02</text>
-          <line x1="360" y1="28" x2="360" y2="60" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- Start -->
+      <ellipse cx="360" cy="26" rx="150" ry="22" fill="#EDE9DD" stroke="#195A33" stroke-width="1"/>
+      <text x="360" y="30" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="2" fill="#8A5A00">START</text>
+      <line x1="360" y1="48" x2="360" y2="60" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 1: Print -->
-          <a href="#printing">
-            <rect x="60" y="64" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="88" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">03</text>
-            <text x="360" y="95" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Print the STL Files</text>
-            <text x="360" y="114" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Ten STL files, printed ahead of assembly</text>
-            <text x="360" y="126" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Skip this step if parts are already provided</text>
-          </a>
-          <line x1="360" y1="148" x2="360" y2="182" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 1: Print -->
+      <a href="#printing">
+        <rect x="60" y="64" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="95" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Print the STL Files</text>
+        <text x="360" y="114" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Ten STL files, printed ahead of assembly</text>
+        <text x="360" y="126" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Skip this step if parts are already provided</text>
+        <g class="diagram-hint" transform="translate(618,106)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="148" x2="360" y2="182" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 2: Assemble -->
-          <a href="#assembly">
-            <rect x="60" y="184" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="208" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">04</text>
-            <text x="360" y="215" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Assemble the Chassis</text>
-            <text x="360" y="234" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Servos become the joints;</text>
-            <text x="360" y="246" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">four legs, two chassis plates</text>
-          </a>
-          <line x1="360" y1="268" x2="360" y2="302" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 2: Assemble -->
+      <a href="#assembly">
+        <rect x="60" y="184" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="215" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Assemble the Chassis</text>
+        <text x="360" y="234" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Servos become the joints;</text>
+        <text x="360" y="246" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">four legs, two chassis plates</text>
+        <g class="diagram-hint" transform="translate(618,226)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="268" x2="360" y2="302" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 3: Solder PCB -->
-          <a href="#pcb">
-            <rect x="60" y="304" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="328" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">05</text>
-            <text x="360" y="335" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Solder the PCB</text>
-            <text x="360" y="354" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Schematic first,</text>
-            <text x="360" y="366" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">then the components</text>
-          </a>
-          <line x1="360" y1="388" x2="360" y2="422" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 3: Solder PCB -->
+      <a href="#pcb">
+        <rect x="60" y="304" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="335" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Solder the PCB</text>
+        <text x="360" y="354" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Schematic first,</text>
+        <text x="360" y="366" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">then the components</text>
+        <g class="diagram-hint" transform="translate(618,346)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="388" x2="360" y2="422" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 4: Buck converter -->
-          <a href="#electronics:buck-converter">
-            <rect x="60" y="424" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="448" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">06</text>
-            <text x="360" y="455" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Set the Buck Converter</text>
-            <text x="360" y="474" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Trim the output to 5.00 V</text>
-            <text x="360" y="486" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">before it reaches a servo</text>
-          </a>
-          <line x1="360" y1="508" x2="360" y2="542" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 4: Buck converter -->
+      <a href="#electronics:buck-converter">
+        <rect x="60" y="424" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="455" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Set the Buck Converter</text>
+        <text x="360" y="474" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Trim the output to 5.00 V</text>
+        <text x="360" y="486" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">before it reaches a servo</text>
+        <g class="diagram-hint" transform="translate(618,466)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="508" x2="360" y2="542" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 5: Wire servos to PCB -->
-          <a href="#electronics:servo-channels">
-            <rect x="60" y="544" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="568" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">06</text>
-            <text x="360" y="575" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Wire the Servos to the PCB</text>
-            <text x="360" y="594" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Match each mounted servo</text>
-            <text x="360" y="606" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">to its header, J1 through J12</text>
-          </a>
-          <line x1="360" y1="628" x2="360" y2="662" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 5: Wire servos to PCB -->
+      <a href="#electronics:servo-channels">
+        <rect x="60" y="544" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="575" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Wire the Servos to the PCB</text>
+        <text x="360" y="594" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Match each mounted servo</text>
+        <text x="360" y="606" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">to its header, J1 through J12</text>
+        <g class="diagram-hint" transform="translate(618,586)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="628" x2="360" y2="662" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 6: Upload calibration sketch -->
-          <a href="#firmware:calibration">
-            <rect x="60" y="664" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="688" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">07</text>
-            <text x="360" y="695" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Upload the Calibration Sketch</text>
-            <text x="360" y="714" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Drives all twelve servos</text>
-            <text x="360" y="726" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">to 90&#176; and holds them there</text>
-          </a>
-          <line x1="360" y1="748" x2="360" y2="782" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 6: Upload calibration sketch -->
+      <a href="#firmware:calibration">
+        <rect x="60" y="664" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="695" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Upload the Calibration Sketch</text>
+        <text x="360" y="714" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Drives all twelve servos</text>
+        <text x="360" y="726" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">to 90&#176; and holds them there</text>
+        <g class="diagram-hint" transform="translate(618,706)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="748" x2="360" y2="782" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 7: Centre joints at 90 -->
-          <a href="#firmware:calibration">
-            <rect x="60" y="784" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="808" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">07</text>
-            <text x="360" y="815" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Set Every Joint to 90&#176;</text>
-            <text x="360" y="834" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Set each limb against its horn</text>
-            <text x="360" y="846" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">while the sketch holds position</text>
-          </a>
-          <line x1="360" y1="868" x2="360" y2="902" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 7: Centre joints at 90 -->
+      <a href="#firmware:calibration">
+        <rect x="60" y="784" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="815" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Set Every Joint to 90&#176;</text>
+        <text x="360" y="834" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Set each limb against its horn</text>
+        <text x="360" y="846" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">while the sketch holds position</text>
+        <g class="diagram-hint" transform="translate(618,826)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="868" x2="360" y2="902" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 8: Fit rocker arms -->
-          <a href="#firmware:calibration">
-            <rect x="60" y="904" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="928" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">07</text>
-            <text x="360" y="935" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Fit the Rocker Arms</text>
-            <text x="360" y="954" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Screw them on neutral,</text>
-            <text x="360" y="966" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">now that the joint is centred</text>
-          </a>
-          <line x1="360" y1="988" x2="360" y2="1022" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 8: Fit rocker arms -->
+      <a href="#firmware:calibration">
+        <rect x="60" y="904" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="935" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Fit the Rocker Arms</text>
+        <text x="360" y="954" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Screw them on neutral,</text>
+        <text x="360" y="966" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">now that the joint is centred</text>
+        <g class="diagram-hint" transform="translate(618,946)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="988" x2="360" y2="1022" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- 9: Upload robot sketch -->
-          <a href="#firmware:robot-sketch">
-            <rect x="60" y="1024" width="600" height="84" class="diagram-box" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-            <text x="78" y="1048" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#C98300">07</text>
-            <text x="360" y="1055" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Upload the Robot Sketch</text>
-            <text x="360" y="1074" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Flashes the walking gait;</text>
-            <text x="360" y="1086" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">the robot runs its demo sequence</text>
-          </a>
-          <line x1="360" y1="1108" x2="360" y2="1142" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+      <!-- 9: Upload robot sketch -->
+      <a href="#firmware:robot-sketch">
+        <rect x="60" y="1024" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
+        <text x="360" y="1055" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Upload the Robot Sketch</text>
+        <text x="360" y="1074" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Flashes the walking gait;</text>
+        <text x="360" y="1086" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">the robot runs its demo sequence</text>
+        <g class="diagram-hint" transform="translate(618,1066)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="1108" x2="360" y2="1132" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-          <!-- End -->
-          <a href="#testing">
-            <rect x="60" y="1144" width="600" height="56" class="diagram-box" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
-            <rect x="60" y="1144" width="600" height="3" fill="#FEB104"/>
-            <text x="360" y="1170" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#F4ECD8">Stands. Walks. Done.</text>
-            <text x="360" y="1187" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1" fill="#FEB104">SECTION 08 &#183; READY FOR CEBU</text>
-          </a>
-
-          <!-- Caption -->
-          <text x="360" y="1232" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 02 &#183; Nine-step build sequence</text>
-        </svg>
-      </div>
-      <figcaption><span class="fig-label">Figure 02</span>Nine steps from raw filament to a robot that walks off the bench. Sections 06 and 07 each carry more than one step; every box above links through to the section that covers it.</figcaption>
-    </figure>
+      <!-- End -->
+      <a href="#testing">
+        <ellipse cx="360" cy="1176" rx="200" ry="44" fill="#0D3E20" stroke="#0D3E20" stroke-width="1"/>
+        <text x="360" y="1172" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#F4ECD8">Stands. Walks. Done.</text>
+        <text x="360" y="1191" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1" fill="#FEB104">SECTION 08 &#183; READY FOR CEBU</text>
+        <g class="diagram-hint" transform="translate(518,1176)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#FEB104" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+    </svg>
+    <p class="aside-note">Nine steps from raw filament to a robot that walks off the bench. Sections 06 and 07 each carry more than one step; every box above links through to the section that covers it.</p>
 
     <h2>System Block Diagram</h2>
     <p>Before any soldering begins, hold the entire system in mind. There are three subsystems, and you will work within each of them in turn.</p>

@@ -794,9 +794,9 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .scope-grid > div {
   padding: 1.6rem 1.6rem 1.8rem;
-  background: var(--paper-2);
+  background: var(--paper);
+  border: 1px solid var(--rule);
 }
-.scope-grid .excluded { background: transparent; }
 .scope-grid h3 {
   margin: 0 0 .8rem;
   font-size: 1rem;

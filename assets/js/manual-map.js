@@ -54,7 +54,7 @@ var MANUAL_MAP = [
     num: '07',
     crumb: 'Section 07 · The Software',
     title: 'Arduino Firmware',
-    subtitle: 'Toolchain setup, a walkthrough of the base sketch, and the calibration procedure that turns twelve imperfectly centred servos into a usable robot.'
+    subtitle: 'Toolchain setup, then the two sketches that take the robot from bare assembly to a walker: centring the servos before the rocker arms go on, then flashing the robot itself.'
   },
   {
     slug: 'testing',

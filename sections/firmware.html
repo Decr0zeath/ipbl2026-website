@@ -1,6 +1,6 @@
     <div class="section-marker">Toolchain Setup</div>
 
-    <p class="lede">The base firmware uses the Arduino IDE and the built-in <code>Servo</code> library; nothing more specialised is required. Prior experience blinking an LED on an Arduino is sufficient preparation.</p>
+    <p class="lede">The toolchain check below only needs the Arduino IDE and the built-in <code>Servo</code> library. The robot's own sketch, covered later in this section, needs one additional library, installed at that point. Prior experience blinking an LED on an Arduino is sufficient preparation.</p>
 
     <h2>Installing the IDE</h2>
 
@@ -27,230 +27,61 @@
       </li>
     </ol>
 
-    <h2>Libraries</h2>
+    <h2>Setting up the Quadruped</h2>
 
-    <p>The base firmware uses only one external library, and it ships with the IDE, no additional install needed:</p>
-
-    <ul class="spec-list">
-      <li><span class="spec-label">Servo</span><span class="spec-value">Built-in</span></li>
-      <li><span class="spec-label">Other deps</span><span class="spec-value">None</span></li>
-    </ul>
-
-    <p>If a library install dialog requests permission to fetch additional dependencies, the sketch in use is not the correct one. Confirm against <code>quadruped_base.ino</code> in the project repository.</p>
-
-    <h2>Sketch Structure</h2>
-
-    <p>The base sketch is intentionally minimal: it does exactly what the manual promises (stand, walk automatically after boot, individual servo command via serial) and nothing more. Open <code>quadruped_base.ino</code> and follow along.</p>
-
-    <h3>Servo Array Declaration</h3>
-
-    <pre data-lang="C++"><code>#include &lt;Servo.h&gt;
-
-// Twelve servos, one Servo object each, addressed by index 0..11.
-// Index matches the channel map from Section 06:
-// 0=FL-C, 1=FL-H, 2=FL-K, 3=FR-C, 4=FR-H, 5=FR-K,
-// 6=BL-C, 7=BL-H, 8=BL-K, 9=BR-C, 10=BR-H, 11=BR-K
-Servo legs[12];
-
-// Pin assignments: D2..D13
-const uint8_t SERVO_PIN[12] = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
-
-// Per-servo trim offsets, in degrees. Set during calibration.
-// Positive trim shifts the neutral angle clockwise from 90°.
-int8_t TRIM[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };</code></pre>
-
-    <p>Three points are worth noting: (1) the twelve servos are held in a flat array indexed by the channel map; (2) the pin numbers are collected into a const array so the index-to-pin mapping exists in one place; (3) the <code>TRIM</code> array is the only element edited per unit, as each robot will have slightly different values derived from calibration.</p>
-
-    <div class="callout note">
-      <div class="callout-label">Note · No LED_PIN</div>
-      <p>Earlier revisions drove the status LED from a Nano digital pin. With all twelve of D2–D13 committed to servos, the status LED (D1 on the PCB) is instead wired straight to the board's 3V3 rail through R1; it lights whenever the board has power, and the sketch never touches it.</p>
-    </div>
-
-    <h3>Setup</h3>
-
-    <pre data-lang="C++"><code>void setup() {
-  Serial.begin(115200);
-
-  // Attach all twelve servos and drive them to neutral immediately.
-  // The 600/2400 µs range covers the SG90's full mechanical sweep
-  // more reliably than the library default (544/2400).
-  for (uint8_t i = 0; i &lt; 12; i++) {
-    legs[i].attach(SERVO_PIN[i], 600, 2400);
-    legs[i].write(90 + TRIM[i]);
-  }
-
-  lastActivity = millis();
-  Serial.println(F("Quadruped ready. Send 'h' for help."));
-}</code></pre>
-
-    <p>The servos are attached one by one and written to their trimmed neutral immediately. This produces the "stand up within two seconds" behaviour described in <a href="#overview">Section 01</a>. The status LED is already lit before <code>setup()</code> runs, since it is tied directly to 3V3; the serial monitor's "Quadruped ready" line should instead be treated as the actual boot-succeeded signal.</p>
-
-    <div class="callout note">
-      <div class="callout-label">Note · Why 600 / 2400 µs?</div>
-      <p>The <code>Servo</code> library defaults to 544–2400 µs, which works for most servos but pushes the SG90 past its mechanical end-stop on the low end, producing an audible buzz. Restricting to 600–2400 keeps it within the safe range. If a particular servo batch behaves differently, adjust by 50 µs at a time and observe the result.</p>
-    </div>
-
-    <h3>Neutral Pose</h3>
-
-    <pre data-lang="C++"><code>// Drive all servos to their trimmed centre.
-// Use this between gait cycles, on stop, and at boot.
-void poseNeutral() {
-  for (uint8_t i = 0; i &lt; 12; i++) {
-    legs[i].write(90 + TRIM[i]);
-  }
-}
-
-// Write a specific angle to one servo, clamped to safe range.
-void setServo(uint8_t idx, int angle) {
-  if (idx &gt;= 12) return;
-  int a = constrain(angle + TRIM[idx], 10, 170);
-  legs[idx].write(a);
-}</code></pre>
-
-    <p>Every angle written should pass through <code>setServo()</code>, which applies the trim and clamps to the safe range. Calling <code>legs[i].write()</code> directly outside of <code>setup()</code> bypasses both the trim and the clamp, risking damage from exceeding the servo's mechanical limits.</p>
-
-    <h3>A Minimal Gait</h3>
-
-    <pre data-lang="C++"><code>// A simple "creep" gait. Lifts one leg at a time, swings it
-// forward, lowers it, then shifts weight onto the new contact.
-// Deliberately conservative given the mechanical constraints
-// of the platform.
-//
-// Each "frame" commands the hip and knee for one leg; the coxa
-// channels (0, 3, 6, 9) are left at neutral throughout this gait.
-// Indices: 0=FL-C 1=FL-H 2=FL-K 3=FR-C 4=FR-H 5=FR-K
-//          6=BL-C 7=BL-H 8=BL-K 9=BR-C 10=BR-H 11=BR-K
-
-const uint16_t FRAME_MS = 180;
-
-void stepCreepForward() {
-  // Phase 1: lift FL knee, swing FL hip forward
-  setServo(2, 60);   delay(80);
-  setServo(1, 60);   delay(FRAME_MS);
-  setServo(2, 90);   delay(80);
-
-  // Phase 2: lift BR knee, swing BR hip forward
-  setServo(11, 60);  delay(80);
-  setServo(10, 120); delay(FRAME_MS);
-  setServo(11, 90);  delay(80);
-
-  // Phase 3: lift FR knee, swing FR hip forward
-  setServo(5, 60);   delay(80);
-  setServo(4, 120);  delay(FRAME_MS);
-  setServo(5, 90);   delay(80);
-
-  // Phase 4: lift BL knee, swing BL hip forward
-  setServo(8, 60);   delay(80);
-  setServo(7, 60);   delay(FRAME_MS);
-  setServo(8, 90);   delay(80);
-
-  // Re-centre hips: body has now shifted forward
-  setServo(1, 90); setServo(4, 90);
-  setServo(7, 90); setServo(10, 90);
-  delay(FRAME_MS);
-}</code></pre>
-
-    <p>The gait above is deliberately the simplest approach that functions: one leg moves at a time, every leg returns to neutral between phases, no two legs are ever airborne simultaneously, and the coxa joints remain still throughout. The resulting motion is slow by design. Using the coxa channels for turning and lateral motion is reserved for the on-ground programme.</p>
-
-    <h3>Main Loop</h3>
-
-    <pre data-lang="C++"><code>enum State { S_IDLE, S_WALKING };
-State state = S_IDLE;
-
-const uint32_t WALK_DELAY_MS = 5000;
-uint32_t lastActivity = 0;
-
-void loop() {
-  // Serial commands for individual servo testing.
-  // Format: "s &lt;idx&gt; &lt;angle&gt;\n", e.g. "s 0 45"
-  // Any command received holds the robot at idle and resets the
-  // auto-walk countdown, so calibration is not interrupted mid-session.
-  if (Serial.available()) {
-    handleSerialCommand();
-    lastActivity = millis();
-    if (state == S_WALKING) {
-      state = S_IDLE;
-      poseNeutral();
-      Serial.println(F("State: IDLE"));
-    }
-  }
-
-  // Auto-walk: start once WALK_DELAY_MS has passed with no serial activity.
-  if (state == S_IDLE &amp;&amp; millis() - lastActivity &gt;= WALK_DELAY_MS) {
-    state = S_WALKING;
-    Serial.println(F("State: WALKING"));
-  }
-
-  // Action
-  if (state == S_WALKING) {
-    stepCreepForward();
-  }
-}</code></pre>
-
-    <p>Five seconds after boot, or five seconds after the last serial command, the state machine transitions on its own from idle to walking; there is no physical button. Sending any servo command over serial returns the robot to idle immediately and restarts the countdown, so a calibration session in progress is never interrupted by the robot walking off. The status LED remains lit throughout, since it is hardwired to 3V3; the serial monitor's <code>State:</code> line should be used for idle/walking feedback instead.</p>
-
-    <div class="callout tip">
-      <div class="callout-label">Tip · Read the serial output during early tests</div>
-      <p>Tools → Serial Monitor at 115200 baud. The sketch prints state transitions and acknowledges every <code>s</code> command. When unexpected behaviour occurs, the serial output is usually the fastest path to identifying the cause.</p>
-    </div>
-
-    <h2>Uploading to the Robot</h2>
-
-    <ol class="steps">
-      <li>
-        <h4>Open <code>quadruped_base.ino</code> in the IDE</h4>
-        <p>From the project repository: clone or download the zip. Open the <code>.ino</code> file; the IDE will offer to create a folder for it. Accept.</p>
-      </li>
-      <li>
-        <h4>Verify (Ctrl/⌘ + R)</h4>
-        <p>The compile step. Expect about ten seconds. Confirm the output reads <em>"Sketch uses X bytes of program storage..."</em> with no errors. Warnings are fine; errors must be fixed.</p>
-      </li>
-      <li>
-        <h4>Upload (Ctrl/⌘ + U)</h4>
-        <p><strong>Disconnect the battery first.</strong> The Nano is powered through USB during upload; if both sources are connected and the buck converter is uncalibrated, a voltage spike can occur on the 5 V rail when the USB enumerates. After confirming the battery is disconnected, begin the upload. The Nano's TX/RX LEDs will flicker as the bootloader receives the image.</p>
-      </li>
-      <li>
-        <h4>Confirm boot</h4>
-        <p>The status LED (D1 on the PCB, not the Nano's onboard LED) is already lit as soon as power is applied, since it is wired to 3V3; its illumination is not an indicator of successful boot. Open the serial monitor instead and confirm the "Quadruped ready" line appears.</p>
-      </li>
-    </ol>
-
-    <h2>Calibration</h2>
-
-    <p>Every SG90 has a slightly different mechanical centre. With the firmware's default <code>TRIM</code> values all at zero, the robot will likely stand with one or two legs noticeably misaligned. The calibration process derives the per-servo offset required for the robot's neutral pose to appear genuinely neutral.</p>
-
-    <ol class="steps">
-      <li>
-        <h4>Place the robot on a flat surface with all twelve servos connected</h4>
-        <p>Apply battery power. The robot should be in its neutral pose. Observe which legs are off.</p>
-      </li>
-      <li>
-        <h4>Open the serial monitor</h4>
-        <p>Type <code>s 1 90</code> and press send. Servo 1 (FL-H) should drive to its "neutral" angle. Visually compare to the intended hip position (femur horizontal, perpendicular to the body). If it is off by, for example, +10° to one side, the trim for that servo should be –10.</p>
-      </li>
-      <li>
-        <h4>Try different angles to converge on the right trim</h4>
-        <p>Send <code>s 1 85</code>, <code>s 1 95</code>, etc., until the visual angle is correct. Note that adjustment value; that is the new <code>TRIM[1]</code>.</p>
-      </li>
-      <li>
-        <h4>Repeat for all twelve servos</h4>
-        <p>Servos 0, 3, 6, 9 are coxas; they should leave the leg centred with no sideways lean. Servos 1, 4, 7, 10 are hips; they should leave femurs horizontal. Servos 2, 5, 8, 11 are knees; they should leave tibias vertical (hanging straight down).</p>
-      </li>
-      <li>
-        <h4>Update the TRIM array and re-upload</h4>
-        <p>Edit the <code>int8_t TRIM[12] = { ... };</code> line in the sketch. Save. Re-upload. Disconnect battery first (as before).</p>
-      </li>
-      <li>
-        <h4>Verify the neutral pose</h4>
-        <p>Re-apply battery. The robot should now stand symmetrically. If not, repeat the per-servo trim adjustment for any that appear off. Two iterations of calibration is typical; a third suggests a servo or print issue that warrants further investigation.</p>
-      </li>
-    </ol>
+    <p>Two sketches carry the robot from bare assembly to a walker: one that centres every servo before the rocker arms go on, and one that runs the robot itself. Both live in the project repository under <code>assets/ino_code/</code> and are linked below as downloads rather than reproduced inline, so there is no risk of a character mistyped from a printed page.</p>
 
     <div class="callout warning">
-      <div class="callout-label">Warning · Trim limits</div>
-      <p>Trim values larger than ±20° usually indicate a mechanical misalignment, typically a servo horn installed off-centre during assembly. A mechanical error should not be compensated for in firmware. Power down, remove the horn, re-centre it physically, and repeat the calibration.</p>
+      <div class="callout-label">Warning · The Nano must come off the PCB to upload</div>
+      <p>Before uploading either sketch below, lift the Nano out of its socket on the PCB. Connect it to the laptop by USB on its own, upload, then reseat it in the socket once the upload finishes. Uploading while the Nano is still seated on the PCB is the single most important thing to avoid in this section.</p>
     </div>
 
-    <h2>Scope of the Base Sketch</h2>
+    <h3>1. Calibrating the Servos to 90°</h3>
 
-    <p>The base sketch deliberately includes servo initialisation, neutral pose, one creep-forward gait that starts automatically after boot, and serial single-servo command. It deliberately excludes any sensor reading, any I²C communication, any communication beyond USB serial, and any autonomous behaviour beyond starting the gait. These exclusions are intentional and will be addressed collaboratively during the on-ground programme.</p>
+    <p>Before the servo rocker arms are attached, every servo must be driven to a known, identical position. Fitting a rocker arm to a horn that has not been centred bakes the misalignment into the mechanical assembly, where it can no longer be corrected afterward.</p>
+
+    <ol class="steps">
+      <li>
+        <h4>Download the calibration sketch</h4>
+        <p><a href="assets/ino_code/quadruped_legs_correction.ino" download><code>quadruped_legs_correction.ino</code></a><span class="dl-tag">↓</span> and open it in the Arduino IDE.</p>
+      </li>
+      <li>
+        <h4>Remove the Nano and upload</h4>
+        <p>Lift the Nano out of its PCB socket, connect it to the laptop by USB, and upload. The sketch drives all twelve servo positions to 90° and holds them there.</p>
+      </li>
+      <li>
+        <h4>Reseat the Nano, set the limbs, and fit the rocker arms</h4>
+        <p>Reseat the Nano in its PCB socket so the servos hold their position on PCB power rather than the bench USB connection. With each servo steady, set the limb to the 90° position against its horn, then fit the rocker arm so it reads neutral at that position.</p>
+        <figure>
+          <div class="frame"><img src="assets/images/90%20degree.png" alt="The assembled chassis held in hand, all four legs set to their centred 90° position with rocker arms fitted" /></div>
+          <figcaption><span class="fig-label">Figure 16</span>All four legs at 90°, symmetric and evenly splayed, rocker arms fitted at neutral.</figcaption>
+        </figure>
+      </li>
+    </ol>
+
+    <h3>2. Uploading the Robot Source Code</h3>
+
+    <p>Once assembly of the robot is complete, it is ready for the sketch that actually walks it.</p>
+
+    <ol class="steps">
+      <li>
+        <h4>Install the FlexiTimer2 library</h4>
+        <p>The robot sketch schedules its servo updates with <a href="https://github.com/wimleers/flexitimer2" target="_blank" rel="noopener">FlexiTimer2</a>, which does not ship with the Arduino IDE. Download it from that repository, install it via Sketch → Include Library → Add .ZIP Library, and see the <a href="https://playground.arduino.cc/Main/FlexiTimer2/" target="_blank" rel="noopener">Arduino Playground page</a> for further background on the library.</p>
+      </li>
+      <li>
+        <h4>Download the robot sketch</h4>
+        <p><a href="assets/ino_code/quadruped_spider_robot_code.ino" download><code>quadruped_spider_robot_code.ino</code></a><span class="dl-tag">↓</span> and open it in the Arduino IDE.</p>
+      </li>
+      <li>
+        <h4>Check the servo-to-pin assignments</h4>
+        <p>Before uploading, confirm each servo motor matches the pin number wired to its corresponding foot, against the channel map in <a href="#electronics">Section 06</a>. A mismatch here produces a leg that moves the wrong way rather than a compile error.</p>
+      </li>
+      <li>
+        <h4>Remove the Nano and upload</h4>
+        <p>As in Step 1: lift the Nano out of its PCB socket before connecting USB. Verify, then upload.</p>
+      </li>
+      <li>
+        <h4>Reseat the Nano and power up</h4>
+        <p>Once the upload finishes, reseat the Nano in its socket and reconnect the battery. The serial monitor will print initialisation messages ending in "Robot initialization Complete," after which the robot runs its demonstration sequence: stand, step forward, step back, turn left, turn right, wave, shake, and sit.</p>
+      </li>
+    </ol>

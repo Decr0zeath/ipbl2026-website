@@ -138,6 +138,7 @@ hr {
   height: 40px;
   object-fit: contain;
   flex-shrink: 0;
+  filter: invert(1);
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; }
 .brand-title {
@@ -972,8 +973,27 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   }
   aside.sidebar.open { display: block; }
   .nav-toggle { display: inline-block; }
-  .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: clamp(1.5rem, 8vh, 3rem) var(--gutter) 2rem; }
-  .hero-mark { max-width: 375px; justify-self: start; }
+  .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: clamp(1.5rem, 8vh, 3rem) var(--gutter) 2rem; overflow: hidden; }
+  /* Below the two-column breakpoint the model no longer fits beside the
+     copy at a legible size, so it drops behind the text as a faint,
+     full-bleed backdrop instead of shrinking into a small inset box. */
+  .hero-mark {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    max-width: none;
+    aspect-ratio: auto;
+    opacity: .22;
+    filter: grayscale(35%);
+    pointer-events: none;
+  }
+  .hero-mark model-viewer {
+    top: 50%;
+    left: 50%;
+    width: min(150vw, 130vh);
+    height: min(150vw, 130vh);
+    aspect-ratio: 1 / 1;
+  }
   footer.site-footer .foot-inner { grid-template-columns: 1fr; gap: 2rem; }
   footer.site-footer .foot-links { flex-direction: column; gap: 2rem; }
   .scope-layout { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -990,7 +1010,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   .brand-mark { width: 32px; height: 32px; }
   .brand-title { font-size: .95rem; }
   .brand-sub { font-size: .65rem; }
-  .hero-mark { max-width: 300px; }
+  .hero-mark model-viewer { width: min(190vw, 120vh); height: min(190vw, 120vh); }
   .outcomes { grid-template-columns: 1fr; }
 }
 

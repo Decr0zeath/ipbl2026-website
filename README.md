@@ -17,7 +17,7 @@ The site covers:
 - Section 05 PCB Assembly — schematic walkthrough and soldering sequence
 - Section 06 Electronics & Wiring — pinout, channel map, power architecture
 - Section 07 Arduino Firmware — toolchain, sketch walkthrough, calibration
-- Section 08 Testing & Calibration — reference footage of a completed unit
+- Section 08 Ready for Cebu — reference footage of a completed unit
 - Credits & Acknowledgments
 
 ## Participating universities
@@ -47,7 +47,7 @@ Serve the folder over HTTP and open `index.html` — e.g. VS Code's Live Server 
 ├── index.html              Home / welcome page (standalone)
 ├── manual.html             Manual shell — chrome + empty viewer; JS fills in everything
 ├── sections/
-│   ├── overview.html       Section 01 … testing.html Section 08, credits.html
+│   ├── overview.html       Section 01 … end.html Section 08, credits.html
 │   └── …                   Content fragments only (no <html>, no chrome) — fetched by the viewer
 ├── assets/
 │   ├── css/

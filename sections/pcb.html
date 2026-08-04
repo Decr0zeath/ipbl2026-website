@@ -2,7 +2,7 @@
 
     <figure>
       <div class="frame">
-        <model-viewer src="assets/3d/board.glb" camera-controls auto-rotate></model-viewer>
+        <model-viewer src="assets/3d/board.glb" camera-controls auto-rotate loading="lazy"></model-viewer>
       </div>
       <figcaption><span class="fig-label">3D Model</span>Interactive 3D preview of the PCB, drag to rotate.</figcaption>
     </figure>
@@ -22,7 +22,7 @@
     <p>The schematic is divided into four functional sections. Read each one and confirm you can locate its components on the bare PCB. The schematic PDF is in the project repository: <a href="assets/pdf/quadruped-schematic-v1.pdf" download><code>quadruped-schematic-v1.pdf</code></a><span class="dl-tag">↓</span>.</p>
 
     <figure>
-      <div class="frame"><img src="assets/images/sch.jpg" alt="Schematic, servo and power sections" /></div>
+      <div class="frame"><img src="assets/images/sch.webp" alt="Schematic, servo and power sections" width="885" height="955" loading="lazy" decoding="async" /></div>
       <figcaption><span class="fig-label">Figure 10</span>Reproduction of the canonical schematic. Refer to the PDF in the repository for full-resolution.</figcaption>
     </figure>
 
@@ -62,25 +62,27 @@
     <p>Twelve identical 3-pin 0.1" headers in a row. Pin 1 of each connects to GND; pin 2 to <code>+5V_SERVO</code>; pin 3 to the corresponding Nano digital pin (D2 through D13). The signal traces run with a ground return alongside them where possible, but this is a single-sided, 1-layer board with no inner layer to route it on, so the routing is opportunistic.</p>
 
     <figure>
-      <div class="frame"><img src="assets/images/pcb-main.png" alt="Bare PCB, top side, rendered straight-on" /></div>
+      <div class="frame"><img src="assets/images/pcb-main.webp" alt="Bare PCB, top side, rendered straight-on" width="1724" height="938" loading="lazy" decoding="async" /></div>
       <figcaption><span class="fig-label">Figure 11</span>Top side, straight-on.</figcaption>
     </figure>
     <figure>
-      <div class="frame"><img src="assets/images/pcb-1.png" alt="Bare PCB, top side, angled render" /></div>
+      <div class="frame"><img src="assets/images/pcb-1.webp" alt="Bare PCB, top side, angled render" width="1724" height="938" loading="lazy" decoding="async" /></div>
       <figcaption><span class="fig-label">Figure 12</span>Top side, angled.</figcaption>
     </figure>
     <figure>
-      <div class="frame"><img src="assets/images/pcb-2.png" alt="Bare PCB, top side, angled render from the opposite corner" /></div>
+      <div class="frame"><img src="assets/images/pcb-2.webp" alt="Bare PCB, top side, angled render from the opposite corner" width="1724" height="938" loading="lazy" decoding="async" /></div>
       <figcaption><span class="fig-label">Figure 13</span>Top side, opposite angle.</figcaption>
     </figure>
     <figure>
-      <div class="frame"><img src="assets/images/pcb-back.png" alt="PCB routing layout for the servo-to-Nano connections" /></div>
+      <div class="frame"><img src="assets/images/pcb-back.webp" alt="PCB routing layout for the servo-to-Nano connections" width="1724" height="938" loading="lazy" decoding="async" /></div>
       <figcaption><span class="fig-label">Figure 14</span>Routing layer, servo-Nano connections.</figcaption>
     </figure>
 
     <h2>Pre-Solder Checks</h2>
 
     <p>Before any solder touches the board, complete the following four checks:</p>
+
+    <h3>Pre-Solder Checklist</h3>
 
     <ol class="steps">
       <li>
@@ -141,6 +143,8 @@
 
     <p>Before any power is applied to a freshly assembled board, do this:</p>
 
+    <h3>Post-Solder Checklist</h3>
+
     <ol class="steps">
       <li>
         <h4>Visual inspection under good light</h4>
@@ -161,6 +165,6 @@
     </ol>
 
     <figure>
-      <div class="frame square"><img class="pos-pcb" src="assets/images/pcb_mounted.jpg" alt="Completed PCB mounted onto the assembled chassis, servo wiring still loose" /></div>
+      <div class="frame square"><img class="pos-pcb" src="assets/images/pcb_mounted.webp" alt="Completed PCB mounted onto the assembled chassis, servo wiring still loose" width="721" height="1600" loading="lazy" decoding="async" /></div>
       <figcaption><span class="fig-label">Figure 15</span>The board mounted onto the chassis, servo leads still loose and unrouted. This is what a freshly assembled PCB actually looks like mid-build.</figcaption>
     </figure>

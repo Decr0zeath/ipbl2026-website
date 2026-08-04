@@ -57,7 +57,7 @@ var MANUAL_MAP = [
     subtitle: 'Toolchain setup, then the two sketches that take the robot from bare assembly to a walker: centring the servos before the rocker arms go on, then flashing the robot itself.'
   },
   {
-    slug: 'testing',
+    slug: 'end',
     num: '08',
     crumb: 'Section 08 · The Last Mile',
     title: 'Ready for Cebu',

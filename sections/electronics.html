@@ -100,7 +100,7 @@
           <tr><td>3V3</td><td>Status LED</td><td>R1 → D1 (red LED), always on while the board has power. Not firmware-controlled.</td></tr>
           <tr><td>A0–A7</td><td>Unused</td><td>·</td></tr>
           <tr><td>VIN</td><td>·</td><td>Do not use. Power comes from the 5 V regulated rail.</td></tr>
-          <tr><td>GND</td><td>Common ground</td><td>Tied to servo GND and battery negative</td></tr>
+          <tr><td>GND</td><td>Common ground</td><td>Tied to servo GND, capacitor grounds, and the terminal block; common with the buck converter. Battery negative wires directly to the buck converter, not into this net</td></tr>
         </tbody>
       </table>
     </div>
@@ -113,8 +113,14 @@
       <div class="frame">
         <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" class="diagram">
           <defs>
-            <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-              <path d="M 0 0 L 8 3 L 0 6 z" fill="#0D3E20"/>
+            <marker id="arrGnd" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M 0 0 L 8 3 L 0 6 z" fill="#21291F"/>
+            </marker>
+            <marker id="arrPos" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M 0 0 L 8 3 L 0 6 z" fill="#B7410E"/>
+            </marker>
+            <marker id="arrSig" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M 0 0 L 8 3 L 0 6 z" fill="#C98300"/>
             </marker>
           </defs>
 
@@ -122,10 +128,6 @@
           <rect x="20" y="140" width="110" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
           <text x="75" y="165" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">BT1</text>
           <text x="75" y="183" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion · 7.4V</text>
-
-          <!-- Switch -->
-          <rect x="155" y="155" width="50" height="30" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="180" y="173" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">SW1</text>
 
           <!-- Buck -->
           <rect x="230" y="60" width="120" height="60" fill="#F3ECD8" stroke="#0D3E20" stroke-width="1.5"/>
@@ -147,34 +149,47 @@
           <text x="555" y="245" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">12 × SG90 Servos</text>
           <text x="555" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">peak ≈ 8 A combined</text>
 
-          <!-- Wires -->
-          <line x1="130" y1="170" x2="153" y2="170" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
-          <line x1="205" y1="170" x2="220" y2="170" stroke="#0D3E20" stroke-width="2"/>
-          <line x1="220" y1="170" x2="220" y2="90" stroke="#0D3E20" stroke-width="2"/>
-          <line x1="220" y1="90" x2="228" y2="90" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
-          <line x1="220" y1="170" x2="220" y2="250" stroke="#0D3E20" stroke-width="2"/>
-          <line x1="220" y1="250" x2="228" y2="250" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
-          <line x1="350" y1="90" x2="418" y2="90" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
-          <line x1="350" y1="250" x2="418" y2="250" stroke="#0D3E20" stroke-width="2" marker-end="url(#arr2)"/>
+          <!-- Wires: battery to buck, direct, no switch. Red = positive supply -->
+          <line x1="130" y1="155" x2="190" y2="155" stroke="#B7410E" stroke-width="2"/>
+          <line x1="190" y1="155" x2="190" y2="80" stroke="#B7410E" stroke-width="2"/>
+          <line x1="190" y1="80" x2="228" y2="80" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
 
-          <!-- Signal -->
-          <line x1="540" y1="120" x2="540" y2="220" stroke="#C98300" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arr2)"/>
+          <!-- Battery return: dedicated wire straight to the buck, not the common rail. Black = ground -->
+          <line x1="130" y1="185" x2="205" y2="185" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
+          <line x1="205" y1="185" x2="205" y2="105" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
+          <line x1="205" y1="105" x2="228" y2="105" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrGnd)"/>
+
+          <!-- Buck output: to Nano, and down to the servo rail. Red = positive supply -->
+          <line x1="350" y1="90" x2="418" y2="90" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="290" y1="120" x2="290" y2="220" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="350" y1="250" x2="418" y2="250" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+
+          <!-- Signal: gold = data -->
+          <line x1="540" y1="120" x2="540" y2="220" stroke="#C98300" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrSig)"/>
           <text x="552" y="170" font-family="IBM Plex Mono, monospace" font-size="8" fill="#C98300">PWM × 12</text>
 
-          <!-- Ground rail -->
-          <line x1="290" y1="280" x2="290" y2="310" stroke="#0D3E20" stroke-width="2"/>
-          <line x1="480" y1="280" x2="480" y2="310" stroke="#0D3E20" stroke-width="2"/>
-          <line x1="555" y1="280" x2="555" y2="310" stroke="#0D3E20" stroke-width="2"/>
-          <line x1="75" y1="200" x2="75" y2="310" stroke="#0D3E20" stroke-width="2"/>
-          <line x1="75" y1="310" x2="640" y2="310" stroke="#0D3E20" stroke-width="2"/>
-          <text x="640" y="307" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">GND</text>
+          <!-- Common ground rail, referenced at the buck; the battery return does not join it. Black = ground -->
+          <line x1="230" y1="115" x2="215" y2="115" stroke="#21291F" stroke-width="2"/>
+          <line x1="215" y1="115" x2="215" y2="310" stroke="#21291F" stroke-width="2"/>
+          <line x1="420" y1="115" x2="400" y2="115" stroke="#21291F" stroke-width="2"/>
+          <line x1="400" y1="115" x2="400" y2="310" stroke="#21291F" stroke-width="2"/>
+          <line x1="290" y1="280" x2="290" y2="310" stroke="#21291F" stroke-width="2"/>
+          <line x1="480" y1="280" x2="480" y2="310" stroke="#21291F" stroke-width="2"/>
+          <line x1="555" y1="280" x2="555" y2="310" stroke="#21291F" stroke-width="2"/>
+          <line x1="215" y1="310" x2="640" y2="310" stroke="#21291F" stroke-width="2"/>
+          <text x="640" y="307" font-family="IBM Plex Mono, monospace" font-size="9" fill="#21291F">GND</text>
 
           <!-- Caption -->
-          <text x="360" y="340" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 09 · Power architecture</text>
+          <text x="360" y="340" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 11 · Power architecture</text>
         </svg>
       </div>
-      <figcaption><span class="fig-label">Figure 11</span>The two-rail power design. The buck converter feeds 5 V to the Nano via a clean, low-current rail. Servos take their power directly from the regulated 5 V at the bulk capacitors. The two rails share ground but not noise.</figcaption>
+      <figcaption><span class="fig-label">Figure 11</span>The two-rail power design, with no inline switch: both battery leads wire directly to the buck converter, the return path (dashed) on its own dedicated wire. Its regulated 5 V feeds the Nano on a clean, low-current rail, and the same 5 V feeds the servos from the bulk capacitors on a separate, higher-current rail. Downstream of the buck, one common ground ties the Nano, servo rail, and capacitors together; the battery's return does not join that plane. Wire colour follows convention: red for the positive supply, black for ground, gold for the PWM signal.</figcaption>
     </figure>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning · No inline power switch</div>
+      <p>This design has no switch between the battery and the buck converter. The system powers on the instant the battery is connected. Make every other connection first, servos seated, Nano socketed, before wiring in the battery, and disconnect the battery itself to power the board down.</p>
+    </div>
 
     <h3>Why two rails?</h3>
 
@@ -192,6 +207,12 @@
     <h3>Decoupling</h3>
 
     <p>The two 470 µF electrolytics (C2, C3) sit on the servo rail at the input to the twelve servo headers. They absorb the inrush current when a servo begins moving and prevent the rail voltage from dropping. A single 100 µF electrolytic (C1) sits at the buck converter's input, on the battery side, providing bulk filtering ahead of the regulator.</p>
+
+    <h3>Grounding</h3>
+
+    <p>Every ground on the PCB, the Nano's GND pin, each servo header's pin 1, the legs of C1 through C3, and the terminal block, is tied to one common net, referenced at the buck converter. Treat it as a single plane; there is no separate "digital ground" and "servo ground" to keep apart here, only the two 5 V rails described above.</p>
+
+    <p>The battery's negative lead is the one exception. It runs on its own dedicated wire straight to the buck converter, rather than joining the common plane at some arbitrary point along the way. This keeps the return path for the battery's raw current short and singular, the same reasoning that keeps servo current off the Nano's traces, applied to the return side of the circuit instead of the supply side.</p>
 
     <h2>Servo Cable Conventions</h2>
 

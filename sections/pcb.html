@@ -1,5 +1,12 @@
     <p class="lede">A blank PCB has been shipped to each delegate as part of the kit. The board layout is provided; the schematic that produced it is published below. Every component on the bare board should be traceable to a symbol on the schematic before the soldering iron is used.</p>
 
+    <figure>
+      <div class="frame">
+        <model-viewer src="assets/3d/board.glb" camera-controls auto-rotate></model-viewer>
+      </div>
+      <figcaption><span class="fig-label">3D Model</span>Interactive 3D preview of the PCB, drag to rotate.</figcaption>
+    </figure>
+
     <div class="callout warning">
       <div class="callout-label">Warning · Not everything arrives in the box</div>
       <p>The courier used for this shipment classifies electrolytic capacitors, lithium battery cells, and the buck converter module as restricted goods, so C1–C3, BT1/BT2, and U2 were withheld from every kit rather than risk the parcel being held at customs. These components must be sourced locally before soldering begins; see the bill of materials in <a href="#bom">Section 02</a> for exact part numbers and ratings.</p>
@@ -17,6 +24,13 @@
     <figure>
       <div class="frame"><img src="assets/images/sch.jpg" alt="Schematic, servo and power sections" /></div>
       <figcaption><span class="fig-label">Figure 10</span>Reproduction of the canonical schematic. Refer to the PDF in the repository for full-resolution.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="frame">
+        <kicanvas-embed src="assets/sch/nano_IPBL_2026.kicad_sch" controls="full"></kicanvas-embed>
+      </div>
+      <figcaption><span class="fig-label">Interactive Schematic</span>Pan and zoom the live schematic. Click a symbol to highlight its net.</figcaption>
     </figure>
 
     <h3>Section A · Power input and switch</h3>

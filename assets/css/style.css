@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.15;
   letter-spacing: -0.02em;
   margin: 0 0 .5em;
-  scroll-margin-top: calc(var(--topbar-h) + 3px + 1rem);
+  scroll-margin-top: calc(var(--topbar-h) + 1rem);
 }
 h1 { font-size: clamp(2.6rem, 5.5vw, 4.6rem); font-weight: 700; }
 h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-top: 2.5em; }
@@ -110,7 +110,6 @@ hr {
 .topbar {
   background: var(--green-800);
   color: var(--paper);
-  border-bottom: 3px solid var(--gold-500);
   position: sticky;
   top: 0;
   z-index: 50;
@@ -216,7 +215,7 @@ aside.sidebar {
 }
 .sidebar ol li a::before {
   content: counter(navcount, decimal-leading-zero);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .7rem;
   color: var(--ink-mute);
   letter-spacing: .05em;
@@ -258,7 +257,7 @@ main.content {
 
 /* Viewer states (manual.html shell) */
 .view-status {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
   font-size: .85rem;
   color: var(--ink-mute);
   padding: 3rem 0;
@@ -623,16 +622,28 @@ footer.site-footer a { color: var(--gold-300); text-decoration: none; }
 footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline; }
 .colophon {
   margin: 1.25rem calc(-1 * var(--gutter)) 0;
-  padding: .6rem var(--gutter) 0;
+  padding: .9rem var(--gutter) 1rem;
   border-top: 1px solid rgba(254,177,4,.18);
   font-family: var(--font-mono);
   font-size: .66rem;
   letter-spacing: .03em;
   color: rgba(220, 231, 222, 0.75);
   display: flex;
+  align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.25rem;
+}
+.foot-partners {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.foot-partners img {
+  height: 46px;
+  width: auto;
+  max-width: 72px;
+  object-fit: contain;
 }
 
 /* ---------- Home Hero (index only) ---------- */
@@ -748,6 +759,17 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   line-height: 1.2;
 }
 .uni-card p { font-size: .92rem; margin: 0; color: inherit; }
+.uni-card.with-logo { display: flex; gap: 1rem; align-items: flex-start; }
+.uni-logo {
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.uni-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.uni-copy { min-width: 0; }
 
 .outcomes {
   display: grid;
@@ -807,7 +829,8 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .scope-grid .included h3 { color: var(--green-700); }
 .scope-grid .excluded h3 { color: var(--gold-700); }
 .scope-grid ul { margin: 0; padding-left: 1.2rem; }
-.scope-grid li { font-size: .95rem; margin-bottom: .3rem; }
+.scope-grid li { font-size: .95rem; line-height: 1.6; margin-bottom: .75rem; }
+.scope-grid li:last-child { margin-bottom: 0; }
 
 /* CTA */
 .cta-band {
@@ -934,11 +957,11 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
     /* fixed dropdown under the sticky topbar, so "Contents" is reachable
        at any scroll position instead of pushing the page down in-flow */
     position: fixed;
-    top: calc(var(--topbar-h) + 3px); /* topbar height + its bottom border */
+    top: var(--topbar-h);
     left: 0;
     right: 0;
     z-index: 40;
-    max-height: calc(100vh - var(--topbar-h) - 3px);
+    max-height: calc(100vh - var(--topbar-h));
     overflow-y: auto;
     background: var(--paper);
     border-right: 0;

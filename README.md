@@ -83,7 +83,7 @@ The frame's corner brackets and styling stay; only the inner content changes.
 ## Design
 
 - **Type:** Plus Jakarta Sans (headings/display), Lexend (body/UI), Crimson Pro italic (accents), IBM Plex Mono (code/labels)
-- **Palette:** USJ-R green `#0D3E20` + gold `#FEB104` on warm ivory paper `#F6F4EE`
+- **Palette:** USJ-R green `#0D3E20` + gold `#FEB104` on warm parchment paper `#F4ECD8`
 - **Aesthetic:** Academic field-guide / vintage technical manual
 
 ## Credits

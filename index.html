@@ -33,10 +33,10 @@
     <h1 class="hero-title">
       A field manual for<br />
       assembling a <span class="accent">quadruped</span><br />
-      from the ground up.
+      before day one in Cebu.
     </h1>
     <div class="hero-blurb">
-      <p>Welcome, and <em>maayong adlaw</em>! Before you arrive in Cebu for iPBL 2026, you'll build the machine that the rest of the program is built upon: a four-legged, twelve-servo robot driven by an Arduino Nano and a custom PCB.</p>
+      <p>Welcome, and <em>maayong adlaw</em>! Before you arrive in Cebu for iPBL 2026, the International Project-Based Learning programme, you'll build the machine that the rest of the program is built upon: a four-legged, twelve-servo robot driven by an Arduino Nano and a custom PCB.</p>
       <p>This manual walks you through every screw, every solder joint, every line of firmware. What happens <em>after</em> the robot stands up is a story for when you get here.</p>
     </div>
   </div>
@@ -104,32 +104,36 @@
 
 <!-- ============== SCOPE ============== -->
 <section class="home-section" id="scope">
-  <div class="section-marker">What This Manual Covers</div>
-  <h2>Read this <em class="em-accent">before</em> you fly to Cebu.</h2>
-  <p class="section-intro">This pre-training programme is deliberately narrow in scope. Its purpose is to give you a working understanding of what you are about to build, nothing more. Assemble the body, solder the PCB, mount and calibrate the servos, set the rocker arms, and bring the unit to a working crawl: that is the entire brief. By the time you land at MCIA, you should already know how to take a robot from parts to standing, blinking, and awaiting instructions. The more advanced material, the part you have not yet anticipated, begins on Day 01 of the on-ground programme. It remains withheld by design.</p>
-
-  <div class="scope-grid">
-    <div class="included">
-      <h3>Included in Pre-Training</h3>
-      <ul>
-        <li>Mechanical assembly of the chassis and twelve-servo leg system</li>
-        <li>Recommended 3D-print settings for every structural part</li>
-        <li>PCB schematic walkthrough and hand-soldered assembly</li>
-        <li>Servo wiring, power distribution, and pinout reference</li>
-        <li>Arduino firmware: upload, calibration, and basic gait</li>
-        <li>Bench-testing, troubleshooting, and pre-flight checklist</li>
-      </ul>
+  <div class="scope-layout">
+    <div class="scope-intro">
+      <div class="section-marker">What This Manual Covers</div>
+      <h2>Read this <em class="em-accent">before</em> you fly to Cebu.</h2>
+      <p class="section-intro">This pre-training programme is deliberately narrow in scope. Its purpose is to give you a working understanding of what you are about to build, nothing more. Assemble the body, solder the PCB, mount and calibrate the servos, set the rocker arms, and bring the unit to a working crawl: that is the entire brief. By the time you land at MCIA, you should already know how to take a robot from parts to standing, blinking, and awaiting instructions. The more advanced material, the part you have not yet anticipated, begins on Day 01 of the on-ground programme. It remains withheld by design.</p>
     </div>
-    <div class="excluded">
-      <h3>Reserved for the iPBL Programme</h3>
-      <ul>
-        <li>Vision and perception layer</li>
-        <li>Higher-level control, behaviour, and autonomy</li>
-        <li>Sensor fusion and environmental interaction</li>
-        <li>The collaborative challenge brief (revealed Day 01)</li>
-        <li>Inter-team protocol and integration tasks</li>
-      </ul>
-      <p class="aside-note">Resist the temptation to speculate; the element of discovery is a deliberate part of the programme.</p>
+
+    <div class="scope-grid">
+      <div class="included">
+        <h3>Included in Pre-Training</h3>
+        <ul>
+          <li>Mechanical assembly of the chassis and twelve-servo leg system</li>
+          <li>Recommended 3D-print settings for every structural part</li>
+          <li>PCB schematic walkthrough and hand-soldered assembly</li>
+          <li>Servo wiring, power distribution, and pinout reference</li>
+          <li>Arduino firmware: upload, calibration, and basic gait</li>
+          <li>A final stand-and-walk check against reference footage</li>
+        </ul>
+      </div>
+      <div class="excluded">
+        <h3>Reserved for the iPBL Programme</h3>
+        <ul>
+          <li>Vision and perception layer</li>
+          <li>Higher-level control, behaviour, and autonomy</li>
+          <li>Sensor fusion and environmental interaction</li>
+          <li>The collaborative challenge brief (revealed Day 01)</li>
+          <li>Inter-team protocol and integration tasks</li>
+        </ul>
+        <p class="aside-note">Resist the temptation to speculate; the element of discovery is a deliberate part of the programme.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -171,37 +175,39 @@
 <!-- ============== CTA ============== -->
 <section class="cta-band">
   <h2>Begin with the overview.</h2>
-  <p>Eight sections, two to three weekends of work, one robot that walks. Begin at the beginning, and do not skip ahead; every section assumes the one before it.</p>
+  <p>Eight sections, one robot that walks. Begin at the beginning, and do not skip ahead; every section assumes the one before it.</p>
   <a href="manual.html#overview" class="btn">Open Section 01 · Overview</a>
 </section>
 
 <footer class="site-footer">
   <div class="foot-inner">
-    <div>
+    <div class="foot-about">
       <h5>About this manual</h5>
       <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos. The mechanical platform is based on the open quadruped published by Regis Hsu on PCBWay, adapted and extended for our programme.</p>
     </div>
-    <div>
-      <h5>Manual</h5>
-      <ul>
-        <li><a href="manual.html#overview">01 · Overview</a></li>
-        <li><a href="manual.html#bom">02 · Materials</a></li>
-        <li><a href="manual.html#printing">03 · 3D-Printed Parts</a></li>
-        <li><a href="manual.html#assembly">04 · Mechanical Assembly</a></li>
-        <li><a href="manual.html#pcb">05 · PCB</a></li>
-        <li><a href="manual.html#electronics">06 · Electronics &amp; Wiring</a></li>
-        <li><a href="manual.html#firmware">07 · Firmware</a></li>
-        <li><a href="manual.html#testing">08 · Testing</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Programme</h5>
-      <ul>
-        <li>iPBL · 2026 Edition</li>
-        <li>Host: USJ-R, Cebu</li>
-        <li>Partners: STUST · OIT · SMCL</li>
-        <li><a href="manual.html#credits">Credits &amp; Acknowledgments</a></li>
-      </ul>
+    <div class="foot-links">
+      <div>
+        <h5>Manual</h5>
+        <ul>
+          <li><a href="manual.html#overview">01 · Overview</a></li>
+          <li><a href="manual.html#bom">02 · Materials</a></li>
+          <li><a href="manual.html#printing">03 · 3D-Printed Parts</a></li>
+          <li><a href="manual.html#assembly">04 · Mechanical Assembly</a></li>
+          <li><a href="manual.html#pcb">05 · PCB</a></li>
+          <li><a href="manual.html#electronics">06 · Electronics &amp; Wiring</a></li>
+          <li><a href="manual.html#firmware">07 · Firmware</a></li>
+          <li><a href="manual.html#testing">08 · Ready for Cebu</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Programme</h5>
+        <ul>
+          <li>iPBL · 2026 Edition</li>
+          <li>Host: USJ-R, Cebu</li>
+          <li>Partners: STUST · OIT · SMCL</li>
+          <li class="stack-top-sm"><a href="manual.html#credits">Credits &amp; Acknowledgments</a></li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="colophon">

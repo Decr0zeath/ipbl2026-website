@@ -30,7 +30,8 @@
   --ink-mute: #55624F;
   --rule:     #C8C0A4;
 
-  --maxw: 1280px;
+  --maxw: 1600px;
+  --measure: 70rem;      /* readable cap for main.content prose/tables/figures */
   --gutter: clamp(1.25rem, 3vw, 2.5rem);
   --topbar-h: 68px;
 
@@ -115,8 +116,6 @@ hr {
   z-index: 50;
 }
 .topbar-inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
   min-height: var(--topbar-h);
   padding: .85rem var(--gutter);
   display: flex;
@@ -175,8 +174,6 @@ hr {
 
 /* ---------- Layout: Sidebar + Content ---------- */
 .layout {
-  max-width: var(--maxw);
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 3rem;
@@ -258,6 +255,7 @@ aside.sidebar {
 /* ---------- Content ---------- */
 main.content {
   width: 100%;
+  max-width: var(--measure);
   min-width: 0;
   min-height: calc(100vh - var(--topbar-h)); /* keeps the dark footer off-screen while a section is still fetching */
 }
@@ -359,6 +357,25 @@ figure .frame video {
   object-position: 50% 37%;
   border: 1px solid var(--rule);
 }
+
+/* Square frames (assembly-sequence photos): each figure's subject sits at
+   a different point in its source photo, so crop position is set per image. */
+figure .frame.square {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+figure .frame.square img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+figure .frame.square img.pos-tibia   { object-position: 44% 50%; }
+figure .frame.square img.pos-coxa    { object-position: 56% 50%; }
+figure .frame.square img.pos-shold-1 { object-position: 60% 50%; }
+figure .frame.square img.pos-shold-2 { object-position: 58% 50%; }
+figure .frame.square img.pos-femur   { object-position: 50% 50%; }
+figure .frame.square img.pos-body    { object-position: 45% 50%; }
+figure .frame.square img.pos-limbs   { object-position: 49% 50%; }
 figure .placeholder span {
   padding: .4rem .9rem;
   text-align: center;
@@ -573,16 +590,22 @@ pre::before {
 footer.site-footer {
   background: var(--green-900);
   color: var(--green-100);
-  padding: 3rem var(--gutter) 2rem;
+  padding: 3rem var(--gutter) .5rem;
   margin-top: 5rem;
 }
 footer.site-footer .foot-inner {
   max-width: var(--maxw);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 3rem;
 }
+footer.site-footer .foot-links {
+  display: flex;
+  gap: 3rem;
+  justify-content: flex-end;
+}
+footer.site-footer .foot-about { max-width: 34rem; }
 footer.site-footer h5 {
   font-family: var(--font-sans);
   font-size: .78rem;
@@ -602,17 +625,16 @@ footer.site-footer li { margin-bottom: .35rem; }
 footer.site-footer a { color: var(--gold-300); text-decoration: none; }
 footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline; }
 .colophon {
-  max-width: var(--maxw);
-  margin: 2.5rem auto 0;
-  padding-top: 1.5rem;
+  margin: 1.25rem calc(-1 * var(--gutter)) 0;
+  padding: .6rem var(--gutter) 0;
   border-top: 1px solid rgba(254,177,4,.18);
   font-family: var(--font-mono);
-  font-size: .72rem;
+  font-size: .66rem;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: rgba(220, 231, 222, 0.75);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -740,24 +762,12 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   margin: 2rem 0 0;
   padding: 0;
   list-style: none;
-  counter-reset: outcomecount;
 }
 .outcomes li {
-  counter-increment: outcomecount;
   padding: 1.5rem 1.2rem;
   border: 1px solid var(--rule);
   background: var(--paper);
   position: relative;
-}
-.outcomes li::before {
-  content: counter(outcomecount, decimal-leading-zero);
-  position: absolute;
-  top: .8rem;
-  right: 1rem;
-  font-family: var(--font-mono);
-  font-size: .7rem;
-  letter-spacing: .12em;
-  color: var(--gold-700);
 }
 .outcomes li h4 {
   margin: 0 0 .4rem;
@@ -767,11 +777,22 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .outcomes li p { margin: 0; font-size: .92rem; color: var(--ink-soft); }
 
-.scope-grid {
+.scope-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
+  align-items: start;
   margin-top: 2rem;
+}
+.scope-intro {
+  position: sticky;
+  top: 90px;
+}
+.scope-intro h2 { margin-top: 0; }
+.scope-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
 }
 .scope-grid > div {
   padding: 1.6rem 1.6rem 1.8rem;
@@ -849,6 +870,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .signoff { font-style: italic; color: var(--ink-soft); text-align: center; font-size: 1.1rem; }
 .stack-top { margin-top: 1.5rem; }
 .stack-bottom { margin-bottom: 1.5rem; }
+.stack-top-sm { margin-top: .75rem; }
 .dl-tag { color: var(--gold-700); margin-left: .35rem; }
 
 /* ---------- Page header (interior pages) ---------- */
@@ -937,7 +959,10 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   .hero { grid-template-columns: 1fr; gap: 1.5rem; padding: clamp(1.5rem, 8vh, 3rem) var(--gutter) 2rem; }
   .hero-mark { max-width: 300px; justify-self: start; }
   footer.site-footer .foot-inner { grid-template-columns: 1fr; gap: 2rem; }
-  .scope-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  footer.site-footer .foot-links { flex-direction: column; gap: 2rem; }
+  .scope-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  .scope-intro { position: static; }
+  .scope-grid { gap: 1.5rem; }
   .outcomes { grid-template-columns: repeat(2, 1fr); }
   body { font-size: 17px; }
 }

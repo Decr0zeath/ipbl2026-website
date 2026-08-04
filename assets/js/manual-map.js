@@ -60,7 +60,7 @@ var MANUAL_MAP = [
     slug: 'testing',
     num: '08',
     crumb: 'Section 08 · The Last Mile',
-    title: 'Testing & Calibration',
+    title: 'Ready for Cebu',
     subtitle: 'Reference footage of a completed unit, and the one bar to clear before departure: a robot that stands and crawls.'
   }
 ];

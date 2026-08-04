@@ -21,7 +21,7 @@ Not a general robotics tutorial: a narrow, sequenced manual scoped to exactly wh
 ## Operating Context
 
 - **Dual-mode use (confirmed with user):** read standalone as self-serve pre-training before any instructor contact, *and* used as a companion/reference during in-person iPBL sessions. Both must work — don't assume clarification is always available in person.
-- Delegates work independently, likely at home or in a dorm/lab, over roughly two to three weekends, following the section order (Overview → BOM → Printing → Assembly → Electronics → PCB → Firmware → Testing).
+- Delegates work independently, likely at home or in a dorm/lab, following the section order (Overview → BOM → Printing → Assembly → Electronics → PCB → Firmware → Testing).
 - Physical, hands-on workflow alongside the screen: soldering, 3D printing, servo wiring — the manual is consulted step-by-step while hands are on hardware.
 - Delegates are expected to arrive with a build journal, spare parts, and a laptop with Arduino IDE pre-configured.
 - Static site deployed via GitHub Pages, no server-side logic.

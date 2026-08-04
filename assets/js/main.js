@@ -100,33 +100,41 @@
       }
       if (idx === last) {
         var ref = MANUAL_REFERENCE[0];
-        html += pagLink('#' + ref.slug, 'Reference', ref.title, 'next');
+        html += pagLink('#' + ref.slug, 'Reference →', ref.title, 'next');
       } else {
         var n = MANUAL_MAP[idx + 1];
-        html += pagLink('#' + n.slug, 'Next · Section ' + n.num, n.title, 'next');
+        html += pagLink('#' + n.slug, 'Next · Section ' + n.num + ' →', n.title, 'next');
       }
     }
     pagination.innerHTML = html;
   }
 
-  function inject(entry, html) {
+  function inject(entry, html, anchor) {
     renderSidebar(entry.slug);
     renderHead(entry);
     view.innerHTML = html;
     renderPagination(entry);
     closeSidebar();
-    window.scrollTo({ top: 0 });
+    var target = anchor && document.getElementById(anchor);
+    if (target) {
+      target.scrollIntoView();
+    } else {
+      window.scrollTo({ top: 0 });
+    }
   }
 
-  function loadSection(slug) {
+  function loadSection(hash) {
+    var sep = hash.indexOf(':');
+    var slug = sep === -1 ? hash : hash.slice(0, sep);
+    var anchor = sep === -1 ? null : hash.slice(sep + 1);
     var entry = findEntry(slug) || MANUAL_MAP[0];
     var file = 'sections/' + entry.slug + '.html';
 
-    if (history.replaceState) history.replaceState(null, '', '#' + entry.slug);
+    if (history.replaceState) history.replaceState(null, '', '#' + entry.slug + (anchor ? ':' + anchor : ''));
     document.documentElement.scrollTop = document.body.scrollTop = 0;
 
     if (cache[file]) {
-      inject(entry, cache[file]);
+      inject(entry, cache[file], anchor);
       return;
     }
 
@@ -139,7 +147,7 @@
       })
       .then(function (html) {
         cache[file] = html;
-        inject(entry, html);
+        inject(entry, html, anchor);
       })
       .catch(function (err) {
         view.innerHTML = '<p class="view-status">Could not load this section (' + esc(err.message) + '). ' +

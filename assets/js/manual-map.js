@@ -26,7 +26,7 @@ var MANUAL_MAP = [
     num: '03',
     crumb: 'Section 03 · The Structure',
     title: '3D-Printed Parts',
-    subtitle: 'Ten STL files, one printer, and roughly fourteen hours of print time.'
+    subtitle: 'Ten STL files and one printer, from raw filament to a complete set of parts.'
   },
   {
     slug: 'assembly',
@@ -61,7 +61,7 @@ var MANUAL_MAP = [
     num: '08',
     crumb: 'Section 08 · The Last Mile',
     title: 'Testing & Calibration',
-    subtitle: 'Bench tests, gait verification, common failure modes, and the pre-flight checklist confirming readiness for departure.'
+    subtitle: 'Reference footage of a completed unit, and the one bar to clear before departure: a robot that stands and crawls.'
   }
 ];
 

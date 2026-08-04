@@ -2,7 +2,7 @@
 
     <p class="lede">Every servo is assigned to a digital pin, and every pin has a defined function. Commit the channel map below to memory; it is referenced throughout every subsequent section of this manual.</p>
 
-    <h2>Buck Converter Setup</h2>
+    <h2 id="buck-converter">Buck Converter Setup</h2>
 
     <p>The XL4015E1 modules ship configured to whatever setting was last used during manufacturing or testing, typically 5 V, though not always. The output voltage must be set <em>before</em> installing the module on the PCB.</p>
 
@@ -35,7 +35,7 @@
       <p>The XL4015E1 is the module specified for this build, but any buck converter may be substituted, provided it outputs a regulated 5 V and is rated for at least 5 A. Confirm both figures before installing a substitute; a module rated below 5 A will brown out under servo load even if it measures correctly on the bench with no load attached.</p>
     </div>
 
-    <h2>Servo Channel Assignment</h2>
+    <h2 id="servo-channels">Servo Channel Assignment</h2>
 
     <p>The twelve servos are addressed by leg and joint. The mnemonic is <code>{FL|FR|BL|BR}-{C|H|K}</code>: front/back, left/right, coxa, hip, or knee. The PCB headers J1 through J12 follow the order below, left to right when looking at the assembled PCB from above.</p>
 
@@ -107,7 +107,7 @@
 
     <h2>Power Architecture</h2>
 
-    <p>Section 01 introduced the shape of this at a glance (Figure 02): the battery feeds the buck converter, and the buck converter's regulated 5 V feeds the PCB, which in turn distributes it onward. This section makes that distribution explicit, down to the rail, the capacitor, and the failure mode each one exists to prevent; it is the most failure-prone area of the entire build, so read it carefully.</p>
+    <p>Section 01 introduced the shape of this at a glance (Figure 03): the battery feeds the buck converter, and the buck converter's regulated 5 V feeds the PCB, which in turn distributes it onward. This section makes that distribution explicit, down to the rail, the capacitor, and the failure mode each one exists to prevent; it is the most failure-prone area of the entire build, so read it carefully.</p>
 
     <figure>
       <div class="frame">

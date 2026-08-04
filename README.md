@@ -17,7 +17,7 @@ The site covers:
 - Section 05 PCB Assembly — schematic walkthrough and soldering sequence
 - Section 06 Electronics & Wiring — pinout, channel map, power architecture
 - Section 07 Arduino Firmware — toolchain, sketch walkthrough, calibration
-- Section 08 Testing & Calibration — bench tests, troubleshooting, pre-flight checklist
+- Section 08 Testing & Calibration — reference footage of a completed unit
 - Credits & Acknowledgments
 
 ## Participating universities
@@ -25,6 +25,7 @@ The site covers:
 - **University of San Jose – Recoletos** (host, Cebu, Philippines)
 - **Southern Taiwan University of Science and Technology** (Tainan, Taiwan)
 - **Osaka Institute of Technology** (Osaka, Japan)
+- **Saint Michael's College of Laguna** (Biñan, Laguna, Philippines)
 
 ## Deploying to GitHub Pages
 

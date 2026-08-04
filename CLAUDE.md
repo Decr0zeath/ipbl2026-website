@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static SPA-lite HTML manual for the iPBL 2026 quadruped robotics pre-training programme (hosted by University of San Jose – Recoletos, with STUST Taiwan and OIT Japan). Deployed via GitHub Pages from the repo root. No build step, no dependencies, no framework — plain HTML/CSS/JS. (Neither Node nor Ruby is installed on this machine; don't reach for either.)
+A static SPA-lite HTML manual for the iPBL 2026 quadruped robotics pre-training programme (hosted by University of San Jose – Recoletos, with STUST Taiwan, OIT Japan, and SMCL Philippines). Deployed via GitHub Pages from the repo root. No build step, no dependencies, no framework — plain HTML/CSS/JS. (Neither Node nor Ruby is installed on this machine; don't reach for either.)
 
 ## Development
 

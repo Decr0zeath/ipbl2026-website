@@ -35,23 +35,23 @@
 
     <h3>Section A · Power input and switch</h3>
 
-    <p>Battery enters the board at J1, a 2-pin screw terminal (5 mm pitch). Positive feeds through SW1, the master power switch, and then into the buck converter's V_IN pin. The negative is tied to the board's common ground plane. SW1 is not a manufactured switch part: it is a break in the trace bridged by two single-pin headers, closed by joining a male-to-male and a male-to-female jumper wire, and opened by separating them.</p>
+    <p>The battery wires directly to the buck converter, not to the board: raw BT1/BT2 voltage reaches the buck converter's V_IN pin off-board, and only its regulated output enters the PCB, at J1, a 2-pin screw terminal (5 mm pitch). From J1, positive feeds through SW1, the master power switch, before reaching the rest of the board; the negative is tied to the board's common ground plane. SW1 is not a manufactured switch part: no latching switch small enough to fit the chassis could be sourced, so the position is instead a break in the trace bridged by two single-pin headers, closed by joining a male-to-male and a male-to-female jumper wire, and opened by separating them.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · No reverse-polarity protection</div>
-      <p>This board revision has no protection diode on the battery input. Connecting BT1/BT2 backwards at J1 will feed reverse voltage straight into the buck converter with nothing to block it. Confirm polarity with a meter before every connection, and wire the screw terminal the same way every time.</p>
+      <p>This board revision has no protection diode on its power input. Connecting the buck converter's output backwards at J1 will feed reverse voltage straight onto the board's 5 V and ground nets with nothing to block it. Confirm polarity with a meter before every connection, and wire the screw terminal the same way every time.</p>
     </div>
 
     <h3>Section B · Buck converter and rails</h3>
 
-    <p>The buck converter module is not a single chip on the PCB but a daughter-board (XL4015E1 module) that you solder in by its four header pins. A 100 µF capacitor (C1) sits at its input for bulk filtering on the battery side. Its output net is labelled <code>+5V</code> and feeds two physical rails:</p>
+    <p>The buck converter module (XL4015E1) is wired in off-board, ahead of J1, rather than soldered to the PCB; the charger module (U3) is wired in parallel with it, both connecting directly to the battery pack's terminals, so the pack can be recharged without disturbing the buck converter or the board. What arrives at J1 is already regulated: a net labelled <code>+5V</code> on the PCB. A 100 µF capacitor (C1), soldered to the board itself at the J1 input, provides bulk filtering for that incoming rail before it splits into two physical branches:</p>
 
     <ul>
-      <li>A low-current <code>+5V_LOGIC</code> branch feeding the Nano's 5V pin directly</li>
+      <li>A low-current <code>+5V_LOGIC</code> branch feeding the Nano's VIN pin directly (its 5V pin is left unconnected)</li>
       <li>A high-current <code>+5V_SERVO</code> branch going to the twelve servo headers, decoupled by C2 and C3 (470 µF each)</li>
     </ul>
 
-    <p>Both branches share ground and run as separate copper traces from the buck converter's output pad.</p>
+    <p>Both branches share ground and run as separate copper traces from J1.</p>
 
     <h3>Section C · Microcontroller</h3>
 
@@ -59,7 +59,7 @@
 
     <h3>Section D · Servo headers</h3>
 
-    <p>Twelve identical 3-pin 0.1" headers in a row. Pin 1 of each connects to GND; pin 2 to <code>+5V_SERVO</code>; pin 3 to the corresponding Nano digital pin (D2 through D13). The signal traces run with a ground return alongside them on the inner layer where possible, though this is a 2-layer board, so the routing is opportunistic.</p>
+    <p>Twelve identical 3-pin 0.1" headers in a row. Pin 1 of each connects to GND; pin 2 to <code>+5V_SERVO</code>; pin 3 to the corresponding Nano digital pin (D2 through D13). The signal traces run with a ground return alongside them where possible, but this is a single-sided, 1-layer board with no inner layer to route it on, so the routing is opportunistic.</p>
 
     <figure>
       <div class="frame"><img src="assets/images/pcb-main.png" alt="Bare PCB, top side, rendered straight-on" /></div>
@@ -89,7 +89,7 @@
       </li>
       <li>
         <h4>Continuity-test the power rails</h4>
-        <p>With a multimeter in continuity mode, probe between the battery + terminal and the buck input pad. You should hear a buzz. Now probe between the battery + terminal and the battery – terminal. You should hear <em>nothing</em>. If you hear a buzz across the battery terminals on a bare board, the board is faulty; do not proceed.</p>
+        <p>With a multimeter in continuity mode, probe between J1's positive pad and the near leg of the SW1 header. You should hear a buzz. Now probe between J1's positive pad and its negative pad. You should hear <em>nothing</em>. If you hear a buzz across J1 on a bare board, the board is faulty; do not proceed.</p>
       </li>
       <li>
         <h4>Sort components into a tray</h4>
@@ -116,9 +116,8 @@
           <tr><td class="num">3</td><td>Nano headers (female)</td><td>U1 sockets</td><td>Two 15-pin female headers, one per row. Tack one corner each, check alignment, then complete.</td></tr>
           <tr><td class="num">4</td><td>Servo headers</td><td>J2–J13</td><td>Twelve 3-pin straight headers. <strong>Orientation matters</strong>: pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
           <tr><td class="num">5</td><td>Improvised switch headers</td><td>SW1</td><td>Two single-pin male headers. The connecting wires are not soldered; they plug in after assembly.</td></tr>
-          <tr><td class="num">6</td><td>Electrolytic capacitors</td><td>C1, C2, C3</td><td>Not included in this kit; team-sourced (see <a href="#bom">Section 02</a>). <strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can). C1 is 100 µF/16 V at the buck input; C2, C3 are 470 µF/10 V on the servo rail.</td></tr>
-          <tr><td class="num">7</td><td>Battery connector</td><td>J1</td><td>2-pin screw terminal, 5 mm pitch. Not keyed: confirm polarity against the silkscreen before wiring in the battery.</td></tr>
-          <tr><td class="num">8</td><td>Buck converter module</td><td>U2</td><td>Not included in this kit; team-sourced (see <a href="#bom">Section 02</a>). Solder via four header pins. Sit it flush against the board or use a standoff if the silkscreen indicates.</td></tr>
+          <tr><td class="num">6</td><td>Electrolytic capacitors</td><td>C1–C3</td><td>Not included in this kit; team-sourced (see <a href="#bom">Section 02</a>). <strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can). C1: 100 µF/16 V, at the J1 input. C2, C3: 470 µF/10 V each, on the servo rail.</td></tr>
+          <tr><td class="num">7</td><td>Power input connector</td><td>J1</td><td>2-pin screw terminal, 5 mm pitch. Not keyed: confirm polarity against the silkscreen before wiring in the buck converter's regulated output.</td></tr>
         </tbody>
       </table>
     </div>
@@ -148,8 +147,8 @@
         <p>Every joint should look like a shiny, concave fillet, not a dull grey blob. Dull joints are usually "cold"; reflow them. Blob joints often hide a short to a neighbouring pad; flux and re-touch.</p>
       </li>
       <li>
-        <h4>Continuity check: battery + to battery –</h4>
-        <p>With the SW1 jumper wires disconnected, probe across the battery terminals. There must be no continuity. If there is, you have a short somewhere on the input side, most often a solder bridge near J1.</p>
+        <h4>Continuity check: J1 positive to J1 negative</h4>
+        <p>With the SW1 jumper wires disconnected, probe across J1's two pads. There must be no continuity. If there is, you have a short somewhere on the input side, most often a solder bridge near J1.</p>
       </li>
       <li>
         <h4>Continuity check: +5V_LOGIC to GND</h4>

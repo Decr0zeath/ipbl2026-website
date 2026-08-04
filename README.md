@@ -6,13 +6,13 @@ Built as a static SPA-lite site for GitHub Pages: one shell page loads the chrom
 
 ## What this is
 
-A 10-page web manual covering everything a student needs to assemble and program a four-legged, twelve-servo quadruped robot before arriving on-site for the on-ground iPBL programme. The mechanical platform is adapted from [Regis Hsu's open quadruped on PCBWay](https://www.pcbway.com/project/shareproject/Quadruped_Spider_Robot_3D_Printed_Parts_SG90_Servo_Motor_Arduino_Nano_10107fe3.html).
+A 10-page web manual covering everything a student needs to assemble and program a four-legged, twelve-servo quadruped robot before arriving on-site for the on-ground iPBL programme. The mechanical platform is adapted from [Mert Kilic's open quadruped on PCBWay](https://www.pcbway.com/project/shareproject/Quadruped_Spider_Robot_3D_Printed_Parts_SG90_Servo_Motor_Arduino_Nano_10107fe3.html).
 
 The site covers:
 
 - Section 01 Overview — what the robot is, system block diagrams
 - Section 02 Bill of Materials & Tools
-- Section 03 3D-Printed Parts — STL inventory, print settings, orientation
+- Section 03 3D-Printed Parts — STL inventory
 - Section 04 Mechanical Assembly — step-by-step build
 - Section 05 PCB Assembly — schematic walkthrough and soldering sequence
 - Section 06 Electronics & Wiring — pinout, channel map, power architecture
@@ -88,9 +88,9 @@ The frame's corner brackets and styling stay; only the inner content changes.
 
 ## Credits
 
-Original quadruped platform — [Regis Hsu on PCBWay](https://www.pcbway.com/project/shareproject/Quadruped_Spider_Robot_3D_Printed_Parts_SG90_Servo_Motor_Arduino_Nano_10107fe3.html). Manual adaptation and PCB redesign by the USJ-R iPBL 2026 host team.
+Original quadruped platform — [Mert Kilic on PCBWay](https://www.pcbway.com/project/shareproject/Quadruped_Spider_Robot_3D_Printed_Parts_SG90_Servo_Motor_Arduino_Nano_10107fe3.html). Manual adaptation and PCB redesign by the USJ-R iPBL 2026 host team.
 
 ## License
 
 Manual text and design: see the host team for redistribution terms.
-Original quadruped design: refer to Regis Hsu's original publication.
+Original quadruped design: refer to Mert Kilic's original publication.

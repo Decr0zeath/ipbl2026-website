@@ -23,6 +23,9 @@
   --gold-300: #FFCD55;
   --gold-100: #FFE9B0;
 
+  --orange-700: #B7410E;
+  --orange-100: #FBE6D7;
+
   --paper:    #F6F4EE;      /* warm ivory, desaturated off the original cream/beige */
   --paper-2:  #EDE9DD;
   --ink:      #21291F;      /* near-black warm ink — body text */
@@ -133,8 +136,6 @@ hr {
 .brand-mark {
   width: 40px;
   height: 40px;
-  border: 1.5px solid var(--gold-500);
-  background: var(--paper);
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -427,8 +428,8 @@ svg.diagram a:focus-visible .diagram-hint path { transform: translateX(3px); }
 .callout.note .callout-label    { color: var(--green-700); }
 .callout.tip      { background: var(--gold-100); }
 .callout.tip .callout-label     { color: var(--gold-700); }
-.callout.warning  { background: #FBE6D7; }
-.callout.warning .callout-label { color: #B7410E; font-size: .84rem; }
+.callout.warning  { background: var(--orange-100); }
+.callout.warning .callout-label { color: var(--orange-700); font-size: .84rem; }
 .callout.warning .callout-label::before { content: "⚠ "; }
 
 /* ---------- Step Blocks ---------- */
@@ -611,6 +612,7 @@ footer.site-footer p, footer.site-footer li {
   color: var(--green-100);
   line-height: 1.55;
 }
+footer.site-footer strong { color: inherit; }
 footer.site-footer ul { list-style: none; padding: 0; margin: 0; }
 footer.site-footer li { margin-bottom: .35rem; }
 footer.site-footer a { color: var(--gold-300); text-decoration: none; }
@@ -885,6 +887,8 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .stack-bottom { margin-bottom: 1.5rem; }
 .stack-top-sm { margin-top: .75rem; }
 .dl-tag { color: var(--gold-700); margin-left: .35rem; }
+.not-provided { color: var(--orange-700); font-weight: 600; }
+.name-accent { color: var(--gold-700); }
 
 /* ---------- Page header (interior pages) ---------- */
 .page-head {

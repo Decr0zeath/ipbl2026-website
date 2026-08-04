@@ -32,7 +32,7 @@ Not a general robotics tutorial: a narrow, sequenced manual scoped to exactly wh
 - Must be served over HTTP (Live Server, `python -m http.server`, etc.) — opening `manual.html` from `file://` fails because the viewer uses `fetch()`.
 - All figures currently use styled placeholder frames (`<div class="placeholder">`) instead of real photos/diagrams — real photography is expected to replace these later.
 - No backend, no forms, no build tooling — plain HTML/CSS/JS only.
-- Mechanical platform adapted from Regis Hsu's open-source quadruped (PCBWay); PCB is a custom redesign by the USJ-R host team.
+- Mechanical platform adapted from Mert Kilic's open-source quadruped (PCBWay); PCB is a custom redesign by the USJ-R host team.
 - No em dashes in site content (house style — see CLAUDE.md); figure labels and empty table cells use `·` instead.
 
 ## Brand Commitments

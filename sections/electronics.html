@@ -97,7 +97,7 @@
         <tbody>
           <tr><td>3V3</td><td>Status LED</td><td>R1 → D1 (red LED), always on while the board has power. Not firmware-controlled.</td></tr>
           <tr><td>A0–A7</td><td>Unused</td><td>·</td></tr>
-          <tr><td>VIN</td><td>·</td><td>Do not use. Power comes from the 5 V regulated rail.</td></tr>
+          <tr><td>VIN</td><td>Board power in</td><td>Fed from the regulated <code>+5V</code> rail, downstream of SW1. This is how the Nano is powered; its 5V pin is left unconnected.</td></tr>
           <tr><td>GND</td><td>Common ground</td><td>Tied to servo GND, capacitor grounds, and the terminal block; common with the buck converter. Battery negative wires directly to the buck converter, not into this net</td></tr>
         </tbody>
       </table>
@@ -204,7 +204,7 @@
 
     <h3>Decoupling</h3>
 
-    <p>The two 470 µF electrolytics (C2, C3) sit on the servo rail at the input to the twelve servo headers. They absorb the inrush current when a servo begins moving and prevent the rail voltage from dropping. A single 100 µF electrolytic (C1) sits at the buck converter's input, on the battery side, providing bulk filtering ahead of the regulator.</p>
+    <p>The two 470 µF electrolytics (C2, C3) sit on the servo rail at the input to the twelve servo headers. They absorb the inrush current when a servo begins moving and prevent the rail voltage from dropping. A single 100 µF electrolytic (C1) sits on the board itself, at the <code>+5V</code> input from J1, providing bulk filtering for the regulated rail before it splits into the two branches.</p>
 
     <h3>Grounding</h3>
 

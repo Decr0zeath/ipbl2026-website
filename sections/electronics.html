@@ -89,11 +89,6 @@
       <p>The <code>Servo</code> library on the ATmega328P uses Timer1 internally and supports up to twelve software-PWM channels on any digital pin. Twelve servos require the use of all of them: D2–D13, contiguous and avoiding the hardware UART pins on D0/D1 (used by USB serial). This leaves no digital pins free for a status indicator, so the status LED is wired directly to the Nano's 3V3 pin instead, simply lighting whenever the Nano is powered rather than reflecting any digital pin state; the analog pins, A0 through A7, carry no function in this design and stay unpopulated.</p>
     </div>
 
-    <div class="callout note">
-      <div class="callout-label">Note · D13 is solely for M12</div>
-      <p>D13 drives only M12 (BR-K); it carries no other function. The status LED is never connected to this pin, it draws from the 3V3 pin instead, so it stays lit whenever the Nano is powered and is unaffected by the knee servo's PWM signal.</p>
-    </div>
-
     <h2>Other Nano Pins in Use</h2>
 
     <div class="table-wrap">

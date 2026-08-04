@@ -172,7 +172,7 @@ hr {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 3rem;
-  padding: 2.5rem var(--gutter) 4rem;
+  padding: 2.5rem var(--gutter) 2.5rem;
 }
 
 aside.sidebar {
@@ -266,31 +266,11 @@ main.content {
 
 /* A new h2 marks a new subsystem — give it a visible break. */
 main.content h2 {
-  margin-top: 3.2em;
-  padding-top: 1.1em;
+  margin-top: 2.2em;
+  padding-top: .8em;
   border-top: 1px solid var(--rule);
 }
-main.content .page-head + h2,
-main.content .section-marker + h2 { margin-top: 0; padding-top: 0; border-top: 0; }
-
-.section-marker {
-  font-family: var(--font-mono);
-  font-size: .78rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--gold-700);
-  margin-bottom: 1.4rem;
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-}
-.section-marker::before, .section-marker::after {
-  content: "";
-  flex: 0 0 28px;
-  height: 1px;
-  background: var(--gold-500);
-}
-.section-marker::after { flex: 1; }
+main.content .page-head + h2 { margin-top: 0; padding-top: 0; border-top: 0; }
 
 .lede {
   font-family: var(--font-sans);
@@ -586,9 +566,10 @@ pre::before {
 footer.site-footer {
   background: var(--green-900);
   color: var(--green-100);
-  padding: 3rem var(--gutter) .5rem;
-  margin-top: 5rem;
+  padding: 2.5rem var(--gutter) .5rem;
+  margin-top: 2.5rem;
 }
+footer.site-footer.home-footer { padding-top: 0; }
 footer.site-footer .foot-inner {
   max-width: var(--maxw);
   margin: 0 auto;

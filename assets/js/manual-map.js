@@ -69,7 +69,7 @@ var MANUAL_REFERENCE = [
   {
     slug: 'credits',
     num: null,
-    crumb: 'Reference',
+    crumb: 'Section · Credits',
     title: 'Credits & Acknowledgments',
     subtitle: 'No project of this scale is completed alone. The work that follows was made possible by the open-hardware community, our partner institutions, and the host team in Cebu.'
   }

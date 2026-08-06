@@ -306,6 +306,30 @@ figure .frame::after {
 figure .frame::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
 figure .frame::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
 
+/* Shown over a figure's media (or the hero 3D model) while it is still
+   fetching; JS toggles .is-loading on the host and removes it on load. */
+figure .frame.is-loading img,
+figure .frame.is-loading video,
+figure .frame.is-loading model-viewer,
+figure .frame.is-loading kicanvas-embed {
+  visibility: hidden;
+}
+.asset-loading-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  background: var(--paper-2);
+  z-index: 2;
+}
+
 figure .placeholder {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -336,7 +360,7 @@ figure .frame video {
 figure .frame model-viewer {
   display: block;
   width: 100%;
-  height: 500px;
+  height: 760px;
   border: 1px solid var(--rule);
 }
 figure .frame kicanvas-embed {
@@ -384,6 +408,21 @@ figure figcaption .fig-label {
   text-transform: uppercase;
   color: var(--gold-700);
   margin-right: .6rem;
+}
+
+/* Scroll zoom: the image eases in slightly larger the first time its frame
+   scrolls into view (JS toggles .in-view via IntersectionObserver, once);
+   the frame itself holds still, clipping the zoomed edges. */
+figure .frame.zoom-frame { overflow: hidden; }
+.scroll-reveal {
+  transform: scale(1);
+  transition: transform 2.5s ease;
+}
+.scroll-reveal.in-view {
+  transform: scale(1.02);
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal { transform: none; transition: none; }
 }
 
 /* Inline SVG diagrams inside frames */
@@ -454,6 +493,7 @@ svg.diagram a:focus-visible .diagram-hint path { transform: translateX(3px); }
    3rem number column and wraps one word per line). */
 .steps > li > * { grid-column: 2; min-width: 0; }
 .steps > li:first-child { padding-top: 0; }
+.steps > li:last-child { border-bottom: 0; }
 .steps > li::before {
   content: counter(stepcount, decimal-leading-zero);
   font-family: var(--font-display);
@@ -822,6 +862,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   aspect-ratio: 1 / 1;
   height: auto;
 }
+.hero-mark.is-loading model-viewer { visibility: hidden; }
 
 /* Home sections (non-content pages share these) */
 .home-section {

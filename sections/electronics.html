@@ -37,7 +37,7 @@
 
     <h2 id="servo-channels">Servo Channel Assignment</h2>
 
-    <p>The twelve servos are addressed by leg and joint. The mnemonic is <code>{FL|FR|BL|BR}-{C|H|K}</code>: front/back, left/right, coxa, hip, or knee. The PCB headers J1 through J12 follow the order below, left to right when looking at the assembled PCB from above.</p>
+    <p>The twelve servos are addressed by leg and joint. The mnemonic is <code>{FL|FR|BL|BR}-{C|H|K}</code>: front/back, left/right, coxa, hip, or knee. The PCB headers M1 through M12 follow the order below, left to right when looking at the assembled PCB from above.</p>
 
     <div class="table-wrap">
       <table>
@@ -52,36 +52,36 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>J1</td><td>FL-C</td><td>Front-Left</td><td>Coxa</td><td>D2</td><td class="num center">0</td></tr>
-          <tr><td>J2</td><td>FL-H</td><td>Front-Left</td><td>Hip</td><td>D3</td><td class="num center">1</td></tr>
-          <tr><td>J3</td><td>FL-K</td><td>Front-Left</td><td>Knee</td><td>D4</td><td class="num center">2</td></tr>
-          <tr><td>J4</td><td>FR-C</td><td>Front-Right</td><td>Coxa</td><td>D5</td><td class="num center">3</td></tr>
-          <tr><td>J5</td><td>FR-H</td><td>Front-Right</td><td>Hip</td><td>D6</td><td class="num center">4</td></tr>
-          <tr><td>J6</td><td>FR-K</td><td>Front-Right</td><td>Knee</td><td>D7</td><td class="num center">5</td></tr>
-          <tr><td>J7</td><td>BL-C</td><td>Back-Left</td><td>Coxa</td><td>D8</td><td class="num center">6</td></tr>
-          <tr><td>J8</td><td>BL-H</td><td>Back-Left</td><td>Hip</td><td>D9</td><td class="num center">7</td></tr>
-          <tr><td>J9</td><td>BL-K</td><td>Back-Left</td><td>Knee</td><td>D10</td><td class="num center">8</td></tr>
-          <tr><td>J10</td><td>BR-C</td><td>Back-Right</td><td>Coxa</td><td>D11</td><td class="num center">9</td></tr>
-          <tr><td>J11</td><td>BR-H</td><td>Back-Right</td><td>Hip</td><td>D12</td><td class="num center">10</td></tr>
-          <tr><td>J12</td><td>BR-K</td><td>Back-Right</td><td>Knee</td><td>D13</td><td class="num center">11</td></tr>
+          <tr><td>M1</td><td>FL-C</td><td>Front-Left</td><td>Coxa</td><td>D2</td><td class="num center">0</td></tr>
+          <tr><td>M2</td><td>FL-H</td><td>Front-Left</td><td>Hip</td><td>D3</td><td class="num center">1</td></tr>
+          <tr><td>M3</td><td>FL-K</td><td>Front-Left</td><td>Knee</td><td>D4</td><td class="num center">2</td></tr>
+          <tr><td>M4</td><td>FR-C</td><td>Front-Right</td><td>Coxa</td><td>D5</td><td class="num center">3</td></tr>
+          <tr><td>M5</td><td>FR-H</td><td>Front-Right</td><td>Hip</td><td>D6</td><td class="num center">4</td></tr>
+          <tr><td>M6</td><td>FR-K</td><td>Front-Right</td><td>Knee</td><td>D7</td><td class="num center">5</td></tr>
+          <tr><td>M7</td><td>BL-C</td><td>Back-Left</td><td>Coxa</td><td>D8</td><td class="num center">6</td></tr>
+          <tr><td>M8</td><td>BL-H</td><td>Back-Left</td><td>Hip</td><td>D9</td><td class="num center">7</td></tr>
+          <tr><td>M9</td><td>BL-K</td><td>Back-Left</td><td>Knee</td><td>D10</td><td class="num center">8</td></tr>
+          <tr><td>M10</td><td>BR-C</td><td>Back-Right</td><td>Coxa</td><td>D11</td><td class="num center">9</td></tr>
+          <tr><td>M11</td><td>BR-H</td><td>Back-Right</td><td>Hip</td><td>D12</td><td class="num center">10</td></tr>
+          <tr><td>M12</td><td>BR-K</td><td>Back-Right</td><td>Knee</td><td>D13</td><td class="num center">11</td></tr>
         </tbody>
       </table>
     </div>
 
     <figure>
-      <div class="frame"><img src="assets/images/joint.webp" alt="Servo connector at a joint, orange signal wire aligned to the header's printed label" width="597" height="345" loading="lazy" decoding="async" /></div>
-      <figcaption><span class="fig-label">Figure 09</span>The orange signal wire always lines up with the header's printed label, regardless of the header's physical position.</figcaption>
+      <div class="frame"><img src="assets/images/joint.webp" alt="Assembled quadruped frame from above, each servo labeled directly with its M-header number, M1 through M12" width="2048" height="944" loading="lazy" decoding="async" /></div>
+      <figcaption><span class="fig-label">Figure 17</span>Every servo position on the assembled frame, labeled M1 through M12 to match the PCB header labels in Figure 18.</figcaption>
     </figure>
     <figure>
       <div class="frame"><img src="assets/images/pcb-main.webp" alt="Bare PCB, top side, showing the M1-M12 servo header labels" width="1724" height="938" loading="lazy" decoding="async" /></div>
-      <figcaption><span class="fig-label">Figure 10</span>The M1–M12 header labels on the assembled PCB. Note that M12 is not placed in line with the rest of the row.</figcaption>
+      <figcaption><span class="fig-label">Figure 18</span>The M1–M12 header labels on the assembled PCB. Note that M12 is not placed in line with the rest of the row.</figcaption>
     </figure>
 
-    <p>Connect each servo to its header by Nano pin: D2 to M1, D3 to M2, D4 to M3, and so on through D13 to M12. On every header, the orange wire, the signal wire on the servo's female connector, must line up with the header's printed label; wherever that label sits on the board, that is where the orange wire goes.</p>
+    <p>Connect each servo to the header matching its position, M1 through M12 as labeled in Figure 17. On every header, the orange wire, the signal wire on the servo's female connector, must line up with the header's printed label; wherever that label sits on the board, that is where the orange wire goes.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · M12 sits out of line</div>
-      <p>M12 is not placed in sequence with the rest of the row; see Figure 10. Locate it by its printed label before connecting, rather than assuming it follows M11 in physical order.</p>
+      <p>M12 is not placed in sequence with the rest of the row; see Figure 18. Locate it by its printed label before connecting, rather than assuming it follows M11 in physical order.</p>
     </div>
 
     <div class="callout note">
@@ -107,7 +107,7 @@
 
     <h2>Power Architecture</h2>
 
-    <p>Section 01 introduced the shape of this at a glance (Figure 03): the battery feeds the buck converter, and the buck converter's regulated 5 V feeds the PCB, which in turn distributes it onward. This section makes that distribution explicit, down to the rail, the capacitor, and the failure mode each one exists to prevent; it is the most failure-prone area of the entire build, so read it carefully.</p>
+    <p>Section 01 introduced the shape of this at a glance (Figure 02): the battery feeds the buck converter, and the buck converter's regulated 5 V feeds the PCB, which in turn distributes it onward. This section makes that distribution explicit, down to the rail, the capacitor, and the failure mode each one exists to prevent; it is the most failure-prone area of the entire build, so read it carefully.</p>
 
     <figure>
       <div class="frame">
@@ -180,10 +180,10 @@
           <text x="640" y="307" font-family="IBM Plex Mono, monospace" font-size="9" fill="#21291F">GND</text>
 
           <!-- Caption -->
-          <text x="360" y="340" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 11 · Power architecture</text>
+          <text x="360" y="340" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 19 · Power architecture</text>
         </svg>
       </div>
-      <figcaption><span class="fig-label">Figure 11</span>The two-rail power design, with no inline switch: both battery leads wire directly to the buck converter, the return path (dashed) on its own dedicated wire. Its regulated 5 V feeds the Nano on a clean, low-current rail, and the same 5 V feeds the servos from the bulk capacitors on a separate, higher-current rail. Downstream of the buck, one common ground ties the Nano, servo rail, and capacitors together; the battery's return does not join that plane. Wire colour follows convention: red for the positive supply, black for ground, gold for the PWM signal.</figcaption>
+      <figcaption><span class="fig-label">Figure 19</span>The two-rail power design, with no inline switch: both battery leads wire directly to the buck converter, the return path (dashed) on its own dedicated wire. Its regulated 5 V feeds the Nano on a clean, low-current rail, and the same 5 V feeds the servos from the bulk capacitors on a separate, higher-current rail. Downstream of the buck, one common ground ties the Nano, servo rail, and capacitors together; the battery's return does not join that plane. Wire colour follows convention: red for the positive supply, black for ground, gold for the PWM signal.</figcaption>
     </figure>
 
     <div class="callout warning">
@@ -221,7 +221,7 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Wire</th><th>Function</th><th>PCB Header Pin (looking at PCB top, J1–J12)</th></tr>
+          <tr><th>Wire</th><th>Function</th><th>PCB Header Pin (looking at PCB top, M1–M12)</th></tr>
         </thead>
         <tbody>
           <tr><td>Brown (or black)</td><td>Ground</td><td>Pin 1, closest to the PCB edge</td></tr>
@@ -236,6 +236,3 @@
       <p>It is mechanically possible to install an SG90 connector on the header backwards. Doing so reverses the polarity into the servo, which destroys the SG90 within seconds and may damage the Nano via the signal pin. <strong>Confirm the brown wire faces the PCB edge before every power-on</strong>, particularly after re-wiring.</p>
     </div>
 
-    <h2>Ready for PCB?</h2>
-
-    <p>By this point, you should understand which pin drives which servo, why the servo rail and Nano rail are separated, how to set the buck converter, and what the connector polarity requirements are. If any of this remains unclear, re-read this section; the next section assumes complete familiarity with it.</p>

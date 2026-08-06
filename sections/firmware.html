@@ -19,7 +19,7 @@
       </li>
       <li>
         <h4>Plug in the Nano, identify the serial port</h4>
-        <p>Connect the USB-C cable. Tools → Port should now show a new entry: <code>/dev/cu.usbserial-*</code> on macOS, <code>COM#</code> on Windows, <code>/dev/ttyUSB#</code> on Linux. Select it. If nothing appears, see the USB cable warning in <a href="#bom">Section 02</a>.</p>
+        <p>Connect the USB-C cable. Tools → Port should now show a new entry: <code>/dev/cu.usbserial-*</code> on macOS, <code>COM#</code> on Windows, <code>/dev/ttyUSB#</code> on Linux. Select it. If nothing appears, the most common cause is a power-only USB-C cable with no data lines; swap it for one confirmed data-capable. The second most common cause is a missing USB-serial driver (commonly a CH340 or CP2102) on clone Nano boards; installing the manufacturer's driver for that chip resolves it.</p>
       </li>
       <li>
         <h4>Verify with Blink</h4>
@@ -50,11 +50,55 @@
         <p>Lift the Nano out of its PCB socket, connect it to the laptop by USB, and upload. The sketch drives all twelve servo positions to 90° and holds them there.</p>
       </li>
       <li>
-        <h4>Reseat the Nano, set the limbs, and fit the rocker arms</h4>
-        <p>Reseat the Nano in its PCB socket so the servos hold their position on PCB power rather than the bench USB connection. With each servo steady, set the limb to the 90° position against its horn, then fit the rocker arm so it reads neutral at that position.</p>
+        <h4>Reseat the Nano</h4>
+        <p>Reseat the Nano in its PCB socket once the upload finishes, so the servos hold their position on PCB power rather than the bench USB connection. Reconnect the battery; every one of the twelve servos should sit still and resist gentle hand pressure.</p>
+      </li>
+      <li>
+        <h4>Fit the coxa rocker arms</h4>
+        <p>Starting at the hip, set each coxa print against its centred horn and drive the rocker screw home. Repeat across all four legs before moving outward to the femur joint.</p>
         <figure>
-          <div class="frame"><img src="assets/images/90%20degree.webp" alt="The assembled chassis held in hand, all four legs set to their centred 90° position with rocker arms fitted" width="599" height="360" loading="lazy" decoding="async" /></div>
-          <figcaption><span class="fig-label">Figure 16</span>All four legs at 90°, symmetric and evenly splayed, rocker arms fitted at neutral.</figcaption>
+          <div class="frame"><img src="assets/images/coxa%20rocker%20install.webp" alt="Hands fitting a rocker arm onto a coxa servo near the centre of the chassis" width="1520" height="954" loading="lazy" decoding="async" /></div>
+          <figcaption><span class="fig-label">Figure 20</span>The coxa rocker arm fitted at the hip, screwed down at its centred 90° position.</figcaption>
+        </figure>
+      </li>
+      <li>
+        <h4>Fit the femur rocker arms</h4>
+        <p>Move outward to the femur servo on each leg, seat the print against its centred horn, and fasten the rocker.</p>
+        <figure>
+          <div class="frame"><img src="assets/images/femur%20rocker%20install.webp" alt="Hands fitting a rocker arm onto a femur servo, with the Arduino Nano visible in the body cavity between the leg pairs" width="1682" height="893" loading="lazy" decoding="async" /></div>
+          <figcaption><span class="fig-label">Figure 21</span>The femur rocker arm fitted next, the Nano already seated in the body between the leg pairs.</figcaption>
+        </figure>
+      </li>
+      <li>
+        <h4>Position the tibia against the femur</h4>
+        <p>With the femur rocker fixed, it becomes the reference for the knee: hold the tibia print flush against the femur at a right angle before locking anything down. This is the point where a knee horn that has drifted from 90° is easiest to catch, before the last rocker arm is screwed on top of it.</p>
+        <figure>
+          <div class="frame"><img src="assets/images/90%20degree%20knee.webp" alt="A tibia print held against a bare knee horn to check that it sits at 90° to the femur before the rocker arm is fitted" width="1804" height="936" loading="lazy" decoding="async" /></div>
+          <figcaption><span class="fig-label">Figure 22</span>The tibia checked square against the femur before the knee rocker goes on; wiring is still loose at this stage.</figcaption>
+        </figure>
+      </li>
+      <li>
+        <h4>Fit the knee rocker arms</h4>
+        <p>With the tibia confirmed square to the femur, fasten the rocker. This completes the run of three servos for that leg: coxa, femur, and knee.</p>
+        <figure>
+          <div class="frame"><img src="assets/images/knee%20rocker%20install.webp" alt="Hands fitting the final rocker arm at a knee joint, the tibia print held level against the horn" width="1722" height="936" loading="lazy" decoding="async" /></div>
+          <figcaption><span class="fig-label">Figure 23</span>The knee rocker arm fitted last on this leg, closing out coxa, femur, and knee in sequence.</figcaption>
+        </figure>
+      </li>
+      <li>
+        <h4>Sight the splay from above</h4>
+        <p>With all twelve rockers fastened, view the chassis from directly above. Every leg should splay outward by the same amount as its neighbours; a leg sitting visibly off from the rest means one of its three horns was not properly checked, and it is faster to catch this now than after the legs are laced up.</p>
+        <figure>
+          <div class="frame"><img src="assets/images/top%20view%2090%20screwed.webp" alt="Top-down view of the fully screwed chassis, all twelve rocker arms fastened and the four legs splayed symmetrically" width="1789" height="949" loading="lazy" decoding="async" /></div>
+          <figcaption><span class="fig-label">Figure 24</span>Sighted from above: every rocker arm screwed down, the splay symmetric leg to leg.</figcaption>
+        </figure>
+      </li>
+      <li>
+        <h4>Confirm the finished stance</h4>
+        <p>The chassis should now hold this stance on its own, under PCB power: four legs at 90°, evenly splayed, every rocker arm reading neutral. This is the correct starting position to carry into the rest of assembly.</p>
+        <figure>
+          <div class="frame"><img src="assets/images/90%20degree.webp" alt="The assembled chassis held in hand, all four legs set to their centred 90° position with rocker arms fitted" width="1197" height="681" loading="lazy" decoding="async" /></div>
+          <figcaption><span class="fig-label">Figure 25</span>All four legs at 90°, symmetric and evenly splayed, rocker arms fitted at neutral.</figcaption>
         </figure>
       </li>
     </ol>

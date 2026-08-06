@@ -30,6 +30,96 @@
     });
   }
 
+  // ---- Media loading labels (figures + hero 3D model) ----
+  // Covers img, video, model-viewer and kicanvas-embed: shows a "Loading"
+  // label over the host (figure .frame or .hero-mark) until the asset
+  // resolves. Re-run on injected section content, since fragments arrive
+  // as fetched HTML rather than being present at parse time.
+  function markLoading(host, asset) {
+    if (host.classList.contains('is-loading') || host.dataset.loadingDone) return;
+    host.classList.add('is-loading');
+    var label = document.createElement('span');
+    label.className = 'asset-loading-label';
+    label.textContent = 'Loading';
+    host.appendChild(label);
+
+    function clear() {
+      host.classList.remove('is-loading');
+      host.dataset.loadingDone = 'true';
+      if (label.parentNode) label.parentNode.removeChild(label);
+    }
+
+    switch (asset.tagName) {
+      case 'IMG':
+        if (asset.complete && asset.naturalWidth !== 0) { clear(); return; }
+        asset.addEventListener('load', clear, { once: true });
+        asset.addEventListener('error', clear, { once: true });
+        break;
+      case 'VIDEO':
+        if (asset.readyState >= 1) { clear(); return; }
+        asset.addEventListener('loadedmetadata', clear, { once: true });
+        asset.addEventListener('error', clear, { once: true });
+        break;
+      case 'MODEL-VIEWER':
+        if (asset.loaded) { clear(); return; }
+        asset.addEventListener('load', clear, { once: true });
+        asset.addEventListener('error', clear, { once: true });
+        break;
+      case 'KICANVAS-EMBED':
+        // kicanvas.js does not fire load/error events (tracked upstream as
+        // not yet implemented), but it does reflect a `loaded` attribute
+        // once rendered; watch for that and fall back to a fixed timeout
+        // rather than risk the label getting stuck forever.
+        if (asset.hasAttribute('loaded')) { clear(); return; }
+        var observer = new MutationObserver(function () {
+          if (asset.hasAttribute('loaded')) {
+            observer.disconnect();
+            clear();
+          }
+        });
+        observer.observe(asset, { attributes: true, attributeFilter: ['loaded'] });
+        setTimeout(clear, 8000);
+        break;
+      default:
+        clear();
+    }
+  }
+
+  function initMediaLoading(root) {
+    root.querySelectorAll('figure .frame, .hero-mark').forEach(function (host) {
+      var asset = host.querySelector('img, video, model-viewer, kicanvas-embed');
+      if (asset) markLoading(host, asset);
+    });
+  }
+
+  initMediaLoading(document);
+
+  // ---- Scroll reveal (ease/zoom-in the first time an element appears) ----
+  function initScrollReveal(root) {
+    var targets = root.querySelectorAll('.scroll-reveal:not(.in-view)');
+    if (!targets.length) return;
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('in-view'); });
+      return;
+    }
+    // Observer is created lazily on the first scroll so a target already
+    // sitting in the viewport at page load doesn't zoom before the visitor
+    // has scrolled at all.
+    window.addEventListener('scroll', function () {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      targets.forEach(function (el) { observer.observe(el); });
+    }, { once: true, passive: true });
+  }
+
+  initScrollReveal(document);
+
   // ---- Viewer (shell page only) ----
   if (typeof MANUAL_MAP === 'undefined') return;
 
@@ -100,7 +190,7 @@
       }
       if (idx === last) {
         var ref = MANUAL_REFERENCE[0];
-        html += pagLink('#' + ref.slug, 'Reference →', ref.title, 'next');
+        html += pagLink('#' + ref.slug, 'Credits →', ref.title, 'next');
       } else {
         var n = MANUAL_MAP[idx + 1];
         html += pagLink('#' + n.slug, 'Next · Section ' + n.num + ' →', n.title, 'next');
@@ -114,6 +204,8 @@
     renderHead(entry);
     view.innerHTML = html;
     renderPagination(entry);
+    initMediaLoading(view);
+    initScrollReveal(view);
     closeSidebar();
     var target = anchor && document.getElementById(anchor);
     if (target) {

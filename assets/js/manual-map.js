@@ -26,7 +26,7 @@ var MANUAL_MAP = [
     num: '03',
     crumb: 'Section 03 · The Structure',
     title: '3D-Printed Parts',
-    subtitle: 'Ten STL files and one printer, from raw filament to a complete set of parts.'
+    subtitle: 'Eight STL files and one printer, from raw filament to a complete set of parts.'
   },
   {
     slug: 'assembly',

@@ -30,23 +30,29 @@
     });
   }
 
-  // ---- Media loading labels (figures + hero 3D model) ----
-  // Covers img, video, model-viewer and kicanvas-embed: shows a "Loading"
-  // label over the host (figure .frame or .hero-mark) until the asset
-  // resolves. Re-run on injected section content, since fragments arrive
-  // as fetched HTML rather than being present at parse time.
+  // ---- Media loading (figures + hero 3D model) ----
+  // Covers img, video, model-viewer and kicanvas-embed. Hides the host's
+  // asset until it resolves; figure .frame hosts also get a "Loading"
+  // label over the gap, but .hero-mark hides silently. Re-run on injected
+  // section content, since fragments arrive as fetched HTML rather than
+  // being present at parse time.
   function markLoading(host, asset) {
     if (host.classList.contains('is-loading') || host.dataset.loadingDone) return;
     host.classList.add('is-loading');
-    var label = document.createElement('span');
-    label.className = 'asset-loading-label';
-    label.textContent = 'Loading';
-    host.appendChild(label);
+    // The hero 3D model hides silently until it's ready; every other
+    // host (figure frames) shows a "Loading" label over the gap.
+    var label = null;
+    if (!host.classList.contains('hero-mark')) {
+      label = document.createElement('span');
+      label.className = 'asset-loading-label';
+      label.textContent = 'Loading';
+      host.appendChild(label);
+    }
 
     function clear() {
       host.classList.remove('is-loading');
       host.dataset.loadingDone = 'true';
-      if (label.parentNode) label.parentNode.removeChild(label);
+      if (label && label.parentNode) label.parentNode.removeChild(label);
     }
 
     switch (asset.tagName) {

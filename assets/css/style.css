@@ -870,16 +870,33 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   height: 64px;
   width: auto;
   image-rendering: pixelated;
-  animation: credits-mark-idle 2.2s ease-in-out infinite;
 }
-.credits-marks img:nth-child(2) { animation-delay: .3s; }
-.credits-marks img:nth-child(3) { animation-delay: .6s; }
-@keyframes credits-mark-idle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+.mark-lapu {
+  transform-origin: bottom center;
+  animation: mark-breathe 2.8s ease-in-out infinite;
+}
+.mark-cross {
+  transform-origin: bottom center;
+  animation: mark-sway 4s ease-in-out infinite;
+}
+.mark-whale {
+  transform-origin: 15% 75%;
+  animation: mark-swim 1.6s ease-in-out infinite;
+}
+@keyframes mark-breathe {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.035); }
+}
+@keyframes mark-sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+@keyframes mark-swim {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .credits-marks img { animation: none; }
+  .mark-lapu, .mark-cross, .mark-whale { animation: none; }
 }
 
 .outcomes {

@@ -120,6 +120,20 @@
 
   initScrollReveal(document);
 
+  // ---- Event hero background crossfade (event.html only) ----
+  (function initEventHero() {
+    var slides = document.querySelectorAll('.event-hero-bg img');
+    if (slides.length < 2) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var current = 0;
+    setInterval(function () {
+      slides[current].classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-active');
+    }, 6000);
+  })();
+
   // ---- Viewer (shell page only) ----
   if (typeof MANUAL_MAP === 'undefined') return;
 

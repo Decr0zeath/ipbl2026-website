@@ -614,6 +614,7 @@ footer.site-footer p, footer.site-footer li {
   line-height: 1.55;
 }
 footer.site-footer strong { color: inherit; }
+footer.site-footer strong.name-accent { color: var(--gold-300); }
 footer.site-footer ul { list-style: none; padding: 0; margin: 0; }
 footer.site-footer li { margin-bottom: .35rem; }
 footer.site-footer a { color: var(--gold-300); text-decoration: none; }
@@ -856,6 +857,29 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 @media (prefers-reduced-motion: reduce) {
   .sponsor-track { animation: none; }
   .sponsor-track .sponsor-card[aria-hidden="true"] { display: none; }
+}
+
+.credits-marks {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  margin: 2.5rem 0 -3rem;
+}
+.credits-marks img {
+  height: 64px;
+  width: auto;
+  image-rendering: pixelated;
+  animation: credits-mark-idle 2.2s ease-in-out infinite;
+}
+.credits-marks img:nth-child(2) { animation-delay: .3s; }
+.credits-marks img:nth-child(3) { animation-delay: .6s; }
+@keyframes credits-mark-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .credits-marks img { animation: none; }
 }
 
 .outcomes {

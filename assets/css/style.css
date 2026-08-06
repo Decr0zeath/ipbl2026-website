@@ -764,7 +764,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-60%, -50%);
   width: 187.5%;
   aspect-ratio: 1 / 1;
   height: auto;
@@ -1060,7 +1060,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
     z-index: 0;
     max-width: none;
     aspect-ratio: auto;
-    opacity: .22;
+    opacity: .80;
     filter: grayscale(35%);
     pointer-events: none;
   }

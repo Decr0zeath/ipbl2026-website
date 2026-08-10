@@ -25,7 +25,6 @@ The site covers:
 - **University of San Jose – Recoletos** (host, Cebu, Philippines)
 - **Southern Taiwan University of Science and Technology** (Tainan, Taiwan)
 - **Osaka Institute of Technology** (Osaka, Japan)
-- **Saint Michael's College of Laguna** (Biñan, Laguna, Philippines)
 
 ## Deploying to GitHub Pages
 

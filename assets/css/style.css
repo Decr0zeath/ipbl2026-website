@@ -680,39 +680,51 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .sponsor-cycle {
   position: relative;
-  width: 96px;
+  width: 150px;
   height: 32px;
   overflow: hidden;
   flex: 0 0 auto;
 }
-.sponsor-cycle img {
+.sponsor-cycle > img,
+.sponsor-cycle > .cycle-pair {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
   opacity: 0;
   animation: sponsor-cycle-fade 15s infinite;
 }
-.sponsor-cycle img.pop-chip {
+.sponsor-cycle > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.sponsor-cycle > img.pop-chip {
   background: var(--paper);
   border-radius: .25rem;
   padding: 3px;
   box-sizing: border-box;
 }
-.sponsor-cycle img:nth-child(1) { animation-delay: 0s; }
-.sponsor-cycle img:nth-child(2) { animation-delay: -3s; }
-.sponsor-cycle img:nth-child(3) { animation-delay: -6s; }
-.sponsor-cycle img:nth-child(4) { animation-delay: -9s; }
-.sponsor-cycle img:nth-child(5) { animation-delay: -12s; }
+.cycle-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+.cycle-pair img { max-height: 80%; max-width: 46%; width: auto; object-fit: contain; }
+.cycle-pair img.cycle-pair-lead { max-height: 100%; max-width: 62%; }
+.sponsor-cycle > *:nth-child(1) { animation-delay: 0s; }
+.sponsor-cycle > *:nth-child(2) { animation-delay: -2.5s; }
+.sponsor-cycle > *:nth-child(3) { animation-delay: -5s; }
+.sponsor-cycle > *:nth-child(4) { animation-delay: -7.5s; }
+.sponsor-cycle > *:nth-child(5) { animation-delay: -10s; }
+.sponsor-cycle > *:nth-child(6) { animation-delay: -12.5s; }
 @keyframes sponsor-cycle-fade {
   0%, 100% { opacity: 0; }
-  2%, 18% { opacity: 1; }
-  20% { opacity: 0; }
+  2%, 14% { opacity: 1; }
+  16.67% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sponsor-cycle img { animation: none; opacity: 0; }
-  .sponsor-cycle img:first-child { opacity: 1; }
+  .sponsor-cycle > img, .sponsor-cycle > .cycle-pair { animation: none; opacity: 0; }
+  .sponsor-cycle > *:first-child { opacity: 1; }
 }
 .foot-partners {
   display: flex;
@@ -883,38 +895,18 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .uni-card {
   padding: 1.6rem 1.4rem;
-  background: var(--paper-2);
   position: relative;
 }
-.uni-card.host { background: var(--green-800); color: var(--paper); }
-.uni-card.host h3 { color: var(--paper); }
-.uni-card.host .uni-role { color: var(--gold-300); }
-.uni-card .uni-role {
-  font-family: var(--font-mono);
-  font-size: .72rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--gold-700);
-  margin-bottom: .6rem;
-}
-.uni-card h3 {
-  margin: 0 0 .4rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-.uni-card p { font-size: .92rem; margin: 0; color: inherit; }
-.uni-card.with-logo { display: flex; gap: 1rem; align-items: flex-start; }
 .uni-logo {
-  flex: 0 0 auto;
-  width: 3rem;
-  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .uni-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.uni-copy { min-width: 0; }
+.uni-card.host .uni-logo { height: 5.5rem; gap: 1.2rem; }
+.uni-card.host .uni-logo img:first-child { max-width: 6.2rem; max-height: 6.2rem; }
+.uni-card.host .uni-logo img:last-child { max-height: 2.1rem; max-width: 26rem; filter: brightness(0); }
+.uni-card.partner .uni-logo img { max-height: 6.4rem; max-width: 100%; }
 
 .sponsor-marquee {
   overflow: hidden;
@@ -947,6 +939,9 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .sponsor-lockup { display: flex; align-items: center; gap: .75rem; min-width: 0; max-width: 100%; }
 .sponsor-lockup .sponsor-mark { max-height: 2.75rem; max-width: 2.75rem; }
 .sponsor-lockup .sponsor-wordmark { max-height: 1.7rem; max-width: 5.2rem; }
+.sponsor-card-wide { width: 280px; }
+.sponsor-card-wide .sponsor-wordmark { max-height: 2.2rem; max-width: 9rem; }
+.sponsor-card-wide .sponsor-mark { max-height: 3.4rem; max-width: 3.4rem; }
 @media (prefers-reduced-motion: reduce) {
   .sponsor-track { animation: none; }
   .sponsor-track .sponsor-card[aria-hidden="true"] { display: none; }

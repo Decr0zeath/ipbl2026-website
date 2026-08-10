@@ -903,9 +903,9 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   justify-content: center;
 }
 .uni-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.uni-card.host .uni-logo { height: 5.5rem; gap: 1.2rem; }
+.uni-card.host .uni-logo { min-height: 5.5rem; gap: 1.2rem; flex-wrap: wrap; }
 .uni-card.host .uni-logo img:first-child { max-width: 6.2rem; max-height: 6.2rem; }
-.uni-card.host .uni-logo img:last-child { max-height: 2.1rem; max-width: 26rem; filter: brightness(0); }
+.uni-card.host .uni-logo img:last-child { max-height: 2.1rem; max-width: min(26rem, 100%); filter: brightness(0); }
 .uni-card.partner .uni-logo img { max-height: 6.4rem; max-width: 100%; }
 
 .sponsor-marquee {

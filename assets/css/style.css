@@ -369,6 +369,12 @@ figure .frame kicanvas-embed {
   height: 500px;
   border: 1px solid var(--rule);
 }
+figure .frame iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 1px solid var(--rule);
+}
 
 /* Square frames (assembly-sequence photos): each figure's subject sits at
    a different point in its source photo, so crop position is set per image. */
@@ -876,6 +882,98 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 }
 .hero-mark.is-loading model-viewer { visibility: hidden; }
 
+/* ---------- Event Hero (event.html only) ---------- */
+/* Full-bleed backdrop of crossfading photos under a dark scrim; JS (see
+   main.js) cycles .is-active between the stacked images on a timer. */
+.event-hero {
+  position: relative;
+  min-height: calc(100vh - var(--topbar-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.event-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.event-hero-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+.event-hero-bg img.is-active { opacity: 1; }
+.event-hero-bg img:nth-child(3) { object-position: center 82%; }
+.event-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to top, var(--green-900) 0%, rgba(6, 32, 15, .4) 45%, rgba(6, 32, 15, .6) 100%),
+    linear-gradient(to right, rgba(6, 32, 15, .6) 0%, rgba(6, 32, 15, .2) 45%, rgba(6, 32, 15, .6) 100%);
+}
+.event-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+  padding: 0 var(--gutter);
+  text-align: center;
+  color: var(--paper);
+}
+.event-hero-kicker {
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+  margin: 0 0 1.2rem;
+}
+.event-hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 3vw + 1.6rem, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin: 0 0 1.2rem;
+}
+.event-hero-meta {
+  font-family: var(--font-sans);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--gold-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  margin: 0 0 1.5rem;
+}
+.event-hero-meta .dot {
+  width: 4px;
+  height: 4px;
+  background: var(--gold-500);
+  border-radius: 50%;
+  display: inline-block;
+}
+.event-hero-sub {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--paper);
+  opacity: .88;
+  margin: 0 0 2rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-hero-bg img { transition: none; }
+}
+
 /* Home sections (non-content pages share these) */
 .home-section {
   max-width: var(--maxw);
@@ -1218,13 +1316,14 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   .brand-sub { font-size: .65rem; }
   .hero-mark model-viewer { width: min(190vw, 120vh); height: min(190vw, 120vh); }
   .outcomes { grid-template-columns: 1fr; }
+  figure .frame iframe { height: 300px; }
 }
 
 /* ---------- Print ----------
    Each section should print as a clean, self-contained handout. */
 @media print {
   .topbar, aside.sidebar, .nav-toggle, .pagination,
-  footer.site-footer, .cta-band { display: none; }
+  footer.site-footer, .cta-band, .event-hero { display: none; }
   .layout { display: block; padding: 0; }
   main.content { max-width: 100%; }
 

@@ -696,7 +696,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   position: absolute;
   inset: 0;
   opacity: 0;
-  animation: sponsor-cycle-fade 15s infinite;
+  animation: sponsor-cycle-fade 20s infinite;
 }
 .sponsor-cycle > img {
   width: 100%;
@@ -723,10 +723,12 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .sponsor-cycle > *:nth-child(4) { animation-delay: -7.5s; }
 .sponsor-cycle > *:nth-child(5) { animation-delay: -10s; }
 .sponsor-cycle > *:nth-child(6) { animation-delay: -12.5s; }
+.sponsor-cycle > *:nth-child(7) { animation-delay: -15s; }
+.sponsor-cycle > *:nth-child(8) { animation-delay: -17.5s; }
 @keyframes sponsor-cycle-fade {
   0%, 100% { opacity: 0; }
-  2%, 14% { opacity: 1; }
-  16.67% { opacity: 0; }
+  1.5%, 10.5% { opacity: 1; }
+  12.5% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sponsor-cycle > img, .sponsor-cycle > .cycle-pair { animation: none; opacity: 0; }
@@ -1033,13 +1035,29 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   justify-content: center;
   padding: 1rem 1.4rem;
 }
-.sponsor-card img { max-width: 100%; max-height: 3rem; width: auto; height: auto; min-width: 0; object-fit: contain; }
+.sponsor-card img { max-width: 100%; max-height: 2.4rem; width: auto; height: auto; min-width: 0; object-fit: contain; }
 .sponsor-lockup { display: flex; align-items: center; gap: .75rem; min-width: 0; max-width: 100%; }
-.sponsor-lockup .sponsor-mark { max-height: 2.75rem; max-width: 2.75rem; }
-.sponsor-lockup .sponsor-wordmark { max-height: 1.7rem; max-width: 5.2rem; }
+.sponsor-lockup .sponsor-mark { max-height: 2.2rem; max-width: 2.2rem; }
+.sponsor-lockup .sponsor-wordmark { max-height: 1.36rem; max-width: 4.16rem; }
 .sponsor-card-wide { width: 280px; }
-.sponsor-card-wide .sponsor-wordmark { max-height: 2.2rem; max-width: 9rem; }
-.sponsor-card-wide .sponsor-mark { max-height: 3.4rem; max-width: 3.4rem; }
+.sponsor-card-wide .sponsor-wordmark { max-height: 1.76rem; max-width: 7.2rem; }
+.sponsor-card-wide .sponsor-mark { max-height: 2.72rem; max-width: 2.72rem; }
+
+.sponsor-featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.sponsor-featured-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.4rem;
+}
+.sponsor-featured-card img { max-width: 100%; max-height: 4.4rem; width: auto; height: auto; object-fit: contain; }
+.sponsor-featured-card .sponsor-mark { max-height: 4rem; max-width: 4rem; }
+.sponsor-featured-card .sponsor-wordmark { max-height: 2.3rem; max-width: 10rem; }
 @media (prefers-reduced-motion: reduce) {
   .sponsor-track { animation: none; }
   .sponsor-track .sponsor-card[aria-hidden="true"] { display: none; }

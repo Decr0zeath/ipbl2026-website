@@ -1382,7 +1382,6 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   height: 26px;
   max-width: 26px;
   margin: 0 .75rem .75rem 0;
-  padding-left: .6rem;
   background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: 999px;
@@ -1390,18 +1389,24 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   color: var(--ink-mute);
   white-space: nowrap;
   overflow: hidden;
-  transition: max-width .25s ease;
+  transition: max-width .25s ease, padding-left .25s ease;
   cursor: pointer;
 }
+/* Left padding for the credit text is added only once expanded — kept off
+   the collapsed pill because the icon's box is sized to exactly fill the
+   26px circle's inner content area (26px minus the 1px border on each
+   side); any padding-left there would starve the icon of room and get it
+   clipped off-centre by overflow: hidden. */
 .venue-map .leaflet-control-attribution.venue-map-attr:hover,
 .venue-map .leaflet-control-attribution.venue-map-attr:focus-within,
 .venue-map .leaflet-control-attribution.venue-map-attr.isOpen {
   max-width: 320px;
+  padding-left: .6rem;
 }
 .venue-map-attr-icon {
-  flex: 0 0 26px;
-  width: 26px;
-  height: 26px;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;

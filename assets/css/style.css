@@ -934,7 +934,6 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   transition: opacity 2s ease;
 }
 .event-hero-bg img.is-active { opacity: 1; }
-.event-hero-bg img:nth-child(3) { object-position: center 82%; }
 .event-hero-scrim {
   position: absolute;
   inset: 0;
@@ -966,6 +965,13 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--paper);
+  margin: 0 0 1.2rem;
+}
+.event-hero-subtitle {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.15rem, .6vw + 1rem, 1.5rem);
+  color: var(--gold-100);
   margin: 0 0 1.2rem;
 }
 .event-hero-meta {

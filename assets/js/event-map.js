@@ -12,13 +12,11 @@
   var mount = document.getElementById('venueMap');
   if (!mount || typeof L === 'undefined') return;
 
-  // Coordinates: USJ-R Main Campus is a surveyed OpenStreetMap point.
-  // The Quadricentennial Campus is too new for OSM/Nominatim to have
-  // an entry yet, so its coordinate is a best-effort placement along
-  // Colon Street and should be checked against the real building.
+  // Coordinates: both are surveyed points (Quadricentennial Campus /
+  // School of Computer Studies building, and USJ-R Main Campus).
   var campuses = [
-    { id: 'quad', name: 'USJ-R Quadricentennial Campus', role: 'iPBL 2026 Venue', lat: 10.2964, lng: 123.8985, primary: true },
-    { id: 'main', name: 'USJ-R Main Campus', role: 'Magallanes Street', lat: 10.29403, lng: 123.89749, primary: false }
+    { id: 'quad', name: 'Quadricentennial Campus', role: 'School of Computer Studies', lat: 10.2950683, lng: 123.8960076, primary: true },
+    { id: 'main', name: 'USJ-R Main Campus', role: 'University of San Jose - Recoletos', lat: 10.29403, lng: 123.89749, primary: false }
   ];
 
   var mapLabels = [
@@ -48,10 +46,13 @@
   var PIN_GAP = 8; // desired px gap between a pin's edge and its label, equalised below
 
   function pinIcon(kind, scale) {
-    var w = Math.round(30 * scale), h = Math.round(30 * scale);
-    var svg = '<svg viewBox="0 0 24 24" width="' + w + '" height="' + h + '" xmlns="http://www.w3.org/2000/svg">' +
-      '<path fill="currentColor" d="M12 0C7.58 0 4 3.58 4 8c0 5.25 8 16 8 16s8-10.75 8-16c0-4.42-3.58-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>';
-    return L.divIcon({ className: 'map-pin map-pin--' + kind, html: svg, iconSize: [w, h], iconAnchor: [w / 2, h] });
+    var w = Math.round(30 * scale), h = Math.round(40 * scale);
+    var svg = '<svg class="map-pin-icon map-pin-icon--' + kind + '" viewBox="0 0 30 40" width="' + w + '" height="' + h + '" xmlns="http://www.w3.org/2000/svg">' +
+      '<path fill="currentColor" d="M15 0C6.7 0 0 6.7 0 15c0 11 15 25 15 25s15-14 15-25C30 6.7 23.3 0 15 0Z"/>' +
+      '<circle cx="15" cy="15" r="5" fill="#fff"/></svg>';
+    // Empty className strips Leaflet's default .leaflet-div-icon white box;
+    // color/shadow are applied via the CSS classes on the svg itself.
+    return L.divIcon({ className: '', html: svg, iconSize: [w, h], iconAnchor: [w / 2, h] });
   }
 
   var boundsPts = [];
@@ -60,7 +61,9 @@
     var kind = c.primary ? 'primary' : 'secondary';
     var icon = pinIcon(kind, c.primary ? 1 : 0.82);
     var halfWidth = icon.options.iconSize[0] / 2;
-    var tipToMiddle = Math.round(icon.options.iconSize[1] * 0.55);
+    // Bubble centre sits at local y=15 of the 30x40 teardrop, iconAnchor
+    // at the tip (local y=40) — 25/40 of the icon's height back up from it.
+    var tipToMiddle = Math.round(icon.options.iconSize[1] * 0.625);
 
     L.marker([c.lat, c.lng], { icon: icon, keyboard: false, pane: 'pinPane' }).addTo(map).bindTooltip(
       '<span class="map-tooltip-name">' + c.name + '</span><span class="map-tooltip-role">' + c.role + '</span>',
@@ -69,8 +72,12 @@
         direction: c.primary ? 'left' : 'right',
         // offset.x carries each pin's own half-width so the visible gap
         // from pin edge to label reads the same on both sides even though
-        // the primary pin renders larger than the secondary one.
-        offset: [halfWidth + PIN_GAP, -tipToMiddle],
+        // the primary pin renders larger than the secondary one. Leaflet
+        // measures a 'left' tooltip's offset from the same pin-centre
+        // origin as a 'right' one (not mirrored), so the primary pin's
+        // offset has to go negative or the label lands on top of the pin
+        // instead of beside it.
+        offset: [c.primary ? -(halfWidth + PIN_GAP) : (halfWidth + PIN_GAP), -tipToMiddle],
         className: 'map-tooltip map-tooltip--' + kind
       }
     );
@@ -84,7 +91,20 @@
     boundsPts.push([l.lat, l.lng]);
   });
 
-  map.fitBounds(L.latLngBounds(boundsPts), { padding: [50, 50], maxZoom: 17 });
+  // The Quadricentennial pin sits at the western edge of the whole point
+  // cluster, so its permanent tooltip (direction: 'left', ~190px wide)
+  // extends past the fitted bounds on that side. paddingTopLeft reserves
+  // room for it directly instead of relying on fitBounds' padding, which
+  // only guarantees clearance around the raw lat/lng points, not the
+  // rendered tooltip box hanging off of one of them.
+  map.fitBounds(L.latLngBounds(boundsPts), {
+    paddingTopLeft: [200, 50],
+    paddingBottomRight: [50, 50],
+    maxZoom: 17
+  });
+  // One step in from whatever fitBounds settled on, so the default view
+  // reads closer instead of the widest framing that still fits everyone.
+  map.setZoom(map.getZoom() + 1);
 
   // Container is sized by CSS/flex layout, so Leaflet needs a nudge to
   // remeasure once that layout settles, or tiles render into stale bounds.

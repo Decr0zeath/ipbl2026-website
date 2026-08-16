@@ -15,7 +15,7 @@
   // Coordinates: both are surveyed points (Quadricentennial Campus /
   // School of Computer Studies building, and USJ-R Main Campus).
   var campuses = [
-    { id: 'quad', name: 'Quadricentennial Campus', role: 'School of Computer Studies', lat: 10.2950683, lng: 123.8960076, primary: true },
+    { id: 'quad', name: 'Quadricentennial Campus', role: 'iPBL 2026 Venue', lat: 10.2950683, lng: 123.8960076, primary: true },
     { id: 'main', name: 'USJ-R Main Campus', role: 'University of San Jose - Recoletos', lat: 10.29403, lng: 123.89749, primary: false }
   ];
 

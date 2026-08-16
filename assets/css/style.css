@@ -42,6 +42,26 @@
   --shadow-md: 0 8px 24px -12px rgba(13,62,32,.25);
 }
 
+/* ---------- Event page theme override (event.html only) ----------
+   Poster-matched palette: vivid orange primary, dark brown secondary,
+   swapped in as custom-property overrides so every component built on
+   the --green---gold-* tokens (topbar, buttons, headings, footer,
+   map pins) repaints without touching each rule individually. */
+body.event-page {
+  --green-900: #1F1309;
+  --green-800: #2E1B0E;
+  --green-700: #7A4419;
+  --green-600: #8F5A2E;
+  --green-100: #E7D9C9;
+  --green-50:  #F3E9DE;
+
+  --gold-700: #B7410E;   /* matches --orange-700 so map pin + text accents read as one orange */
+  --gold-600: #C96A0C;
+  --gold-500: #F0850F;
+  --gold-300: #FFB066;
+  --gold-100: #FFD9A8;
+}
+
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; color-scheme: light; background: var(--paper); }
@@ -679,6 +699,10 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   flex-wrap: wrap;
   gap: 1.25rem;
 }
+/* .colophon's border/text tints are hardcoded rgba (not tokens), so the
+   event-page override above can't reach them — restated here in the
+   poster orange/brown instead of the manual's green/gold. */
+body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rgba(231, 217, 201, 0.75); }
 .colophon-sponsors {
   display: flex;
   align-items: center;
@@ -916,8 +940,8 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(to top, var(--green-900) 0%, rgba(6, 32, 15, .4) 45%, rgba(6, 32, 15, .6) 100%),
-    linear-gradient(to right, rgba(6, 32, 15, .6) 0%, rgba(6, 32, 15, .2) 45%, rgba(6, 32, 15, .6) 100%);
+    linear-gradient(to top, var(--green-900) 0%, rgba(31, 19, 9, .4) 45%, rgba(31, 19, 9, .6) 100%),
+    linear-gradient(to right, rgba(31, 19, 9, .6) 0%, rgba(31, 19, 9, .2) 45%, rgba(31, 19, 9, .6) 100%);
 }
 .event-hero-content {
   position: relative;
@@ -1001,12 +1025,12 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 5.5rem;
 }
-.uni-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.uni-card.host .uni-logo { min-height: 5.5rem; gap: 1.2rem; flex-wrap: wrap; }
-.uni-card.host .uni-logo img:first-child { max-width: 6.2rem; max-height: 6.2rem; }
-.uni-card.host .uni-logo img:last-child { max-height: 2.1rem; max-width: min(26rem, 100%); filter: brightness(0); }
-.uni-card.partner .uni-logo img { max-height: 6.4rem; max-width: 100%; }
+.uni-logo img { max-width: 100%; max-height: 6.4rem; object-fit: contain; }
+.uni-card.dual-logo .uni-logo { gap: .9rem; flex-wrap: nowrap; }
+.uni-card.dual-logo .uni-logo img:first-child { max-width: 5.8rem; max-height: 5.8rem; flex: 0 0 auto; }
+.uni-card.dual-logo .uni-logo img:last-child { max-height: 2rem; max-width: 100%; flex: 1 1 auto; min-width: 0; filter: brightness(0); }
 
 .sponsor-marquee {
   overflow: hidden;
@@ -1035,7 +1059,7 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
   justify-content: center;
   padding: 1rem 1.4rem;
 }
-.sponsor-card img { max-width: 100%; max-height: 2.4rem; width: auto; height: auto; min-width: 0; object-fit: contain; }
+.sponsor-card img { width: 100%; height: 2.4rem; min-width: 0; object-fit: contain; }
 .sponsor-lockup { display: flex; align-items: center; gap: .75rem; min-width: 0; max-width: 100%; }
 .sponsor-lockup .sponsor-mark { max-height: 2.2rem; max-width: 2.2rem; }
 .sponsor-lockup .sponsor-wordmark { max-height: 1.36rem; max-width: 4.16rem; }
@@ -1162,6 +1186,42 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .scope-grid li { font-size: .95rem; line-height: 1.6; margin-bottom: .75rem; }
 .scope-grid li:last-child { margin-bottom: 0; }
 
+/* ---------- Programme layout (event.html only) ---------- */
+.programme-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+.programme-intro {
+  position: sticky;
+  top: 90px;
+}
+.programme-intro h2 { margin-top: 0; }
+.programme-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+.programme-card {
+  padding: 1.6rem 1.6rem 1.8rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+}
+.programme-card h3 {
+  margin: 0 0 1.1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.programme-card:first-child h3 { color: var(--green-700); }
+.programme-card:last-child h3 { color: var(--gold-700); }
+.programme-card p { margin: 0; font-size: .95rem; line-height: 1.65; color: var(--ink-soft); }
+.programme-card .spec-list { margin: 0; }
+
 /* CTA */
 .cta-band {
   background: var(--green-800);
@@ -1214,14 +1274,23 @@ footer.site-footer a:hover { color: var(--gold-500); text-decoration: underline;
 .name-accent { color: var(--gold-700); }
 
 /* ---------- Venue Map (event.html only) ---------- */
-/* Isolates Leaflet's internal z-indexes (900-1000 range) inside their own
-   stacking context so its controls/tooltips can never rise above the
-   sticky topbar as the map scrolls underneath it. */
-figure .frame.venue-map-frame { isolation: isolate; z-index: 0; }
+/* Breaks out of .home-section's centred max-width to run the full width of
+   the viewport rather than sitting inset in a bordered figure frame; the
+   figcaption below stays put in the normal reading column. Isolates
+   Leaflet's internal z-indexes (900-1000 range) inside their own stacking
+   context so its controls/tooltips can never rise above the sticky topbar
+   as the map scrolls underneath it. */
+.venue-map-frame {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  isolation: isolate;
+  z-index: 0;
+}
 .venue-map {
   display: block;
   width: 100%;
-  height: 420px;
+  height: 480px;
   border: 1px solid var(--rule);
   background: var(--paper-2);
 }
@@ -1290,9 +1359,11 @@ figure .frame.venue-map-frame { isolation: isolate; z-index: 0; }
 .venue-map .leaflet-control-zoom a:first-child { border-bottom: 1px solid var(--rule); }
 .venue-map .leaflet-control-zoom a:hover { background: var(--green-800); color: var(--paper); }
 
-/* Collapsed to a small "i" circle flush in the bottom-right corner by
-   default. row-reverse keeps the icon pinned at that corner (Leaflet
-   floats this control's right edge against the map edge) while the
+/* Collapsed to a small "i" circle, inset from the bottom-right corner by
+   default (Leaflet gives the attribution control no margin of its own, so
+   without this it sits flush against the map's true edge, which reads as
+   jammed into the corner now that the map itself runs to the edge of the
+   viewport). row-reverse keeps the icon pinned at that corner while the
    credit text rolls out from behind it on hover/focus, growing toward
    the left where the map has room; a fixed pixel width would either
    clip the credit or leave slack, so max-width is animated to a value
@@ -1303,6 +1374,7 @@ figure .frame.venue-map-frame { isolation: isolate; z-index: 0; }
   align-items: center;
   height: 26px;
   max-width: 26px;
+  margin: 0 .75rem .75rem 0;
   padding-left: .6rem;
   background: var(--paper);
   border: 1px solid var(--rule);
@@ -1361,31 +1433,34 @@ figure .frame.venue-map-frame { isolation: isolate; z-index: 0; }
 /* ---------- Spec list ---------- */
 .spec-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.2rem;
+  gap: .9rem;
   list-style: none;
   padding: 0;
   margin: 2em 0;
 }
 .spec-list li {
-  padding: 1rem 1.1rem;
-  background: var(--paper-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid var(--rule);
 }
+.spec-list li:last-child { padding-bottom: 0; border-bottom: 0; }
 .spec-list .spec-label {
-  display: block;
   font-family: var(--font-sans);
   font-size: .72rem;
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--ink-mute);
-  margin-bottom: .3rem;
 }
 .spec-list .spec-value {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--green-800);
   font-weight: 500;
+  text-align: right;
 }
 
 /* ---------- Responsive ---------- */
@@ -1438,6 +1513,8 @@ figure .frame.venue-map-frame { isolation: isolate; z-index: 0; }
   .scope-layout { grid-template-columns: 1fr; gap: 1.5rem; }
   .scope-intro { position: static; }
   .scope-grid { gap: 1.5rem; }
+  .programme-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  .programme-intro { position: static; }
   .outcomes { grid-template-columns: repeat(2, 1fr); }
   body { font-size: 17px; }
 }

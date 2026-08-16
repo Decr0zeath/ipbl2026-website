@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
   <link rel="icon" type="image/webp" href="assets/logo/web-crawler-white.webp" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -113,12 +114,12 @@
   <p class="section-intro">iPBL 2026 is held on-site at the USJ-R Quadricentennial Campus, the university's newest campus building along Colon Street in downtown Cebu City.</p>
 
   <figure class="stack-top">
-    <div class="frame">
-      <iframe src="https://maps.google.com/maps?q=USJ-R%20Quadricentennial%20Campus%2C%20Colon%20Street%2C%20Cebu%20City&t=&z=16&ie=UTF8&iwloc=&output=embed" title="Map of USJ-R Quadricentennial Campus, Colon Street, Cebu City" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="frame venue-map-frame">
+      <div id="venueMap" class="venue-map" role="img" aria-label="Map of the USJ-R Quadricentennial Campus venue on Colon Street, with the USJ-R Main Campus shown nearby for orientation"></div>
     </div>
-    <figcaption><span class="fig-label">Map</span>USJ-R Quadricentennial Campus, Colon Street, Cebu City, Philippines.</figcaption>
+    <figcaption><span class="fig-label">Map</span>USJ-R Quadricentennial Campus, Colon Street, Cebu City, Philippines. Orange marks the venue; green marks USJ-R's Main Campus for orientation.</figcaption>
   </figure>
-  <p class="aside-note"><a href="https://www.google.com/maps/search/?api=1&query=USJ-R+Quadricentennial+Campus%2C+Colon+Street%2C+Cebu+City" target="_blank" rel="noopener">Open in Google Maps →</a></p>
+  <p class="aside-note">Drag to pan, use the +/&minus; control to zoom.<br /><a href="https://www.google.com/maps/dir/?api=1&destination=USJ-R%20Quadricentennial%20Campus%2C%20Colon%20Street%2C%20Cebu%20City" target="_blank" rel="noopener">Get directions in Google Maps →</a></p>
 </section>
 
 <!-- ============== SPONSORS ============== -->
@@ -235,6 +236,8 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="assets/js/event-map.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

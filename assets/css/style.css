@@ -1012,6 +1012,7 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   margin: 0 auto;
   padding: 4rem var(--gutter);
   border-top: 1px solid var(--rule);
+  scroll-margin-top: var(--topbar-h);
 }
 .home-section h2 {
   font-size: clamp(2rem, 3.5vw, 3rem);

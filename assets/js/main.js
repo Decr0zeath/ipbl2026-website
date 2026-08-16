@@ -127,16 +127,29 @@
   initScrollReveal(document);
 
   // ---- Event hero background crossfade (event.html only) ----
+  // Only the first slide ships with a real src; the rest carry data-src and
+  // are fetched one at a time, one interval ahead of when they're shown, so
+  // the page never pays for all nine full-resolution photos up front.
   (function initEventHero() {
     var slides = document.querySelectorAll('.event-hero-bg img');
     if (slides.length < 2) return;
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    function preload(img) {
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+      }
+    }
+
     var current = 0;
+    preload(slides[(current + 1) % slides.length]);
+
     setInterval(function () {
       slides[current].classList.remove('is-active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('is-active');
+      preload(slides[(current + 1) % slides.length]);
     }, 6000);
   })();
 

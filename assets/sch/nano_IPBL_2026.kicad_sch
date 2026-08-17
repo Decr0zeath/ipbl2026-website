@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "iPBL 2026 - Servo Nano Connection")
-		(date "sam. 04 avril 2015")
-		(rev "v2.1")
+		(date "August 08, 2026")
+		(rev "v3.0")
 	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x01_Pin"
@@ -2098,22 +2098,14 @@
 		(uuid "57a92a9c-f375-4788-b950-1d8760dffcb3")
 	)
 	(junction
-		(at 124.46 39.37)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "60ef576d-9cf2-44cc-a238-7a56f0c038f0")
-	)
-	(junction
 		(at 95.25 39.37)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6d403a9e-cfa9-43db-a1f8-72af23b92739")
 	)
-	(junction
-		(at 106.68 39.37)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b94dfd52-48da-40d5-a016-801dce575f8a")
+	(no_connect
+		(at 124.46 41.91)
+		(uuid "03b3b7fc-b010-4f20-be53-286732ae0968")
 	)
 	(no_connect
 		(at 139.7 80.01)
@@ -2173,16 +2165,6 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 39.37) (xy 147.32 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0274c0eb-2890-4535-8bb4-c1f46dd956c0")
-	)
-	(wire
-		(pts
 			(xy 106.68 72.39) (xy 114.3 72.39)
 		)
 		(stroke
@@ -2210,16 +2192,6 @@
 			(type default)
 		)
 		(uuid "0e224ecd-7983-421b-9b96-fbbf9766543e")
-	)
-	(wire
-		(pts
-			(xy 124.46 39.37) (xy 124.46 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "13be6933-0dbe-457f-b1f6-030043e1c5d5")
 	)
 	(wire
 		(pts
@@ -2393,16 +2365,6 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 39.37) (xy 124.46 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "42828812-9438-4d2b-a0fd-8504ff36be7f")
-	)
-	(wire
-		(pts
 			(xy 129.54 92.71) (xy 129.54 96.52)
 		)
 		(stroke
@@ -2430,16 +2392,6 @@
 			(type default)
 		)
 		(uuid "5a5abf1b-0188-4015-8bb0-b99093cc53ac")
-	)
-	(wire
-		(pts
-			(xy 147.32 50.8) (xy 147.32 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5b8199d7-039e-4c52-911f-531cb98bfa34")
 	)
 	(wire
 		(pts
@@ -2760,16 +2712,6 @@
 			(type default)
 		)
 		(uuid "b889c88a-2fed-4a66-aa24-ab2db36444d1")
-	)
-	(wire
-		(pts
-			(xy 147.32 39.37) (xy 124.46 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "baab2676-9aef-4e8e-9bdb-646722d235dc")
 	)
 	(wire
 		(pts
@@ -5726,84 +5668,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 147.32 54.61 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c59c713d-dc23-4aec-87d5-231d5748be23")
-		(property "Reference" "#PWR08"
-			(at 147.32 60.96 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 147.32 59.69 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 147.32 54.61 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 54.61 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 147.32 54.61 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "69991f6e-c8b4-46d5-a332-132d27187938")
-		)
-		(instances
-			(project "nano_IPBL_2026"
-				(path "/0d35483a-0b12-46cc-b9f2-896fd6831779"
-					(reference "#PWR08")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 127 116.84 0)
 		(unit 1)
 		(body_style 1)
@@ -6385,99 +6249,6 @@
 			(project "nano_IPBL_2026"
 				(path "/0d35483a-0b12-46cc-b9f2-896fd6831779"
 					(reference "#PWR021")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Polarized")
-		(at 147.32 46.99 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f2b24296-6689-4eee-8059-fb694db60063")
-		(property "Reference" "C3"
-			(at 151.13 44.8309 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100uF"
-			(at 151.13 47.3709 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm"
-			(at 148.2852 50.8 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 147.32 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Polarized capacitor"
-			(at 147.32 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KiLib_Generator" "capacitor/THT/other"
-			(at 147.32 46.99 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "ce795296-23df-492e-8bf8-9b1f7094f22d")
-		)
-		(pin "2"
-			(uuid "b32e92fb-1189-4a86-b2c0-3b557649f648")
-		)
-		(instances
-			(project "nano_IPBL_2026"
-				(path "/0d35483a-0b12-46cc-b9f2-896fd6831779"
-					(reference "C3")
 					(unit 1)
 				)
 			)

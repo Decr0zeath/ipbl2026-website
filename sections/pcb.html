@@ -9,7 +9,7 @@
 
     <div class="callout warning">
       <div class="callout-label">Warning · Not everything arrives in the box</div>
-      <p>The courier used for this shipment classifies electrolytic capacitors, lithium battery cells, the buck converter module, and the twelve micro servos as restricted goods, so C1–C3, BT1/BT2, U2, and M1–M12 were withheld from every kit rather than risk the parcel being held at customs. These components must be sourced locally before soldering begins; see the bill of materials in <a href="#bom">Section 02</a> for exact part numbers and ratings.</p>
+      <p>The courier used for this shipment classifies electrolytic capacitors, lithium battery cells, the buck converter module, and the twelve micro servos as restricted goods, so C1–C2, BT1/BT2, U2, and M1–M12 were withheld from every kit rather than risk the parcel being held at customs. These components must be sourced locally before soldering begins; see the bill of materials in <a href="#bom">Section 02</a> for exact part numbers and ratings.</p>
     </div>
 
     <div class="callout note">
@@ -22,15 +22,10 @@
     <p>The schematic is divided into four functional sections. Read each one and confirm you can locate its components on the bare PCB. The schematic PDF is in the project repository: <a href="assets/pdf/quadruped-schematic-v1.pdf" download><code>quadruped-schematic-v1.pdf</code></a><span class="dl-tag">↓</span>.</p>
 
     <figure>
-      <div class="frame"><img src="assets/images/sch.webp" alt="Schematic, servo and power sections" width="885" height="955" loading="lazy" decoding="async" /></div>
-      <figcaption><span class="fig-label">Figure 11</span>Reproduction of the canonical schematic. Refer to the PDF in the repository for full-resolution.</figcaption>
-    </figure>
-
-    <figure>
       <div class="frame">
         <kicanvas-embed src="assets/sch/nano_IPBL_2026.kicad_sch" controls="full"></kicanvas-embed>
       </div>
-      <figcaption><span class="fig-label">Interactive Schematic</span>Pan and zoom the live schematic. Click a symbol to highlight its net.</figcaption>
+      <figcaption><span class="fig-label">Figure 11</span>Pan and zoom the live schematic. Click a symbol to highlight its net.</figcaption>
     </figure>
 
     <h3>Section A · Power input and switch</h3>
@@ -44,18 +39,13 @@
 
     <h3>Section B · Buck converter and rails</h3>
 
-    <p>The buck converter module (XL4015E1) is wired in off-board, ahead of J1, rather than soldered to the PCB; the charger module (U3) is wired in parallel with it, both connecting directly to the battery pack's terminals, so the pack can be recharged without disturbing the buck converter or the board. What arrives at J1 is already regulated: a net labelled <code>+5V</code> on the PCB. A 100 µF capacitor (C1), soldered to the board itself at the J1 input, provides bulk filtering for that incoming rail before it splits into two physical branches:</p>
+    <p>The buck converter module (XL4015E1) is wired in off-board, ahead of J1, rather than soldered to the PCB; the charger module (U3) is wired in parallel with it, both connecting directly to the battery pack's terminals, so the pack can be recharged without disturbing the buck converter or the board. What arrives at J1 is already regulated: a net labelled <code>+5V_SERVO</code> on the PCB. Two 470 µF capacitors (C1, C2), paralleled with each other, sit on that rail and decouple the twelve servo headers against inrush current.</p>
 
-    <ul>
-      <li>A low-current <code>+5V_LOGIC</code> branch feeding the Nano's VIN pin directly (its 5V pin is left unconnected)</li>
-      <li>A high-current <code>+5V_SERVO</code> branch going to the twelve servo headers, decoupled by C2 and C3 (470 µF each)</li>
-    </ul>
-
-    <p>Both branches share ground and run as separate copper traces from J1.</p>
+    <p>This board revision carries only that one branch. Earlier revisions also ran a low-current <code>+5V_LOGIC</code> branch to the Nano's VIN pin, filtered at the J1 input by a 100 µF capacitor (C3, since removed); both are gone now. The Nano is powered separately, over USB, from one of the Raspberry Pi's USB-A ports into the Nano's own USB-C port, so it no longer needs a branch off this board's rail, or that capacitor, at all. Its VIN and 5V pins are both left unconnected.</p>
 
     <h3>Section C · Microcontroller</h3>
 
-    <p>The Arduino Nano sits in a socketed arrangement of two 15-pin female headers, one per row, so the module is not directly soldered, preserving the option to replace it. Its pin mapping is exactly as documented in <a href="#electronics">Section 06</a>. All twelve digital pins D2–D13 go to servo headers, so the status LED (D1) is instead wired straight to the Nano's 3V3 pin via R1 (330 Ω): it lights whenever the board has power and is not firmware-controlled.</p>
+    <p>The Arduino Nano sits in a socketed arrangement of two 15-pin female headers, one per row, so the module is not directly soldered, preserving the option to replace it. Its pin mapping is exactly as documented in <a href="#electronics">Section 06</a>. All twelve digital pins D2–D13 go to servo headers, so the status LED (D1) is instead wired straight to the Nano's 3V3 pin via R1 (330 Ω): it lights whenever the Nano itself has power, from its USB connection, and is not firmware-controlled.</p>
 
     <h3>Section D · Servo headers</h3>
 
@@ -118,7 +108,7 @@
           <tr><td class="num">3</td><td>Nano headers (female)</td><td>U1 sockets</td><td>Two 15-pin female headers, one per row. Tack one corner each, check alignment, then complete.</td></tr>
           <tr><td class="num">4</td><td>Servo headers</td><td>J2–J13</td><td>Twelve 3-pin straight headers. <strong>Orientation matters</strong>: pin 1 (square pad on silkscreen) toward the board edge.</td></tr>
           <tr><td class="num">5</td><td>Improvised switch headers</td><td>SW1</td><td>Two single-pin male headers. The connecting wires are not soldered; they plug in after assembly.</td></tr>
-          <tr><td class="num">6</td><td>Electrolytic capacitors</td><td>C1–C3</td><td>Not included in this kit; team-sourced (see <a href="#bom">Section 02</a>). <strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can). C1: 100 µF/16 V, at the J1 input. C2, C3: 470 µF/10 V each, on the servo rail.</td></tr>
+          <tr><td class="num">6</td><td>Electrolytic capacitors</td><td>C1–C2</td><td>Not included in this kit; team-sourced (see <a href="#bom">Section 02</a>). <strong>Polarity matters.</strong> Long lead = +, short = – (also marked with stripe on can). C1, C2: 470 µF/10 V each, paralleled, on the servo rail.</td></tr>
           <tr><td class="num">7</td><td>Power input connector</td><td>J1</td><td>2-pin screw terminal, 5 mm pitch. Not keyed: confirm polarity against the silkscreen before wiring in the buck converter's regulated output.</td></tr>
         </tbody>
       </table>
@@ -135,7 +125,7 @@
 
     <ol>
       <li><strong>D1 (LED).</strong> Long lead = anode (+). Flat side on plastic body = cathode (–).</li>
-      <li><strong>C1, C2, C3 (electrolytic capacitors).</strong> Long lead = +. White stripe on the can = – side.</li>
+      <li><strong>C1, C2 (electrolytic capacitors).</strong> Long lead = +. White stripe on the can = – side.</li>
       <li><strong>The Nano itself.</strong> The USB port faces the edge of the PCB labelled "USB"; do not insert it rotated 180°.</li>
     </ol>
 
@@ -155,8 +145,8 @@
         <p>With the SW1 jumper wires disconnected, probe across J1's two pads. There must be no continuity. If there is, you have a short somewhere on the input side, most often a solder bridge near J1.</p>
       </li>
       <li>
-        <h4>Continuity check: +5V_LOGIC to GND</h4>
-        <p>Probe the Nano's 5 V pin (in its socket) against GND. There should be no continuity. If there is, you have a short on the 5 V rail; check around the Nano socket pins and C1.</p>
+        <h4>Continuity check: Nano VIN/5V isolation</h4>
+        <p>Probe the Nano's VIN pin (in its socket) against both GND and against <code>+5V_SERVO</code> (pin 2 of any servo header). There should be no continuity to either. This board no longer wires the Nano's power pins to anything; any continuity here means a stray solder bridge, not a deliberate connection.</p>
       </li>
       <li>
         <h4>Continuity check: +5V_SERVO to GND</h4>

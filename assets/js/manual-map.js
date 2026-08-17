@@ -60,8 +60,8 @@ var MANUAL_MAP = [
     slug: 'end',
     num: '08',
     crumb: 'Section 08 · The Last Mile',
-    title: 'Ready for Cebu',
-    subtitle: 'Reference footage of a completed unit, and the one bar to clear before departure: a robot that stands and crawls.'
+    title: 'Final Check',
+    subtitle: 'Reference footage of a completed unit, and the one bar to clear: a robot that stands and crawls.'
   }
 ];
 

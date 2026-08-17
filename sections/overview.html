@@ -55,9 +55,9 @@
       <!-- 4: Buck converter -->
       <a href="#electronics:buck-converter">
         <rect x="60" y="424" width="600" height="84" class="diagram-box" fill="#EDE9DD" stroke="#C9C4B4" stroke-width="1"/>
-        <text x="360" y="455" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Set the Buck Converter</text>
-        <text x="360" y="474" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Trim the output to 5.00 V</text>
-        <text x="360" y="486" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">before it reaches a servo</text>
+        <text x="360" y="455" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#0D3E20">Set Both Buck Converters</text>
+        <text x="360" y="474" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Trim each output to 5.00 V</text>
+        <text x="360" y="486" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">before either reaches a load</text>
         <g class="diagram-hint" transform="translate(618,466)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
       </a>
       <line x1="360" y1="508" x2="360" y2="542" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
@@ -123,11 +123,11 @@
     <p class="aside-note">Nine steps from raw filament to a robot that walks off the bench. Sections 06 and 07 each carry more than one step; every box above links through to the section that covers it.</p>
 
     <h2>System Block Diagram</h2>
-    <p>Before any soldering begins, hold the entire system in mind. There are three subsystems, and you will work within each of them in turn.</p>
+    <p>Before any soldering begins, hold the entire system in mind. The diagram below shows the full picture, including the Raspberry Pi, camera, and proximity sensor added for the in-person programme; this manual itself walks you through building three subsystems, Power, Control, and Actuation, in turn.</p>
 
     <figure>
       <div class="frame">
-        <svg viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" class="diagram">
+        <svg viewBox="0 0 860 560" xmlns="http://www.w3.org/2000/svg" class="diagram">
           <defs>
             <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
               <path d="M 0 0 L 8 3 L 0 6 z" fill="#0D3E20"/>
@@ -139,13 +139,13 @@
             <text x="75" y="185" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Battery</text>
             <text x="75" y="205" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion / 7.4V</text>
           </g>
-          <!-- Buck converter -->
+          <!-- Buck converter 1: servo rail -->
           <g>
             <rect x="180" y="145" width="150" height="90" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
             <text x="255" y="172" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">XL4015E1</text>
-            <text x="255" y="192" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Buck Converter</text>
+            <text x="255" y="192" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Buck Converter #1</text>
             <text x="255" y="209" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">7.4V → 5V</text>
-            <text x="255" y="219" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">5A Max Current Output</text>
+            <text x="255" y="219" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Servo Rail · 5A Max</text>
           </g>
           <!-- PCB -->
           <g>
@@ -195,6 +195,31 @@
             <text x="730" y="287" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">F = Front · B = Back · R = Right · L = Left</text>
             <text x="730" y="297" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">C = Coxa · H = Hip · K = Knee</text>
           </g>
+          <!-- Buck converter 2: Pi rail -->
+          <g>
+            <rect x="180" y="380" width="150" height="90" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
+            <text x="255" y="407" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">XL4015E1</text>
+            <text x="255" y="427" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Buck Converter #2</text>
+            <text x="255" y="444" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">7.4V → 5V</text>
+            <text x="255" y="454" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Pi Rail</text>
+          </g>
+          <!-- Raspberry Pi -->
+          <g>
+            <rect x="380" y="380" width="180" height="90" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
+            <text x="470" y="410" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#FEB104">Raspberry Pi</text>
+            <text x="470" y="428" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#FFCD55">vision + control</text>
+            <text x="470" y="444" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#FFCD55">powers Nano · camera · sensor</text>
+          </g>
+          <!-- Camera -->
+          <g>
+            <rect x="620" y="380" width="210" height="45" fill="none" stroke="#0D3E20" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="725" y="407" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Camera</text>
+          </g>
+          <!-- Proximity sensor -->
+          <g>
+            <rect x="620" y="440" width="210" height="45" fill="none" stroke="#0D3E20" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="725" y="467" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Proximity Sensor</text>
+          </g>
           <!-- Arrows -->
           <line x1="130" y1="190" x2="178" y2="190" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
           <line x1="330" y1="190" x2="378" y2="190" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
@@ -204,15 +229,29 @@
           <text x="334" y="170" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">Regulated</text>
           <text x="348" y="180" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">5V</text>
           <text x="568" y="155" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">PWM × 12</text>
+          <!-- Second-rail arrows -->
+          <line x1="75" y1="220" x2="75" y2="425" stroke="#0D3E20" stroke-width="1.5"/>
+          <line x1="75" y1="425" x2="178" y2="425" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="330" y1="425" x2="378" y2="425" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="435" y1="380" x2="435" y2="227" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="560" y1="402" x2="618" y2="402" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="560" y1="462" x2="618" y2="462" stroke="#0D3E20" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <text x="85" y="315" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">Raw</text>
+          <text x="83" y="327" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">7.4V</text>
+          <text x="340" y="410" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">5V · Pi Rail</text>
+          <text x="445" y="300" font-family="IBM Plex Mono, monospace" font-size="8" fill="#8A5A00">5V, not</text>
+          <text x="445" y="312" font-family="IBM Plex Mono, monospace" font-size="8" fill="#8A5A00">Rail 1</text>
+          <text x="565" y="392" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">5V</text>
+          <text x="565" y="452" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">5V</text>
           <!-- Caption -->
-          <text x="430" y="355" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 02 · High-level block diagram</text>
+          <text x="430" y="525" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 02 · High-level block diagram</text>
         </svg>
       </div>
-      <figcaption><span class="fig-label">Figure 02</span>Battery power passes through the XL4015E1 buck converter to the custom PCB, which distributes it to the bank of twelve servos. The PCB forms the connective layer of the system.</figcaption>
+      <figcaption><span class="fig-label">Figure 02</span>Two independent rails come off the same battery. Buck converter #1 regulates the servo rail, feeding the custom PCB's headers and, through the Nano, the twelve servos. Buck converter #2 regulates a separate rail for the Raspberry Pi, which in turn powers the camera, the proximity sensor, and the Arduino Nano itself, over its own dedicated wire, not the servo rail. The PCB still forms the connective layer for the servos; the Pi forms the connective layer for everything added on top.</figcaption>
     </figure>
 
     <h3>Subsystem 01 · Power</h3>
-    <p>A 2S Li-Ion pack (nominally 7.4 V) supplies all power in the system, but the Nano and the servos both accept 5 V maximum, so a step-down stage sits between the battery and every load. This build uses an XL4015E1 buck converter to derive a clean 5 V rail for the Nano and, critically, a separate, higher-current 5 V rail for the servos; any converter that regulates down to 5 V at up to 5 A of output current is an acceptable substitute. Twelve servos drawing current simultaneously represent a non-trivial load; the servos must never be powered from the Nano's onboard regulator, as doing so reliably produces a brown-out.</p>
+    <p>A 2S Li-Ion pack (nominally 7.4 V) supplies all power in the system, but every load on it accepts 5 V maximum, so a step-down stage sits between the battery and each of the two rails it feeds. This build uses two XL4015E1 buck converters, one deriving a high-current 5 V rail for the servos, the other a separate 5 V rail for the Raspberry Pi, which powers the camera, the proximity sensor, and, critically, the Arduino Nano itself; any converter that regulates down to 5 V at up to 5 A of output current is an acceptable substitute for either. Twelve servos drawing current simultaneously represent a non-trivial load; the servos must never be powered from the Nano's onboard regulator, as doing so reliably produces a brown-out, which is why the Nano's own 5 V now comes from the Pi rail rather than the servo rail at all.</p>
 
     <h3>Subsystem 02 · Control</h3>
     <p>An Arduino Nano (ATmega328P) sits at the centre of the PCB. It drives the twelve servos via the <code>Servo</code> library, begins the gait automatically a few seconds after boot, and accepts individual servo commands over serial for calibration. The Nano provides ample headroom for a twelve-channel software-PWM task; computational capacity is not a constraint in this design.</p>

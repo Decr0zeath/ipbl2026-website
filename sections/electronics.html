@@ -2,7 +2,7 @@
 
     <h2 id="buck-converter">Buck Converter Setup</h2>
 
-    <p>The XL4015E1 modules ship configured to whatever setting was last used during manufacturing or testing, typically 5 V, though not always. The output voltage must be set <em>before</em> installing the module on the PCB.</p>
+    <p>The XL4015E1 modules ship configured to whatever setting was last used during manufacturing or testing, typically 5 V, though not always. The output voltage must be set <em>before</em> installing the module on the PCB. This build uses two of them, one for the servo rail, one for the Raspberry Pi rail; repeat the procedure below for each module, independently, rather than assuming the second matches because the first was set correctly.</p>
 
     <h3>Setting the Output Voltage</h3>
 
@@ -99,19 +99,19 @@
         <tbody>
           <tr><td>3V3</td><td>Status LED</td><td>R1 → D1 (red LED), always on while the board has power. Not firmware-controlled.</td></tr>
           <tr><td>A0–A7</td><td>Unused</td><td>·</td></tr>
-          <tr><td>VIN</td><td>Board power in</td><td>Fed from the regulated <code>+5V</code> rail, downstream of SW1. This is how the Nano is powered; its 5V pin is left unconnected.</td></tr>
-          <tr><td>GND</td><td>Common ground</td><td>Tied to servo GND, capacitor grounds, and the terminal block; common with the buck converter. Battery negative wires directly to the buck converter, not into this net</td></tr>
+          <tr><td>VIN / 5V</td><td>Board power in</td><td>Unused. The Nano no longer draws board power from the PCB's <code>+5V</code> rail; it is powered over USB from the Raspberry Pi instead (see Figure 19).</td></tr>
+          <tr><td>GND</td><td>Common ground</td><td>Tied to servo GND, capacitor grounds, and the terminal block; common with buck converter #1. Battery negative wires directly to buck converter #1, not into this net</td></tr>
         </tbody>
       </table>
     </div>
 
     <h2>Power Architecture</h2>
 
-    <p>Section 01 introduced the shape of this at a glance (Figure 02): the battery feeds the buck converter, and the buck converter's regulated 5 V feeds the PCB, which in turn distributes it onward. This section makes that distribution explicit, down to the rail, the capacitor, and the failure mode each one exists to prevent; it is the most failure-prone area of the entire build, so read it carefully.</p>
+    <p>Section 01 introduced the shape of this at a glance (Figure 02): the battery feeds two buck converters, one regulated 5 V rail for the servos and PCB, a separate one for the Raspberry Pi, which in turn powers the Nano, camera, and proximity sensor. This section makes that distribution explicit, down to the rail, the capacitor, and the failure mode each one exists to prevent; it is the most failure-prone area of the entire build, so read it carefully.</p>
 
     <figure>
       <div class="frame">
-        <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" class="diagram">
+        <svg viewBox="0 0 1020 500" xmlns="http://www.w3.org/2000/svg" class="diagram">
           <defs>
             <marker id="arrGnd" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
               <path d="M 0 0 L 8 3 L 0 6 z" fill="#21291F"/>
@@ -125,79 +125,121 @@
           </defs>
 
           <!-- Battery -->
-          <rect x="20" y="140" width="110" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="75" y="165" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">BT1</text>
-          <text x="75" y="183" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion · 7.4V</text>
+          <rect x="430" y="20" width="160" height="55" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="510" y="45" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">BT1 · BT2</text>
+          <text x="510" y="63" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">2S Li-Ion · 7.4V</text>
 
-          <!-- Buck -->
-          <rect x="230" y="60" width="120" height="60" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="290" y="83" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">Buck → 5V</text>
-          <text x="290" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">XL4015E1</text>
+          <!-- Buck 1: servo rail -->
+          <rect x="90" y="150" width="170" height="60" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="175" y="175" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">Buck #1</text>
+          <text x="175" y="193" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">5V · Servo Rail</text>
+
+          <!-- Buck 2: Pi rail -->
+          <rect x="790" y="150" width="150" height="60" fill="#EBDFC0" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="865" y="175" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">Buck #2</text>
+          <text x="865" y="193" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">5V · Pi Rail</text>
 
           <!-- Servo rail -->
-          <rect x="230" y="220" width="120" height="60" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="290" y="243" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">5V Servo Rail</text>
-          <text x="290" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">C2 · C3 bulk</text>
+          <rect x="90" y="270" width="170" height="55" fill="#FEB104" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="175" y="295" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">5V Servo Rail</text>
+          <text x="175" y="313" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0D3E20">C1 · C2 bulk</text>
 
-          <!-- Nano -->
-          <rect x="420" y="60" width="120" height="60" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
-          <text x="480" y="83" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#FEB104">Arduino Nano</text>
-          <text x="480" y="103" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#FFCD55">5V logic only</text>
+          <!-- Raspberry Pi -->
+          <rect x="790" y="270" width="150" height="60" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="865" y="295" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#FEB104">Raspberry Pi</text>
+          <text x="865" y="313" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#FFCD55">vision + control</text>
 
           <!-- Servos -->
-          <rect x="420" y="220" width="270" height="60" fill="none" stroke="#0D3E20" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <text x="555" y="245" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">12 × SG90 Servos</text>
-          <text x="555" y="263" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">peak ≈ 8 A combined</text>
+          <rect x="90" y="380" width="170" height="60" fill="none" stroke="#0D3E20" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="175" y="405" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#0D3E20">12 × SG90 Servos</text>
+          <text x="175" y="423" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">peak ≈ 8 A combined</text>
 
-          <!-- Wires: battery to buck, direct, no switch. Red = positive supply -->
-          <line x1="130" y1="155" x2="190" y2="155" stroke="#B7410E" stroke-width="2"/>
-          <line x1="190" y1="155" x2="190" y2="80" stroke="#B7410E" stroke-width="2"/>
-          <line x1="190" y1="80" x2="228" y2="80" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <!-- PCB, with Nano mounted on it -->
+          <rect x="295" y="365" width="160" height="85" fill="none" stroke="#195A33" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="375" y="377" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1" fill="#195A33">PCB</text>
+          <rect x="310" y="380" width="130" height="60" fill="#0D3E20" stroke="#0D3E20" stroke-width="1.5"/>
+          <text x="375" y="405" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#FEB104">Arduino Nano</text>
+          <text x="375" y="423" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#FFCD55">not on Rail 1</text>
 
-          <!-- Battery return: dedicated wire straight to the buck, not the common rail. Black = ground -->
-          <line x1="130" y1="185" x2="205" y2="185" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
-          <line x1="205" y1="185" x2="205" y2="105" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
-          <line x1="205" y1="105" x2="228" y2="105" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrGnd)"/>
+          <!-- Camera -->
+          <rect x="700" y="380" width="130" height="60" fill="none" stroke="#0D3E20" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="765" y="415" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Camera</text>
 
-          <!-- Buck output: to Nano, and down to the servo rail. Red = positive supply -->
-          <line x1="350" y1="90" x2="418" y2="90" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
-          <line x1="290" y1="120" x2="290" y2="220" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
-          <line x1="350" y1="250" x2="418" y2="250" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <!-- Proximity sensor -->
+          <rect x="850" y="380" width="150" height="60" fill="none" stroke="#0D3E20" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="925" y="405" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Proximity</text>
+          <text x="925" y="423" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="14" font-weight="600" fill="#0D3E20">Sensor</text>
 
-          <!-- Signal: gold = data -->
-          <line x1="540" y1="120" x2="540" y2="220" stroke="#C98300" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrSig)"/>
-          <text x="552" y="170" font-family="IBM Plex Mono, monospace" font-size="8" fill="#C98300">PWM × 12</text>
+          <!-- Battery to Buck 1: direct, no switch. Red = positive supply, dashed black = dedicated return -->
+          <line x1="460" y1="75" x2="460" y2="110" stroke="#B7410E" stroke-width="2"/>
+          <line x1="460" y1="110" x2="150" y2="110" stroke="#B7410E" stroke-width="2"/>
+          <line x1="150" y1="110" x2="150" y2="148" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="480" y1="75" x2="480" y2="130" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
+          <line x1="480" y1="130" x2="200" y2="130" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
+          <line x1="200" y1="130" x2="200" y2="148" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrGnd)"/>
 
-          <!-- Common ground rail, referenced at the buck; the battery return does not join it. Black = ground -->
-          <line x1="230" y1="115" x2="215" y2="115" stroke="#21291F" stroke-width="2"/>
-          <line x1="215" y1="115" x2="215" y2="310" stroke="#21291F" stroke-width="2"/>
-          <line x1="420" y1="115" x2="400" y2="115" stroke="#21291F" stroke-width="2"/>
-          <line x1="400" y1="115" x2="400" y2="310" stroke="#21291F" stroke-width="2"/>
-          <line x1="290" y1="280" x2="290" y2="310" stroke="#21291F" stroke-width="2"/>
-          <line x1="480" y1="280" x2="480" y2="310" stroke="#21291F" stroke-width="2"/>
-          <line x1="555" y1="280" x2="555" y2="310" stroke="#21291F" stroke-width="2"/>
-          <line x1="215" y1="310" x2="640" y2="310" stroke="#21291F" stroke-width="2"/>
-          <text x="640" y="307" font-family="IBM Plex Mono, monospace" font-size="9" fill="#21291F">GND</text>
+          <!-- Battery to Buck 2: same pattern, its own dedicated pair -->
+          <line x1="560" y1="75" x2="560" y2="110" stroke="#B7410E" stroke-width="2"/>
+          <line x1="560" y1="110" x2="840" y2="110" stroke="#B7410E" stroke-width="2"/>
+          <line x1="840" y1="110" x2="840" y2="148" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="540" y1="75" x2="540" y2="130" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
+          <line x1="540" y1="130" x2="890" y2="130" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3"/>
+          <line x1="890" y1="130" x2="890" y2="148" stroke="#21291F" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arrGnd)"/>
+
+          <!-- Buck 1 -> Servo Rail -> Servos -->
+          <line x1="150" y1="210" x2="150" y2="268" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="200" y1="210" x2="200" y2="270" stroke="#21291F" stroke-width="2"/>
+          <line x1="150" y1="325" x2="150" y2="378" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="200" y1="325" x2="200" y2="380" stroke="#21291F" stroke-width="2"/>
+
+          <!-- Buck 2 -> Raspberry Pi -->
+          <line x1="840" y1="210" x2="840" y2="268" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="890" y1="210" x2="890" y2="270" stroke="#21291F" stroke-width="2"/>
+
+          <!-- Raspberry Pi -> Nano: the one wire that changed. Nano's own ground stays on the PCB's common plane -->
+          <line x1="790" y1="300" x2="410" y2="300" stroke="#B7410E" stroke-width="2"/>
+          <line x1="410" y1="300" x2="410" y2="378" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <text x="600" y="293" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#8A5A00">5V · powers Nano, not Rail 1</text>
+
+          <!-- Raspberry Pi -> Camera, Proximity Sensor -->
+          <line x1="800" y1="330" x2="800" y2="360" stroke="#B7410E" stroke-width="2"/>
+          <line x1="800" y1="360" x2="765" y2="360" stroke="#B7410E" stroke-width="2"/>
+          <line x1="765" y1="360" x2="765" y2="378" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <line x1="930" y1="330" x2="930" y2="360" stroke="#B7410E" stroke-width="2"/>
+          <line x1="930" y1="360" x2="925" y2="360" stroke="#B7410E" stroke-width="2"/>
+          <line x1="925" y1="360" x2="925" y2="378" stroke="#B7410E" stroke-width="2" marker-end="url(#arrPos)"/>
+          <text x="778" y="352" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">5V</text>
+          <text x="898" y="352" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5E6F62">5V</text>
+
+          <!-- Signal: gold = data. Nano still drives every servo regardless of where its own 5V comes from -->
+          <line x1="310" y1="410" x2="262" y2="410" stroke="#C98300" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrSig)"/>
+          <text x="285" y="398" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#C98300">PWM×12</text>
+
+          <!-- Common ground bus: Servos and Nano share one plane with the rest of the servo/PCB side -->
+          <line x1="200" y1="440" x2="200" y2="460" stroke="#21291F" stroke-width="2"/>
+          <line x1="375" y1="440" x2="375" y2="460" stroke="#21291F" stroke-width="2"/>
+          <line x1="130" y1="460" x2="460" y2="460" stroke="#21291F" stroke-width="2"/>
+          <text x="475" y="464" font-family="IBM Plex Mono, monospace" font-size="9" fill="#21291F">GND</text>
 
           <!-- Caption -->
-          <text x="360" y="340" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 19 · Power architecture</text>
+          <text x="510" y="485" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" letter-spacing="1.5" fill="#5E6F62">FIG. 19 · Power architecture</text>
         </svg>
       </div>
-      <figcaption><span class="fig-label">Figure 19</span>The two-rail power design, with no inline switch: both battery leads wire directly to the buck converter, the return path (dashed) on its own dedicated wire. Its regulated 5 V feeds the Nano on a clean, low-current rail, and the same 5 V feeds the servos from the bulk capacitors on a separate, higher-current rail. Downstream of the buck, one common ground ties the Nano, servo rail, and capacitors together; the battery's return does not join that plane. Wire colour follows convention: red for the positive supply, black for ground, gold for the PWM signal.</figcaption>
+      <figcaption><span class="fig-label">Figure 19</span>Two buck converters, each with its own dedicated return wire straight to the battery pack, no shared rail at the source. Buck #1 regulates a high-current 5 V servo rail feeding the PCB's headers; buck #2 regulates a separate 5 V rail feeding the Raspberry Pi, which in turn powers the camera, the proximity sensor, and, critically, the Arduino Nano. The Nano sits mounted on the same PCB as the servo headers and shares their common ground, but its own 5 V no longer comes from Rail 1: that separation is deliberate, covered in <a href="#why-two-rails">Why two rails?</a> below. The Nano still drives all twelve servos over PWM regardless of where its own power originates. Wire colour follows convention: red for positive supply, black for ground, gold for the PWM signal.</figcaption>
     </figure>
 
     <div class="callout warning">
       <div class="callout-label">Warning · No inline power switch</div>
-      <p>This design has no switch between the battery and the buck converter. The system powers on the instant the battery is connected. Make every other connection first, servos seated, Nano socketed, before wiring in the battery, and disconnect the battery itself to power the board down.</p>
+      <p>This design has no switch between the battery and either buck converter. The system powers on the instant the battery is connected, both rails together. Make every other connection first, servos seated, Nano socketed, Raspberry Pi ready, before wiring in the battery, and disconnect the battery itself to power everything down.</p>
     </div>
 
-    <h3>Why two rails?</h3>
+    <h3 id="why-two-rails">Why two rails?</h3>
 
     <p>Section 01 already named the rule: servos must never draw from the Nano's onboard regulator. Here is why that rule is absolute, in numbers. An idle SG90 draws approximately 10 mA; a stalled SG90 draws approximately 700 mA. Twelve servos stalling simultaneously, for instance during a hard landing where every leg attempts to brace, can draw up to roughly 8 A in a transient (12 × 700 mA). The Arduino Nano's onboard 5 V regulator can supply at most ~800 mA continuously and will fail under sudden loads of this magnitude.</p>
 
     <p>Connecting the Nano's 5 V pin directly to the servos produces a characteristic failure: the moment the servos begin moving, the Nano's voltage sags, the ATmega328P browns out, and the firmware locks up. The robot then holds its last commanded servo positions until power is cycled. This failure mode can be difficult to diagnose without prior knowledge of its cause.</p>
 
-    <p>The XL4015E1 buck converter steps 7.4 V down to 5 V at up to 5 A continuous, with bulk capacitors on the servo rail absorbing transients above that. <strong>This alone, however, is not the complete solution.</strong> The essential design principle is keeping the servo current loop physically separate from the Nano's 5 V pin. The buck output feeds both branches (the Nano draws its 5 V from one branch, the servo headers from the other), but servo current never travels along the Nano's traces.</p>
+    <p>Buck #1 steps 7.4 V down to 5 V at up to 5 A continuous, with bulk capacitors on the servo rail absorbing transients above that. <strong>This alone, however, is not the complete solution.</strong> The essential design principle is keeping the servo current loop physically separate from the Nano's 5 V pin, and this build takes that further than splitting one regulator into two branches: the Nano's own 5 V now comes from the Raspberry Pi, over a dedicated wire, off Rail 1 entirely. Servo current never has a path onto the Nano's supply at all.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · Do not power servos from the Nano's 5V pin</div>
@@ -206,13 +248,13 @@
 
     <h3>Decoupling</h3>
 
-    <p>The two 470 µF electrolytics (C2, C3) sit on the servo rail at the input to the twelve servo headers. They absorb the inrush current when a servo begins moving and prevent the rail voltage from dropping. A single 100 µF electrolytic (C1) sits on the board itself, at the <code>+5V</code> input from J1, providing bulk filtering for the regulated rail before it splits into the two branches.</p>
+    <p>Two 470 µF electrolytics (C1, C2), paralleled with each other, sit on the servo rail at the input to the twelve servo headers. Together they absorb the inrush current when a servo begins moving and prevent the rail voltage from dropping. An earlier board revision also carried a 100 µF electrolytic (C3) at the <code>+5V</code> input from J1, filtering a branch that fed the Nano directly; both that branch and C3 are gone now, since the Nano is powered over USB from the Raspberry Pi instead.</p>
 
     <h3>Grounding</h3>
 
-    <p>Every ground on the PCB, the Nano's GND pin, each servo header's pin 1, the legs of C1 through C3, and the terminal block, is tied to one common net, referenced at the buck converter. Treat it as a single plane; there is no separate "digital ground" and "servo ground" to keep apart here, only the two 5 V rails described above.</p>
+    <p>Every ground on the PCB, the Nano's GND pin, each servo header's pin 1, the legs of C1 and C2, and the terminal block, is tied to one common net, referenced at buck converter #1. Treat it as a single plane; there is no separate "digital ground" and "servo ground" to keep apart here. The PCB itself now carries just the one regulated rail, for the servos; the Nano's 5 V arrives separately, by wire, from the Raspberry Pi, but the Nano's ground pin stays on this same PCB plane.</p>
 
-    <p>The battery's negative lead is the one exception. It runs on its own dedicated wire straight to the buck converter, rather than joining the common plane at some arbitrary point along the way. This keeps the return path for the battery's raw current short and singular, the same reasoning that keeps servo current off the Nano's traces, applied to the return side of the circuit instead of the supply side.</p>
+    <p>The battery's negative lead is the one exception, on both rails. Each buck converter's return runs on its own dedicated wire straight to the battery, rather than joining a common plane at some arbitrary point along the way. This keeps the return path for the battery's raw current short and singular, the same reasoning that keeps servo current off the Nano's traces, applied to the return side of the circuit instead of the supply side.</p>
 
     <h2>Servo Cable Conventions</h2>
 

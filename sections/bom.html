@@ -24,11 +24,10 @@
           <tr><td>M1–M12</td><td><span class="not-provided">SG90 micro servo, 9 g</span></td><td class="num">12</td><td>Team-sourced. Not permitted for international shipment by the courier.</td></tr>
           <tr><td>BT1, BT2</td><td><span class="not-provided">18650 Li-ion cell</span></td><td class="num">2</td><td>Team-sourced. Held in series by BH1 for a 2S, 7.4–8.4 V pack.</td></tr>
           <tr><td>BH1</td><td>18650 battery holder, 2-cell</td><td class="num">1</td><td>Wires BT1 and BT2 in series.</td></tr>
-          <tr><td>SW1</td><td>Improvised switch: 2× 1-pin male header + jumper wires (1× M-M, 1× M-F)</td><td class="num">1 set</td><td>Master power. In-line between buck converter and 12 servos, and the Nano; join the wires to close the circuit, separate them to open it.</td></tr>
+          <tr><td>SW1</td><td>Improvised switch: 2× 1-pin male header + jumper wires (1× M-M, 1× M-F)</td><td class="num">1 set</td><td>Master power for the servo rail only. In-line between the buck converter and the 12 servos; join the wires to close the circuit, separate them to open it. Does not gate the Nano, which is powered separately over USB.</td></tr>
           <tr><td>D1</td><td>LED, 3 mm, red</td><td class="num">1</td><td>Power indicator. Forward voltage ~2 V.</td></tr>
           <tr><td>R1</td><td>Carbon film resistor 330 Ω, 1/4 W</td><td class="num">1</td><td>LED current limiting.</td></tr>
-          <tr><td>C1</td><td><span class="not-provided">Electrolytic capacitor 100 µF / 16 V</span></td><td class="num">1</td><td>On the board, at the +5V input from J1: bulk filtering for the regulated rail.</td></tr>
-          <tr><td>C2, C3</td><td><span class="not-provided">Electrolytic capacitor 470 µF / 10 V</span></td><td class="num">2</td><td>Bulk decoupling on the 5 V servo rail.</td></tr>
+          <tr><td>C1, C2</td><td><span class="not-provided">Electrolytic capacitor 470 µF / 10 V</span></td><td class="num">2</td><td>Paralleled with each other, bulk decoupling on the 5 V servo rail. C3, a 100 µF cap that filtered the old Nano-power branch at the J1 input, is no longer on this board revision: the Nano is powered over USB from the Raspberry Pi now.</td></tr>
           <tr><td>J1</td><td>Screw terminal, 2-pin, 5 mm pitch</td><td class="num">1</td><td>Buck converter's regulated 5 V input to the board. Not keyed: confirm polarity against the silkscreen before wiring it in.</td></tr>
           <tr><td>J2–J13</td><td>Male header, 3-pin, 2.54 mm pitch</td><td class="num">12</td><td>Match the cable orientation.</td></tr>
           <tr><td>·</td><td>Female header, 15-pin, 2.54 mm pitch</td><td class="num">2</td><td>Nano socket, one row per side.</td></tr>

@@ -4,151 +4,199 @@
   <meta charset="UTF-8" />
   <meta name="color-scheme" content="light" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iPBL 2026 · Quadruped Pre-Training Manual</title>
-  <meta name="description" content="Pre-training field manual for the iPBL 2026 quadruped robotics project, hosted by the University of San Jose – Recoletos." />
+  <title>iPBL 2026 · International Project-Based Learning</title>
+  <meta name="description" content="iPBL 2026 is an international project-based learning programme hosted by the University of San Jose – Recoletos, Cebu, in partnership with STUST and OIT." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@1,400&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=Lexend:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" />
   <link rel="icon" type="image/webp" href="assets/logo/web-crawler-white.webp" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
-<body>
+<body class="event-page">
 
 <header class="topbar">
   <div class="topbar-inner">
     <a href="index.html" class="brand">
       <img src="assets/logo/web-crawler.webp" alt="iPBL logo" class="brand-mark" width="40" height="40" decoding="async" />
       <span class="brand-text">
-        <span class="brand-title">Quadruped Pre-Training Manual</span>
-        <span class="brand-sub">iPBL · 2026 · USJ-R</span>
+        <span class="brand-title">iPBL 2026</span>
+        <span class="brand-sub">International Project-Based Learning</span>
       </span>
     </a>
-    <a href="manual.html" class="btn btn-sm">Open Manual →</a>
+    <a href="pretraining.html" class="btn btn-sm">Pre-Training Manual →</a>
   </div>
 </header>
 
 <!-- ============== HERO ============== -->
-<section class="hero">
-  <div class="hero-copy">
-    <h1 class="hero-title">
-      A field manual for<br />
-      assembling a <span class="accent">quadruped</span><br />
-      before day one in Cebu.
-    </h1>
-    
-    <div class="hero-blurb">
-      <p>Welcome, and <em>maayong adlaw</em>! Before you arrive in Cebu for iPBL 2026, the International Project-Based Learning programme, you'll build the machine that the rest of the program is built upon: a four-legged, twelve-servo robot driven by an Arduino Nano and a custom PCB.</p>
-      <p>This manual walks you through every screw, every solder joint, every line of firmware. What happens after the robot stands up is a story for when you get here.</p>
-    </div>
+<section class="event-hero">
+  <div class="event-hero-bg" aria-hidden="true">
+    <img class="is-active" src="assets/hero/DSC_0407.webp" alt="" width="6048" height="4032" decoding="async" fetchpriority="high" />
+    <img data-src="assets/hero/DSC_0410.webp" alt="" width="6048" height="4032" decoding="async" />
+    <img data-src="assets/hero/DSC_0412.webp" alt="" width="6048" height="4032" decoding="async" />
+    <img data-src="assets/hero/DSC_0428.webp" alt="" width="6048" height="4032" decoding="async" />
+    <img data-src="assets/hero/DSC_0464.webp" alt="" width="6048" height="4032" decoding="async" />
+    <img data-src="assets/hero/DSC_0489.webp" alt="" width="6048" height="4032" decoding="async" />
+    <img data-src="assets/hero/DSC_0945.webp" alt="" width="6048" height="4032" decoding="async" />
+    <img data-src="assets/hero/DSC_1112.webp" alt="" width="6048" height="4032" decoding="async" />
+    <img data-src="assets/hero/S__249487377_0.webp" alt="" width="2364" height="1774" decoding="async" />
   </div>
-  <div class="hero-mark">
-    <model-viewer src="assets/3d/quad.glb" camera-controls disable-pan disable-zoom interaction-prompt="none" auto-rotate auto-rotate-delay="0" camera-orbit="100deg 75deg auto" alt="Interactive 3D model of the quadruped robot"></model-viewer>
+  <div class="event-hero-scrim"></div>
+  <div class="event-hero-content">
+    <h1 class="event-hero-title">International Project-Based Learning 2026</h1>
+    <p class="event-hero-subtitle">Autonomous Quadruped Challenge</p>
+    <p class="event-hero-meta">17–21 August 2026<span class="dot"></span>USJ-R Quadricentennial Campus</p>
+    <p class="event-hero-sub">Delegates from the Philippines, Taiwan, and Japan converge in Cebu to build and program a spider-inspired, four-legged autonomous robot, fitted with a camera, an AI object-detection system, and a proximity sensor, geared toward search-and-rescue scenarios.</p>
+    <a href="#programme" class="btn">See the Programme ↓</a>
   </div>
 </section>
 
-<!-- ============== SCOPE ============== -->
-<section class="home-section" id="scope">
-  <div class="scope-layout">
-    <div class="scope-intro">
-      <h2>Read this <em class="em-accent">before</em> you fly to Cebu.</h2>
-      <p class="section-intro">This pre-training programme is deliberately narrow in scope. Its purpose is to give you a working understanding of what you are about to build, nothing more. Assemble the body, solder the PCB, mount and calibrate the servos, set the rocker arms, and bring the unit to a working crawl: that is the entire brief. By the time you land at MCIA, you should already know how to take a robot from parts to standing, blinking, and awaiting instructions. The more advanced material, the part you have not yet anticipated, begins on Day 01 of the on-ground programme. It remains withheld by design.</p>
+<!-- ============== PROGRAMME ============== -->
+<section class="home-section" id="programme">
+  <div class="programme-layout">
+    <div class="programme-intro">
+      <h2>Two Phases, One Robot</h2>
+      <p class="section-intro">iPBL runs in two phases. Individual pre-training, completed at each delegate's home campus before travel, brings the quadruped to a working mechanical crawl. The intensive in-person phase, once every delegation has arrived in Cebu, extends that platform with computer vision and a proximity sensor, teaching the finished robot to see, sense its surroundings, and move toward autonomous behaviour.</p>
     </div>
 
-    <div class="scope-grid">
-      <div class="included">
-        <h3>Included in Pre-Training</h3>
-        <ul>
-          <li>Mechanical assembly of the chassis and twelve-servo leg system</li>
-          <li>STL files for every structural part, with a labelled inventory</li>
-          <li>PCB schematic walkthrough and hand-soldered assembly</li>
-          <li>Servo wiring, power distribution, and pinout reference</li>
-          <li>Arduino firmware: upload, calibration, and basic gait</li>
-          <li>A final stand-and-walk check against reference footage</li>
-        </ul>
-      </div>
-      <div class="excluded">
-        <h3>Reserved for the iPBL Programme</h3>
-        <ul>
-          <li>Vision and perception layer</li>
-          <li>Higher-level control, behaviour, and autonomy</li>
-          <li>Sensor fusion and environmental interaction</li>
-          <li>The collaborative challenge brief (revealed Day 01)</li>
-          <li>Inter-team protocol and integration tasks</li>
-        </ul>
+    <div class="programme-detail">
+      <div class="programme-cards">
+        <div class="programme-card">
+          <h3>Logistics</h3>
+          <ul class="spec-list">
+            <li><span class="spec-label">Venue</span><span class="spec-value">USJ-R Quadricentennial Campus, Cebu City, PH</span></li>
+            <li><span class="spec-label">Dates</span><span class="spec-value">17–21 August 2026</span></li>
+          </ul>
+        </div>
+        <div class="programme-card">
+          <h3>The Challenge</h3>
+          <p>Teams build and program a spider-inspired, four-legged autonomous robot fitted with a camera, an AI-based object-detection system, and a proximity sensor. Delegates assemble and calibrate the hardware during pre-training, then in Cebu add computer vision and proximity sensing, from locomotion control to vision-based target identification, with applications geared toward search-and-rescue scenarios.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============== OUTCOMES ============== -->
-<section class="home-section" id="outcomes">
-  <h2>What you should arrive knowing.</h2>
-  <p class="section-intro">Nothing you build here is required to travel with you. The quadruped is yours to keep; a fresh kit awaits in Cebu, where you will build again from the beginning. What accompanies you to the programme is what you have learned, and your laptop.</p>
+<!-- ============== UNIVERSITIES ============== -->
+<section class="home-section" id="universities">
+  <h2>Three Institutions, One Cohort</h2>
+  <p class="section-intro">iPBL 2026 draws delegates from three universities across the Philippines, Taiwan, and Japan.</p>
 
-  <ol class="outcomes">
-    <li>
-      <h3>Assembly fluency</h3>
-      <p>Mechanical assembly of the chassis and twelve-servo leg system, done once already and understood, not just followed.</p>
-    </li>
-    <li>
-      <h3>Soldering and wiring confidence</h3>
-      <p>A PCB built from the published schematic, kit-soldered or hand-wired, with the pinout committed to memory.</p>
-    </li>
-    <li>
-      <h3>Firmware command</h3>
-      <p>Comfortable uploading the base sketch, calibrating servos individually, and getting a basic gait running.</p>
-    </li>
-    <li>
-      <h3>Troubleshooting instinct</h3>
-      <p>A working sense of common failure points: stripped gears, cold solder joints, misaligned rocker arms, so that subsequent builds proceed more efficiently than the first.</p>
-    </li>
-    <li>
-      <h3>A build journal</h3>
-      <p>A concise personal log of issues encountered and resolved, retained for your own reference; it will not be collected or graded.</p>
-    </li>
-    <li>
-      <h3>A working laptop</h3>
-      <p>With the Arduino IDE installed, the board package configured, and the project sketch flashed at least once. This is the one item that travels with you to Cebu.</p>
-    </li>
-  </ol>
+  <div class="cols-3 stack-top">
+    <div class="uni-card dual-logo">
+      <div class="uni-logo">
+        <img src="assets/logo/USJR.webp" alt="University of San Jose – Recoletos emblem" width="200" height="209" loading="lazy" decoding="async" />
+        <img src="assets/logo/USJR-name.webp" alt="University of San Jose – Recoletos wordmark" width="993" height="65" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="uni-card">
+      <div class="uni-logo"><img src="assets/logo/stust-full.webp" alt="Southern Taiwan University of Science and Technology logo" width="1165" height="218" loading="lazy" decoding="async" /></div>
+    </div>
+    <div class="uni-card">
+      <div class="uni-logo"><img src="assets/logo/oit-full.webp" alt="Osaka Institute of Technology logo" width="1136" height="249" loading="lazy" decoding="async" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== VENUE ============== -->
+<section class="home-section" id="venue">
+  <figure class="stack-bottom">
+    <div class="venue-map-frame">
+      <div id="venueMap" class="venue-map" role="img" aria-label="Map of the USJ-R Quadricentennial Campus venue on Colon Street, with the USJ-R Main Campus shown nearby for orientation"></div>
+    </div>
+  </figure>
+
+  <p class="section-intro">iPBL 2026 is held on-site at the USJ-R Quadricentennial Campus, the university's newest campus building along Colon Street in downtown Cebu City.</p>
+  <p class="aside-note"><a href="https://www.google.com/maps/dir/?api=1&destination=USJ-R%20Quadricentennial%20Campus%2C%20Colon%20Street%2C%20Cebu%20City" target="_blank" rel="noopener">Get directions in Google Maps →</a></p>
+</section>
+
+<!-- ============== SPONSORS ============== -->
+<section class="home-section" id="sponsors">
+  <h2>Made Possible By</h2>
+  <p class="section-intro">The 2026 cohort's kits, PCBs, and shipping to partner delegates are made possible by the generous support of the following sponsors.</p>
+
+  <div class="sponsor-featured stack-top" role="group" aria-label="Major sponsor logos">
+    <div class="sponsor-featured-card">
+      <div class="sponsor-lockup">
+        <img src="assets/logo/skanlog.webp" alt="Skanlog mark" class="sponsor-mark" width="516" height="517" loading="lazy" decoding="async" />
+        <img src="assets/logo/skanlog-full.webp" alt="Skanlog wordmark" class="sponsor-wordmark" width="763" height="105" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="sponsor-featured-card">
+      <div class="sponsor-lockup">
+        <img src="assets/logo/7core_logo.webp" alt="7Core mark" class="sponsor-mark" width="921" height="979" loading="lazy" decoding="async" />
+        <img src="assets/logo/7core_name.webp" alt="7Core Communications Inc. wordmark" class="sponsor-wordmark" width="935" height="45" loading="lazy" decoding="async" />
+      </div>
+    </div>
+    <div class="sponsor-featured-card">
+      <img src="assets/logo/openlearning.webp" alt="OpenLearning logo" width="456" height="114" loading="lazy" decoding="async" />
+    </div>
+  </div>
+
+  <div class="sponsor-marquee stack-top" role="group" aria-label="Sponsor logos">
+    <div class="sponsor-track">
+      <div class="sponsor-card">
+        <img src="assets/logo/sandbox.webp" alt="The Sandbox Foundation logo" width="2235" height="414" decoding="async" />
+      </div>
+      <div class="sponsor-card">
+        <img src="assets/logo/jobtarget.webp" alt="JobTarget logo" width="505" height="109" decoding="async" />
+      </div>
+      <div class="sponsor-card">
+        <img src="assets/logo/riqi_works.webp" alt="3D Riqi Printing Works logo" width="2048" height="676" decoding="async" />
+      </div>
+      <div class="sponsor-card">
+        <img src="assets/logo/capri.webp" alt="Capriccioso Studio logo" width="228" height="62" decoding="async" />
+      </div>
+      <div class="sponsor-card">
+        <img src="assets/logo/escape_the_day_job.webp" alt="Escape the Day Job logo" width="2206" height="866" decoding="async" />
+      </div>
+      <div class="sponsor-card" aria-hidden="true">
+        <img src="assets/logo/sandbox.webp" alt="" width="2235" height="414" decoding="async" />
+      </div>
+      <div class="sponsor-card" aria-hidden="true">
+        <img src="assets/logo/jobtarget.webp" alt="" width="505" height="109" decoding="async" />
+      </div>
+      <div class="sponsor-card" aria-hidden="true">
+        <img src="assets/logo/riqi_works.webp" alt="" width="2048" height="676" decoding="async" />
+      </div>
+      <div class="sponsor-card" aria-hidden="true">
+        <img src="assets/logo/capri.webp" alt="" width="228" height="62" decoding="async" />
+      </div>
+      <div class="sponsor-card" aria-hidden="true">
+        <img src="assets/logo/escape_the_day_job.webp" alt="" width="2206" height="866" decoding="async" />
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ============== CTA ============== -->
 <section class="cta-band">
-  <h2>Begin with the overview.</h2>
-  <p>Eight sections, one robot that walks. Begin at the beginning, and do not skip ahead; every section assumes the one before it.</p>
-  <a href="manual.html#overview" class="btn">Open Section 01 · Overview</a>
+  <h2>Begin With the Pre-Training Manual.</h2>
+  <p>Every delegate arrives in Cebu having already built and calibrated their own quadruped. Start there.</p>
+  <a href="pretraining.html" class="btn">Open the Pre-Training Manual →</a>
 </section>
 
 <footer class="site-footer home-footer">
   <div class="foot-inner">
     <div class="foot-about">
-      <h3>About this manual</h3>
-      <p>The Quadruped Pre-Training Manual is prepared for delegates of iPBL 2026 by the host team at the University of San Jose – Recoletos. The mechanical platform is based on the open quadruped published by <strong class="name-accent">Mert Kilic</strong> on PCBWay, adapted and extended for our programme.</p>
+      <h3>About iPBL 2026</h3>
+      <p>International Project-Based Learning 2026 is hosted in Cebu by the <strong class="name-accent">University of San Jose – Recoletos</strong>, in partnership with <strong class="name-accent">Southern Taiwan University of Science and Technology</strong> and <strong class="name-accent">Osaka Institute of Technology</strong>.</p>
     </div>
     <div class="foot-links">
       <div>
-        <h3>Manual</h3>
+        <h3>This Page</h3>
         <ul>
-          <li><a href="manual.html#overview">01 · Overview</a></li>
-          <li><a href="manual.html#bom">02 · Materials</a></li>
-          <li><a href="manual.html#printing">03 · 3D-Printed Parts</a></li>
-          <li><a href="manual.html#assembly">04 · Mechanical Assembly</a></li>
-          <li><a href="manual.html#pcb">05 · PCB</a></li>
-          <li><a href="manual.html#electronics">06 · Electronics &amp; Wiring</a></li>
-          <li><a href="manual.html#firmware">07 · Firmware</a></li>
-          <li><a href="manual.html#end">08 · Ready for Cebu</a></li>
+          <li><a href="#programme">The Programme</a></li>
+          <li><a href="#universities">Partner Universities</a></li>
+          <li><a href="#venue">Venue &amp; Map</a></li>
+          <li><a href="#sponsors">Sponsors</a></li>
         </ul>
       </div>
       <div>
-        <h3>Programme</h3>
+        <h3>Pre-Training</h3>
         <ul>
-          <li><a href="event.html">About the iPBL Programme →</a></li>
-          <li>iPBL · 2026 Edition</li>
-          <li>Host: USJ-R, Cebu</li>
-          <li>Partners: STUST · OIT</li>
+          <li><a href="pretraining.html">Manual Home</a></li>
+          <li><a href="manual.html#overview">01 · Overview</a></li>
           <li class="stack-top-sm"><a href="manual.html#credits">Credits &amp; Acknowledgments</a></li>
         </ul>
       </div>
@@ -189,6 +237,8 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="assets/js/event-map.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

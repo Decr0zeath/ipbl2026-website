@@ -1,5 +1,5 @@
 // ============================================================
-// Interactive venue map (event.html only). Leaflet over CARTO's
+// Interactive venue map (index.html only). Leaflet over CARTO's
 // "Positron no-labels" basemap, which ships with zero baked-in
 // text — the campuses/mapLabels arrays below hand-place the only
 // labels that matter instead of fighting raster-tile label

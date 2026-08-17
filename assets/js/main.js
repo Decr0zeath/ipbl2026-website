@@ -3,7 +3,7 @@
 // from the course-viewer pattern: the chrome loads once, section
 // content is fetched from sections/<slug>.html and injected, and
 // hash routing (#slug) keeps every section linkable.
-// On pages without MANUAL_MAP (index.html) only the mobile
+// On pages without MANUAL_MAP (index.html, pretraining.html) only the mobile
 // sidebar toggle below is active.
 // ============================================================
 
@@ -126,7 +126,7 @@
 
   initScrollReveal(document);
 
-  // ---- Event hero background crossfade (event.html only) ----
+  // ---- Event hero background crossfade (index.html only) ----
   // Only the first slide ships with a real src; the rest carry data-src and
   // are fetched one at a time, one interval ahead of when they're shown, so
   // the page never pays for all nine full-resolution photos up front.
@@ -227,10 +227,10 @@
       // Reference pages (credits): previous = last manual section
       var lastSec = MANUAL_MAP[last];
       html += pagLink('#' + lastSec.slug, '← Previous · Section ' + lastSec.num, lastSec.title, 'prev');
-      html += pagLink('index.html', '↑ Top', 'Back to Home', 'next');
+      html += pagLink('pretraining.html', '↑ Top', 'Back to Home', 'next');
     } else {
       if (idx === 0) {
-        html += pagLink('index.html', '← Home', 'Welcome', 'prev');
+        html += pagLink('pretraining.html', '← Home', 'Welcome', 'prev');
       } else {
         var p = MANUAL_MAP[idx - 1];
         html += pagLink('#' + p.slug, '← Previous · Section ' + p.num, p.title, 'prev');

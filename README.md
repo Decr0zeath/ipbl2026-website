@@ -37,13 +37,14 @@ No build step — plain HTML, CSS, and JS.
 
 ## Local preview
 
-Serve the folder over HTTP and open `index.html` — e.g. VS Code's Live Server extension, or `python -m http.server`. (Opening files directly from disk won't work: the manual shell fetches section content, and browsers block `fetch()` on `file://`.)
+Serve the folder over HTTP — e.g. VS Code's Live Server extension, or `python -m http.server` — then open `index.html` (event landing page) or `pretraining.html` (manual landing page). (Opening files directly from disk won't work: the manual shell fetches section content, and browsers block `fetch()` on `file://`.)
 
 ## File structure
 
 ```
 /
-├── index.html              Home / welcome page (standalone)
+├── index.html              Event landing page (standalone) — served at the site root
+├── pretraining.html        Manual welcome page (standalone)
 ├── manual.html             Manual shell — chrome + empty viewer; JS fills in everything
 ├── sections/
 │   ├── overview.html       Section 01 … end.html Section 08, credits.html
@@ -60,7 +61,7 @@ Serve the folder over HTTP and open `index.html` — e.g. VS Code's Live Server 
 
 Sections are addressed as `manual.html#<slug>` (e.g. `manual.html#assembly`) — deep links work and are shareable.
 
-To add a manual section: drop its content fragment in `sections/<slug>.html` and add one entry to `MANUAL_MAP` in `assets/js/manual-map.js` — sidebar, page header, and prev/next links update automatically. (The footer link lists in `index.html` and `manual.html` are the only manual edits.)
+To add a manual section: drop its content fragment in `sections/<slug>.html` and add one entry to `MANUAL_MAP` in `assets/js/manual-map.js` — sidebar, page header, and prev/next links update automatically. (The footer link lists in `pretraining.html` and `manual.html` are the only manual edits.)
 
 ## Replacing placeholder images
 

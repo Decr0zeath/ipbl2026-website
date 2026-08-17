@@ -28,7 +28,7 @@ Not a general robotics tutorial: a narrow, sequenced manual scoped to exactly wh
 
 ## Capabilities and Constraints
 
-- **Shell + fragments architecture (SPA-lite):** `index.html` is a standalone landing page. `manual.html` is a single shell (chrome + empty mounts) that fetches `sections/<slug>.html` fragments via `assets/js/main.js`, injects them, and routes via location hash (`manual.html#assembly`). `assets/js/manual-map.js` is the single source of truth for section order/titles; `sections/*.html` are content-only fragments (no `<html>`/chrome). `reference/course-viewer.js` is an inert reference pattern, not loaded by any page.
+- **Shell + fragments architecture (SPA-lite):** `pretraining.html` is a standalone landing page for the manual; `index.html` is the site's root landing page (the event page — programme, universities, venue, sponsors), since GitHub Pages serves it at the domain root. The two cross-link. `manual.html` is a single shell (chrome + empty mounts) that fetches `sections/<slug>.html` fragments via `assets/js/main.js`, injects them, and routes via location hash (`manual.html#assembly`). `assets/js/manual-map.js` is the single source of truth for section order/titles; `sections/*.html` are content-only fragments (no `<html>`/chrome). `reference/course-viewer.js` is an inert reference pattern, not loaded by any page.
 - Must be served over HTTP (Live Server, `python -m http.server`, etc.) — opening `manual.html` from `file://` fails because the viewer uses `fetch()`.
 - All figures currently use styled placeholder frames (`<div class="placeholder">`) instead of real photos/diagrams — real photography is expected to replace these later.
 - No backend, no forms, no build tooling — plain HTML/CSS/JS only.

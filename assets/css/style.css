@@ -42,7 +42,7 @@
   --shadow-md: 0 8px 24px -12px rgba(13,62,32,.25);
 }
 
-/* ---------- Event page theme override (event.html only) ----------
+/* ---------- Event page theme override (index.html only) ----------
    Poster-matched palette: vivid orange primary, dark brown secondary,
    swapped in as custom-property overrides so every component built on
    the --green---gold-* tokens (topbar, buttons, headings, footer,
@@ -174,6 +174,18 @@ hr {
   color: var(--gold-300);
   font-family: var(--font-mono);
 }
+
+.topbar-actions { display: flex; align-items: center; gap: 1rem; }
+.topbar-link {
+  color: var(--paper);
+  opacity: .75;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: .78rem;
+  letter-spacing: .04em;
+  transition: opacity .15s ease;
+}
+.topbar-link:hover { opacity: 1; }
 
 .nav-toggle {
   background: transparent;
@@ -908,7 +920,7 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
 }
 .hero-mark.is-loading model-viewer { visibility: hidden; }
 
-/* ---------- Event Hero (event.html only) ---------- */
+/* ---------- Event Hero (index.html only) ---------- */
 /* Full-bleed backdrop of crossfading photos under a dark scrim; JS (see
    main.js) cycles .is-active between the stacked images on a timer. */
 .event-hero {
@@ -1203,7 +1215,7 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
 .scope-grid li { font-size: .95rem; line-height: 1.6; margin-bottom: .75rem; }
 .scope-grid li:last-child { margin-bottom: 0; }
 
-/* ---------- Programme layout (event.html only) ---------- */
+/* ---------- Programme layout (index.html only) ---------- */
 .programme-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1290,7 +1302,7 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
 .not-provided { color: var(--orange-700); font-weight: 600; }
 .name-accent { color: var(--gold-700); }
 
-/* ---------- Venue Map (event.html only) ---------- */
+/* ---------- Venue Map (index.html only) ---------- */
 /* Breaks out of .home-section's centred max-width to run the full width of
    the viewport rather than sitting inset in a bordered figure frame; the
    figcaption below stays put in the normal reading column. Isolates
@@ -1548,6 +1560,7 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   .brand-mark { width: 32px; height: 32px; }
   .brand-title { font-size: .95rem; }
   .brand-sub { font-size: .65rem; }
+  .topbar-link { display: none; }
   .hero-mark model-viewer { width: min(190vw, 120vh); height: min(190vw, 120vh); }
   .outcomes { grid-template-columns: 1fr; }
   figure .frame iframe { height: 300px; }

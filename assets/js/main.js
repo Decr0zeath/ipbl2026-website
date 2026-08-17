@@ -143,13 +143,27 @@
     }
 
     var current = 0;
+    slides[current].style.zIndex = 1;
     preload(slides[(current + 1) % slides.length]);
 
     setInterval(function () {
-      slides[current].classList.remove('is-active');
+      var outgoing = slides[current];
       current = (current + 1) % slides.length;
-      slides[current].classList.add('is-active');
+      var incoming = slides[current];
+
+      // Stack the incoming slide above the outgoing one and only fade
+      // the incoming slide in; the outgoing slide stays fully opaque
+      // underneath until it's covered, then drops away invisibly. If
+      // both faded at once they'd be simultaneously translucent and
+      // the page background would flash through in between.
+      incoming.style.zIndex = 1;
+      outgoing.style.zIndex = 0;
+      incoming.classList.add('is-active');
       preload(slides[(current + 1) % slides.length]);
+
+      setTimeout(function () {
+        outgoing.classList.remove('is-active');
+      }, 2000);
     }, 6000);
   })();
 

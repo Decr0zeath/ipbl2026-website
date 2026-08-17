@@ -931,9 +931,18 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   height: 100%;
   object-fit: cover;
   opacity: 0;
+  transform: scale(1.08) translateX(1.5%);
   transition: opacity 2s ease;
 }
-.event-hero-bg img.is-active { opacity: 1; }
+.event-hero-bg img.is-active {
+  opacity: 1;
+  animation: event-hero-pan 6s linear forwards;
+  will-change: transform, opacity;
+}
+@keyframes event-hero-pan {
+  from { transform: scale(1.08) translateX(-1.5%); }
+  to { transform: scale(1.08) translateX(1.5%); }
+}
 .event-hero-scrim {
   position: absolute;
   inset: 0;
@@ -1003,7 +1012,8 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   margin: 0 0 2rem;
 }
 @media (prefers-reduced-motion: reduce) {
-  .event-hero-bg img { transition: none; }
+  .event-hero-bg img { transition: none; transform: none; }
+  .event-hero-bg img.is-active { animation: none; }
 }
 
 /* Home sections (non-content pages share these) */

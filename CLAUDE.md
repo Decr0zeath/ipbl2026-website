@@ -38,7 +38,17 @@ A static SPA-lite HTML manual for the iPBL 2026 quadruped robotics pre-training 
 
 ## Editorial voice
 
-Deliberately scoped: pre-arrival mechanical build, PCB, wiring, firmware upload, and calibration only. Vision, autonomy, sensor fusion, and the collaborative brief are intentionally withheld until Day 01 in Cebu — don't add content covering them. Tone is a vintage academic field guide; sections are referenced as "Section 01"–"Section 08" (never with the § sign — the user does not want it in content).
+Deliberately scoped: pre-arrival mechanical build, PCB, wiring, firmware upload, and calibration only. Vision, autonomy, sensor fusion, and the collaborative brief are intentionally withheld until Day 01 in Cebu — don't add content covering them. The one exception is the physical power wiring for the Raspberry Pi, camera, and proximity sensor (see below): that's hardware/wiring content and is in scope for Section 06, even though setting the Pi up and programming it stays withheld until Cebu. Tone is a vintage academic field guide; sections are referenced as "Section 01"–"Section 08" (never with the § sign — the user does not want it in content).
+
+## Current hardware revision
+
+As of August 2026 the board runs a **two-rail power architecture**, not the original single-rail one — this replaced an earlier revision throughout Sections 01, 02, 05, and 06, so any new content touching power must match it:
+
+- **Buck #1** regulates a 5 V servo rail: PCB → SW1 → twelve servo headers. SW1 gates this rail only.
+- **Buck #2** regulates a separate 5 V rail feeding the Raspberry Pi directly (off-board, not through the PCB). The Pi in turn powers the Arduino Nano over USB, plus the camera and proximity sensor. The Nano's VIN/5V pins are unconnected; board/battery power never reaches the Nano.
+- On the PCB, only two servo-rail decoupling capacitors remain, **C1 and C2** (470 µF each). The earlier C1 (100 µF, at the J1 input, filtering the old `+5V_LOGIC` branch to the Nano) is gone, and that branch no longer exists.
+- The interactive KiCanvas schematic embed is Figure 11; there is no separate static schematic image anymore.
+- Because the Nano now depends on external USB power rather than board power, any procedure that reseats the Nano onto the PCB and expects it to run (hold servo position, print to the serial monitor, etc.) needs the Nano's USB connection kept live — reconnecting the battery alone no longer powers it.
 
 ## Conventions
 

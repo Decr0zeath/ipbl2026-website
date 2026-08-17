@@ -30,7 +30,7 @@
 
     <h3>Section A · Power input and switch</h3>
 
-    <p>The battery wires directly to the buck converter, not to the board: raw BT1/BT2 voltage reaches the buck converter's V_IN pin off-board, and only its regulated output enters the PCB, at J1, a 2-pin screw terminal (5 mm pitch). From J1, positive feeds through SW1, the master power switch, before reaching the rest of the board; the negative is tied to the board's common ground plane. SW1 is not a manufactured switch part: no latching switch small enough to fit the chassis could be sourced, so the position is instead a break in the trace bridged by two single-pin headers, closed by joining a male-to-male and a male-to-female jumper wire, and opened by separating them.</p>
+    <p>The battery wires directly to the buck converter, not to the board: raw BT1/BT2 voltage reaches the buck converter's V_IN pin off-board, and only its regulated output enters the PCB, at J1, a 2-pin screw terminal (5 mm pitch). From J1, positive feeds through SW1, the master power switch, before reaching the rest of the board; the negative is tied to the board's common ground plane. SW1 is not a manufactured switch part: no latching switch small enough to fit the chassis could be sourced, so the position is instead a break in the trace bridged by two single-pin headers, closed by joining a male-to-male and a male-to-female jumper wire, and opened by separating them. Leave it open when the battery goes in; see <a href="#electronics">Section 06</a> for the power-on sequence this switch is used in.</p>
 
     <div class="callout warning">
       <div class="callout-label">Warning · No reverse-polarity protection</div>

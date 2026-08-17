@@ -233,6 +233,30 @@
       <p>This design has no switch between the battery and either buck converter. The system powers on the instant the battery is connected, both rails together. Make every other connection first, servos seated, Nano socketed, Raspberry Pi ready, before wiring in the battery, and disconnect the battery itself to power everything down.</p>
     </div>
 
+    <h3>Power-On Sequence</h3>
+
+    <p>SW1 sits downstream of Buck #1's regulator, not upstream of it: connecting the battery brings both buck converters up immediately, Pi rail included, whether or not SW1's jumper wires are joined. That gap, servo rail regulated but not yet delivered, is deliberate, and the order below depends on it. Power on in this order, every time:</p>
+
+    <ol class="steps">
+      <li>
+        <h4>Connect the battery, leave SW1 open</h4>
+        <p>With the SW1 jumper wires separated, wire in the battery. Both buck converters come up together: Buck #1's regulated servo rail sits ready at SW1's open contact, unable to reach the servo headers yet, and Buck #2 begins powering the Raspberry Pi.</p>
+      </li>
+      <li>
+        <h4>Wait for the Pi to boot, then check D1</h4>
+        <p>Give the Raspberry Pi time to finish booting; it powers the Nano over USB once it is up. D1, the status LED, lights the instant the Nano has power, regardless of what firmware it is running. Treat an unlit D1 as the signal to stop: something upstream, the Pi, its USB output, or the Nano's socket, is not powered yet.</p>
+      </li>
+      <li>
+        <h4>Close SW1 only once D1 is lit</h4>
+        <p>Join the SW1 jumper wires to bring the servo rail online. By this point the Nano is already running and driving a defined PWM signal on every servo header's signal pin.</p>
+      </li>
+    </ol>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning · Closing SW1 before D1 lights makes the servos squiggle</div>
+      <p>Closing SW1 while the Nano has no power leaves the servo rail energised with every signal pin floating: nothing is driving them. An SG90 in that state does not sit still, it squiggles, twitching its horn erratically as it reacts to noise on an undriven signal line rather than holding a commanded position. This is not a fault in the servo; it is a symptom of powering the servo rail before the signal source. The fix is the sequence above, not a different servo.</p>
+    </div>
+
     <h3 id="why-two-rails">Why two rails?</h3>
 
     <p>Section 01 already named the rule: servos must never draw from the Nano's onboard regulator. Here is why that rule is absolute, in numbers. An idle SG90 draws approximately 10 mA; a stalled SG90 draws approximately 700 mA. Twelve servos stalling simultaneously, for instance during a hard landing where every leg attempts to brace, can draw up to roughly 8 A in a transient (12 × 700 mA). The Arduino Nano's onboard 5 V regulator can supply at most ~800 mA continuously and will fail under sudden loads of this magnitude.</p>
@@ -244,6 +268,15 @@
     <div class="callout warning">
       <div class="callout-label">Warning · Do not power servos from the Nano's 5V pin</div>
       <p>This is the single most common failure mode in beginner servo projects. The Nano's 5 V pin is connected to its onboard regulator, which is rated for hundreds of milliamps, not amps. Brown-out, lockup, and eventual damage to the Nano are the predictable results.</p>
+    </div>
+
+    <h3>Connecting Buck #2 to the Raspberry Pi</h3>
+
+    <p>Buck #2's regulated 5 V never touches a header or a screw terminal: it reaches the Pi over a USB-C cable with one end stripped to bare conductors. Cut away whatever was originally on that end, strip back the outer jacket to expose the VBUS (usually red) and GND (usually black) conductors, and solder those two to OUT+ and OUT– on Buck #2. Leave the USB-C plug on the other end intact and plug it into the Raspberry Pi's own USB-C power port, the same port a wall charger would normally use.</p>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning · Power the Pi through its USB-C port, never its GPIO pins</div>
+      <p>Do not wire Buck #2's output to the Pi's 5V/GND GPIO pins instead, even though it looks like a shorter path. The USB-C port carries the Pi's onboard power-path circuitry, under-voltage lockout and reverse-current protection among it, that the GPIO rail bypasses entirely. Injecting power through GPIO removes that protection along with the connector's strain relief, and a wiring mistake there reaches the Pi's silicon directly.</p>
     </div>
 
     <h3>Decoupling</h3>

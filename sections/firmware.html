@@ -36,6 +36,11 @@
       <p>Before uploading either sketch below, lift the Nano out of its socket on the PCB. Connect it to the laptop by USB on its own, upload, then reseat it in the socket once the upload finishes. Uploading while the Nano is still seated on the PCB is the single most important thing to avoid in this section.</p>
     </div>
 
+    <div class="callout note">
+      <div class="callout-label">Note · The Nano runs on USB power only, in this section</div>
+      <p>This board revision does not feed the Nano from the battery: its VIN and 5V pins are unconnected, and reconnecting the battery brings up the servo rail alone (see <a href="#electronics">Section 06</a>). Until the Raspberry Pi takes over that job in Cebu, the Nano's USB connection to the laptop is its only source of power, throughout both procedures below. Keep it plugged in through reseating, calibration, and the rocker-arm fitting that follows; unplugging it mid-procedure stops the sketch and the servos go limp.</p>
+    </div>
+
     <h3 id="calibration">1. Calibrating the Servos to 90°</h3>
 
     <p>Before the servo rocker arms are attached, every servo must be driven to a known, identical position. Fitting a rocker arm to a horn that has not been centred bakes the misalignment into the mechanical assembly, where it can no longer be corrected afterward.</p>
@@ -50,8 +55,8 @@
         <p>Lift the Nano out of its PCB socket, connect it to the laptop by USB, and upload. The sketch drives all twelve servo positions to 90° and holds them there.</p>
       </li>
       <li>
-        <h4>Reseat the Nano</h4>
-        <p>Reseat the Nano in its PCB socket once the upload finishes, so the servos hold their position on PCB power rather than the bench USB connection. Reconnect the battery; every one of the twelve servos should sit still and resist gentle hand pressure.</p>
+        <h4>Reseat the Nano, keep it on USB power</h4>
+        <p>Reseat the Nano in its PCB socket once the upload finishes, but leave its USB cable connected to the laptop; that connection is what keeps the calibration sketch running now, in place of the Raspberry Pi. Reconnect the battery, then close SW1 (join its jumper wires) to bring up the servo rail; with both powered, every one of the twelve servos should sit still and resist gentle hand pressure. Closing SW1 before the Nano has power leaves the servo signal pins undriven, which makes them squiggle rather than hold still; the USB cable from the previous step is what prevents that here.</p>
       </li>
       <li>
         <h4>Fit the coxa rocker arms</h4>
@@ -95,7 +100,7 @@
       </li>
       <li>
         <h4>Confirm the finished stance</h4>
-        <p>The chassis should now hold this stance on its own, under PCB power: four legs at 90°, evenly splayed, every rocker arm reading neutral. This is the correct starting position to carry into the rest of assembly.</p>
+        <p>With the Nano still on USB power and SW1 closed to bring the servo rail up, the chassis should now hold this stance: four legs at 90°, evenly splayed, every rocker arm reading neutral. This is the correct starting position to carry into the rest of assembly.</p>
         <figure>
           <div class="frame"><img src="assets/images/90%20degree.webp" alt="The assembled chassis held in hand, all four legs set to their centred 90° position with rocker arms fitted" width="1197" height="681" loading="lazy" decoding="async" /></div>
           <figcaption><span class="fig-label">Figure 25</span>All four legs at 90°, symmetric and evenly splayed, rocker arms fitted at neutral.</figcaption>
@@ -126,6 +131,6 @@
       </li>
       <li>
         <h4>Reseat the Nano and power up</h4>
-        <p>Once the upload finishes, reseat the Nano in its socket and reconnect the battery. The serial monitor will print initialisation messages ending in "Robot initialization Complete," after which the robot runs its demonstration sequence: stand, step forward, step back, turn left, turn right, wave, shake, and sit.</p>
+        <p>Once the upload finishes, reseat the Nano in its socket, keeping its USB cable connected, and reconnect the battery. Then close SW1 (join its jumper wires) to bring up the servo rail; the Nano is already running by this point, so the servos come up under a defined signal rather than squiggling. The serial monitor will print initialisation messages ending in "Robot initialization Complete," after which the robot runs its demonstration sequence: stand, step forward, step back, turn left, turn right, wave, shake, and sit.</p>
       </li>
     </ol>

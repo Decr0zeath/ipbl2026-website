@@ -2,7 +2,7 @@
 
     <div class="callout note">
       <div class="callout-label">Note · Kit contents</div>
-      <p>Each delegate receives <strong>one (1) printed PCB</strong>, <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of the complete quadruped parts and components that needs to be soldered. The remaining items in the bill of materials below, including the twelve servos, batteries, capacitors, buck converter, and consumables, are the responsibility of each team. Items shown in <span class="not-provided">orange</span> were goods the chosen courier does not allow to be shipped internationally; these must be sourced locally as well.</p>
+      <p>Each delegate receives <strong>one (1) printed PCB</strong>, <strong>one (1) Arduino Nano (ATmega328P, USB-C)</strong>, and a small bag of the complete quadruped parts and components that needs to be soldered. The remaining items in the bill of materials below, including the twelve servos, batteries, capacitors, both buck converters, and consumables, are the responsibility of each team. Items shown in <span class="not-provided">orange</span> were goods the chosen courier does not allow to be shipped internationally; these must be sourced locally as well.</p>
     </div>
 
     <h2>Electronic Components</h2>
@@ -19,7 +19,8 @@
         </thead>
         <tbody>
           <tr><td>U1</td><td>Arduino Nano (ATmega328P)</td><td class="num">1</td><td>Provided. USB-C variant. Older Mini-USB clones also function but are not recommended.</td></tr>
-          <tr><td>U2</td><td><span class="not-provided">XL4015E1 buck converter module</span></td><td class="num">1</td><td>Adjustable, set to 5.0 V using a Multitester before installation.</td></tr>
+          <tr><td>U2</td><td><span class="not-provided">XL4015E1 buck converter module</span></td><td class="num">2</td><td>Two required: one regulates the servo rail into the PCB at J1, the other regulates a separate rail wired directly to the Raspberry Pi and never touches the PCB. Adjustable; set each to 5.0 V independently with a multitester before installation.</td></tr>
+          <tr><td>·</td><td>USB-C cable, one end stripped to bare conductors</td><td class="num">1</td><td>Buck converter #2's power injection cable. OUT+/OUT– solder to the exposed VBUS/GND conductors; the intact USB-C plug on the other end goes into the Raspberry Pi's own USB-C power port, not its GPIO pins. See <a href="#electronics">Section 06</a>.</td></tr>
           <tr><td>U3</td><td><span class="not-provided">2S Li-ion/LiPo charger module, 4 A, USB-C input</span></td><td class="num">1</td><td>Off-board accessory used to charge BT1/BT2. Not part of the robot's onboard circuit.</td></tr>
           <tr><td>M1–M12</td><td><span class="not-provided">SG90 micro servo, 9 g</span></td><td class="num">12</td><td>Team-sourced. Not permitted for international shipment by the courier.</td></tr>
           <tr><td>BT1, BT2</td><td><span class="not-provided">18650 Li-ion cell</span></td><td class="num">2</td><td>Team-sourced. Held in series by BH1 for a 2S, 7.4–8.4 V pack.</td></tr>
@@ -37,8 +38,8 @@
     </div>
 
     <div class="callout warning">
-      <div class="callout-label">Important · The buck converter is not optional</div>
-      <p>The 2S pack delivers 7.4 V nominal. The SG90 servos are rated for 4.8–6 V, and the Nano's logic rail requires a clean 5 V; neither can be supplied directly from the battery. The XL4015E1 (U2) steps 7.4 V down to a regulated 5 V before either load receives it. Omitting this step and wiring the battery directly to the servo headers or the Nano's 5 V pin will overdrive the servos past their rated voltage and pass more current through the Nano's onboard regulator than it is designed to handle. Set and verify the converter's output before it is installed on the board; see <a href="#electronics">Section 06</a> for the full two-rail rationale and <a href="#firmware">Section 07</a> for the calibration procedure.</p>
+      <div class="callout-label">Important · The buck converters are not optional</div>
+      <p>The 2S pack delivers 7.4 V nominal. The SG90 servos are rated for 4.8–6 V, and the Raspberry Pi, which in turn powers the Nano, also needs a clean 5 V; neither can be supplied directly from the battery. This build needs two XL4015E1 modules (U2), not one: the first steps 7.4 V down to the servo rail at J1, the second steps it down again for a separate rail wired straight to the Raspberry Pi. Omitting either and wiring the battery directly to its load will overdrive the servos or the Pi past their rated voltage. Set and verify each converter's output independently before it is installed; see <a href="#electronics">Section 06</a> for the full two-rail rationale and <a href="#firmware">Section 07</a> for the calibration procedure.</p>
     </div>
 
     <h2>Tools Required</h2>
@@ -79,7 +80,7 @@
     <h2>Optional but Recommended</h2>
 
     <ul>
-      <li><strong>Bench power supply</strong>: current-limited, for first-power-on tests before committing the battery. See the buck converter verification step in <a href="#electronics">Section 06</a>.</li>
+      <li><strong>Bench power supply</strong>: current-limited, for first-power-on tests before committing the battery. See the buck converter verification step in <a href="#electronics">Section 06</a>, and repeat it for each of the two modules.</li>
       <li><strong>Helping hands / PCB holder</strong>: markedly improves soldering quality and consistency.</li>
       <li><strong>Logic analyser</strong>: not essential, but useful for debugging servo PWM signals if problems arise.</li>
       <li><strong>Magnifying lamp</strong>: substantially eases work with small components and fine solder joints.</li>

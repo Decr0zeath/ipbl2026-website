@@ -60,8 +60,8 @@ var MANUAL_MAP = [
     slug: 'end',
     num: '08',
     crumb: 'Section 08 · The Last Mile',
-    title: 'Final Check',
-    subtitle: 'Reference footage of a completed unit, and the one bar to clear: a robot that stands and crawls.'
+    title: 'The Bench Check',
+    subtitle: "Reference footage of a completed unit, and the one bar to clear: a robot that stands and crawls. This manual's coverage ends here; the brain and the eyes come next, in Cebu."
   }
 ];
 

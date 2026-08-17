@@ -1,16 +1,16 @@
     <p class="lede">Twelve servos. Four legs. One Arduino Nano. A custom PCB to organise the wiring, a battery to sustain motion, and sustained effort to bring the system to a working state.</p>
 
-    <p>The platform is a small quadruped, occasionally referred to as a "spider robot" for its splayed posture, with three degrees of freedom per leg. One servo swings the leg at the coxa (side to side); one lifts it at the hip; one swings it forward and back at the knee. With careful timing across the twelve joints, the robot can produce a basic crawl, trot, and turn-in-place. The robot does not respond to anything: the main sketch running on the Nano steps through a fixed set of states, and the gait plays out on its own once power is applied. This is the full extent of this manual's aim: a robot that <strong>stands and walks forward reliably</strong>. More advanced behaviour is reserved for Day 01 in Cebu.</p>
+    <p>The platform is a small quadruped, occasionally referred to as a "spider robot" for its splayed posture, with three degrees of freedom per leg. One servo swings the leg at the coxa (side to side); one lifts it at the hip; one swings it forward and back at the knee. With careful timing across the twelve joints, the robot can produce a basic crawl, trot, and turn-in-place. The robot does not respond to anything: the main sketch running on the Nano steps through a fixed set of states, and the gait plays out on its own once power is applied. This is the full extent of this manual's aim: a robot that <strong>stands and walks forward reliably</strong>. Giving it a brain and a pair of eyes, a Raspberry Pi, a NoIR camera, and a proximity sensor, along with everything they make possible, is reserved for Day 01 in Cebu.</p>
 
     <figure>
       <div class="frame"><video src="assets/videos/overview.mp4" controls preload="metadata"></video></div>
       <figcaption><span class="fig-label">Figure 01</span>Reference footage of a completed unit. Individual builds may vary slightly in print colour and PCB component placement.</figcaption>
     </figure>
 
-    <h2>Nine Steps to a Working Robot</h2>
-    <p>Here is the shape of the whole build, start to finish, from raw filament to a robot that walks off the bench. Each box below links to the section that covers it.</p>
+    <h2>Nine Steps to a Working Robot, Then What Comes After</h2>
+    <p>Here is the shape of the whole build, start to finish, from raw filament to a robot that walks off the bench. Each of the first nine boxes below links to the section that covers it. The three dashed boxes after are not: standing and walking is not the finish line, only the point where this manual hands off to Cebu.</p>
 
-    <svg viewBox="0 0 720 1235" xmlns="http://www.w3.org/2000/svg" class="diagram">
+    <svg viewBox="0 0 720 1720" xmlns="http://www.w3.org/2000/svg" class="diagram">
       <defs>
         <marker id="arrowFlow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
           <path d="M 0 0 L 8 3 L 0 6 z" fill="#195A33"/>
@@ -112,15 +112,55 @@
       </a>
       <line x1="360" y1="1108" x2="360" y2="1132" stroke="#195A33" stroke-width="1" marker-end="url(#arrowFlow)"/>
 
-      <!-- End -->
+      <!-- Manual's own end: Section 08, not the robot's finish line -->
       <a href="#end">
         <ellipse cx="360" cy="1176" rx="200" ry="44" fill="#0D3E20" stroke="#0D3E20" stroke-width="1"/>
-        <text x="360" y="1172" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#F4ECD8">Stands. Walks. Done.</text>
+        <text x="360" y="1172" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#F4ECD8">Stands. Walks. Ready.</text>
         <text x="360" y="1191" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1" fill="#FEB104">SECTION 08 &#183; READY FOR CEBU</text>
         <g class="diagram-hint" transform="translate(518,1176)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#FEB104" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
       </a>
+      <line x1="360" y1="1220" x2="360" y2="1254" stroke="#8A5A00" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrowFlow)"/>
+      <text x="70" y="1244" text-anchor="start" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1.5" fill="#8A5A00">WHAT FOLLOWS, AT THE EVENT</text>
+
+      <!-- 10: Implement computer vision -->
+      <a href="#end">
+        <rect x="60" y="1256" width="600" height="84" class="diagram-box" fill="#FFF6DF" stroke="#C98300" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="360" y="1287" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8A5A00">Implement Computer Vision</text>
+        <text x="360" y="1306" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Object detection running</text>
+        <text x="360" y="1318" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">on the Raspberry Pi itself</text>
+        <g class="diagram-hint" transform="translate(618,1298)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="1340" x2="360" y2="1374" stroke="#8A5A00" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrowFlow)"/>
+
+      <!-- 11: Mount camera and proximity sensor -->
+      <a href="#end">
+        <rect x="60" y="1376" width="600" height="84" class="diagram-box" fill="#FFF6DF" stroke="#C98300" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="360" y="1407" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8A5A00">Mount the Camera &amp; Proximity Sensor</text>
+        <text x="360" y="1426" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Bolted on now that the Pi</text>
+        <text x="360" y="1438" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">has something to plug into</text>
+        <g class="diagram-hint" transform="translate(618,1418)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="1460" x2="360" y2="1494" stroke="#8A5A00" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrowFlow)"/>
+
+      <!-- 12: Pi directs the walk -->
+      <a href="#end">
+        <rect x="60" y="1496" width="600" height="84" class="diagram-box" fill="#FFF6DF" stroke="#C98300" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="360" y="1527" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8A5A00">Let the Pi Direct the Walk</text>
+        <text x="360" y="1546" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">Forward, turn, or stop,</text>
+        <text x="360" y="1558" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5E6F62">commanded down to the Nano</text>
+        <g class="diagram-hint" transform="translate(618,1538)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#8A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
+      <line x1="360" y1="1580" x2="360" y2="1614" stroke="#8A5A00" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrowFlow)"/>
+
+      <!-- True end: the challenge itself -->
+      <a href="index.html#programme">
+        <ellipse cx="360" cy="1658" rx="200" ry="44" fill="#8A5A00" stroke="#8A5A00" stroke-width="1"/>
+        <text x="360" y="1654" text-anchor="middle" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="13" font-weight="600" fill="#F4ECD8">Sees. Decides. Walks Where Told.</text>
+        <text x="360" y="1673" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" letter-spacing="1" fill="#FFE9B0">AUTONOMOUS &#183; THE CHALLENGE ITSELF</text>
+        <g class="diagram-hint" transform="translate(518,1658)"><path d="M -5 -8 L 5 0 L -5 8" fill="none" stroke="#FFE9B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </a>
     </svg>
-    <p class="aside-note">Nine steps from raw filament to a robot that walks off the bench. Sections 06 and 07 each carry more than one step; every box above links through to the section that covers it.</p>
+    <p class="aside-note">Nine steps from raw filament to a robot that walks off the bench; Sections 06 and 07 each carry more than one step, and every solid box above links through to the section that covers it. The three dashed boxes that follow, computer vision, the camera and proximity sensor, and the Pi directing the gait, happen at the event and are named here only in outline; this manual does not walk you through them.</p>
 
     <h2>System Block Diagram</h2>
     <p>Before any soldering begins, hold the entire system in mind. The diagram below shows the full picture, including the Raspberry Pi, camera, and proximity sensor added for the in-person programme; this manual itself walks you through building three subsystems, Power, Control, and Actuation, in turn.</p>
@@ -268,7 +308,7 @@
       <li><strong>Individual servo addressability.</strong> Through the serial monitor, any of the twelve servos can be commanded to any valid angle.</li>
     </ol>
 
-    <p>These three behaviours are the goal to reach before arrival day. Reaching them means you carry a <b>solid grasp</b> of the system into the event, ready for what comes next.</p>
+    <p>These three behaviours are the goal to reach before arrival day. They are also only half of what iPBL asks of you: the other half, giving the quadruped a brain and a pair of eyes with a Raspberry Pi, a NoIR camera, and a proximity sensor, is deliberately left for Cebu, and is not covered by this manual (see Section 08). Reaching the three behaviours above means you carry a <b>solid grasp</b> of the platform into the event, ready for that next half.</p>
 
     <h2>Prerequisites</h2>
     <p>This manual assumes nothing beyond general working knowledge; specifically, you should already possess, or be prepared to acquire quickly:</p>

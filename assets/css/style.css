@@ -1381,6 +1381,8 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   height: 26px;
   max-width: 26px;
   margin: 0 .75rem .75rem 0;
+  padding: 0;
+  gap: 10px;
   background: var(--paper);
   border: 1px solid var(--rule);
   border-radius: 999px;

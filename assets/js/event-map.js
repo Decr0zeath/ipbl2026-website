@@ -29,7 +29,12 @@
 
   var map = L.map(mount, { scrollWheelZoom: false }).setView([campuses[0].lat, campuses[0].lng], 15);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+  // Free key from carto.com/basemaps/apikey (5M tile requests/month fair-use
+  // limit) — unkeyed requests to this endpoint now render an "API KEY
+  // REQUIRED" watermark over the tiles instead of failing outright.
+  var CARTO_API_KEY = 'cb1_2a1v_1_fd280b3039e7dc0b8a4a49f3';
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png?key=' + CARTO_API_KEY, {
     subdomains: 'abcd',
     maxZoom: 20,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'

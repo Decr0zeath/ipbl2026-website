@@ -1300,19 +1300,6 @@ body.event-page .colophon { border-top-color: rgba(240, 133, 15, .18); color: rg
   border: 1px solid var(--rule);
   background: var(--paper-2);
 }
-/* The sitewide img reset above (max-width: 100%) shrinks Leaflet's 256px
-   tile <img>s just enough to open hairline seams between them. */
-.venue-map.leaflet-container img { max-width: none; }
-/* Leaflet positions tiles with sub-pixel translate3d offsets; browsers
-   round each tile independently, opening 1px seams that expose the map
-   background as a grid. Oversizing tiles a hair covers most of the
-   rounding gap (overrides Leaflet's own inline width/height, hence
-   !important); a light blur on the tile pane itself (not the individual
-   tiles, which would double up at their overlaps) hides what's left
-   without softening the pins/labels/controls, which live in their own
-   separate panes untouched by this filter. */
-.venue-map .leaflet-tile { width: 256.5px !important; height: 256.5px !important; }
-.venue-map .leaflet-tile-pane { filter: blur(1px); }
 
 .map-pin-icon { display: block; filter: drop-shadow(0 2px 3px rgba(6, 32, 15, .35)); }
 .map-pin-icon--primary { color: var(--orange-700); }
